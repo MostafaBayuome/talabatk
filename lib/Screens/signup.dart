@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:geolocator/geolocator.dart';
-import 'package:talabatk_flutter/Entities/ApiManager.dart';
-import 'package:talabatk_flutter/Entities/Validation.dart';
+import 'package:talabatk_flutter/Entities/apiManager.dart';
+import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Screens/shophomepage.dart';
 import 'package:talabatk_flutter/Widgets/Utils.dart';

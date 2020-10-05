@@ -10,6 +10,8 @@ class Location {
   final String title;
   final String note;
   Location(this.id, this.user_id, this.latitude, this.longitude, this.title, this.note);
+
+
 // Add location to Location table
   static Future<String> addLocation (String apiName,int  user_id,double latitude,double longitude,String title,String note) async {
     try{

@@ -33,7 +33,7 @@ class Validation {
      }
    }
    String validateMobileNumber (String value) {
-    if(value.length<7)
+    if(value.length<4)
     {
       return 'Please Enter valid mobile number';
     }

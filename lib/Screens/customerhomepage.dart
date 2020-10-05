@@ -10,11 +10,11 @@ import 'package:talabatk_flutter/Entities/location.dart';
 
 
 
-class CustomerHomePage extends StatefulWidget {
 
+
+class CustomerHomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _State();
-
 }
 
 
@@ -49,33 +49,33 @@ class _State extends State<CustomerHomePage>
     );
   }
 
- Widget customerMenuWidget()
+  Widget customerMenuWidget()
   {
-   return Center(
+    return Center(
 
-        child: Column(
+      child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             RaisedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LocationEditor()
-                ));
-              },
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LocationEditor()
+                  ));
+                },
                 color: Color(int.parse(Global.primaryColor)),
-               elevation: 10.0,
-               textColor: Colors.white,
-               padding: const EdgeInsets.all(0.0),
-               shape: RoundedRectangleBorder(
-                   borderRadius: BorderRadius.circular(18.0),
+                elevation: 10.0,
+                textColor: Colors.white,
+                padding: const EdgeInsets.all(0.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
                 ),
-               child: Container(
-                   padding: const EdgeInsets.all(10.0),
-                     child: const Text(
-                         'اضافه موقع جديد',
-                         style: TextStyle(fontSize: 20)
-                     ),
-           )),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text(
+                      'اضافه موقع جديد',
+                      style: TextStyle(fontSize: 20)
+                  ),
+                )),
             const SizedBox(height: 100),
             RaisedButton(
                 onPressed: () {
@@ -109,7 +109,7 @@ class _State extends State<CustomerHomePage>
                       style: TextStyle(fontSize: 20)
                   ),
                 )),
-        ]
+          ]
       ),
     );
 
@@ -144,7 +144,7 @@ class _State extends State<CustomerHomePage>
             onTap: () {
               LatLng latlng = new LatLng( Locations[index].latitude,  Locations[index].longitude);
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => Gmap(currentPosition : latlng),
+                builder: (context) => Gmap(currentPosition : latlng),
               ));
             },
             title:Text(Locations[index].title.toString(),
