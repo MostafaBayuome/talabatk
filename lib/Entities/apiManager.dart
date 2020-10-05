@@ -1,14 +1,12 @@
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'location.dart';
 import 'dart:convert';
 import 'global.dart';
-
-
 
 Future<String> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,bool map_Appear) async {
   try{
 
-    String url= Global.url+apiName;
+    String url = Global.url+apiName;
     final response= await  http.post(url,
         headers: {"Content-Type": "application/json"},
         body:json.encode( {
@@ -22,16 +20,21 @@ Future<String> signUp (String apiName,String phone,String password,String userna
         } )
     );
     var convertDatatoJson =  response.body;
+    if(!convertDatatoJson.contains("user_exist"))
+    {
+      if(map_Appear)
+        Location.addLocation("Location/AddLocation",int.parse(convertDatatoJson),latitude,longitude,username," ");
+      else
+        Location.addLocation("Location/AddLocation",int.parse(convertDatatoJson),latitude,longitude,"المكان الرئيسي"," ");
+    }
     return  convertDatatoJson;
 
   }catch(Excepetion)
   {
     print(Excepetion);
+    return Excepetion;
   }
-
-
 }
-
 
 Future<Map<String, dynamic>> loginUser (String apiName, String mobileNumber , String password) async {
 
