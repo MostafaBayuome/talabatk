@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'dart:async';
 import 'package:talabatk_flutter/Entities/location.dart';
-import 'package:talabatk_flutter/Widgets/Utils.dart';
-import 'customerhomepage.dart';
+import 'package:talabatk_flutter/Widgets/utils.dart';
+import 'customer_home_page.dart';
 
 class LocationEditor extends StatefulWidget {
   @override

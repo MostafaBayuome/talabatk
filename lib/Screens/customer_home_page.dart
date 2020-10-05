@@ -5,7 +5,7 @@ import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'gmap.dart';
-import 'locationeditor.dart';
+import 'location_editor.dart';
 import 'package:talabatk_flutter/Entities/location.dart';
 
 

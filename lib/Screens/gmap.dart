@@ -9,7 +9,6 @@ import '../Entities/user.dart';
 import 'signup.dart';
 
 
-
 class Gmap extends StatefulWidget {
   LatLng currentPosition;
   Gmap({Key key, @required this.currentPosition}): super(key: key);
@@ -63,10 +62,8 @@ class _GMapState extends State<Gmap> {
               )
           ));
         });
-
       }
     });
-
   }
 
   Future<void> choiceAction(String choices) async {

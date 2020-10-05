@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:geolocator/geolocator.dart';
-import 'package:talabatk_flutter/Entities/apiManager.dart';
+import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/shophomepage.dart';
-import 'package:talabatk_flutter/Widgets/Utils.dart';
-import 'customerhomepage.dart';
+import 'package:talabatk_flutter/Screens/shop_home_page.dart';
+import 'package:talabatk_flutter/Widgets/utils.dart';
+import 'customer_home_page.dart';
 import 'login.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talabatk_flutter/screens/customerhomepage.dart';
-import 'package:talabatk_flutter/screens/shophomepage.dart';
+import 'package:talabatk_flutter/screens/customer_home_page.dart';
+import 'package:talabatk_flutter/screens/shop_home_page.dart';
 import 'package:talabatk_flutter/screens/signup.dart';
 
 Future<void> main() async {
