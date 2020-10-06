@@ -1,71 +1,63 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:talabatk_flutter/Entities/user.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'chat_page.dart';
 
 
 class UserRequest extends StatefulWidget
 {
+  User shop;
+  UserRequest({Key key, @required this.shop}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() =>_State();
+  State<StatefulWidget> createState() =>_State(shop);
 }
+
 class _State extends State<UserRequest>{
+  User shop;
+  _State(this.shop);
+
   @override
   Widget build(BuildContext context) {
           return Scaffold(
               appBar:AppBar(
-                title: Text('APP NAME'),
+                backgroundColor: Color(int.parse(Global.primaryColor)),
+                centerTitle: true,
+                title:Text(Global.appName,
+                  style: TextStyle(
+                      fontFamily: Global.fontFamily,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 30
+                  ),),
                 automaticallyImplyLeading: false,
               ),
             body: Padding(
-                padding: EdgeInsets.all(30),
+              padding: EdgeInsets.all(10),
               child: Column(
+
                 children: [
-                  Text('User number : 0111123455',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                  Container(margin: EdgeInsets.only(top:25.0),),
-                  Text('User Description  need 1 litre milk 10 eggs etc ......... plus new things will be added  plus new things will be added  and plus new things adddeded hererereererer',style: TextStyle(fontSize: 15)),
-                  Container(margin: EdgeInsets.only(top:25.0),),
-                  Container(
-                              height: 50,
-                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                              child: RaisedButton(
-                                textColor: Colors.white,
-                                color: Colors.blue,
-                                child: Text('Chat'),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>ChatPage()
-                                  ));
-                                },
-                              )),
                   Container(
                       height: 50,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       child: RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.blue,
-                        child: Text('Call User'),
-                        onPressed: () {
-
-                        },
-                      )),
-                          FlatButton(
-                            child: IconButton(
-                              icon: Icon(Icons.place),
-                              color: Colors.red,
-                              onPressed: () {
-                                // here we send location of user
-                              },
-                            ),
+                          onPressed: () {
+                            launch('tel://${shop.mobileNumber}');
+                          },
+                          elevation: 2.0,
+                          color: Color(int.parse(Global.primaryColor)),
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
-                  Container(
-                      height: 60,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.blue,
-                        child: Text('Submit'),
-                        onPressed: () {
-                        },
-                      ))
+                          child: Container(
+                            padding: const EdgeInsets.all(10.0),
+                            child: const Text('اتصال  ',
+                                style: TextStyle(fontSize: 20)
+                            ),
+                          )
+                      ),),
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:talabatk_flutter/Screens/user_request.dart';
 import '../Entities/user.dart';
 import 'signup.dart';
 
@@ -119,7 +120,7 @@ class _GMapState extends State<Gmap> {
   }
 
 
-  Widget _boxes(String _image,double lat , double long, String name)
+  Widget _boxes(String _image,double lat , double long, String name,int index)
   {
     return GestureDetector(
       onTap: (){
@@ -146,13 +147,43 @@ class _GMapState extends State<Gmap> {
                       ),
                     ),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(name),
-                    ),
-                  )
+                  Column(
+                    children: [
+                      Container(
+                       child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(name),
+                               ),
+                        ),
+                      RaisedButton(
+                       onPressed: () {
+                         // send user to request screen to request items from exact shop
+                         print("hey there"+ name);
+                         Navigator.of(context).push(MaterialPageRoute(
+                           builder: (context) => UserRequest(shop:nearestShops[index]),
+                         ));
+
+                       },
+                       elevation: 2.0,
+                          color: Color(int.parse(Global.primaryColor)),
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(10.0),
+                            child: const Text(
+                                'طلب اوردر',
+                                style: TextStyle(fontSize: 20)
+                            ),
+                          )
+                          ),
+                      ]
+                  ),
+
                 ],
+
               ),
             ),
           )
@@ -164,7 +195,7 @@ class _GMapState extends State<Gmap> {
   Widget _buildContainer() {
 
     return Align(
-      alignment: Alignment.bottomLeft,
+      alignment: Alignment.bottomCenter,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20.0),
         height: 180.0,
@@ -176,7 +207,7 @@ class _GMapState extends State<Gmap> {
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
                   "https://lh5.googleusercontent.com/p/AF1QipO3VPL9m-b355xWeg4MXmOQTauFAEkavSluTtJU=w225-h160-k-no",
-                  nearestShops[i].latitude, nearestShops[i].longitude,nearestShops[i].userName),
+                  nearestShops[i].latitude, nearestShops[i].longitude,nearestShops[i].userName,i),
             );
           },
           scrollDirection: Axis.horizontal,
