@@ -18,14 +18,66 @@ class Gmap extends StatefulWidget {
 
 class _GMapState extends State<Gmap> {
   List<User> nearestShops=[];
+  List<Marker> allMarkers =[];
+
   LatLng _currentPosition;
   _GMapState(this._currentPosition);
-  GoogleMapController mapController;
   Completer<GoogleMapController> _controller = Completer();
   double zoomVal=20.0;
 
 
-  List<Marker> allMarkers =[];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title:Text(Global.appName),
+        backgroundColor: Color(int.parse(Global.primaryColor)),
+        automaticallyImplyLeading: false,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context){
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          )
+        ],
+      ),
+      body:Stack(
+        children: [
+          _googleMap(context),
+          _buildContainer(),
+        ],
+      ),
+    );
+  }
+
+  Widget _googleMap(BuildContext context)  {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: GoogleMap(
+
+        myLocationEnabled:true,
+        mapType: MapType.normal  ,
+        zoomControlsEnabled: false,
+        initialCameraPosition:  CameraPosition(
+            target:_currentPosition,
+            zoom: 15),
+        onMapCreated: (GoogleMapController controller){
+           _controller.complete(controller);
+        },
+        markers: Set.from(allMarkers),
+      ),
+
+    );
+  }
+
 
   @override
   void initState() {
@@ -66,74 +118,6 @@ class _GMapState extends State<Gmap> {
     });
   }
 
-  Future<void> choiceAction(String choices) async {
-
-    if(choices.contains('تسجيل الخروج')){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('value');
-      prefs.remove('phone');
-      prefs.remove('map_Appear');
-
-
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>SignUp()
-      ));
-    }
-    // for future features
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:Text(Global.appName),
-        backgroundColor: Color(int.parse(Global.primaryColor)),
-        automaticallyImplyLeading: false,
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context){
-              return Constants.choices.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          )
-        ],
-      ),
-      body:Stack(
-        children: [
-          _googleMap(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _googleMap(BuildContext context)  {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: GoogleMap(
-
-        myLocationEnabled:true,
-        mapType: MapType.normal  ,
-        zoomControlsEnabled: false,
-        initialCameraPosition: new CameraPosition(
-            target:_currentPosition,
-            zoom: 15),
-        onMapCreated: (GoogleMapController controller){
-          mapController=controller;
-        },
-        markers: Set.from(allMarkers),
-      ),
-
-    );
-  }
-
 
   Widget _boxes(String _image,double lat , double long, String name)
   {
@@ -145,9 +129,9 @@ class _GMapState extends State<Gmap> {
           child:new FittedBox(
             child: Material(
               color: Colors.white,
-              elevation: 14.0,
+              elevation: 4.0,
               borderRadius: BorderRadius.circular(24.0),
-              shadowColor: Color(0x802196F3),
+              shadowColor: Color(int.parse(Global.primaryColor)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -177,10 +161,51 @@ class _GMapState extends State<Gmap> {
   }
 
 
-  Future<void> _goToLocation(double lat,double long) async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,long), zoom:15, tilt: 20.0,bearing:45.0)));
+  Widget _buildContainer() {
+
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20.0),
+        height: 180.0,
+        child: ListView.builder(
+          itemCount: nearestShops.length,
+          itemBuilder: (BuildContext context,int i)
+          {
+            return  Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _boxes(
+                  "https://lh5.googleusercontent.com/p/AF1QipO3VPL9m-b355xWeg4MXmOQTauFAEkavSluTtJU=w225-h160-k-no",
+                  nearestShops[i].latitude, nearestShops[i].longitude,nearestShops[i].userName),
+            );
+          },
+          scrollDirection: Axis.horizontal,
+        ),
+      ),
+    );
   }
 
+  Future<void> _goToLocation(double lat,double long) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,long), zoom:15, tilt: 40.0,bearing:45.0)));
+  }
+
+  Future<void> choiceAction(String choices) async {
+
+    if(choices.contains('تسجيل الخروج')){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('value');
+      prefs.remove('phone');
+      prefs.remove('map_Appear');
+
+
+      Navigator.of(context).pop();
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>SignUp()
+      ));
+    }
+    // for future features
+
+  }
 
 }

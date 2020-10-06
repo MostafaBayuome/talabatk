@@ -14,6 +14,7 @@ class User {
 
   User(this.id, this.mobileNumber, this.latitude, this.longitude, this.userName,
       this.password, this.mapAppear);
+
   // get all nearest shops
    static Future <List<User>> getNearestShops(String apiName,String phone) async
    {
