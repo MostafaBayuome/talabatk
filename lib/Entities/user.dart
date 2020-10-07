@@ -9,7 +9,7 @@ class User {
   double longitude;
   String userName;
   String password;
-  bool mapAppear;
+  int mapAppear;
 
 
   User(this.id, this.mobileNumber, this.latitude, this.longitude, this.userName,

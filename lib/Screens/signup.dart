@@ -7,6 +7,7 @@ import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Screens/shop_home_page.dart';
+import 'package:talabatk_flutter/Widgets/custom_spinner.dart';
 import 'package:talabatk_flutter/Widgets/utils.dart';
 import 'customer_home_page.dart';
 import 'login.dart';
@@ -20,7 +21,7 @@ class SignUp extends StatefulWidget {
 class _State extends State<SignUp> with Validation  {
 
   // true signup => SHOP  false => CUSTOMER
-
+  String dropdownValue = 'مستخدم';
   bool map_Appear=false;
   String userName='';
   String phone='';
@@ -96,14 +97,16 @@ class _State extends State<SignUp> with Validation  {
                             fontWeight: FontWeight.w500,),
                         ),
                         getLocation(),
-                        Container(margin: EdgeInsets.only(top:25.0),),
+                        Container(margin: EdgeInsets.only(top:15.0),),
+                        DropDown(),//Account Type Spinner (user,shop,pharmacy)
+                        Container(margin: EdgeInsets.only(top:15.0),),
                         submitButton(),
 
                       ],
                     ),
                   ),
                 ),
-                checkBox(),
+
                 SizedBox(height: 10),
                 sentToLogin(),
               ],
@@ -200,7 +203,7 @@ class _State extends State<SignUp> with Validation  {
             }
             else {
               
-              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear).then((value) async {
+              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, dropdownValue).then((value) async {
                 if(!value.contains("user_exist"))
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -227,15 +230,13 @@ class _State extends State<SignUp> with Validation  {
               _getCurrentLocation();
             }
             else {
-              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear).then((value) async {
+              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, dropdownValue).then((value) async {
                 if(!value.contains("user_exist"))
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('id',value);
                   prefs.setString('phone', phone);
                   prefs.setBool('map_Appear', map_Appear);
-
-
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CustomerHomePage()
@@ -300,7 +301,40 @@ class _State extends State<SignUp> with Validation  {
         )
     );
   }
+  Widget DropDown() {
+    return   Container(
+        child: Row(
+          children: <Widget>[
 
+            new DropdownButton<String>(
+              value: dropdownValue,
+              onChanged: (String data) {
+                setState(() {
+                  dropdownValue = data;
+                });
+              },
+              items: <String>['مستخدم', 'محل تجاري', 'صيدلية'].map((String value) {
+                return new DropdownMenuItem<String>(
+                  value: value,
+                  child: new Text(value),
+                );
+              }).toList(),
+
+            ),
+            Container(
+              margin:EdgeInsets.all(15) ,
+              child: Text(
+                'نوع الحساب',
+                style: TextStyle(fontSize: 13,
+                  fontFamily: Global.fontFamily,
+                  fontWeight: FontWeight.w500,),
+              ),
+            )
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        )
+    );
+  }
   Widget sentToLogin(){
     return Container(
         child: Row(

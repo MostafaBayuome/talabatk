@@ -184,9 +184,9 @@ class _State extends State<Login>  with Validation {
 
                   prefs.setInt('id',data["id"]);
                   prefs.setString('phone', data["phone"]);
-                  prefs.setBool('map_Appear', data["map_Appear"]);
+                  prefs.setInt('map_Appear', data["map_Appear"]);
 
-                  if(value["map_Appear"])
+                  if(value["map_Appear"]>0)
                     {
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
