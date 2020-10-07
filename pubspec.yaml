@@ -41,3 +41,5 @@ flutter:
       fonts:
         - asset: fonts/NotoSansJP-Regular.otf
         - asset: fonts/NotoSansJP-Medium.otf
+  assets:
+    - images/shooping.PNG
