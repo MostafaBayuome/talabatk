@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:talabatk_flutter/Entities/user.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Screens/shop_home_page.dart';
-import 'package:talabatk_flutter/Widgets/custom_spinner.dart';
 import 'package:talabatk_flutter/Widgets/utils.dart';
 import 'customer_home_page.dart';
 import 'login.dart';
@@ -22,7 +21,7 @@ class _State extends State<SignUp> with Validation  {
 
   // true signup => SHOP  false => CUSTOMER
   String dropdownValue = 'مستخدم';
-  bool map_Appear=false;
+  int map_Appear;
   String userName='';
   String phone='';
   String password='';
@@ -205,7 +204,8 @@ class _State extends State<SignUp> with Validation  {
 
         if(formKey.currentState.validate()) {
           formKey.currentState.save();
-          if (map_Appear){   // Sign up as shop
+          // Sign up as shop
+          if (map_Appear>0){
             if (position == null) {
               _getCurrentLocation();
             }
@@ -218,10 +218,18 @@ class _State extends State<SignUp> with Validation  {
                 if(!value.contains("user_exist"))
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                  User user =new User(int.parse(value),phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  Global.loginUser=user;
+
+                  //save all user data
                   prefs.setString('id',value);
                   prefs.setString('phone', phone);
-                  prefs.setBool('map_Appear', map_Appear);
-
+                  prefs.setInt('map_Appear', map_Appear);
+                  prefs.setString('password', password);
+                  prefs.setString('userName', userName);
+                  prefs.setDouble('latitude',position.latitude);
+                  prefs.setDouble('longitude', position.longitude);
 
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
@@ -235,7 +243,8 @@ class _State extends State<SignUp> with Validation  {
 
             }
           }
-          else { // sign up as customer
+          // sign up as customer
+          else {
 
             if (position == null) {
               setState(() {
@@ -251,9 +260,19 @@ class _State extends State<SignUp> with Validation  {
                 if(!value.contains("user_exist"))
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                  User user =new User(int.parse(value),phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  Global.loginUser=user;
+
+                  //save all user data
                   prefs.setString('id',value);
                   prefs.setString('phone', phone);
-                  prefs.setBool('map_Appear', map_Appear);
+                  prefs.setInt('map_Appear', map_Appear);
+                  prefs.setString('password', password);
+                  prefs.setString('userName', userName);
+                  prefs.setDouble('latitude',position.latitude);
+                  prefs.setDouble('longitude', position.longitude);
+
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CustomerHomePage()
@@ -298,30 +317,6 @@ class _State extends State<SignUp> with Validation  {
     return position;
   }
 
-  Widget checkBox() {
-    return   Container(
-        child: Row(
-          children: <Widget>[
-            Text(
-              'التسجيل كصاحب محل تجاري',
-              style: TextStyle(fontSize: 10,
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w500,),
-            ),
-            Checkbox(
-              value: map_Appear,
-              onChanged: (bool value)
-              {
-                setState(() {
-                  map_Appear=value;
-                });
-              },
-            )
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-        )
-    );
-  }
   Widget DropDown() {
     return   Container(
         child: Row(
@@ -356,6 +351,7 @@ class _State extends State<SignUp> with Validation  {
         )
     );
   }
+
   Widget sentToLogin(){
     return Container(
         child: Row(

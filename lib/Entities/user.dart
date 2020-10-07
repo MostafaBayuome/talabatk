@@ -12,6 +12,8 @@ class User {
   int mapAppear;
 
 
+  User.empty();
+
   User(this.id, this.mobileNumber, this.latitude, this.longitude, this.userName,
       this.password, this.mapAppear);
 

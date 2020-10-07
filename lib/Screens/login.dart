@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:talabatk_flutter/Entities/api_manger.dart';
+import 'package:talabatk_flutter/Entities/user.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Screens/shop_home_page.dart';
@@ -193,12 +191,21 @@ class _State extends State<Login>  with Validation {
 
                 try{
                   var data =value;
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                  // SharedPreferences prefs = await SharedPreferences.getInstance();
 
 
+                  User user =new User(data['id'],data['mobileNumber'],data['latitude'],data['longitude'],data['userName'],data['password'],data['mapAppear']);
+                  Global.loginUser=user;
+                  /*
                   prefs.setInt('id',data["id"]);
                   prefs.setString('phone', data["phone"]);
                   prefs.setInt('map_Appear', data["map_Appear"]);
+                  prefs.setString('userName', data["userName"]);
+                  prefs.setString('password', data["password"]);
+                  prefs.setDouble('latitude',data['latitude']);
+                  prefs.setDouble('longitude', data['longitude']);
+                  */
 
                   if(value["map_Appear"]>0)
                     {

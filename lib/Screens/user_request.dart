@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:talabatk_flutter/Entities/request.dart';
 import 'package:talabatk_flutter/Entities/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'chat_page.dart';
@@ -20,12 +21,14 @@ class UserRequest extends StatefulWidget
 }
 
 class _State extends State<UserRequest>{
-  File _image;
+  _State(this.shop);
+  File image;
   final picker = ImagePicker();
   List<Asset> images = List<Asset>();
   String _error = 'No Error Dectected';
   User shop;
-  _State(this.shop);
+  final detailsTextController = TextEditingController();
+  String image1="",image2="";
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +71,7 @@ class _State extends State<UserRequest>{
                           child: TextField(
                             maxLines: 10,
                             decoration: InputDecoration.collapsed(hintText: ""),
+                            controller: detailsTextController,
                           ),
                         ),
                       ) ),
@@ -79,9 +83,9 @@ class _State extends State<UserRequest>{
                     width: 80,
                     height: 80,
                     child:  Center(
-                      child: _image == null
+                      child: image == null
                           ? Text('')
-                          : Image.file(_image),
+                          : Image.file(image),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -151,6 +155,19 @@ class _State extends State<UserRequest>{
                       child: Center(
                         child: RaisedButton(
                             onPressed: () {
+
+                              if(images.length>0)
+                                {
+                                    image1=images[0].name.toString();
+                                  if(images.length>1)
+                                    image2=images[1].name.toString();
+                                }
+                              Request.addRequest("Request/AddRequest",Global.loginUser.id,
+                                shop.id,Global.userLocationIdDeliever,
+                                DateTime.now().toString().substring(0,10),DateTime.now().toString().substring(11,16),detailsTextController.text.toString(),
+                                image1,image2
+                               );
+
 
                             },
                             elevation: 2.0,
@@ -260,7 +277,7 @@ class _State extends State<UserRequest>{
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        image = File(pickedFile.path);
       } else {
         print('No image selected.');
       }

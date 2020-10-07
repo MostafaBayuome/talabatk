@@ -20,7 +20,7 @@ class CustomerHomePage extends StatefulWidget {
 
 class _State extends State<CustomerHomePage>
 {
-  bool _loading=false;
+
   List<Location> Locations =[];
   @override
   Widget build(BuildContext context) {
@@ -143,6 +143,7 @@ class _State extends State<CustomerHomePage>
           return ListTile(
             onTap: () {
               LatLng latlng = new LatLng( Locations[index].latitude,  Locations[index].longitude);
+              Global.userLocationIdDeliever=Locations[index].id;
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => Gmap(currentPosition : latlng),
               ));
