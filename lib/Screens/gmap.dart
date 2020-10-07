@@ -96,7 +96,7 @@ class _GMapState extends State<Gmap> {
 
   }
 
-  Future<void> getAllNearestShops() async {
+  Future<void> getAllNearestShops() async  {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User.getNearestShops("Talabatk/GetNearestShops",prefs.getString('phone')).then((value){
       nearestShops=value;
