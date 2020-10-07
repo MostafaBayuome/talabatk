@@ -186,7 +186,11 @@ class _State extends State<SignUp> with Validation  {
   }
 
   Widget submitButton()  {
+    if(Global.visible_progress){
+      return CircularProgressIndicator();
 
+    }
+    else
     return RaisedButton(
       color:Color(int.parse(Global.primaryColor)),
       child: Text('تسجيل الدخول',style:TextStyle(
@@ -195,6 +199,10 @@ class _State extends State<SignUp> with Validation  {
         fontWeight: FontWeight.w500,
       ),),
       onPressed: () async {
+        setState(() {
+          Global.visible_progress=true;
+        });
+
         if(formKey.currentState.validate()) {
           formKey.currentState.save();
           if (map_Appear){   // Sign up as shop
@@ -204,6 +212,9 @@ class _State extends State<SignUp> with Validation  {
             else {
               
               signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, dropdownValue).then((value) async {
+                setState(() {
+                  Global.visible_progress=false;
+                });
                 if(!value.contains("user_exist"))
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -227,10 +238,16 @@ class _State extends State<SignUp> with Validation  {
           else { // sign up as customer
 
             if (position == null) {
+              setState(() {
+                Global.visible_progress=false;
+              });
               _getCurrentLocation();
             }
             else {
               signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, dropdownValue).then((value) async {
+                setState(() {
+                  Global.visible_progress=false;
+                });
                 if(!value.contains("user_exist"))
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -243,7 +260,11 @@ class _State extends State<SignUp> with Validation  {
                   ));
                 }
                 else{
-                  Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+                  setState(() {
+                    Global.visible_progress=false;
+                  });
+
+                  Utils.toastMessage("رقم الموبايل مستخدم مسبقا ");
                 }}
               );
 

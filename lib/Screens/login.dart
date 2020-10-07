@@ -15,6 +15,7 @@ import 'customer_home_page.dart';
 import 'forget_pass.dart';
 
 class Login extends StatefulWidget {
+
   @override
   _State createState() => _State();
 }
@@ -84,7 +85,9 @@ class _State extends State<Login>  with Validation {
                       ),
                         forgetPasswordButton(),
                         Container(margin: EdgeInsets.only(top:25.0),),
-                        submitButton(),
+                        submitButton()
+
+
                       ],
                     ),
                   ),
@@ -161,6 +164,11 @@ class _State extends State<Login>  with Validation {
 
   
   Widget submitButton() {
+    if(Global.visible_progress){
+      return CircularProgressIndicator();
+
+    }
+    else
     return RaisedButton(
       color: Color(int.parse(Global.primaryColor)),
       child: Text('دخول',
@@ -171,9 +179,15 @@ class _State extends State<Login>  with Validation {
 
         if(formKey.currentState.validate())
         {
+          setState(() {
+            Global.visible_progress=true;
+          });
 
           formKey.currentState.save();
           loginUser("Talabatk/GetUserByConditionPhone",mobileNumber, password).then((value) async {
+            setState(() {
+              Global.visible_progress=false;
+            });
             if(value != null)
               {
 
@@ -214,7 +228,10 @@ class _State extends State<Login>  with Validation {
 
         }},
     );
+
   }
+
+
 
 
 }

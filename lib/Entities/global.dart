@@ -8,7 +8,7 @@ class  Global {
   static String primaryColor='0xff27bdef';   //Cloudy
   static String secondaryColor='0xffe85c9b';   //pink
   static String url="http://talabatk.maxsystem-eg.com/api/";
-
+  static bool visible_progress=false;
 
   }
 
