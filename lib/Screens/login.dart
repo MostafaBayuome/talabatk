@@ -51,6 +51,14 @@ class _State extends State<Login>  with Validation {
                           border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
                           borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
                           color:Color(int.parse(Global.secondaryColor))
+
+
+
+
+
+
+
+
                       ),
                       width: 140.0,
                       height: 70.0,
@@ -186,18 +194,16 @@ class _State extends State<Login>  with Validation {
             setState(() {
               Global.visible_progress=false;
             });
-            if(value != null)
-              {
+            if(value != null){
 
                 try{
                   var data =value;
 
-                  // SharedPreferences prefs = await SharedPreferences.getInstance();
-
-
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   User user =new User(data['id'],data['mobileNumber'],data['latitude'],data['longitude'],data['userName'],data['password'],data['mapAppear']);
                   Global.loginUser=user;
-                  /*
+
+
                   prefs.setInt('id',data["id"]);
                   prefs.setString('phone', data["phone"]);
                   prefs.setInt('map_Appear', data["map_Appear"]);
@@ -205,10 +211,9 @@ class _State extends State<Login>  with Validation {
                   prefs.setString('password', data["password"]);
                   prefs.setDouble('latitude',data['latitude']);
                   prefs.setDouble('longitude', data['longitude']);
-                  */
 
-                  if(value["map_Appear"]>0)
-                    {
+
+                  if(value["map_Appear"]>0){
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>ShopHomePage()

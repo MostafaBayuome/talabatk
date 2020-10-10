@@ -9,6 +9,7 @@ class Location {
   final double longitude;
   final String title;
   final String note;
+
   Location(this.id, this.user_id, this.latitude, this.longitude, this.title, this.note);
 
 
