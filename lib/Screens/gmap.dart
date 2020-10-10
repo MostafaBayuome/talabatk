@@ -120,7 +120,7 @@ class _GMapState extends State<Gmap> {
   }
 
 
-  Widget _boxes(String _image,double lat , double long, String name,int index)
+  Widget _boxes(String _image,double lat , double long, String name,int index,String mobileNumber)
   {
     return GestureDetector(
       onTap: (){
@@ -152,9 +152,15 @@ class _GMapState extends State<Gmap> {
                       Container(
                        child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(name),
+                        child: Text(name, style: TextStyle(
+                            fontFamily: Global.fontFamily,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Color(int.parse(Global.primaryColor))
+                        )),
                                ),
                         ),
+
                       RaisedButton(
                        onPressed: () {
                          // send user to request screen to request items from exact shop
@@ -169,16 +175,27 @@ class _GMapState extends State<Gmap> {
                           textColor: Colors.white,
                           padding: const EdgeInsets.all(0.0),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Container(
                             padding: const EdgeInsets.all(10.0),
                             child: const Text(
                                 'طلب اوردر',
-                                style: TextStyle(fontSize: 20)
+                                style: TextStyle(fontSize: 15)
                             ),
                           )
                           ),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(mobileNumber, style: TextStyle(
+                              fontFamily: Global.fontFamily,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Color(int.parse(Global.primaryColor))
+                          )),
+                        ),
+                      ),
                       ]
                   ),
 
@@ -206,8 +223,8 @@ class _GMapState extends State<Gmap> {
             return  Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
-                  "https://lh5.googleusercontent.com/p/AF1QipO3VPL9m-b355xWeg4MXmOQTauFAEkavSluTtJU=w225-h160-k-no",
-                  nearestShops[i].latitude, nearestShops[i].longitude,nearestShops[i].userName,i),
+                  "https://wheelandbarrow.com.au/skins/customer/modules/PerceptionSystemPvtLtd/Storelocator/storelocator/images/default-store.png",
+                  nearestShops[i].latitude, nearestShops[i].longitude,nearestShops[i].userName,i,nearestShops[i].mobileNumber),
             );
           },
           scrollDirection: Axis.horizontal,
