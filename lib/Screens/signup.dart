@@ -294,6 +294,11 @@ class _State extends State<SignUp> with Validation  {
             }
           }
         }
+        else{
+          setState(() {
+            Global.visible_progress=true;
+          });
+        }
       },
     );
   }
@@ -363,7 +368,7 @@ class _State extends State<SignUp> with Validation  {
             FlatButton(
               textColor: Color(int.parse(Global.primaryColor)),
               child: Text(
-                ' الدخول',
+                ' انشاء حساب',
                 style: TextStyle(fontSize: 20,
                   fontFamily: Global.fontFamily,
                   fontWeight: FontWeight.w500,),
@@ -375,7 +380,7 @@ class _State extends State<SignUp> with Validation  {
                 ));
               },
             ),
-            Text('لديك حساب؟' ,style: TextStyle(
+            Text('ليس لديك حساب؟ ' ,style: TextStyle(
               fontFamily: Global.fontFamily,
               fontWeight: FontWeight.w500,),),
           ],
