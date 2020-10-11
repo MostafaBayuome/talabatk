@@ -14,7 +14,7 @@ class Location {
 
 
 // Add location to Location table
-  static Future<String> addLocation (String apiName,int  user_id,double latitude,double longitude,String title,String note) async {
+  static Future<Map<String, dynamic>> addLocation (String apiName,int  user_id,double latitude,double longitude,String title,String note) async {
     try{
       String url= Global.url+apiName;
       final response= await  http.post(url,
@@ -27,8 +27,8 @@ class Location {
             "note": note
           } )
       );
-      var convertDatatoJson =  response.body;
-      return  convertDatatoJson;
+      Map<String, dynamic> convert =  json.decode(response.body);
+      return  convert;
     }catch(Excepetion)
     {
       print(Excepetion);

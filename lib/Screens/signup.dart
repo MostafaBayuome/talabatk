@@ -219,11 +219,11 @@ class _State extends State<SignUp> with Validation  {
                 setState(() {
                   Global.visible_progress=false;
                 });
-                if(!value.contains("user_exist"))
+                if(value != null)
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                  User user =new User(int.parse(value),phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  User user =new User(int.parse(value['id']),phone,position.latitude,position.longitude,userName,password,map_Appear);
                   Global.loginUser=user;
 
                   //save all user data
@@ -257,15 +257,15 @@ class _State extends State<SignUp> with Validation  {
               _getCurrentLocation();
             }
             else {
-              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, dropdownValue).then((value) async {
+              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear).then((value) async {
                 setState(() {
                   Global.visible_progress=false;
                 });
-                if(!value.contains("user_exist"))
+                if(value != null)
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                  User user =new User(int.parse(value),phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  User user =new User(int.parse(value['id']),phone,position.latitude,position.longitude,userName,password,map_Appear);
                   Global.loginUser=user;
 
                   //save all user data

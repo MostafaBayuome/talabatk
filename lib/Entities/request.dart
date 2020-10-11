@@ -15,6 +15,7 @@ class Request {
   String image_url;
   String image_url2;
   int state;
+
   Request.empty();
   Request(id, user_id,merchant_id, location_id, request_date, request_time, details ,image_url,state);
 
@@ -34,23 +35,16 @@ class Request {
            "state": 0
          } ) );
 
-     String response1= response.toString();
+      response.toString();
+      //future work return int to work on requests
   }
+
   static Future <List<Request>> getRequestsByUser(int id) async {
 
     String url =Global.url+"Request/GetAllRequestuest?UserId="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);
-
-    //List<Request> Requests = List<Request>.from(jsonData).map((Map model)=> Request.fromJson(model)).toList();
-
-    List<Request> Requests=(jsonData as List).map((i) =>
-        Request.fromJson(i)).toList();
-    for(var i in jsonData)
-    {
-      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],i['request_date'],i['request_time'],i['details'],i['image_url'],i['state']);
-      Requests.add(request);
-    }
+    List<Request> Requests=(jsonData as List).map((i) => Request.fromJson(i)).toList();
     return Requests;
   }
 

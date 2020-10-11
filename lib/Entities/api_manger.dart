@@ -3,7 +3,7 @@ import 'location.dart';
 import 'dart:convert';
 import 'global.dart';
 
-Future<String> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear) async {
+Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear) async {
   try{
 
     String url = Global.url+apiName;
@@ -20,14 +20,19 @@ Future<String> signUp (String apiName,String phone,String password,String userna
         } )
     );
     var convertDatatoJson =  response.body;
+
     if(!convertDatatoJson.contains("user_exist"))
     {
+      Map<String, dynamic> convert =  json.decode(response.body);
       if(map_Appear>0)
-        Location.addLocation("Location/AddLocation",int.parse(convertDatatoJson),latitude,longitude,username," ");
+        Location.addLocation("Location/AddLocation",convert['id'],latitude,longitude,username," ");
       else
-        Location.addLocation("Location/AddLocation",int.parse(convertDatatoJson),latitude,longitude,"المكان الرئيسي"," ");
+        Location.addLocation("Location/AddLocation",convert['id'],latitude,longitude,"المكان الرئيسي"," ");
+
+      return convert;
     }
-    return  convertDatatoJson;
+
+    return  null;
 
   }catch(Excepetion)
   {
