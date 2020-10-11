@@ -20,19 +20,19 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
         } )
     );
     var convertDatatoJson =  response.body;
+    Map<String, dynamic> convert;
+    if(!convertDatatoJson.contains("user_exist")) {
+        convert =json.decode(response.body);
+       if (map_Appear > 0)
+          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, username, " ");
+       else
+          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "المكان الرئيسي", " ");
 
-    if(!convertDatatoJson.contains("user_exist"))
-    {
-      Map<String, dynamic> convert =  json.decode(response.body);
-      if(map_Appear>0)
-        Location.addLocation("Location/AddLocation",convert['id'],latitude,longitude,username," ");
-      else
-        Location.addLocation("Location/AddLocation",convert['id'],latitude,longitude,"المكان الرئيسي"," ");
-
-      return convert;
     }
-
-    return  null;
+    else{
+      return null;
+    }
+    return convert;
 
   }catch(Excepetion)
   {

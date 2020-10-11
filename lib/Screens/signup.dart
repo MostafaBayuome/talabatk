@@ -223,7 +223,7 @@ class _State extends State<SignUp> with Validation  {
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                  User user =new User(int.parse(value['id']),phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear);
                   Global.loginUser=user;
 
                   //save all user data
@@ -265,7 +265,7 @@ class _State extends State<SignUp> with Validation  {
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                  User user =new User(int.parse(value['id']),phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear);
                   Global.loginUser=user;
 
                   //save all user data
@@ -299,6 +299,7 @@ class _State extends State<SignUp> with Validation  {
             Global.visible_progress=true;
           });
         }
+
       },
     );
   }
