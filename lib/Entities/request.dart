@@ -16,12 +16,12 @@ class Request {
            "user_id": user_id,
            "merchant_id": merchant_id,
            "location_id":location_id,
-           "request_data": request_data,
-           "request_time": request_time,
            "details": details,
            "image_url": image_url,
            "image_url2": image_url2,
-           "state": true
+           "state": 0
          } ) );
+
+     String response1= response.toString();
   }
 }

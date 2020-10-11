@@ -205,13 +205,17 @@ class _State extends State<SignUp> with Validation  {
         if(formKey.currentState.validate()) {
           formKey.currentState.save();
           // Sign up as shop
+          map_Appear=0;
+          if(dropdownValue=="صيدلية")     map_Appear=2;
+          else if(dropdownValue=="محل تجاري")     map_Appear=1;
+
           if (map_Appear>0){
             if (position == null) {
               _getCurrentLocation();
             }
             else {
               
-              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, dropdownValue).then((value) async {
+              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear).then((value) async {
                 setState(() {
                   Global.visible_progress=false;
                 });
@@ -223,7 +227,7 @@ class _State extends State<SignUp> with Validation  {
                   Global.loginUser=user;
 
                   //save all user data
-                  prefs.setString('id',value);
+                  prefs.setInt('id',user.id);
                   prefs.setString('phone', phone);
                   prefs.setInt('map_Appear', map_Appear);
                   prefs.setString('password', password);
@@ -265,7 +269,7 @@ class _State extends State<SignUp> with Validation  {
                   Global.loginUser=user;
 
                   //save all user data
-                  prefs.setString('id',value);
+                  prefs.setInt('id',user.id);
                   prefs.setString('phone', phone);
                   prefs.setInt('map_Appear', map_Appear);
                   prefs.setString('password', password);

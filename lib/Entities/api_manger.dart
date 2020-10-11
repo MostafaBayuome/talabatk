@@ -3,11 +3,9 @@ import 'location.dart';
 import 'dart:convert';
 import 'global.dart';
 
-Future<String> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,String account_type) async {
+Future<String> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear) async {
   try{
-    int map_Appear=0;
-    if(account_type=="صيدلية")     map_Appear=2;
-    else if(account_type=="محل تجاري")     map_Appear=1;
+
     String url = Global.url+apiName;
     final response= await  http.post(url,
         headers: {"Content-Type": "application/json"},

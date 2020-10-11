@@ -162,12 +162,8 @@ class _State extends State<UserRequest>{
                                   if(images.length>1)
                                     image2=images[1].name.toString();
                                 }
-                              Request.addRequest("Request/AddRequest",Global.loginUser.id,
-                                shop.id,Global.userLocationIdDeliever,
-                                DateTime.now().toString().substring(0,10),DateTime.now().toString().substring(11,16),detailsTextController.text.toString(),
-                                image1,image2
-                               );
-
+                              //DateTime.now().toString().substring(0,10) DateTime.now().toString().substring(11,16)
+                              Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2);
 
                             },
                             elevation: 2.0,
