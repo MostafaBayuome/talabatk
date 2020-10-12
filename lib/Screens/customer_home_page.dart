@@ -137,22 +137,6 @@ class _State extends State<CustomerHomePage>
 
   }
 
-  Future<void> choiceAction(String choices) async {
-
-    if(choices.contains('تسجيل الخروج')){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('value');
-      prefs.remove('phone');
-      prefs.remove('map_Appear');
-
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>SignUp()
-      ));
-    }
-    // for future features example settings user etc...
-
-  }
 
   Widget setupAlertDialoadContainer() {
     return Container(
@@ -181,7 +165,22 @@ class _State extends State<CustomerHomePage>
     );
   }
 
-  Widget _circularProgressIndicator(){
-    return CircularProgressIndicator();
+
+  Future<void> choiceAction(String choices) async {
+
+    if(choices.contains('تسجيل الخروج')){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('value');
+      prefs.remove('phone');
+      prefs.remove('map_Appear');
+
+      Navigator.of(context).pop();
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>SignUp()
+      ));
+    }
+    // for future features example settings user etc...
+
   }
+
 }

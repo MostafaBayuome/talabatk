@@ -7,6 +7,7 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Entities/request.dart';
 import 'package:talabatk_flutter/Entities/user.dart';
+import 'package:talabatk_flutter/Widgets/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'chat_page.dart';
 
@@ -153,17 +154,26 @@ class _State extends State<UserRequest>{
                   Container(
 
                       child: Center(
-                        child: RaisedButton(
-                            onPressed: () {
-
+                        child:  Global.visible_progress ?
+                             CircularProgressIndicator() :
+                             RaisedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      Global.visible_progress=true;
+                                    });
                               if(images.length>0)
                                 {
                                     image1=images[0].name.toString();
                                   if(images.length>1)
                                     image2=images[1].name.toString();
                                 }
-                              //DateTime.now().toString().substring(0,10) DateTime.now().toString().substring(11,16)
-                              Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2);
+
+                              Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2).then((value) {
+                                setState(() {
+                                  Global.visible_progress=false;
+                                });
+                              Utils.toastMessage('لقد تم ارسال طلبك');
+                              });
 
                             },
                             elevation: 2.0,
@@ -279,4 +289,6 @@ class _State extends State<UserRequest>{
       }
     });
   }
+
+
 }

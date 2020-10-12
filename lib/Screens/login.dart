@@ -53,12 +53,6 @@ class _State extends State<Login>  with Validation {
                           color:Color(int.parse(Global.secondaryColor))
 
 
-
-
-
-
-
-
                       ),
                       width: 140.0,
                       height: 70.0,
@@ -101,23 +95,28 @@ class _State extends State<Login>  with Validation {
                 Container(
                     child: Row(
                       children: <Widget>[
-
-                        FlatButton(
-                          textColor: Color(int.parse(Global.primaryColor)),
-                          child: Text(
-                            'تسجيل الدخول',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>SignUp()
-                            ));
-                          },
+                      FlatButton(
+                        textColor: Color(int.parse(Global.primaryColor)),
+                        child: Text(
+                        ' انشاء حساب',
+                        style: TextStyle(fontSize: 20,
+                        fontFamily: Global.fontFamily,
+                        fontWeight: FontWeight.w500,),
                         ),
-                        Text('انشاء حساب؟'),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
+                        onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>SignUp()
+                        ));
+                        },
+                        ),
+                          Text('ليس لديك حساب؟ ' ,style: TextStyle(
+                          fontFamily: Global.fontFamily,
+                          fontWeight: FontWeight.w500,),),
+                          ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    )),
+
               ],
             )));
   }
@@ -172,7 +171,6 @@ class _State extends State<Login>  with Validation {
   Widget submitButton() {
     if(Global.visible_progress){
       return CircularProgressIndicator();
-
     }
     else
     return RaisedButton(

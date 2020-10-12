@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/user_request.dart';
+import 'package:talabatk_flutter/Screens/user_request_page.dart';
 
 class RequestsLayout extends StatelessWidget {
   String title="الطلبات تحت التنفيذ";
-   BuildContext currContest=null;
+   BuildContext currContext=null;
   @override
   Widget build(BuildContext context) {
-    currContest=context;
+    currContext=context;
     // TODO: implement build
     return new MaterialApp(
       color: Colors.yellow,
@@ -34,7 +34,7 @@ class RequestsLayout extends StatelessWidget {
               ),
               new Container(
                 color: Colors.orange,
-                child: WaitedRequests(Icons.two_wheeler,'Processing'),
+                child: WaitedRequests(Icons.network_wifi,'Processing'),
               ),
               new Container(
 
@@ -43,7 +43,7 @@ class RequestsLayout extends StatelessWidget {
                   ),
               new Container(
                 color: Colors.red,
-                child: WaitedRequests(Icons.cancel_rounded,'Rejected'),
+                child: WaitedRequests(Icons.add_call,'Rejected'),
               ),
             ],
           ),
@@ -53,12 +53,12 @@ class RequestsLayout extends StatelessWidget {
                 icon: new Icon(Icons.timer),
               ),
               Tab(
-                icon: new Icon(Icons.two_wheeler),
+                icon: new Icon(Icons.network_wifi),
               ),
               Tab(
                 icon: new Icon(Icons.done),
               ),
-              Tab(icon: new Icon(Icons.cancel_rounded),)
+              Tab(icon: new Icon(Icons.add_call),)
             ],
             labelColor: Colors.yellow,
             unselectedLabelColor: Colors.blue,
@@ -83,7 +83,7 @@ class RequestsLayout extends StatelessWidget {
               child:  InkWell
                 (
                 onTap:(){
-                  Navigator.of(currContest).push(MaterialPageRoute(
+                  Navigator.of(currContext).push(MaterialPageRoute(
                       builder: (context) =>UserRequest()
                   ));
                 },

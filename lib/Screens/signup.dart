@@ -363,27 +363,23 @@ class _State extends State<SignUp> with Validation  {
   }
 
   Widget sentToLogin(){
-    return Container(
+    return     Container(
         child: Row(
           children: <Widget>[
+
             FlatButton(
               textColor: Color(int.parse(Global.primaryColor)),
               child: Text(
-                ' انشاء حساب',
-                style: TextStyle(fontSize: 20,
-                  fontFamily: Global.fontFamily,
-                  fontWeight: FontWeight.w500,),
+                'تسجيل الدخول',
+                style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>Login()
                 ));
               },
             ),
-            Text('ليس لديك حساب؟ ' ,style: TextStyle(
-              fontFamily: Global.fontFamily,
-              fontWeight: FontWeight.w500,),),
+            Text('انشاء حساب؟'),
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ));

@@ -56,6 +56,16 @@ class Request {
     req.image_url=model['image_url'];req.state=model['state'];
     return req;
   }
+  // get all requests for shop to display shop_home_page
+  static Future <List<Request>> getCustomerRequests  (int shopid,int locationid) async
+  {
+    String url =Global.url+"Request/GetAllRequestuest?UserId="+Global.loginUser.id.toString();
+    final response = await http.get(url,headers:{"Content-Type": "application/json"});
 
+
+
+
+
+  }
 
 }
