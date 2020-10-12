@@ -17,8 +17,6 @@ Future<void> main()  async {
 
   // if mobileNumber and check not null then it will redirect to the correct homepage
    var FirstEnter=prefs.getInt('FirstEnter');
-
-
    var phone=prefs.getString('phone');
    var map_Appear=prefs.getInt('map_Appear');
    var user_id=prefs.getInt('id');

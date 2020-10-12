@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:talabatk_flutter/Screens/RequestsLayout.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'gmap.dart';
 import 'location_editor.dart';
@@ -106,6 +107,27 @@ class _State extends State<CustomerHomePage>
                   padding: const EdgeInsets.all(10.0),
                   child: const Text(
                       'لطلب اوردر',
+                      style: TextStyle(fontSize: 20)
+                  ),
+                )),
+            const SizedBox(height: 100),
+            RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RequestsLayout()
+                  ));
+                },
+                color: Color(int.parse(Global.primaryColor)),
+                elevation: 10.0,
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text(
+                      ' طلباتي',
                       style: TextStyle(fontSize: 20)
                   ),
                 )),
