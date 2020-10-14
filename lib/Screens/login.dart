@@ -28,17 +28,7 @@ class _State extends State<Login>  with Validation {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(int.parse(Global.primaryColor)),
-          centerTitle: true,
-          title:Text(Global.appName,
-            style: TextStyle(
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 30
-            ),),
-          automaticallyImplyLeading: false,
-        ),
+        appBar:Utils.appBar(30),
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(

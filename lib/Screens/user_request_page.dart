@@ -79,7 +79,7 @@ class _State extends State<UserRequest>{
                   SizedBox(height: 10),
                   Expanded(
                     child: buildGridView(),
-                  ),
+                   ),
                   Container(
                     width: 80,
                     height: 80,
@@ -94,7 +94,6 @@ class _State extends State<UserRequest>{
                      mainAxisAlignment: MainAxisAlignment.center ,//Center Row contents horizontally,
                     children: [
                       Container(
-
                           child: Center(
                             child: SizedBox.fromSize(
                               size: Size(80, 80), // button width and height
@@ -152,49 +151,42 @@ class _State extends State<UserRequest>{
                   ),
                   SizedBox(height: 50),
                   Container(
-
                       child: Center(
                         child:  Global.visible_progress ?
-                             CircularProgressIndicator() :
-                             RaisedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      Global.visible_progress=true;
-                                    });
-                              if(images.length>0)
-                                {
-                                    image1=images[0].name.toString();
-                                  if(images.length>1)
-                                    image2=images[1].name.toString();
-                                }
-
-                              Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2).then((value) {
-                                setState(() {
-                                  Global.visible_progress=false;
-                                });
-                              Utils.toastMessage('لقد تم ارسال طلبك');
-                              });
-
-                            },
-                            elevation: 2.0,
-                            color: Color(int.parse(Global.primaryColor)),
-                            textColor: Colors.white,
-                            padding: const EdgeInsets.all(0.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              child: const Text('طلب اوردر',
-                                  style: TextStyle(fontSize: 20)
-                              ),
-                            )
-                        ),
-                      )),
-
-
-
-
+                                   CircularProgressIndicator() :
+                                   RaisedButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              Global.visible_progress=true;
+                                            });
+                                      if(images.length>0)
+                                        {
+                                            image1=images[0].name.toString();
+                                          if(images.length>1)
+                                            image2=images[1].name.toString();
+                                        }
+                                      Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2).then((value) {
+                                        setState(() {
+                                          Global.visible_progress=false;
+                                        });
+                                      Utils.toastMessage('لقد تم ارسال طلبك');
+                                      });
+                                    },
+                                    elevation: 2.0,
+                                    color: Color(int.parse(Global.primaryColor)),
+                                    textColor: Colors.white,
+                                    padding: const EdgeInsets.all(0.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                    ),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: const Text('طلب اوردر',
+                                          style: TextStyle(fontSize: 20)
+                                      ),
+                                    )
+                                ),
+                              )),
                 ],
               ),
             ),
@@ -205,7 +197,7 @@ class _State extends State<UserRequest>{
 
   Widget buildGridView() {
     return GridView.count(
-      crossAxisCount: 3,
+      crossAxisCount: 2,
       children: List.generate(images.length, (index) {
         Asset asset = images[index];
         return AssetThumb(

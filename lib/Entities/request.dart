@@ -17,7 +17,7 @@ class Request {
   int state;
 
   Request.empty();
-  Request(id, user_id,merchant_id, location_id, request_date, request_time, details ,image_url,state);
+  Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state);
 
   static Future<void> addRequest(String apiName,int user_id,int merchant_id,int location_id,
       String request_data,String request_time,String details, String image_url, String image_url2) async {
@@ -56,13 +56,24 @@ class Request {
     req.image_url=model['image_url'];req.state=model['state'];
     return req;
   }
-  // get all requests for shop to display shop_home_page
-  static Future <List<Request>> getCustomerRequests  (int shopid,int locationid) async
+
+  // get all requests for exact shop to display requests to shop_home_page
+  static Future <List<Request>> getCustomerRequests  () async
   {
-    String url =Global.url+"Request/GetAllRequestuest?UserId="+Global.loginUser.id.toString();
+    String url =Global.url+"Request/GetByMerchantId?merchantid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
-
-
+    var jsonData = json.decode(response.body);
+    List<Request> customerRequest =[];
+    for(var i in jsonData)
+    {
+      String time = i['request_time'].toString().substring(0,5);
+      String date =i['request_date'].toString().substring(0,10);
+      // merchant_id equals Global.loginUser.id
+      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
+      customerRequest.add(request);
+    }
+    
+    return customerRequest;
 
 
 

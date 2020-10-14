@@ -12,7 +12,6 @@ import 'package:talabatk_flutter/Entities/location.dart';
 
 
 
-
 class CustomerHomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _State();
@@ -170,9 +169,14 @@ class _State extends State<CustomerHomePage>
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('value');
+      prefs.remove('FirstEnter');
       prefs.remove('phone');
       prefs.remove('map_Appear');
+      prefs.remove('id');
+      prefs.remove('password');
+      prefs.remove('userName');
+      prefs.remove('latitude');
+      prefs.remove('longitude');
 
       Navigator.of(context).pop();
       Navigator.of(context).push(MaterialPageRoute(
