@@ -6,10 +6,10 @@ import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/user.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/shop_home_page.dart';
+import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/shop/shop_home_page.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'package:talabatk_flutter/Widgets/utils.dart';
-import 'customer_home_page.dart';
+import 'customer/customer_home_page.dart';
 import 'forget_pass.dart';
 
 class Login extends StatefulWidget {

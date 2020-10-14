@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/user_request_page.dart';
-import '../Entities/user.dart';
-import 'signup.dart';
+import 'package:talabatk_flutter/Entities/user.dart';
+import 'package:talabatk_flutter/Screens/customer/customer_request_page.dart';
+import 'package:talabatk_flutter/Screens/signup.dart';
+
 
 
 class Gmap extends StatefulWidget {

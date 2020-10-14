@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talabatk_flutter/Entities/global.dart';
 
 
 class ChatPage extends StatefulWidget{
@@ -13,7 +14,14 @@ class _State extends State<ChatPage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('App Name'),
+          backgroundColor: Color(int.parse(Global.primaryColor)),
+          centerTitle: true,
+          title:Text(Global.appName,
+            style: TextStyle(
+                fontFamily: Global.fontFamily,
+                fontWeight: FontWeight.w900,
+                fontSize: 30
+            ),),
           automaticallyImplyLeading: false,
         ),
         body: Padding(
