@@ -6,9 +6,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/shop_home_page.dart';
+import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/shop/shop_home_page.dart';
 import 'package:talabatk_flutter/Widgets/utils.dart';
-import 'customer_home_page.dart';
+import 'customer/customer_home_page.dart';
 import 'login.dart';
 
 
@@ -19,7 +19,6 @@ class SignUp extends StatefulWidget {
 
 class _State extends State<SignUp> with Validation  {
 
-  // true signup => SHOP  false => CUSTOMER
   String dropdownValue = 'مستخدم';
   int map_Appear;
   String userName='';
@@ -49,18 +48,7 @@ class _State extends State<SignUp> with Validation  {
 
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(int.parse(Global.primaryColor)),
-          centerTitle: true,
-          title:Text(Global.appName,
-            style: TextStyle(
-            fontFamily: Global.fontFamily,
-            fontWeight: FontWeight.w900,
-            fontSize: 30
-          ),),
-          automaticallyImplyLeading: false,
-        ),
-
+        appBar: Utils.appBar(30),
         body: Padding(
 
             padding: EdgeInsets.all(10),
@@ -107,7 +95,7 @@ class _State extends State<SignUp> with Validation  {
                 ),
 
                 SizedBox(height: 10),
-                sentToLogin(),
+                sendToLogin(),
               ],
             )));
   }
@@ -362,17 +350,16 @@ class _State extends State<SignUp> with Validation  {
     );
   }
 
-  Widget sentToLogin(){
-    return Container(
+  Widget sendToLogin(){
+    return   Container(
         child: Row(
           children: <Widget>[
+
             FlatButton(
               textColor: Color(int.parse(Global.primaryColor)),
               child: Text(
-                ' انشاء حساب',
-                style: TextStyle(fontSize: 20,
-                  fontFamily: Global.fontFamily,
-                  fontWeight: FontWeight.w500,),
+                'تسجيل الدخول',
+                style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -381,9 +368,7 @@ class _State extends State<SignUp> with Validation  {
                 ));
               },
             ),
-            Text('ليس لديك حساب؟ ' ,style: TextStyle(
-              fontFamily: Global.fontFamily,
-              fontWeight: FontWeight.w500,),),
+            Text('انشاء حساب؟'),
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ));

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:talabatk_flutter/Screens/signup.dart';
-import 'package:talabatk_flutter/screens/customer_home_page.dart';
-import 'package:talabatk_flutter/screens/shop_home_page.dart';
-
-
 import 'Entities/global.dart';
 import 'Entities/user.dart';
 import 'Screens/app_info.dart';
+import 'Screens/customer/customer_home_page.dart';
+import 'Screens/shop/shop_home_page.dart';
+import 'Screens/signup.dart';
 
 Future<void> main()  async {
   WidgetsFlutterBinding.ensureInitialized();

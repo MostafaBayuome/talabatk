@@ -6,10 +6,10 @@ import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/user.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/shop_home_page.dart';
+import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/shop/shop_home_page.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'package:talabatk_flutter/Widgets/utils.dart';
-import 'customer_home_page.dart';
+import 'customer/customer_home_page.dart';
 import 'forget_pass.dart';
 
 class Login extends StatefulWidget {
@@ -28,17 +28,7 @@ class _State extends State<Login>  with Validation {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(int.parse(Global.primaryColor)),
-          centerTitle: true,
-          title:Text(Global.appName,
-            style: TextStyle(
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 30
-            ),),
-          automaticallyImplyLeading: false,
-        ),
+        appBar:Utils.appBar(30),
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -51,12 +41,6 @@ class _State extends State<Login>  with Validation {
                           border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
                           borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
                           color:Color(int.parse(Global.secondaryColor))
-
-
-
-
-
-
 
 
                       ),
@@ -101,23 +85,28 @@ class _State extends State<Login>  with Validation {
                 Container(
                     child: Row(
                       children: <Widget>[
-
-                        FlatButton(
-                          textColor: Color(int.parse(Global.primaryColor)),
-                          child: Text(
-                            'تسجيل الدخول',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>SignUp()
-                            ));
-                          },
+                      FlatButton(
+                        textColor: Color(int.parse(Global.primaryColor)),
+                        child: Text(
+                        ' انشاء حساب',
+                        style: TextStyle(fontSize: 20,
+                        fontFamily: Global.fontFamily,
+                        fontWeight: FontWeight.w500,),
                         ),
-                        Text('انشاء حساب؟'),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
+                        onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>SignUp()
+                        ));
+                        },
+                        ),
+                          Text('ليس لديك حساب؟ ' ,style: TextStyle(
+                          fontFamily: Global.fontFamily,
+                          fontWeight: FontWeight.w500,),),
+                          ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    )),
+
               ],
             )));
   }
@@ -172,7 +161,6 @@ class _State extends State<Login>  with Validation {
   Widget submitButton() {
     if(Global.visible_progress){
       return CircularProgressIndicator();
-
     }
     else
     return RaisedButton(

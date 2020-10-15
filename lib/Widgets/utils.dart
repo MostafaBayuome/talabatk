@@ -14,5 +14,19 @@ class Utils {
         fontSize: 16.0
     );
   }
+  static Widget appBar(double fontsize )
+  {
+    return AppBar(
+      backgroundColor: Color(int.parse(Global.primaryColor)),
+      centerTitle: true,
+      title:Text(Global.appName,
+        style: TextStyle(
+            fontFamily: Global.fontFamily,
+            fontWeight: FontWeight.w900,
+            fontSize: fontsize
+        ),),
+      automaticallyImplyLeading: false,
+    );
+  }
 
 }

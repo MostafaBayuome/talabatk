@@ -3,12 +3,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/RequestsLayout.dart';
+import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/customer/customer_requests_layout.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'gmap.dart';
-import 'location_editor.dart';
+import 'customer_location_editor.dart';
 import 'package:talabatk_flutter/Entities/location.dart';
-
 
 
 
@@ -137,22 +136,6 @@ class _State extends State<CustomerHomePage>
 
   }
 
-  Future<void> choiceAction(String choices) async {
-
-    if(choices.contains('تسجيل الخروج')){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('value');
-      prefs.remove('phone');
-      prefs.remove('map_Appear');
-
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>SignUp()
-      ));
-    }
-    // for future features example settings user etc...
-
-  }
 
   Widget setupAlertDialoadContainer() {
     return Container(
@@ -181,7 +164,27 @@ class _State extends State<CustomerHomePage>
     );
   }
 
-  Widget _circularProgressIndicator(){
-    return CircularProgressIndicator();
+
+  Future<void> choiceAction(String choices) async {
+
+    if(choices.contains('تسجيل الخروج')){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('FirstEnter');
+      prefs.remove('phone');
+      prefs.remove('map_Appear');
+      prefs.remove('id');
+      prefs.remove('password');
+      prefs.remove('userName');
+      prefs.remove('latitude');
+      prefs.remove('longitude');
+
+      Navigator.of(context).pop();
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>SignUp()
+      ));
+    }
+    // for future features example settings user etc...
+
   }
+
 }

@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/user_request.dart';
-import '../Entities/user.dart';
-import 'signup.dart';
+import 'package:talabatk_flutter/Entities/user.dart';
+import 'package:talabatk_flutter/Screens/customer/customer_request_page.dart';
+import 'package:talabatk_flutter/Screens/signup.dart';
+
 
 
 class Gmap extends StatefulWidget {
@@ -242,9 +243,14 @@ class _GMapState extends State<Gmap> {
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('value');
+      prefs.remove('FirstEnter');
       prefs.remove('phone');
       prefs.remove('map_Appear');
+      prefs.remove('id');
+      prefs.remove('password');
+      prefs.remove('userName');
+      prefs.remove('latitude');
+      prefs.remove('longitude');
 
 
       Navigator.of(context).pop();
