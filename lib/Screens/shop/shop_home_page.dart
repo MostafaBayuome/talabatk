@@ -59,17 +59,16 @@ class _State extends State<ShopHomePage>{
         body: TabBarView(
           children: [
             new Container(
-              child: WaitedRequests(Icons.timer,'Waited'),
+              child: WaitedRequests(Icons.timer,'Waited',waitingList),
             ),
             new Container(
-              child: WaitedRequests(Icons.motorcycle,'Processing'),
+              child: WaitedRequests(Icons.motorcycle,'Processing',processingList),
             ),
             new Container(
-              child: WaitedRequests(Icons.done,'Delevired',
-              ),
+              child: WaitedRequests(Icons.done,'Delevired',deliveredList),
             ),
             new Container(
-              child: WaitedRequests(Icons.close,'Rejected'),
+              child: WaitedRequests(Icons.close,'Rejected',rejectedList),
             ),
           ],
         ),
@@ -98,11 +97,12 @@ class _State extends State<ShopHomePage>{
     );
 
   }
-  WaitedRequests(IconData icon,String title) {
+  WaitedRequests(IconData icon,String title,List<Request> listItem) {
+
 
     return   ListView.builder(
       padding: EdgeInsets.all(20),
-      itemCount: waitingList.length,
+      itemCount: listItem.length,
       itemBuilder: (BuildContext context,int index){
         return ListTile(
           title:Center(
@@ -119,7 +119,7 @@ class _State extends State<ShopHomePage>{
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(waitingList[index].request_date.toString(), style: TextStyle(
+                            child: Text(listItem[index].request_date.toString(), style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
@@ -130,7 +130,7 @@ class _State extends State<ShopHomePage>{
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(waitingList[index].request_time.toString()  +"الوقت ", style: TextStyle(
+                            child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
@@ -142,7 +142,7 @@ class _State extends State<ShopHomePage>{
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(waitingList[index].details, style: TextStyle(
+                            child: Text(listItem[index].details, style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
@@ -185,6 +185,7 @@ class _State extends State<ShopHomePage>{
             if(value.length!=customerRequest.length)
               {
                 customerRequest=value;
+
                 arrangeRequestsWithState();
               }
           });
@@ -195,13 +196,17 @@ class _State extends State<ShopHomePage>{
   }
   void arrangeRequestsWithState()
   {
+    waitingList.clear();
+    processingList.clear();
+    deliveredList.clear();
+    rejectedList.clear();
     for(int i=0;i<customerRequest.length;i++)
       {
-        if(customerRequest[i].state==1)
+        if(customerRequest[i].state==0)
            waitingList.add(customerRequest[i]);
-        else if(customerRequest[i].state==2)
+        else if(customerRequest[i].state==1)
           processingList.add(customerRequest[i]);
-        else if(customerRequest[i].state==3)
+        else if(customerRequest[i].state==2)
           deliveredList.add(customerRequest[i]);
         else
           rejectedList.add(customerRequest[i]);
