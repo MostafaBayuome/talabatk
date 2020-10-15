@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/customer/customer_requests_layout.dart';
+import 'package:talabatk_flutter/Screens/customer/customer_requests_layout.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'gmap.dart';
 import 'customer_location_editor.dart';
@@ -89,7 +89,7 @@ class _State extends State<CustomerHomePage>
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text(' مكان التوصيل'),
-                            content: setupAlertDialoadContainer(),
+                            content: setupAlertDialogContainer(),
                           );});
 
                   });
@@ -113,7 +113,7 @@ class _State extends State<CustomerHomePage>
             RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RequestsLayout()
+                      builder: (context) => CustomerRequestLayout()
                   ));
                 },
                 color: Color(int.parse(Global.primaryColor)),
@@ -137,7 +137,7 @@ class _State extends State<CustomerHomePage>
   }
 
 
-  Widget setupAlertDialoadContainer() {
+  Widget setupAlertDialogContainer() {
     return Container(
       height: 200.0,
       width: 200.0,

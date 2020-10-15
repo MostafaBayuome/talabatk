@@ -27,15 +27,12 @@ Future<void> main()  async {
        User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear);
        Global.loginUser=user;
      }
-
-
-
-  runApp(
+    runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
           home:FirstEnter==null? app_info(): phone ==null ? SignUp() : map_Appear > 0 ? ShopHomePage() : CustomerHomePage() ,
 
       )
-  );
+   );
   
 }

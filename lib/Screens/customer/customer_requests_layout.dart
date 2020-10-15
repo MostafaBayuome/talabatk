@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/user_request.dart';
+import 'package:talabatk_flutter/Screens/customer/customer_request_page.dart';
 
-class RequestsLayout extends StatefulWidget {
+class CustomerRequestLayout extends StatefulWidget{
   @override
   _State createState() => _State();
 }
-class _State extends State<RequestsLayout> {
-  String _title="الطلبات";
-   BuildContext currContest=null;
+
+class _State extends State<CustomerRequestLayout>
+{
+  String title="الطلبات تحت التنفيذ";
+  BuildContext currContext=null;
   @override
   Widget build(BuildContext context) {
-    currContest=context;
-    // TODO: implement build
+    currContext=context;
     return new MaterialApp(
       color: Colors.yellow,
 
       home: DefaultTabController(
         length: 4,
         child: new Scaffold(
-
           appBar: AppBar(
             backgroundColor: Color(int.parse(Global.primaryColor)),
             centerTitle: true,
-            title:Text(_title,
+            title:Text(title,
               style: TextStyle(
                   fontFamily: Global.fontFamily,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w900,
                   fontSize: 25
               ),),
             automaticallyImplyLeading: false,
@@ -35,20 +35,20 @@ class _State extends State<RequestsLayout> {
             children: [
               new Container(
                 color: Colors.yellow,
-                 child: WaitedRequests(Icons.timer,'تحت الانتظار',0),
+                child: WaitedRequests(Icons.timer,'Waited'),
               ),
               new Container(
                 color: Colors.orange,
-                child: WaitedRequests(Icons.two_wheeler,'جاري التنفيذ',1),
+                child: WaitedRequests(Icons.motorcycle,'Processing'),
               ),
               new Container(
-                
+
                 color: Colors.lightGreen,
-                child: WaitedRequests(Icons.done,'تم توصيلها',2),
-                  ),
+                child: WaitedRequests(Icons.done,'Delevired'),
+              ),
               new Container(
                 color: Colors.red,
-                child: WaitedRequests(Icons.cancel_rounded,'مرفوضة',3),
+                child: WaitedRequests(Icons.close,'Rejected'),
               ),
             ],
           ),
@@ -58,12 +58,12 @@ class _State extends State<RequestsLayout> {
                 icon: new Icon(Icons.timer),
               ),
               Tab(
-                icon: new Icon(Icons.two_wheeler),
+                icon: new Icon(Icons.motorcycle),
               ),
               Tab(
                 icon: new Icon(Icons.done),
               ),
-              Tab(icon: new Icon(Icons.cancel_rounded),)
+              Tab(icon: new Icon(Icons.close),)
             ],
             labelColor: Colors.yellow,
             unselectedLabelColor: Colors.blue,
@@ -77,74 +77,34 @@ class _State extends State<RequestsLayout> {
     );
   }
 
-  WaitedRequests(IconData icon,String title,int state) {
+  WaitedRequests(IconData icon,String title) {
 
-  setState(){
-    _title=title;
-  }
+    return  ListView(
 
-  return  ListView(
+        children: <Widget>[
 
-          children: <Widget>[
+          Container(
 
-            Container(
-
-                child:  InkWell
-                  (
-                  onTap:(){
-                    Navigator.of(currContest).push(MaterialPageRoute(
-                        builder: (context) =>UserRequest()
-                    ));
-                  },
-                  child:Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          //mainAxisSize: MainAxisSize.min,
-
-                          children: <Widget>[
-                            ListTile(
-                              title: Text('Order number : 0111123455'),
-                              subtitle: Text('User Description  need 1 litre milk 10 eggs etc ......... plus new things will be added  plus new things will be added  '),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center ,
-                              children: <Widget>[
-                                FlatButton(
-                                  child: IconButton(
-                                    tooltip:'waited',
-                                    icon: Icon(icon),
-                                    color: Colors.red,
-
-                                    onPressed: () {
-                                      // here we send location of user
-                                    },
-                                  ),
-                                ),
-                                Text(title)
-                              ],
-                            )
-
-                          ],
-                        ),
-                      ) ) ,
-                )
-            ) ,
-            Container(
-
-                child:  Card(
+              child:  InkWell
+                (
+                onTap:(){
+                  Navigator.of(currContext).push(MaterialPageRoute(
+                      builder: (context) =>UserRequest()
+                  ));
+                },
+                child:Card(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                        //mainAxisSize: MainAxisSize.min,
+
                         children: <Widget>[
                           ListTile(
-                            title: Text('Order No : 01149056691'),
-                            subtitle: Text('User Description  i need to buy milk 100 orange asadas  ......... plus new things will be added  plus new things will be added  '),
+                            title: Text('Order number : 0111123455'),
+                            subtitle: Text('User Description  need 1 litre milk 10 eggs etc ......... plus new things will be added  plus new things will be added  '),
                           ),
                           Row(
-
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center ,
                             children: <Widget>[
                               FlatButton(
                                 child: IconButton(
@@ -163,16 +123,45 @@ class _State extends State<RequestsLayout> {
 
                         ],
                       ),
-                    ) )
-            )
-          ]
-      );
+                    ) ) ,
+              )
+          ) ,
+          Container(
 
-  }
+              child:  Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          title: Text('Order No : 01149056691'),
+                          subtitle: Text('User Description  i need to buy milk 100 orange asadas  ......... plus new things will be added  plus new things will be added  '),
+                        ),
+                        Row(
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            FlatButton(
+                              child: IconButton(
+                                tooltip:'waited',
+                                icon: Icon(icon),
+                                color: Colors.red,
 
+                                onPressed: () {
+                                  // here we send location of user
+                                },
+                              ),
+                            ),
+                            Text(title)
+                          ],
+                        )
+
+                      ],
+                    ),
+                  ) )
+          )
+        ]
+    );
   }
 }
