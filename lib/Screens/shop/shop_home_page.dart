@@ -179,7 +179,7 @@ class _State extends State<ShopHomePage>{
 
   Future getAllRequests() {
     return  Future.delayed(const Duration(seconds: 5), () {
-      Request.getCustomerRequests().then((value)
+      Request.getShopRequests().then((value)
         {
           setState(() {
             if(value.length!=customerRequest.length)

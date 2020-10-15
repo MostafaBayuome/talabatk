@@ -6,7 +6,7 @@ import 'package:talabatk_flutter/Entities/api_manger.dart';
 import 'package:talabatk_flutter/Entities/user.dart';
 import 'package:talabatk_flutter/Entities/validation.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
-import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/shop/shop_home_page.dart';
+import 'package:talabatk_flutter/Screens/shop/shop_home_page.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 import 'package:talabatk_flutter/Widgets/utils.dart';
 import 'customer/customer_home_page.dart';

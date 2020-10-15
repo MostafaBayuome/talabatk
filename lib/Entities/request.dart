@@ -58,7 +58,7 @@ class Request {
   }
 
   // get all requests for exact shop to display requests to shop_home_page
-  static Future <List<Request>> getCustomerRequests  () async
+  static Future <List<Request>> getShopRequests  () async
   {
     String url =Global.url+"Request/GetByMerchantId?merchantid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
@@ -73,6 +73,26 @@ class Request {
       customerRequest.add(request);
     }
     
+    return customerRequest;
+
+
+
+  }
+  static Future <List<Request>> getCustumerRequests  () async
+  {
+    String url =Global.url+"Request//api/Request/GetByUserId?userid="+Global.loginUser.id.toString();
+    final response = await http.get(url,headers:{"Content-Type": "application/json"});
+    var jsonData = json.decode(response.body);
+    List<Request> customerRequest =[];
+    for(var i in jsonData)
+    {
+      String time = i['request_time'].toString().substring(0,5);
+      String date =i['request_date'].toString().substring(0,10);
+      // merchant_id equals Global.loginUser.id
+      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
+      customerRequest.add(request);
+    }
+
     return customerRequest;
 
 
