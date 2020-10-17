@@ -3,10 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Entities/request.dart';
-import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/shop/shop_request_information.dart';
 import '../signup.dart';
-
-
 
 class ShopHomePage extends StatefulWidget {
 
@@ -104,13 +101,14 @@ class _State extends State<ShopHomePage>{
       padding: EdgeInsets.all(20),
       itemCount: listItem.length,
       itemBuilder: (BuildContext context,int index){
-        return ListTile(
-          title:Center(
+        return Container(
+          child:Padding(
+              padding: const EdgeInsets.all(5.0),
               child: Container(
                 child: Material(
                   color: Colors.white,
                   elevation: 8.0,
-                  borderRadius: BorderRadius.circular(24.0),
+                  borderRadius: BorderRadius.circular(30.0),
                   shadowColor: Color(int.parse(Global.primaryColor)),
                   child: Column(
 
@@ -118,18 +116,18 @@ class _State extends State<ShopHomePage>{
                       children: [
                         Container(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Text(listItem[index].request_date.toString(), style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 15,
+                                fontSize: 17,
                                 color: Color(int.parse(Global.primaryColor))
                             )),
                           ),
                         ),
                         Container(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
@@ -138,34 +136,39 @@ class _State extends State<ShopHomePage>{
                             )),
                           ),
                         ),
-
                         Container(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Text(listItem[index].details, style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 12,
+                                fontSize: 15,
                                 color: Color(int.parse(Global.primaryColor))
                             )),
                           ),
                         ),
-                        RaisedButton(
+                       if (listItem[index].state==0)
+                          RaisedButton(
                             onPressed: () {
-
+                              showAlertDialog(context,index);
                             },
                             elevation: 2.0,
                             color: Color(int.parse(Global.primaryColor)),
                             textColor: Colors.white,
-                            padding: const EdgeInsets.all(0.0),
+                            padding:   EdgeInsets.all(0.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              child: const Text(
+                              padding:   EdgeInsets.all(10.0),
+                              child:   Text(
                                   "تفاصيل الطلب",
-                                  style: TextStyle(fontSize: 15)
+                                  style: TextStyle(
+                                      fontFamily: Global.fontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+
+                                  )
                               ),
                             )
                         ),
@@ -233,5 +236,68 @@ class _State extends State<ShopHomePage>{
     }
 
   }
+  showAlertDialog(BuildContext context,int index) {
 
+    // set up the buttons
+    Widget cancelButton = RaisedButton(
+      elevation: 2.0,
+      color: Color(int.parse("0xffFF6C6C")),
+      textColor: Colors.white,
+      padding:   EdgeInsets.all(10.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Text("لا اوافق" ,style: TextStyle(
+        fontFamily: Global.fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+        color: Colors.white
+      ),),
+      onPressed:  () {},
+    );
+    Widget continueButton = RaisedButton(
+      elevation: 2.0,
+      color: Colors.lightGreen,
+      textColor: Colors.white,
+      padding:   EdgeInsets.all(10.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+       ),
+      child: Text("تنفيذ الطلب" ,style: TextStyle(
+          fontFamily: Global.fontFamily,
+          fontWeight: FontWeight.w600,
+          fontSize: 14,
+          color: Colors.white
+      )),
+      onPressed:  () {},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(waitingList[index].request_time , style: TextStyle(
+          fontFamily: Global.fontFamily,
+          fontWeight: FontWeight.w600,
+          fontSize: 15,
+          color: Color(int.parse(Global.primaryColor))
+      )),
+      content:Text(waitingList[index].details, style: TextStyle(
+          fontFamily: Global.fontFamily,
+          fontWeight: FontWeight.w600,
+          fontSize: 15,
+          color: Color(int.parse(Global.primaryColor))
+      ) ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }

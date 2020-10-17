@@ -26,6 +26,7 @@ class _State extends State<ChatPage>
         ),
         body: Padding(
           padding: EdgeInsets.all(10),
+
        )
 
 
