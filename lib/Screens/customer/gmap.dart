@@ -22,6 +22,10 @@ class _GMapState extends State<Gmap> {
   List<User> nearestShops=[];
   List<Marker> allMarkers =[];
 
+  List<User> pharmacy=[];
+  List<User> shops=[];
+  //0 all SHOP 1 All pharmacy 2 All supermarket
+  int numberOfList=0;
   LatLng _currentPosition;
   _GMapState(this._currentPosition);
   Completer<GoogleMapController> _controller = Completer();
@@ -53,7 +57,15 @@ class _GMapState extends State<Gmap> {
       body:Stack(
         children: [
           _googleMap(context),
+          Row(
+            mainAxisAlignment:  MainAxisAlignment.center,
+            children: [
+              pharmacyIcon(),
+              shopIcon(),
+            ],
+          ),
           _buildContainer(),
+          
         ],
       ),
     );
@@ -104,6 +116,11 @@ class _GMapState extends State<Gmap> {
 
       for(int i=0;i<nearestShops.length;i++)
       {
+        if(nearestShops[i].mapAppear==1)
+          shops.add(nearestShops[i]);
+        else if(nearestShops[i].mapAppear==2)
+          pharmacy.add(nearestShops[i]);
+
         LatLng _position = new LatLng(nearestShops[i].latitude, nearestShops[i].longitude);
         setState(() {
           allMarkers.add(Marker(
@@ -121,7 +138,7 @@ class _GMapState extends State<Gmap> {
   }
 
 
-  Widget _boxes(String _image,double lat , double long, String name,int index,String mobileNumber)
+  Widget _boxes(String _image,double lat , double long, String name,int index,String mobileNumber,User shop)
   {
     return GestureDetector(
       onTap: (){
@@ -167,7 +184,7 @@ class _GMapState extends State<Gmap> {
                          // send user to request screen to request items from exact shop
                          print("hey there"+ name);
                          Navigator.of(context).push(MaterialPageRoute(
-                           builder: (context) => UserRequest(shop:nearestShops[index]),
+                           builder: (context) => UserRequest(shop:shop),
                          ));
 
                        },
@@ -211,21 +228,30 @@ class _GMapState extends State<Gmap> {
 
 
   Widget _buildContainer() {
-
+    List<User> shopList =[];
+    setState(() {
+      if(  numberOfList == 0)
+        shopList=nearestShops;
+      else if(numberOfList == 1)
+        shopList=pharmacy;
+      else if(numberOfList == 2)
+        shopList=shops;
+    });
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20.0),
         height: 180.0,
         child: ListView.builder(
-          itemCount: nearestShops.length,
+          itemCount: shopList.length,
           itemBuilder: (BuildContext context,int i)
           {
-            return  Padding(
+
+            return Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
                   "https://wheelandbarrow.com.au/skins/customer/modules/PerceptionSystemPvtLtd/Storelocator/storelocator/images/default-store.png",
-                  nearestShops[i].latitude, nearestShops[i].longitude,nearestShops[i].userName,i,nearestShops[i].mobileNumber),
+                  shopList[i].latitude, shopList[i].longitude,shopList[i].userName,i,shopList[i].mobileNumber,shopList[i]),
             );
           },
           scrollDirection: Axis.horizontal,
@@ -237,6 +263,135 @@ class _GMapState extends State<Gmap> {
   Future<void> _goToLocation(double lat,double long) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,long), zoom:15, tilt: 40.0,bearing:45.0)));
+  }
+
+
+  Widget pharmacyIcon() {
+    return Container(
+        padding: EdgeInsets.all(10.0),
+        alignment: Alignment.topCenter,
+        child: SizedBox.fromSize(
+          size: Size(70, 70), // button width and height
+          child: ClipOval(
+            child: Material(
+              color:  Color(int.parse(Global.primaryColor)), // button color
+              child: InkWell(
+                splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                onTap: () {
+                  getAllPharmacies();
+                }, // button pressed
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.local_pharmacy,color: Colors.white,), // icon
+                    Text("صيدليه"  , style: TextStyle(
+                      color: Colors.white,
+                    ),), // text
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ));
+  }
+  void getAllPharmacies()  {
+    setState(() {
+      allMarkers.clear();
+      nearestShops.clear();
+    });
+    allMarkers.add(Marker(
+        markerId:MarkerId("myMarker"),
+        infoWindow: InfoWindow(title:"مكان التوصيل"),
+        draggable: false,
+        position: _currentPosition,
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueBlue,
+        )
+    ));
+    for(int i=0;i<pharmacy.length;i++)
+      {
+        LatLng _position = new LatLng(pharmacy[i].latitude, pharmacy[i].longitude);
+        setState(() {
+          allMarkers.add(Marker(
+              markerId:MarkerId(pharmacy[i].id.toString()),
+              infoWindow: InfoWindow(title:pharmacy[i].userName),
+              draggable: false,
+              position: _position,
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueViolet,
+              )
+          ));
+        });
+      }
+    setState(() {
+      numberOfList=1;
+    });
+
+  }
+
+  Widget shopIcon(){
+   return Container(
+        padding: EdgeInsets.all(10.0),
+        alignment: Alignment.topCenter,
+        child: SizedBox.fromSize(
+          size: Size(70, 70), // button width and height
+          child: ClipOval(
+            child: Material(
+              color:  Color(int.parse(Global.primaryColor)), // button color
+              child: InkWell(
+                splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                onTap: () {
+                  getAllShops();
+                }, // button pressed
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.shopping_cart,color: Colors.white,), // icon
+                    Text("محل تجاري"  , style: TextStyle(
+                      color: Colors.white,
+                    ),), // text
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ));
+  }
+
+  void getAllShops()  {
+    setState(() {
+      allMarkers.clear();
+      nearestShops.clear();
+    });
+
+    allMarkers.add(Marker(
+        markerId:MarkerId("myMarker"),
+        infoWindow: InfoWindow(title:"مكان التوصيل"),
+        draggable: false,
+        position: _currentPosition,
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueBlue,
+        )
+    ));
+    for(int i=0;i<shops.length;i++)
+      {
+        LatLng _position = new LatLng(shops[i].latitude, shops[i].longitude);
+        setState(() {
+          allMarkers.add(Marker(
+              markerId:MarkerId(shops[i].id.toString()),
+              infoWindow: InfoWindow(title:shops[i].userName),
+              draggable: false,
+              position: _position,
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueViolet,
+              )
+          ));
+        });
+      }
+
+    setState(() {
+      numberOfList=2;
+    });
   }
 
   Future<void> choiceAction(String choices) async {
@@ -260,5 +415,4 @@ class _GMapState extends State<Gmap> {
     // for future features
 
   }
-
 }
