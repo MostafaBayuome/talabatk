@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talabatk_flutter/Entities/constants.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 import 'package:talabatk_flutter/Entities/request.dart';
+import 'package:talabatk_flutter/Screens/shop/shop_request_information.dart';
 import '../signup.dart';
 
 class ShopHomePage extends StatefulWidget {
@@ -15,8 +16,8 @@ class ShopHomePage extends StatefulWidget {
 class _State extends State<ShopHomePage>{
 
   BuildContext currContext=null;
-  List<Request> customerRequest=[];
-
+  List<Request> allCustomerRequest=[];
+  //all Customer Request divided into 4 Lists
   List<Request> waitingList=[];
   List<Request> processingList=[];
   List<Request> deliveredList=[];
@@ -56,16 +57,16 @@ class _State extends State<ShopHomePage>{
         body: TabBarView(
           children: [
             new Container(
-              child: WaitedRequests(Icons.timer,'Waited',waitingList),
+              child: allRequests(Icons.timer,'Waited',waitingList),
             ),
             new Container(
-              child: WaitedRequests(Icons.motorcycle,'Processing',processingList),
+              child: allRequests(Icons.motorcycle,'Processing',processingList),
             ),
             new Container(
-              child: WaitedRequests(Icons.done,'Delevired',deliveredList),
+              child: allRequests(Icons.done,'Delevired',deliveredList),
             ),
             new Container(
-              child: WaitedRequests(Icons.close,'Rejected',rejectedList),
+              child: allRequests(Icons.close,'Rejected',rejectedList),
             ),
           ],
         ),
@@ -94,7 +95,7 @@ class _State extends State<ShopHomePage>{
     );
 
   }
-  WaitedRequests(IconData icon,String title,List<Request> listItem) {
+  allRequests(IconData icon,String title,List<Request> listItem) {
 
 
     return   ListView.builder(
@@ -150,7 +151,10 @@ class _State extends State<ShopHomePage>{
                        if (listItem[index].state==0)
                           RaisedButton(
                             onPressed: () {
-                              showAlertDialog(context,index);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>ShopRequestInfromation(request: listItem[index])
+                              ));
+
                             },
                             elevation: 2.0,
                             color: Color(int.parse(Global.primaryColor)),
@@ -185,9 +189,9 @@ class _State extends State<ShopHomePage>{
       Request.getShopRequests().then((value)
         {
           setState(() {
-            if(value.length!=customerRequest.length)
+            if(value.length!=allCustomerRequest.length)
               {
-                customerRequest=value;
+                allCustomerRequest=value;
 
                 arrangeRequestsWithState();
               }
@@ -203,23 +207,22 @@ class _State extends State<ShopHomePage>{
     processingList.clear();
     deliveredList.clear();
     rejectedList.clear();
-    for(int i=0;i<customerRequest.length;i++)
+    for(int i=0;i<allCustomerRequest.length;i++)
       {
-        if(customerRequest[i].state==0)
-           waitingList.add(customerRequest[i]);
-        else if(customerRequest[i].state==1)
-          processingList.add(customerRequest[i]);
-        else if(customerRequest[i].state==2)
-          deliveredList.add(customerRequest[i]);
+        if(allCustomerRequest[i].state==0)
+           waitingList.add(allCustomerRequest[i]);
+        else if(allCustomerRequest[i].state==1)
+          processingList.add(allCustomerRequest[i]);
+        else if(allCustomerRequest[i].state==2)
+          deliveredList.add(allCustomerRequest[i]);
         else
-          rejectedList.add(customerRequest[i]);
+          rejectedList.add(allCustomerRequest[i]);
       }
   }
   Future<void>  choiceAction(String choices) async {
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('FirstEnter');
       prefs.remove('phone');
       prefs.remove('map_Appear');
       prefs.remove('id');
@@ -229,13 +232,15 @@ class _State extends State<ShopHomePage>{
       prefs.remove('longitude');
 
 
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
           builder: (context) =>SignUp()
-      ));
+      ),ModalRoute.withName("/Home"));
     }
 
   }
+
+  //Alert Dialog
+  /*
   showAlertDialog(BuildContext context,int index) {
 
     // set up the buttons
@@ -253,7 +258,10 @@ class _State extends State<ShopHomePage>{
         fontSize: 14,
         color: Colors.white
       ),),
-      onPressed:  () {},
+      onPressed:  () {
+
+
+      },
     );
     Widget continueButton = RaisedButton(
       elevation: 2.0,
@@ -269,7 +277,10 @@ class _State extends State<ShopHomePage>{
           fontSize: 14,
           color: Colors.white
       )),
-      onPressed:  () {},
+      onPressed:  () {
+
+
+      },
     );
 
     // set up the AlertDialog
@@ -299,5 +310,6 @@ class _State extends State<ShopHomePage>{
         return alert;
       },
     );
-  }
+  } */
+
 }

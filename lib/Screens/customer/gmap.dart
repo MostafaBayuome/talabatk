@@ -243,7 +243,7 @@ class _GMapState extends State<Gmap> {
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('FirstEnter');
+
       prefs.remove('phone');
       prefs.remove('map_Appear');
       prefs.remove('id');
@@ -253,10 +253,9 @@ class _GMapState extends State<Gmap> {
       prefs.remove('longitude');
 
 
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
           builder: (context) =>SignUp()
-      ));
+      ),ModalRoute.withName("/Home"));
     }
     // for future features
 

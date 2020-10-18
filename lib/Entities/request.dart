@@ -50,10 +50,15 @@ class Request {
 
   static fromJson(Map model) {
     Request req=new Request.empty();
-    req.id=model['id'];req.user_id=model['user_id'];req.merchant_id=model['merchant_id'];
-    req.location_id=model['location_id'];req.request_date=model['request_date'];
-    req.request_time=model['request_time'];req.details=model['details'];
-    req.image_url=model['image_url'];req.state=model['state'];
+    req.id=model['id'];
+    req.user_id=model['user_id'];
+    req.merchant_id=model['merchant_id'];
+    req.location_id=model['location_id'];
+    req.request_date=model['request_date'];
+    req.request_time=model['request_time'];
+    req.details=model['details'];
+    req.image_url=model['image_url'];
+    req.state=model['state'];
     return req;
   }
 

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:talabatk_flutter/Entities/global.dart';
 class Utils {
-  static void toastMessage(String message) {
+
+  static void toastMessage(String message){
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
@@ -14,7 +15,7 @@ class Utils {
         fontSize: 16.0
     );
   }
-  static Widget appBar(double fontsize )
+  static Widget appBar(double fontsize)
   {
     return AppBar(
       backgroundColor: Color(int.parse(Global.primaryColor)),

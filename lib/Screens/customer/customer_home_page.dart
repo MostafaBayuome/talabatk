@@ -169,7 +169,7 @@ class _State extends State<CustomerHomePage>
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('FirstEnter');
+
       prefs.remove('phone');
       prefs.remove('map_Appear');
       prefs.remove('id');
@@ -178,13 +178,11 @@ class _State extends State<CustomerHomePage>
       prefs.remove('latitude');
       prefs.remove('longitude');
 
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
           builder: (context) =>SignUp()
-      ));
-    }
-    // for future features example settings user etc...
+      ),ModalRoute.withName("/Home"));
 
+    }
   }
 
 }

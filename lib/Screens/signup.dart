@@ -50,10 +50,10 @@ class _State extends State<SignUp> with Validation  {
     return Scaffold(
         appBar: Utils.appBar(30),
         body: Padding(
-
             padding: EdgeInsets.all(10),
             child: ListView(
-              children: <Widget>[
+                  children: <Widget>[
+                //future update remove _title() and put CircleAvatar()
                 _title(),
                 Container(margin: EdgeInsets.only(top:25.0),),
                 Container(

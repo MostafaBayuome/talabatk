@@ -6,16 +6,16 @@ import 'package:talabatk_flutter/Entities/request.dart';
 import 'package:talabatk_flutter/Screens/signup.dart';
 
 
-class RequestInfromation extends StatefulWidget {
+class ShopRequestInfromation extends StatefulWidget {
   Request request;
-  RequestInfromation({Key key, @required this.request}) : super(key: key);
+  ShopRequestInfromation({Key key, @required this.request}) : super(key: key);
   @override
-  _RequestInfromationState createState() => _RequestInfromationState(request);
+  _ShopRequestInfromationState createState() => _ShopRequestInfromationState(request);
 }
 
-class _RequestInfromationState extends State<RequestInfromation> {
+class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
   Request request;
-  _RequestInfromationState(this.request);
+  _ShopRequestInfromationState(this.request);
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +39,106 @@ class _RequestInfromationState extends State<RequestInfromation> {
         ],
       ),
 
-      body: Container(
-        //page for displaying request with accepting and refusing it
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+         child: Column(
+
+           children: [
+             Text(request.request_date.toString(), style: TextStyle(
+                 fontFamily: Global.fontFamily,
+                 fontWeight: FontWeight.w600,
+                 fontSize: 25,
+                 color: Color(int.parse(Global.primaryColor))
+                 )),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(request.request_time.toString(), style: TextStyle(
+                      fontFamily: Global.fontFamily,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      color: Color(int.parse(Global.primaryColor))
+                  )),
+                  SizedBox(width: 20,),
+                  Text("الوقت", style: TextStyle(
+                      fontFamily: Global.fontFamily,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      color: Color(int.parse(Global.primaryColor))
+                  )),
+
+                ],
+              ),
+             SizedBox(height: 20,),
+             Text(request.details, style: TextStyle(
+                 fontFamily: Global.fontFamily,
+                 fontWeight: FontWeight.w600,
+                 fontSize: 20,
+                 color: Color(int.parse(Global.primaryColor))
+             )),
+             SizedBox(height: 20,),
+             /*** IMAGES WIDGET WILL BE ADDED HERE FUTURE WORK ***/
+             Expanded(
+               child: Row(
+                 crossAxisAlignment: CrossAxisAlignment.end,
+                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                 children: [
+                   RaisedButton(
+                     elevation: 2.0,
+                     color: Color(int.parse("0xffFF6C6C")),
+                     textColor: Colors.white,
+                     padding:   EdgeInsets.all(10.0),
+                     shape: RoundedRectangleBorder(
+                       borderRadius: BorderRadius.circular(20.0),
+                     ),
+                     child: Text("لا اوافق" ,style: TextStyle(
+                         fontFamily: Global.fontFamily,
+                         fontWeight: FontWeight.w600,
+                         fontSize: 14,
+                         color: Colors.white
+                     ),),
+                     onPressed:  () {
+                        //update state of request to 3
+
+                     },
+                   ),
+                   SizedBox(width: 20,),
+                   RaisedButton(
+                     elevation: 2.0,
+                     color: Colors.lightGreen,
+                     textColor: Colors.white,
+                     padding:   EdgeInsets.all(10.0),
+                     shape: RoundedRectangleBorder(
+                       borderRadius: BorderRadius.circular(20.0),
+                     ),
+                     child: Text("تنفيذ الطلب" ,style: TextStyle(
+                         fontFamily: Global.fontFamily,
+                         fontWeight: FontWeight.w600,
+                         fontSize: 14,
+                         color: Colors.white
+                     )),
+                     onPressed:  () {
+                       // update state of request to  4
+
+                     },
+                   )
+                 ],
+               ),
+             )
+              ],
+         ),
       ),
     );
   }
 
-  Future<void> choiceAction(String choices) async {
+    Future<void> choiceAction(String choices) async {
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('FirstEnter');
+
       prefs.remove('phone');
       prefs.remove('map_Appear');
       prefs.remove('id');
@@ -58,12 +147,14 @@ class _RequestInfromationState extends State<RequestInfromation> {
       prefs.remove('latitude');
       prefs.remove('longitude');
 
-      Navigator.of(context).pop();
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
           builder: (context) =>SignUp()
-      ));
+      ),ModalRoute.withName("/Home"));
+
     }
-    // for future features example settings user etc...
+
 
   }
+
+
 }
