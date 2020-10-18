@@ -265,7 +265,7 @@ class _GMapState extends State<Gmap> {
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,long), zoom:15, tilt: 40.0,bearing:45.0)));
   }
 
-
+  //PHARMACY
   Widget pharmacyIcon() {
     return Container(
         padding: EdgeInsets.all(10.0),
@@ -329,6 +329,7 @@ class _GMapState extends State<Gmap> {
 
   }
 
+  // SHOP
   Widget shopIcon(){
    return Container(
         padding: EdgeInsets.all(10.0),
@@ -357,7 +358,6 @@ class _GMapState extends State<Gmap> {
           ),
         ));
   }
-
   void getAllShops()  {
     setState(() {
       allMarkers.clear();

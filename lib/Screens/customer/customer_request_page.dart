@@ -75,7 +75,8 @@ class _State extends State<UserRequest>{
                             controller: detailsTextController,
                           ),
                         ),
-                      ) ),
+                      )
+                  ),
                   SizedBox(height: 10),
                   Expanded(
                     child: buildGridView(),

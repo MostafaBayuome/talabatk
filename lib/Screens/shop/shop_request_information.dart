@@ -31,7 +31,11 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
               return Constants.choices.map((String choice){
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice),
+                  child: Text(choice ,style: TextStyle(
+                      fontFamily: Global.fontFamily,
+                    color:  Color(int.parse(Global.primaryColor)),
+
+                  ),),
                 );
               }).toList();
             },
@@ -44,14 +48,44 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
          child: Column(
 
            children: [
-             Text(request.request_date.toString(), style: TextStyle(
-                 fontFamily: Global.fontFamily,
-                 fontWeight: FontWeight.w600,
-                 fontSize: 25,
-                 color: Color(int.parse(Global.primaryColor))
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceAround,
+               children: [
+                 Text(request.request_date.toString(), style: TextStyle(
+                     fontFamily: Global.fontFamily,
+                     fontWeight: FontWeight.w600,
+                     fontSize: 25,
+                     color: Color(int.parse(Global.primaryColor))
                  )),
+                 SizedBox.fromSize(
+                   size: Size(70, 70), // button width and height
+                   child: ClipOval(
+                     child: Material(
+                       color:  Color(int.parse(Global.primaryColor)), // button color
+                       child: InkWell(
+                         splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                         onTap: () {
+                           //Send User to chat page
+
+                         }, // button pressed
+                         child: Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: <Widget>[
+                             Icon(Icons.chat,color: Colors.white,), // icon
+                             Text("محادثه", style: TextStyle(
+                               color: Colors.white,
+                             )), // text
+                           ],
+                         ),
+                       ),
+                     ),
+                   ),
+                 )
+               ],
+             )
+             ,
               SizedBox(
-                height: 20,
+                height: 35,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -59,14 +93,14 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                   Text(request.request_time.toString(), style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
-                      fontSize: 20,
+                      fontSize: 22,
                       color: Color(int.parse(Global.primaryColor))
                   )),
                   SizedBox(width: 20,),
                   Text("الوقت", style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
-                      fontSize: 20,
+                      fontSize: 22,
                       color: Color(int.parse(Global.primaryColor))
                   )),
 
