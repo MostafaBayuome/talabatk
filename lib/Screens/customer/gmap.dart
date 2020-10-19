@@ -161,7 +161,7 @@ class _GMapState extends State<Gmap> {
                       borderRadius: new BorderRadius.circular(24.0),
                       child: Image(
                         fit:BoxFit.fill,
-                        image:NetworkImage(_image),
+                        image:AssetImage(_image),
                       ),
                     ),
                   ),
@@ -182,7 +182,7 @@ class _GMapState extends State<Gmap> {
                       RaisedButton(
                        onPressed: () {
                          // send user to request screen to request items from exact shop
-                         print("hey there"+ name);
+
                          Navigator.of(context).push(MaterialPageRoute(
                            builder: (context) => UserRequest(shop:shop),
                          ));
@@ -247,10 +247,19 @@ class _GMapState extends State<Gmap> {
           itemBuilder: (BuildContext context,int i)
           {
 
+            String image= "images/";
+            String pharmacy = "snake.png";
+            String supermarket = "supermarket.png";
+            if(shopList[i].mapAppear==1)
+              image+=supermarket;
+            else if (shopList[i].mapAppear==2)
+              image+=pharmacy;
+
+
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
-                  "https://wheelandbarrow.com.au/skins/customer/modules/PerceptionSystemPvtLtd/Storelocator/storelocator/images/default-store.png",
+                   image,
                   shopList[i].latitude, shopList[i].longitude,shopList[i].userName,i,shopList[i].mobileNumber,shopList[i]),
             );
           },
@@ -268,32 +277,24 @@ class _GMapState extends State<Gmap> {
   //PHARMACY
   Widget pharmacyIcon() {
     return Container(
-        padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0),
         alignment: Alignment.topCenter,
-        child: SizedBox.fromSize(
-          size: Size(70, 70), // button width and height
-          child: ClipOval(
-            child: Material(
-              color:  Color(int.parse(Global.primaryColor)), // button color
-              child: InkWell(
-                splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                onTap: () {
-                  getAllPharmacies();
-                }, // button pressed
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.local_pharmacy,color: Colors.white,), // icon
-                    Text("صيدليه"  , style: TextStyle(
-                      color: Colors.white,
-                    ),), // text
-                  ],
-                ),
-              ),
-            ),
+        child:FlatButton(
+          child: Column (
+            mainAxisSize : MainAxisSize.min,
+            children: [
+              Icon(Icons.local_pharmacy,color:Color(int.parse(Global.primaryColor)),
+              size: 30,),
+
+            ],
           ),
-        ));
+          onPressed: () {
+            getAllPharmacies();
+          },
+        ), );
   }
+
+
   void getAllPharmacies()  {
     setState(() {
       allMarkers.clear();
@@ -332,31 +333,22 @@ class _GMapState extends State<Gmap> {
   // SHOP
   Widget shopIcon(){
    return Container(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0),
         alignment: Alignment.topCenter,
-        child: SizedBox.fromSize(
-          size: Size(70, 70), // button width and height
-          child: ClipOval(
-            child: Material(
-              color:  Color(int.parse(Global.primaryColor)), // button color
-              child: InkWell(
-                splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                onTap: () {
-                  getAllShops();
-                }, // button pressed
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.shopping_cart,color: Colors.white,), // icon
-                    Text("محل تجاري"  , style: TextStyle(
-                      color: Colors.white,
-                    ),), // text
-                  ],
-                ),
-              ),
-            ),
+        child:FlatButton(
+          child: Column (
+            mainAxisSize : MainAxisSize.min,
+            children: [
+              Icon(Icons.shopping_cart,color:Color(int.parse(Global.primaryColor)),
+              size: 30,),
+
+            ],
           ),
-        ));
+          onPressed: () {
+            getAllShops();
+          },
+        ),
+     );
   }
   void getAllShops()  {
     setState(() {

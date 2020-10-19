@@ -88,7 +88,14 @@ class _State extends State<CustomerHomePage>
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text(' مكان التوصيل'),
+                            title: Text(' مكان التوصيل',
+                              style : TextStyle(
+                              color: Color(int.parse(Global.primaryColor)),
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
                             content: setupAlertDialogContainer(),
                           );});
 
@@ -153,7 +160,7 @@ class _State extends State<CustomerHomePage>
                 builder: (context) => Gmap(currentPosition : latlng),
               ));
             },
-            title:Text(Locations[index].title.toString(),
+            title:Text(Locations[index].title.toString(),textAlign: TextAlign.center,
               style: TextStyle(fontSize: 15,
                 color:Color(int.parse(Global.primaryColor)),
                 fontFamily: Global.fontFamily,
