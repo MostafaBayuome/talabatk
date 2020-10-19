@@ -126,6 +126,7 @@ class _State extends State<ShopHomePage>{
                             )),
                           ),
                         ),
+                        SizedBox(height: 10,),
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
@@ -176,6 +177,7 @@ class _State extends State<ShopHomePage>{
                               ),
                             )
                         ),
+                        SizedBox(height: 10,)
                       ]
                   ),
                 ),)),

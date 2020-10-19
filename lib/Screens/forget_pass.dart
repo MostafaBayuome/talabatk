@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,13 +11,10 @@ class _State extends State<ForgetPassword>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('App Name'),
-        automaticallyImplyLeading: false,
-      ),
+      appBar: Utils.appBar(30),
       body: Padding(
       padding: EdgeInsets.all(10),
-      child: ListView(
+        child: ListView(
           children: <Widget>[
             Container(
                 alignment: Alignment.center,

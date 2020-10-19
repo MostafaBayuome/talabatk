@@ -293,8 +293,6 @@ class _GMapState extends State<Gmap> {
           },
         ), );
   }
-
-
   void getAllPharmacies()  {
     setState(() {
       allMarkers.clear();
@@ -385,6 +383,7 @@ class _GMapState extends State<Gmap> {
       numberOfList=2;
     });
   }
+
 
   Future<void> choiceAction(String choices) async {
 

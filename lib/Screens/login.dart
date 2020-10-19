@@ -33,20 +33,30 @@ class _State extends State<Login>  with Validation {
             padding: EdgeInsets.all(10),
             child: ListView(
               children: <Widget>[
-
                 Align(
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image : AssetImage("images/Talabatk.png"),
+                            fit:BoxFit.fill
+                        )
+                    ),
 
+                  ),
+                ),
+                /*
+                Align(
                   child:  Container(
                       decoration: BoxDecoration(
                           border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
                           borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
                           color:Color(int.parse(Global.secondaryColor))
-
-
                       ),
                       width: 140.0,
                       height: 70.0,
-
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(10),
                       child: Text(
@@ -58,7 +68,7 @@ class _State extends State<Login>  with Validation {
                             fontSize: 18),
                       )),
                 ),
-
+                */
                 Container(
                   margin: EdgeInsets.all(20.0),
                   child: Form(

@@ -105,7 +105,19 @@ class _State extends State<SignUp> with Validation  {
   Widget _title() {
     return Align(
 
-      child:  Container(
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image : AssetImage("images/Talabatk.png"),
+            fit:BoxFit.fill
+          )
+        ),
+
+      ),);
+      /*Container(
           decoration: BoxDecoration(
               border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
               borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
@@ -122,8 +134,8 @@ class _State extends State<SignUp> with Validation  {
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w900,
                 fontSize: 18),
-          )),
-    );
+          )) */
+
   }
 
   Widget nameField(){

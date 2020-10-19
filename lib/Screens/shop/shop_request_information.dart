@@ -57,30 +57,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                      fontSize: 25,
                      color: Color(int.parse(Global.primaryColor))
                  )),
-                 SizedBox.fromSize(
-                   size: Size(70, 70), // button width and height
-                   child: ClipOval(
-                     child: Material(
-                       color:  Color(int.parse(Global.primaryColor)), // button color
-                       child: InkWell(
-                         splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                         onTap: () {
-                           //Send User to chat page
 
-                         }, // button pressed
-                         child: Column(
-                           mainAxisAlignment: MainAxisAlignment.center,
-                           children: <Widget>[
-                             Icon(Icons.chat,color: Colors.white,), // icon
-                             Text("محادثه", style: TextStyle(
-                               color: Colors.white,
-                             )), // text
-                           ],
-                         ),
-                       ),
-                     ),
-                   ),
-                 )
                ],
              )
              ,
@@ -138,6 +115,31 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                         //update state of request to 3
 
                      },
+                   ),
+                   SizedBox(width: 20,),
+                   SizedBox.fromSize(
+                     size: Size(70, 70), // button width and height
+                     child: ClipOval(
+                       child: Material(
+                         color:  Color(int.parse(Global.primaryColor)), // button color
+                         child: InkWell(
+                           splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                           onTap: () {
+                             //Send User to chat page
+
+                           }, // button pressed
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: <Widget>[
+                               Icon(Icons.chat,color: Colors.white,), // icon
+                               Text("محادثه", style: TextStyle(
+                                 color: Colors.white,
+                               )), // text
+                             ],
+                           ),
+                         ),
+                       ),
+                     ),
                    ),
                    SizedBox(width: 20,),
                    RaisedButton(
