@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:Talabatk/Entities/global.dart';
 import 'dart:async';
-import 'package:talabatk_flutter/Entities/location.dart';
-import 'package:talabatk_flutter/Widgets/utils.dart';
+import 'package:Talabatk/Entities/location.dart';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'customer_home_page.dart';
 
 class LocationEditor extends StatefulWidget {

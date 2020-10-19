@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:Talabatk/Entities/global.dart';
 
 
 class ChatPage extends StatefulWidget{

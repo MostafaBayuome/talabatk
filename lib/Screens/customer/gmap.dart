@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talabatk_flutter/Entities/constants.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Entities/user.dart';
-import 'package:talabatk_flutter/Screens/customer/customer_request_page.dart';
-import 'package:talabatk_flutter/Screens/signup.dart';
+import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/user.dart';
+import 'package:Talabatk/Screens/customer/customer_request_page.dart';
+import 'package:Talabatk/Screens/signup.dart';
 
 
 

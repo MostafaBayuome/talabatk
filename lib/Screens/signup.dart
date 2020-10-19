@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talabatk_flutter/Entities/user.dart';
+import 'package:Talabatk/Entities/user.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:talabatk_flutter/Entities/api_manger.dart';
-import 'package:talabatk_flutter/Entities/validation.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/shop/shop_home_page.dart';
-import 'package:talabatk_flutter/Widgets/utils.dart';
+import 'package:Talabatk/Entities/api_manger.dart';
+import 'package:Talabatk/Entities/validation.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Screens/shop/shop_home_page.dart';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'customer/customer_home_page.dart';
 import 'login.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:Talabatk/Entities/global.dart';
 import 'package:http/http.dart' as http;
 
 class Request {

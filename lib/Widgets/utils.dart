@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
+import 'package:Talabatk/Entities/global.dart';
 class Utils {
 
   static void toastMessage(String message){

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/customer/customer_request_page.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Screens/customer/customer_request_page.dart';
 
 class CustomerRequestLayout extends StatefulWidget{
   @override

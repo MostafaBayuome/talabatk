@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Widgets/Utils.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Widgets/Utils.dart';
 import 'login.dart';
 import 'use_policy.dart';
 

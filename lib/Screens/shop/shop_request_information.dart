@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talabatk_flutter/Entities/constants.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Entities/request.dart';
-import 'package:talabatk_flutter/Screens/signup.dart';
+import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/request.dart';
+import 'package:Talabatk/Screens/signup.dart';
 
 
 class ShopRequestInfromation extends StatefulWidget {

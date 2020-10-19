@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Entities/request.dart';
-import 'package:talabatk_flutter/Entities/user.dart';
-import 'package:talabatk_flutter/Widgets/utils.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/request.dart';
+import 'package:Talabatk/Entities/user.dart';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../chat_page.dart';
 

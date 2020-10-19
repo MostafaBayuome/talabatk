@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talabatk_flutter/Entities/constants.dart';
-import 'package:talabatk_flutter/Entities/global.dart';
-import 'package:talabatk_flutter/Screens/customer/customer_requests_layout.dart';
-import 'package:talabatk_flutter/Screens/signup.dart';
+import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
+import 'package:Talabatk/Screens/signup.dart';
 import 'gmap.dart';
 import 'customer_location_editor.dart';
-import 'package:talabatk_flutter/Entities/location.dart';
+import 'package:Talabatk/Entities/location.dart';
 
 
 
