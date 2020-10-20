@@ -1,17 +1,27 @@
+import 'package:Talabatk/Entities/request.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 
 
 class ChatPage extends StatefulWidget{
+
+  Request request;
+  ChatPage({Key key, @required this.request}) : super(key: key);
   @override
-  State<StatefulWidget> createState() =>_State();
+  State<StatefulWidget> createState() =>_ChatPage(request);
 
 
 }
-class _State extends State<ChatPage>
+class _ChatPage extends State<ChatPage>
 {
+
+  Request request;
+  _ChatPage(this.request);
+
+  var _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print(request.id);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(int.parse(Global.primaryColor)),
@@ -36,13 +46,23 @@ class _State extends State<ChatPage>
                   icon: Icon(Icons.photo),
                   iconSize: 25.0,
                   color: Theme.of(context).primaryColor,
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                 ),
                 Expanded(
                   child: TextField(
+                    controller: _controller,
                     textCapitalization: TextCapitalization.sentences,
-                    onChanged: (value) {},
-                    decoration: InputDecoration.collapsed(
+
+                    onChanged: (value) {
+
+                    },
+                    decoration: InputDecoration (
+                      suffixIcon: IconButton(
+                        onPressed: () => _controller.clear(),
+                        icon: Icon(Icons.clear),
+                      ),
                       hintText: 'Send a message...',
                     ),
                   ),
@@ -51,7 +71,14 @@ class _State extends State<ChatPage>
                   icon: Icon(Icons.send),
                   iconSize: 25.0,
                   color: Theme.of(context).primaryColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    //send postReq to reply
+                   print (_controller.toString());
+                    setState(() {
+                      _controller.clear();
+                    });
+
+                  },
                 ),
               ],
             ),

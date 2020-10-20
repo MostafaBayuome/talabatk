@@ -119,6 +119,17 @@ class _State extends State<ShopHomePage>{
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
+                            child: Text(listItem[index].user_id.toString(), style: TextStyle(
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
+                                color: Color(int.parse(Global.primaryColor))
+                            )),
+                          ),
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
                             child: Text(listItem[index].id.toString(), style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
@@ -203,7 +214,7 @@ class _State extends State<ShopHomePage>{
                                            onTap: () {
                                              //Send User to chat page
                                              Navigator.of(context).push(MaterialPageRoute(
-                                                 builder: (context) =>ChatPage()
+                                                 builder: (context) =>ChatPage(  request: listItem[index]  )
                                              ));
                                            }, // button pressed
                                            child: Column(

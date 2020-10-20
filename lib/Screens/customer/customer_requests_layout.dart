@@ -118,7 +118,18 @@ class _State extends State<CustomerRequestLayout>
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
-                            child: Text(listItem[index].id.toString(), style: TextStyle(
+                            child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(), style: TextStyle(
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
+                                color: Color(int.parse(Global.primaryColor))
+                            )),
+                          ),
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Text( "Request ID: "+ listItem[index].id.toString() , style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 17,
@@ -174,7 +185,7 @@ class _State extends State<CustomerRequestLayout>
                                         onTap: () {
                                           //Send User to chat page
                                           Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) =>ChatPage()
+                                              builder: (context) =>ChatPage( request: listItem[index] )
                                           ));
                                         }, // button pressed
                                         child: Column(
