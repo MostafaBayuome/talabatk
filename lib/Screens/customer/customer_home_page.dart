@@ -56,6 +56,7 @@ class _State extends State<CustomerHomePage>
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+
             RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -137,7 +138,9 @@ class _State extends State<CustomerHomePage>
                       style: TextStyle(fontSize: 20)
                   ),
                 )),
-          ]
+
+
+                       ]
       ),
     );
 

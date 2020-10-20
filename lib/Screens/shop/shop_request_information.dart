@@ -1,3 +1,6 @@
+import 'package:Talabatk/Screens/chat_page.dart';
+import 'package:Talabatk/Screens/shop/shop_home_page.dart';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/constants.dart';
@@ -112,20 +115,28 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                          color: Colors.white
                      ),),
                      onPressed:  () {
+                       Utils.toastMessage("جاري تنفيذ");
                         //update state of request to 3
-
+                       Request.editRequest(request, 3).then((value) {
+                         Navigator.of(context).pop();
+                         Navigator.of(context).push(MaterialPageRoute(
+                             builder: (context) => ShopHomePage()
+                         ));
+                       });
                      },
                    ),
                    SizedBox(width: 20,),
                    SizedBox.fromSize(
-                     size: Size(70, 70), // button width and height
+                     size: Size(60, 60), // button width and height
                      child: ClipOval(
                        child: Material(
                          color:  Color(int.parse(Global.primaryColor)), // button color
                          child: InkWell(
                            splashColor: Color(int.parse(Global.secondaryColor)), // splash color
                            onTap: () {
-                             //Send User to chat page
+                             Navigator.of(context).push(MaterialPageRoute(
+                                 builder: (context) =>ChatPage()
+                             ));
 
                            }, // button pressed
                            child: Column(
@@ -157,7 +168,16 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                          color: Colors.white
                      )),
                      onPressed:  () {
-                       // update state of request to  4
+
+                       Utils.toastMessage("جاري تنفيذ");
+                       //edit state to 1 to be on delivery
+                       Request.editRequest(request, 1).then((value) {
+                         Navigator.of(context).pop();
+                         Navigator.of(context).push(MaterialPageRoute(
+                             builder: (context) => ShopHomePage()
+                         ));
+                            });
+
 
                      },
                    )

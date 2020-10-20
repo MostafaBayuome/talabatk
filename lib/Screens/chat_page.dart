@@ -24,8 +24,37 @@ class _State extends State<ChatPage>
             ),),
           automaticallyImplyLeading: false,
         ),
-        body: Padding(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.photo),
+                  iconSize: 25.0,
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {},
+                ),
+                Expanded(
+                  child: TextField(
+                    textCapitalization: TextCapitalization.sentences,
+                    onChanged: (value) {},
+                    decoration: InputDecoration.collapsed(
+                      hintText: 'Send a message...',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.send),
+                  iconSize: 25.0,
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {},
+                ),
+              ],
+            ),
 
        )
 

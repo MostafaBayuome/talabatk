@@ -1,3 +1,4 @@
+import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/constants.dart';
@@ -118,6 +119,17 @@ class _State extends State<ShopHomePage>{
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
+                            child: Text(listItem[index].id.toString(), style: TextStyle(
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
+                                color: Color(int.parse(Global.primaryColor))
+                            )),
+                          ),
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
                             child: Text(listItem[index].request_date.toString(), style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
@@ -177,6 +189,37 @@ class _State extends State<ShopHomePage>{
                               ),
                             )
                         ),
+
+                       if(listItem[index].state==1)
+                           Container(
+                               child: Center(
+                                   child: SizedBox.fromSize(
+                                     size: Size(60, 60), // button width and height
+                                     child: ClipOval(
+                                       child: Material(
+                                         color:  Color(int.parse(Global.primaryColor)), // button color
+                                         child: InkWell(
+                                           splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                                           onTap: () {
+                                             //Send User to chat page
+                                             Navigator.of(context).push(MaterialPageRoute(
+                                                 builder: (context) =>ChatPage()
+                                             ));
+                                           }, // button pressed
+                                           child: Column(
+                                             mainAxisAlignment: MainAxisAlignment.center,
+                                             children: <Widget>[
+                                               Icon(Icons.chat,color: Colors.white,), // icon
+                                               Text("محادثه", style: TextStyle(
+                                                 color: Colors.white,
+                                               )), // text
+                                             ],
+                                           ),
+                                         ),
+                                       ),
+                                     ),
+                                   )
+                               )),
                         SizedBox(height: 10,)
                       ]
                   ),
@@ -185,18 +228,15 @@ class _State extends State<ShopHomePage>{
       },
     );
   }
-
   Future getAllRequests() {
-    return  Future.delayed(const Duration(seconds: 5), () {
+    return  Future.delayed(const Duration(seconds: 2), () {
       Request.getShopRequests().then((value)
         {
           setState(() {
-            if(value.length!=allCustomerRequest.length)
-              {
-                allCustomerRequest=value;
 
+                allCustomerRequest=value;
                 arrangeRequestsWithState();
-              }
+
           });
         }
         );
@@ -241,77 +281,5 @@ class _State extends State<ShopHomePage>{
 
   }
 
-  //Alert Dialog
-  /*
-  showAlertDialog(BuildContext context,int index) {
-
-    // set up the buttons
-    Widget cancelButton = RaisedButton(
-      elevation: 2.0,
-      color: Color(int.parse("0xffFF6C6C")),
-      textColor: Colors.white,
-      padding:   EdgeInsets.all(10.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Text("لا اوافق" ,style: TextStyle(
-        fontFamily: Global.fontFamily,
-        fontWeight: FontWeight.w600,
-        fontSize: 14,
-        color: Colors.white
-      ),),
-      onPressed:  () {
-
-
-      },
-    );
-    Widget continueButton = RaisedButton(
-      elevation: 2.0,
-      color: Colors.lightGreen,
-      textColor: Colors.white,
-      padding:   EdgeInsets.all(10.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-       ),
-      child: Text("تنفيذ الطلب" ,style: TextStyle(
-          fontFamily: Global.fontFamily,
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
-          color: Colors.white
-      )),
-      onPressed:  () {
-
-
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(waitingList[index].request_time , style: TextStyle(
-          fontFamily: Global.fontFamily,
-          fontWeight: FontWeight.w600,
-          fontSize: 15,
-          color: Color(int.parse(Global.primaryColor))
-      )),
-      content:Text(waitingList[index].details, style: TextStyle(
-          fontFamily: Global.fontFamily,
-          fontWeight: FontWeight.w600,
-          fontSize: 15,
-          color: Color(int.parse(Global.primaryColor))
-      ) ),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  } */
 
 }

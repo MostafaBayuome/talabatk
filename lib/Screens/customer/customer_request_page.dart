@@ -148,37 +148,8 @@ class _State extends State<UserRequest>{
                               ),
                             )
                           )),
-                      SizedBox(width: 20),
-                      Container(
 
-                          child: Center(
-                              child: SizedBox.fromSize(
-                                size: Size(80, 80), // button width and height
-                                child: ClipOval(
-                                  child: Material(
-                                    color:  Color(int.parse(Global.primaryColor)), // button color
-                                    child: InkWell(
-                                      splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                      onTap: () {
-                                        //Send User to chat page
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (context) =>ChatPage()
-                                        ));
-                                      }, // button pressed
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(Icons.chat,color: Colors.white,), // icon
-                                          Text("محادثه", style: TextStyle(
-                                            color: Colors.white,
-                                          )), // text
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                          )),
+
                     ],
                   ),
                   SizedBox(height: 50),
@@ -240,7 +211,6 @@ class _State extends State<UserRequest>{
       }),
     );
   }
-
   Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
