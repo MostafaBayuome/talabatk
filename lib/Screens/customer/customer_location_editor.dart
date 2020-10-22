@@ -74,13 +74,27 @@ class _State  extends State<LocationEditor>{
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context,int index){
                   return ListTile(
+
                     title:Center(
-                      child: Text(snapshot.data[index].title ,style: TextStyle(
-                          fontFamily: Global.fontFamily,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: Color(int.parse(Global.primaryColor))
-                      ),),
+                      child: RaisedButton(
+
+                            onPressed: () {
+
+                            },
+                            color: Color(int.parse(Global.primaryColor)),
+                            elevation: 10.0,
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.all(15.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                        child: Text(snapshot.data[index].title ,style: TextStyle(
+                            fontFamily: Global.fontFamily,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Colors.white
+                        ),),
+                      ),
                     ) ,
 
                   );

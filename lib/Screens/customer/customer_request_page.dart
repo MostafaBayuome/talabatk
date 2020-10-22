@@ -217,7 +217,7 @@ class _State extends State<UserRequest>{
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 3,
+        maxImages: 2,
        // enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
@@ -255,7 +255,7 @@ class _State extends State<UserRequest>{
                         onTap: () {
                           loadAssets();
                           Navigator.of(context).pop();
-                        }),
+                        }), /*
                     new ListTile(
                       leading: new Icon(Icons.photo_camera),
                       title: new Text('Camera'),
@@ -263,7 +263,7 @@ class _State extends State<UserRequest>{
                         getImage(ImageSource.camera);
                         Navigator.of(context).pop();
                       },
-                    ),
+                    ), */
                 ],
               ),
             ),
