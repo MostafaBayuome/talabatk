@@ -11,7 +11,6 @@ class ChatPage extends StatefulWidget{
   ChatPage({Key key, @required this.request}) : super(key: key);
   @override
   State<StatefulWidget> createState() =>_ChatPage(request);
-
 }
 class _ChatPage extends State<ChatPage>
 {
@@ -20,6 +19,7 @@ class _ChatPage extends State<ChatPage>
   _ChatPage(this.request);
   var _controller = TextEditingController();
   final _controllerList = ScrollController();
+  String time="";
   @override
   Widget build(BuildContext context) {
     getAllRequests();
@@ -151,7 +151,9 @@ class _ChatPage extends State<ChatPage>
                             child:
                             RaisedButton(
                                 onPressed: () {
-
+                                      setState(() {
+                                        time=replyDetails[index].reply_time;
+                                      });
                                 },
                                 color: Color(int.parse(Global.primaryColor)),
                                 elevation: 10.0,
@@ -169,6 +171,9 @@ class _ChatPage extends State<ChatPage>
                                 )),
                           ),
                         ),
+                        Text(time,style: TextStyle(
+                          color: Colors.grey
+                        ),)
                       ]
                   ),)),
           );
