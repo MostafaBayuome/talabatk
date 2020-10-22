@@ -135,9 +135,8 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                            splashColor: Color(int.parse(Global.secondaryColor)), // splash color
                            onTap: () {
                              Navigator.of(context).push(MaterialPageRoute(
-                                 builder: (context) =>ChatPage()
+                                 builder: (context) =>ChatPage(request :  request)
                              ));
-
                            }, // button pressed
                            child: Column(
                              mainAxisAlignment: MainAxisAlignment.center,
