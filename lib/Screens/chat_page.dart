@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Talabatk/Entities/reply.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class _ChatPage extends State<ChatPage>
   Request request;
   _ChatPage(this.request);
   var _controller = TextEditingController();
-
+  final _controllerList = ScrollController();
   @override
   Widget build(BuildContext context) {
     getAllRequests();
@@ -85,12 +87,13 @@ class _ChatPage extends State<ChatPage>
                         {
                           //send postReq to reply
                           print (_controller.text);
-
                           Reply reply = new Reply(request.id , Global.loginUser.id, _controller.text, "", "" , "",true);
                           Reply.addReply(reply);
                           setState(() {
                             _controller.clear();
+                            _controllerList.jumpTo(_controllerList.position.maxScrollExtent);
                           });
+
                         }
 
                       },
@@ -110,9 +113,14 @@ class _ChatPage extends State<ChatPage>
     return  Future.delayed(const Duration(seconds: 2), () {
       Reply.getRepliesByRequestID(request.id).then((value)
       {
-        setState(() {
-          replyDetails = value;
-        });
+        if(value.length!=replyDetails.length)
+          {
+            setState(() {
+            replyDetails = value;
+                });
+
+          }
+
       }
       );
 
@@ -121,11 +129,15 @@ class _ChatPage extends State<ChatPage>
   Widget allReply()
   {
 
+    // After 1 second, it takes you to the bottom of the ListView
     return ListView.builder(
+
       padding: EdgeInsets.all(8.0),
       itemCount: replyDetails.length,
       itemBuilder: (BuildContext context,int index){
+
         if(Global.loginUser.id==replyDetails[index].user_id) {
+
           return Container(
             child:Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -163,7 +175,6 @@ class _ChatPage extends State<ChatPage>
         }
         else{
           return Container(
-
             child:Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
@@ -194,6 +205,7 @@ class _ChatPage extends State<ChatPage>
         }
 
       },
+      controller: _controllerList,
     );
 
   }

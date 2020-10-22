@@ -15,7 +15,7 @@ class Utils {
         fontSize: 16.0
     );
   }
-  static Widget appBar(double fontsize)
+  static Widget appBar(double fontsize)   // Signup and login
   {
     return AppBar(
       backgroundColor: Color(int.parse(Global.primaryColor)),

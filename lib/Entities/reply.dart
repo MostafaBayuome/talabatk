@@ -16,6 +16,8 @@ Reply( this.request_id, this.user_id, this.reply_detail, this.reply_date,
       this.reply_time, this.image_url, this.state);
 Reply.id(this.id,this.request_id, this.user_id, this.reply_detail, this.reply_date,
     this.reply_time, this.image_url, this.state);
+
+
   static Future<void> addReply(Reply reply) async {
 
   String url = Global.url+"Reply/AddReply";
@@ -31,8 +33,7 @@ Reply.id(this.id,this.request_id, this.user_id, this.reply_detail, this.reply_da
   response.toString();
   }
 
-  static Future <List<Reply>> getRepliesByRequestID (int requestid)
-  async {
+  static Future <List<Reply>> getRepliesByRequestID (int requestid) async {
 
     String url = Global.url+"Reply/GetRepliesByRequestID?RequestId="+requestid.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
