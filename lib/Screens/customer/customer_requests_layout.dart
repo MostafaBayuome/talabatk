@@ -44,7 +44,7 @@ class _State extends State<CustomerRequestLayout>
             PopupMenuButton<String>(
               onSelected: choiceAction,
               itemBuilder: (BuildContext context){
-                return Constants.choices.map((String choice){
+                return Constants.customerChoices.map((String choice){
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),

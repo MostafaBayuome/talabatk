@@ -43,9 +43,9 @@ Reply.id(this.id,this.request_id, this.user_id, this.reply_detail, this.reply_da
     {
 
       String date =i['reply_date'].toString().substring(0,10);
-      //String time = i['reply_time'].toString().substring(0,5);
+      String time = i['reply_time'].toString().substring(0,5);
       //merchant_id equals Global.loginUser.id
-      Reply reply = Reply.id(i['id'],i['request_id'],i['user_id'],i['reply_detail'],date,"",i['image_url'],i['state']);
+      Reply reply = Reply.id(i['id'],i['request_id'],i['user_id'],i['reply_detail'],date,time,i['image_url'],i['state']);
       usersReply.add(reply);
     }
 

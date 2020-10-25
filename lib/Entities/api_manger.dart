@@ -3,7 +3,9 @@ import 'location.dart';
 import 'dart:convert';
 import 'global.dart';
 
-Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear) async {
+
+// merchant_id = -1 if its shop / pharmacy / customer
+Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id) async {
   try{
 
     String url = Global.url+apiName;
@@ -16,7 +18,8 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
           "latitude": latitude,
           "longitude": longitude,
           "state": state,
-          "map_Appear": map_Appear
+          "map_Appear": map_Appear,
+          "merchant_id":merchant_id
         } )
     );
     var convertDatatoJson =  response.body;
@@ -60,5 +63,6 @@ Future<Map<String, dynamic>> loginUser (String apiName, String mobileNumber , St
   }
 
 }
+
 
 

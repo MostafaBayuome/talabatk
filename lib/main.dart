@@ -14,6 +14,7 @@ Future<void> main()  async {
 
   // if mobileNumber and check not null then it will redirect to the correct homepage
    var FirstEnter=prefs.getInt('FirstEnter');
+
    var phone=prefs.getString('phone');
    var map_Appear=prefs.getInt('map_Appear');
    var user_id=prefs.getInt('id');
@@ -21,10 +22,11 @@ Future<void> main()  async {
    var user_name=prefs.getString('userName');
    var latitude=prefs.getDouble('latitude');
    var longitude=prefs.getDouble('longitude');
+   var merchant_id=prefs.getInt('merchant_id');
 
    if(phone!=null)
      {
-       User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear);
+       User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear,merchant_id);
        Global.loginUser=user;
      }
     runApp(

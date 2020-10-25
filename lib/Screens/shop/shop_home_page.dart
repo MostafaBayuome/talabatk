@@ -1,4 +1,5 @@
 import 'package:Talabatk/Screens/chat_page.dart';
+import 'package:Talabatk/Screens/shop/display_all_delivery_men.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/constants.dart';
@@ -6,6 +7,7 @@ import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Screens/shop/shop_request_information.dart';
 import '../signup.dart';
+import 'add_delivery_man.dart';
 
 class ShopHomePage extends StatefulWidget {
 
@@ -45,7 +47,7 @@ class _State extends State<ShopHomePage>{
             PopupMenuButton<String>(
               onSelected: choiceAction,
               itemBuilder: (BuildContext context){
-                return Constants.choices.map((String choice){
+                return Constants.shopChoices.map((String choice){
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
@@ -96,6 +98,8 @@ class _State extends State<ShopHomePage>{
     );
 
   }
+
+
   allRequests(IconData icon,String title,List<Request> listItem) {
 
 
@@ -289,6 +293,17 @@ class _State extends State<ShopHomePage>{
           builder: (context) =>SignUp()
       ),ModalRoute.withName("/Home"));
     }
+    else if(choices.contains('اضافه طيار')){
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>addDeliveryman()
+      ));
+    }
+    else if(choices.contains('عرض جميع الطيارين')){
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>DisplayAllDeliveryMen()
+      ));
+    }
+
 
   }
 

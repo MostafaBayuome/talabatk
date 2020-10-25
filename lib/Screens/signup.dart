@@ -24,8 +24,11 @@ class _State extends State<SignUp> with Validation  {
   String userName='';
   String phone='';
   String password='';
+  String confirmPassword='';
   Position position=null;
   final formKey = GlobalKey <FormState>();
+  final TextEditingController _confirmPass = TextEditingController();
+  final TextEditingController _pass = TextEditingController();
 
   @override
   void initState()  {
@@ -75,6 +78,11 @@ class _State extends State<SignUp> with Validation  {
                           textDirection: TextDirection.rtl,
                           child: passwordField(),
                         ),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: passwordFieldConfirmation(),
+                        ),
+
                         Container(margin: EdgeInsets.only(top:10.0),),
                         Text(
                           'موقعك',
@@ -169,8 +177,10 @@ class _State extends State<SignUp> with Validation  {
     );
   }
 
+
   Widget passwordField() {
     return  TextFormField(
+      controller: _pass,
       obscureText: true,
       textAlign: TextAlign.right,
       decoration: InputDecoration(
@@ -184,6 +194,27 @@ class _State extends State<SignUp> with Validation  {
     );
   }
 
+  Widget passwordFieldConfirmation() {
+    return  TextFormField(
+      controller:_confirmPass,
+      obscureText: true,
+      textAlign: TextAlign.right,
+      decoration: InputDecoration(
+        labelText: 'تاكيد كلمه المرور',
+        hintText: 'تاكيد كلمه المرور',
+      ),
+      validator: (val){
+        if(val.isEmpty)
+          return 'Empty';
+        if(val != _pass.text)
+          return 'Not Match';
+        return null;
+      },
+      onSaved: (String value){
+        confirmPassword=value;
+      },
+    );
+  }
   Widget submitButton()  {
     if(Global.visible_progress){
       return CircularProgressIndicator();
@@ -215,7 +246,7 @@ class _State extends State<SignUp> with Validation  {
             }
             else {
               
-              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear).then((value) async {
+              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
                 setState(() {
                   Global.visible_progress=false;
                 });
@@ -223,7 +254,7 @@ class _State extends State<SignUp> with Validation  {
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
                   Global.loginUser=user;
 
                   //save all user data
@@ -257,7 +288,7 @@ class _State extends State<SignUp> with Validation  {
               _getCurrentLocation();
             }
             else {
-              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear).then((value) async {
+              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
                 setState(() {
                   Global.visible_progress=false;
                 });
@@ -265,7 +296,7 @@ class _State extends State<SignUp> with Validation  {
                 {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear);
+                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
                   Global.loginUser=user;
 
                   //save all user data
