@@ -12,16 +12,10 @@ class _State extends State<DisplayAllDeliveryMen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Utils.appBar(30),
-      body: Padding(
-          padding: EdgeInsets.all(10),
-          child: ListView(
-              children: <Widget>[
+      body: Container(
+        child: FutureBuilder(
 
-
-
-
-              ]
-          )
+        ),
       ),
     );
   }

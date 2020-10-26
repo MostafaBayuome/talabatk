@@ -111,7 +111,7 @@ class _GMapState extends State<Gmap> {
 
   Future<void> getAllNearestShops() async  {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    User.getNearestShops("Talabatk/GetNearestShops",prefs.getString('phone')).then((value){
+    User.getNearestShops("Talabatk/GetNearestShops",Global.loginUser.mobileNumber).then((value){
       nearestShops=value;
 
       for(int i=0;i<nearestShops.length;i++)
@@ -397,7 +397,7 @@ class _GMapState extends State<Gmap> {
       prefs.remove('userName');
       prefs.remove('latitude');
       prefs.remove('longitude');
-
+      prefs.remove('merchant_id');
 
       Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
           builder: (context) =>SignUp()
