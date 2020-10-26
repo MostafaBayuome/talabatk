@@ -36,7 +36,10 @@ class _State extends State<CustomerHomePage>
                 return Constants.customerChoices.map((String choice){
                   return PopupMenuItem<String>(
                     value: choice,
-                    child: Text(choice),
+                    child: Text(choice,style: TextStyle(
+                      color: Color(int.parse(Global.primaryColor))
+                    ),),
+
                   );
                 }).toList();
               },

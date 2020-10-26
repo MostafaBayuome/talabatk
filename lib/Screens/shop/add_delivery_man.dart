@@ -29,7 +29,7 @@ class _State extends State<addDeliveryman> with Validation
             child: ListView(
               children: <Widget>[
                 //future update remove _title() and put CircleAvatar()
-                _title(),
+
                 Container(margin: EdgeInsets.only(top:25.0),),
                 Container(
                   margin: EdgeInsets.all(20.0),

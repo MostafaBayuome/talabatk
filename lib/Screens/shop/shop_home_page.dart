@@ -40,7 +40,8 @@ class _State extends State<ShopHomePage>{
             style: TextStyle(
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w900,
-                fontSize: 25
+                fontSize: 25,
+
             ),),
           automaticallyImplyLeading: false,
           actions: [
@@ -50,7 +51,9 @@ class _State extends State<ShopHomePage>{
                 return Constants.shopChoices.map((String choice){
                   return PopupMenuItem<String>(
                     value: choice,
-                    child: Text(choice),
+                    child: Text(choice,style: TextStyle(
+                        color:  Color(int.parse(Global.primaryColor))
+                    ),),
                   );
                 }).toList();
               },
