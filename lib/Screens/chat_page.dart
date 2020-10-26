@@ -14,6 +14,8 @@ class ChatPage extends StatefulWidget{
 }
 class _ChatPage extends State<ChatPage>
 {
+  // check for displaying time
+  bool check=false;
   List<Reply> replyDetails=[];
   Request request;
   _ChatPage(this.request);
@@ -23,7 +25,6 @@ class _ChatPage extends State<ChatPage>
   @override
   Widget build(BuildContext context) {
     getAllRequests();
-    print(request.id);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(int.parse(Global.primaryColor)),
@@ -150,10 +151,19 @@ class _ChatPage extends State<ChatPage>
                             padding: const EdgeInsets.all(0.0),
                             child:
                             RaisedButton(
+
                                 onPressed: () {
-                                      setState(() {
-                                        time=replyDetails[index].reply_time;
-                                      });
+                                  check= !check;
+                                  if(check){
+                                    setState(() {
+                                      time=replyDetails[index].reply_time;
+                                    });
+                                  }
+                                  else{
+                                    setState(() {
+                                      time="";
+                                    });
+                                  }
                                 },
                                 color: Color(int.parse(Global.primaryColor)),
                                 elevation: 10.0,
@@ -171,9 +181,12 @@ class _ChatPage extends State<ChatPage>
                                 )),
                           ),
                         ),
-                        Text(time,style: TextStyle(
-                          color: Colors.grey
-                        ),)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 5,0),
+                          child: Text(time,style: TextStyle(
+                            color: Colors.grey
+                          ),),
+                        )
                       ]
                   ),)),
           );
@@ -186,24 +199,47 @@ class _ChatPage extends State<ChatPage>
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        RaisedButton(
-                            onPressed: () {
-
-                            },
-                            color: Colors.grey[150],
-                            elevation: 10.0,
-                            textColor: Colors.black,
+                         Container(
+                          child: Padding(
                             padding: const EdgeInsets.all(0.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              child:   Text(
-                                  replyDetails[index].reply_detail,
+                            child: RaisedButton(
+                                onPressed: () {
+                                  check= !check;
+                                  if(check){
+                                    setState(() {
+                                      time=replyDetails[index].reply_time;
+                                    });
+                                  }
+                                  else{
+                                    setState(() {
+                                      time="";
+                                    });
 
-                              ),
-                            )),
+                                  }
+
+                                },
+                                color: Colors.grey[150],
+                                elevation: 10.0,
+                                textColor: Colors.black,
+                                padding: const EdgeInsets.all(0.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child:   Text(
+                                      replyDetails[index].reply_detail,
+
+                                  ),
+                                )),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0,0),
+                          child: Text(time,style: TextStyle(
+                              color: Colors.grey
+                          ),),
+                        )
                       ]
                   ),)),
           );

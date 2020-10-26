@@ -3,6 +3,7 @@ import 'package:Talabatk/Entities/global.dart';
 import 'package:http/http.dart' as http;
 
 class Reply {
+
 int id;
 int request_id;
 int user_id;

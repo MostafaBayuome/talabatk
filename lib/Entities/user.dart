@@ -13,15 +13,11 @@ class User {
   int mapAppear;
   int merchant_id;
 
-
   User.empty();
-
   User(this.id, this.mobileNumber, this.latitude, this.longitude, this.userName,
       this.password, this.mapAppear,this.merchant_id);
-
   // get all nearest shops
-   static Future <List<User>> getNearestShops(String apiName,String phone) async
-   {
+   static Future <List<User>> getNearestShops(String apiName,String phone) async {
      String url =Global.url+apiName+"?mobileNumber="+phone;
      final response = await http.get(url,headers:{"Content-Type": "application/json"});
      var jsonData = json.decode(response.body);
@@ -32,6 +28,20 @@ class User {
        nearestShop.add(user);
      }
      return nearestShop;
+   }
+
+   static Future <List<User>> getUserByMerchantId(int merchant_id) async {
+     String url =Global.url+"Talabatk/GetUserByMerchantId?mobileNumber="+merchant_id.toString();
+     final response = await http.get(url,headers:{"Content-Type": "application/json"});
+     var jsonData = json.decode(response.body);
+     List<User> deliveryMen =[];
+     for(var i in jsonData)
+     {
+       User user = User(i['id'],i['phone'],i['latitude'],i['longitude'],i['username'],i['password'],i['map_Appear'],i['merchant_id']);
+       deliveryMen.add(user);
+     }
+
+     return deliveryMen;
    }
 
 }

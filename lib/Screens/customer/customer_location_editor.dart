@@ -36,14 +36,12 @@ class _State  extends State<LocationEditor>{
             ),),
           automaticallyImplyLeading: false,
         ),
-      floatingActionButton:  Container(
-
+      floatingActionButton:Container(
         child: FittedBox(
           child: FloatingActionButton(
             backgroundColor:Color(int.parse(Global.primaryColor)) ,
             child:IconButton(
               icon: Icon(Icons.location_on),
-
               onPressed: () {
                 showAlertDialog(context);
               },
