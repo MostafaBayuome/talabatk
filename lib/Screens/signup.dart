@@ -51,7 +51,7 @@ class _State extends State<SignUp> with Validation  {
 
 
     return Scaffold(
-        appBar: Utils.appBar(30),
+
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -125,6 +125,7 @@ class _State extends State<SignUp> with Validation  {
         ),
 
       ),);
+
       /*Container(
           decoration: BoxDecoration(
               border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),

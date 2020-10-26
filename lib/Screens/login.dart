@@ -28,7 +28,7 @@ class _State extends State<Login>  with Validation {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:Utils.appBar(30),
+
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(

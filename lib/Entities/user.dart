@@ -6,10 +6,11 @@ class User {
 
   int id;
   String mobileNumber;
-  double latitude;
-  double longitude;
+  num latitude;
+  num longitude;
   String userName;
   String password;
+  String note;
   int mapAppear;
   int merchant_id;
 
@@ -31,14 +32,21 @@ class User {
    }
 
    static Future <List<User>> getUserByMerchantId(int merchant_id) async {
-     String url =Global.url+"Talabatk/GetUserByMerchantId?mobileNumber="+merchant_id.toString();
+     String url =Global.url+"Talabatk/GetUserByMerchantId?merchant_id="+merchant_id.toString();
      final response = await http.get(url,headers:{"Content-Type": "application/json"});
      var jsonData = json.decode(response.body);
      List<User> deliveryMen =[];
      for(var i in jsonData)
      {
-       User user = User(i['id'],i['phone'],i['latitude'],i['longitude'],i['username'],i['password'],i['map_Appear'],i['merchant_id']);
-       deliveryMen.add(user);
+       try{
+         User user = User(i['id'],i['phone'],i['latitude'],i['longitude'],i['username'],i['password'],i['map_Appear'],i['merchant_id']);
+         deliveryMen.add(user);
+       }
+       catch(Exception)
+       {
+         print(Exception);
+       }
+
      }
 
      return deliveryMen;

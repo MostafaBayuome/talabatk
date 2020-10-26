@@ -7,7 +7,7 @@ class Request {
   int id;
   int user_id;
   int merchant_id;
-  int location_id ;
+  int location_id;
   String request_date;
   String request_time;
   String details;
