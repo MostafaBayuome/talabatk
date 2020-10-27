@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'global.dart';
 
 
-// merchant_id = -1 if its shop / pharmacy / customer
+// merchant_id = 0 if its (shop, pharmacy, customer)
 Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id) async {
   try{
 

@@ -13,9 +13,9 @@ import 'customer/customer_home_page.dart';
 import 'forget_pass.dart';
 
 class Login extends StatefulWidget {
-
   @override
   _State createState() => _State();
+
 }
 
 class _State extends State<Login>  with Validation {
@@ -192,7 +192,7 @@ class _State extends State<Login>  with Validation {
             setState(() {
               Global.visible_progress=false;
             });
-            if(value != null){
+            if(value != null  && value['state'] == true){
 
                 try{
                   var data =value;
