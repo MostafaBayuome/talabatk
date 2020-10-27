@@ -29,16 +29,17 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
         automaticallyImplyLeading: false,
         actions: [
           PopupMenuButton<String>(
-            onSelected: choiceAction,
+            onSelected: (value){
+              Utils.choiceAction(value, context);
+            },
             itemBuilder: (BuildContext context){
-              return Constants.customerChoices.map((String choice){
+              return Constants.singleChoice.map((String choice){
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice ,style: TextStyle(
-                      fontFamily: Global.fontFamily,
-                    color:  Color(int.parse(Global.primaryColor)),
-
+                  child: Text(choice,style: TextStyle(
+                      color: Color(int.parse(Global.primaryColor))
                   ),),
+
                 );
               }).toList();
             },
@@ -189,27 +190,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
     );
   }
 
-    Future<void> choiceAction(String choices) async {
 
-    if(choices.contains('تسجيل الخروج')){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      prefs.remove('phone');
-      prefs.remove('map_Appear');
-      prefs.remove('id');
-      prefs.remove('password');
-      prefs.remove('userName');
-      prefs.remove('latitude');
-      prefs.remove('longitude');
-
-      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
-          builder: (context) =>SignUp()
-      ),ModalRoute.withName("/Home"));
-
-    }
-
-
-  }
 
 
 }

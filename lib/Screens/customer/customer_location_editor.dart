@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,7 +36,24 @@ class _State  extends State<LocationEditor>{
                 fontSize: 30
             ),),
           automaticallyImplyLeading: false,
-        ),
+          actions: [
+            PopupMenuButton<String>(
+              onSelected: (value){
+                Utils.choiceAction(value, context);
+              },
+              itemBuilder: (BuildContext context){
+                return Constants.singleChoice.map((String choice){
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice,style: TextStyle(
+                        color: Color(int.parse(Global.primaryColor))
+                    ),),
+
+                  );
+                }).toList();
+              },
+            )
+          ],),
       floatingActionButton:Container(
         child: FittedBox(
           child: FloatingActionButton(

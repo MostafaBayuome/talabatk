@@ -57,7 +57,7 @@ class _State extends State<SignUp> with Validation  {
             child: ListView(
                   children: <Widget>[
                 //future update remove _title() and put CircleAvatar()
-                _title(),
+                Utils.title(100.0,100.0),
                 Container(margin: EdgeInsets.only(top:25.0),),
                 Container(
                   margin: EdgeInsets.all(20.0),
@@ -110,42 +110,7 @@ class _State extends State<SignUp> with Validation  {
 
 
 
-  Widget _title() {
-    return Align(
 
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image : AssetImage("images/Talabatk.png"),
-            fit:BoxFit.fill
-          )
-        ),
-
-      ),);
-
-      /*Container(
-          decoration: BoxDecoration(
-              border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
-              borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
-              color:Color(int.parse(Global.secondaryColor))
-          ),
-          width: 140.0,
-          height: 70.0,
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(10),
-          child: Text(
-            'سجل حسابك',
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 18),
-          )) */
-
-  }
 
   Widget nameField(){
 

@@ -20,7 +20,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Utils.appBar(30),
+      appBar: Utils.appBar(20),
       body: Container(
         child: FutureBuilder(
           future: User.getUserByMerchantId(Global.loginUser.id),
@@ -116,7 +116,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                          child: new Column(
                                            mainAxisSize: MainAxisSize.min,
                                            children: <Widget>[
-                                             _title(),
+                                             Utils.title(50.0,50.0),
                                              Directionality(
                                                textDirection: TextDirection.rtl,
                                                child: nameField(),
@@ -221,24 +221,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
     );
   }
 
-  Widget _title() {
-    return Align(
 
-      child: Container(
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-                image : AssetImage("images/Talabatk.png"),
-                fit:BoxFit.fill
-            )
-        ),
-
-      ),);
-    
-
-  }
 
   Widget nameField(){
 

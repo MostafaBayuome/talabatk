@@ -1,10 +1,9 @@
+import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
-import 'package:Talabatk/Screens/signup.dart';
 import 'gmap.dart';
 import 'customer_location_editor.dart';
 import 'package:Talabatk/Entities/location.dart';
@@ -31,13 +30,15 @@ class _State extends State<CustomerHomePage>
           automaticallyImplyLeading: false,
           actions: [
             PopupMenuButton<String>(
-              onSelected: choiceAction,
+              onSelected: (value){
+                Utils.choiceAction(value, context);
+              },
               itemBuilder: (BuildContext context){
-                return Constants.customerChoices.map((String choice){
+                return Constants.singleChoice.map((String choice){
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice,style: TextStyle(
-                      color: Color(int.parse(Global.primaryColor))
+                        color: Color(int.parse(Global.primaryColor))
                     ),),
 
                   );
@@ -178,24 +179,6 @@ class _State extends State<CustomerHomePage>
   }
 
 
-  Future<void> choiceAction(String choices) async {
 
-    if(choices.contains('تسجيل الخروج')){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      prefs.remove('phone');
-      prefs.remove('map_Appear');
-      prefs.remove('id');
-      prefs.remove('password');
-      prefs.remove('userName');
-      prefs.remove('latitude');
-      prefs.remove('longitude');
-
-      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
-          builder: (context) =>SignUp()
-      ),ModalRoute.withName("/Home"));
-
-    }
-  }
 
 }

@@ -19,7 +19,7 @@ class User {
   User(this.id, this.mobileNumber, this.latitude, this.longitude, this.userName,
       this.password, this.mapAppear, this.merchant_id);
 
-  // get all nearest shops
+   //get all nearest shops
   static Future <List<User>> getNearestShops(String apiName, String phone) async {
     String url = Global.url + apiName + "?mobileNumber=" + phone;
     final response = await http.get(
@@ -43,6 +43,7 @@ class User {
     return nearestShop;
   }
 
+   //get user by merchant id user=deliveryMan
   static Future <List<User>> getUserByMerchantId(int merchant_id) async {
     String url = Global.url + "Talabatk/GetUserByMerchantId?merchant_id=" +
         merchant_id.toString();
@@ -73,6 +74,7 @@ class User {
     return deliveryMen;
   }
 
+  // update username userpassword and also user status(true,false)
   static Future <String> updateUserWithPassUserStatus(int id,
       String phoneNumber, String username, String password, bool state) async {
     String url = Global.url + "Talabatk/UpdateUserWithPassUserStatus";

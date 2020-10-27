@@ -2,6 +2,7 @@ import 'global.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+
 class Location {
   final int  id;
   final int user_id;
@@ -9,7 +10,6 @@ class Location {
   final double longitude;
   final String title;
   final String note;
-
   Location(this.id, this.user_id, this.latitude, this.longitude, this.title, this.note);
 
 
@@ -34,8 +34,6 @@ class Location {
       print(Excepetion);
     }
   }
-
-
 // get all user locations from Location table
   static Future <List<Location>> getByIdLocation(String apiName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

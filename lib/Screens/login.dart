@@ -34,18 +34,7 @@ class _State extends State<Login>  with Validation {
             child: ListView(
               children: <Widget>[
                 Align(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image : AssetImage("images/Talabatk.png"),
-                            fit:BoxFit.fill
-                        )
-                    ),
-
-                  ),
+                  child: Utils.title(100.0, 100.0)
                 ),
                 /*
                 Align(

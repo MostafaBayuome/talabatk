@@ -1,32 +1,35 @@
-import 'package:Talabatk/Entities/constants.dart';
-import 'package:Talabatk/Entities/request.dart';
-import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:Talabatk/Screens/chat_page.dart';
+import 'package:Talabatk/Screens/shop/display_all_delivery_men.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/request.dart';
+import 'package:Talabatk/Screens/shop/shop_request_information.dart';
+import '../signup.dart';
+import 'add_delivery.dart';
 
-
-class CustomerRequestLayout extends StatefulWidget{
+class ShopRequestLayout extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<CustomerRequestLayout>
-{
+class _State extends State<ShopRequestLayout> {
 
+  BuildContext currContext=null;
   List<Request> allCustomerRequest=[];
-  String title="الطلبات تحت التنفيذ";
+
+  //all Customer Request divided into 4 Lists
   List<Request> waitingList=[];
   List<Request> processingList=[];
   List<Request> deliveredList=[];
   List<Request> rejectedList=[];
-  BuildContext currContext=null;
-
   @override
   Widget build(BuildContext context) {
     currContext=context;
     getAllRequests();
-    return DefaultTabController(
+    return  DefaultTabController(
       length: 4,
       child: new Scaffold(
         appBar: AppBar(
@@ -34,9 +37,10 @@ class _State extends State<CustomerRequestLayout>
           centerTitle: true,
           title:Text(Global.appName,
             style: TextStyle(
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 25
+              fontFamily: Global.fontFamily,
+              fontWeight: FontWeight.w900,
+              fontSize: 25,
+
             ),),
           automaticallyImplyLeading: false,
           actions: [
@@ -64,7 +68,7 @@ class _State extends State<CustomerRequestLayout>
               child: allRequests(Icons.timer,'Waited',waitingList),
             ),
             new Container(
-              child: allRequests(Icons.motorcycle,'Processing', processingList),
+              child: allRequests(Icons.motorcycle,'Processing',processingList),
             ),
             new Container(
               child: allRequests(Icons.done,'Delevired',deliveredList),
@@ -97,9 +101,11 @@ class _State extends State<CustomerRequestLayout>
 
       ),
     );
+
   }
 
   allRequests(IconData icon,String title,List<Request> listItem) {
+
 
     return   ListView.builder(
       padding: EdgeInsets.all(20),
@@ -121,7 +127,7 @@ class _State extends State<CustomerRequestLayout>
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
-                            child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(), style: TextStyle(
+                            child: Text(listItem[index].user_id.toString(), style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 17,
@@ -132,7 +138,7 @@ class _State extends State<CustomerRequestLayout>
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
-                            child: Text( "Request ID: "+ listItem[index].id.toString() , style: TextStyle(
+                            child: Text(listItem[index].id.toString(), style: TextStyle(
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 17,
@@ -174,39 +180,66 @@ class _State extends State<CustomerRequestLayout>
                             )),
                           ),
                         ),
-                        if(listItem[index].state == 0 || listItem[index].state == 1)
-                           Container(
+                        if (listItem[index].state==0)
+                          RaisedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>ShopRequestInfromation(request: listItem[index])
+                                ));
 
-                            child: Center(
-                                child: SizedBox.fromSize(
-                                  size: Size(60, 60), // button width and height
-                                  child: ClipOval(
-                                    child: Material(
-                                      color:  Color(int.parse(Global.primaryColor)), // button color
-                                      child: InkWell(
-                                        splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                        onTap: () {
-                                          //Send User to chat page
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) =>ChatPage( request: listItem[index] )
-                                          ));
-                                        }, // button pressed
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Icon(Icons.chat,color: Colors.white,), // icon
-                                            Text("محادثه", style: TextStyle(
-                                              color: Colors.white,
-                                            )), // text
-                                          ],
+                              },
+                              elevation: 2.0,
+                              color: Color(int.parse(Global.primaryColor)),
+                              textColor: Colors.white,
+                              padding:   EdgeInsets.all(0.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: Container(
+                                padding:   EdgeInsets.all(10.0),
+                                child:   Text(
+                                    "تفاصيل الطلب",
+                                    style: TextStyle(
+                                      fontFamily: Global.fontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+
+                                    )
+                                ),
+                              )
+                          ),
+
+                        if(listItem[index].state==1)
+                          Container(
+                              child: Center(
+                                  child: SizedBox.fromSize(
+                                    size: Size(60, 60), // button width and height
+                                    child: ClipOval(
+                                      child: Material(
+                                        color:  Color(int.parse(Global.primaryColor)), // button color
+                                        child: InkWell(
+                                          splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                                          onTap: () {
+                                            //Send User to chat page
+                                            Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) =>ChatPage(  request: listItem[index]  )
+                                            ));
+                                          }, // button pressed
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(Icons.chat,color: Colors.white,), // icon
+                                              Text("محادثه", style: TextStyle(
+                                                color: Colors.white,
+                                              )), // text
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                            )),
-                        SizedBox(height : 5),
-
+                                  )
+                              )),
+                        SizedBox(height: 10,)
                       ]
                   ),
                 ),)),
@@ -214,10 +247,9 @@ class _State extends State<CustomerRequestLayout>
       },
     );
   }
-
   Future getAllRequests() {
     return  Future.delayed(const Duration(seconds: 2), () {
-      Request.getCustumerRequests().then((value)
+      Request.getShopRequests().then((value)
       {
         setState(() {
 
@@ -230,8 +262,8 @@ class _State extends State<CustomerRequestLayout>
 
     });
   }
-
-  void arrangeRequestsWithState() {
+  void arrangeRequestsWithState()
+  {
     waitingList.clear();
     processingList.clear();
     deliveredList.clear();
@@ -248,6 +280,5 @@ class _State extends State<CustomerRequestLayout>
         rejectedList.add(allCustomerRequest[i]);
     }
   }
-
 
 }

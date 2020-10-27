@@ -46,7 +46,6 @@ class Request {
     List<Request> Requests=(jsonData as List).map((i) => Request.fromJson(i)).toList();
     return Requests;
   }
-
   static fromJson(Map model) {
     Request req=new Request.empty();
     req.id=model['id'];
@@ -62,8 +61,7 @@ class Request {
   }
 
   // get all requests for exact shop to display requests to shop_home_page
-  static Future <List<Request>> getShopRequests  () async
-  {
+  static Future <List<Request>> getShopRequests  () async {
     String url =Global.url+"Request/GetByMerchantId?merchantid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);
@@ -81,8 +79,8 @@ class Request {
     return customerRequest;
 
   }
-  static Future <List<Request>> getCustumerRequests  () async
-  {
+
+  static Future <List<Request>> getCustumerRequests  () async {
     String url =Global.url+"Request/GetByUserId?userid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);

@@ -1,7 +1,5 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Talabatk/Entities/global.dart';
 
 class CustomSpinner extends StatefulWidget {
 @override

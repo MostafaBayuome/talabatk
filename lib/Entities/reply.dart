@@ -33,7 +33,6 @@ Reply.id(this.id,this.request_id, this.user_id, this.reply_detail, this.reply_da
       } ) );
   response.toString();
   }
-
   static Future <List<Reply>> getRepliesByRequestID (int requestid) async {
 
     String url = Global.url+"Reply/GetRepliesByRequestID?RequestId="+requestid.toString();
