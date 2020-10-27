@@ -187,7 +187,7 @@ class _State extends State<Login>  with Validation {
                   var data =value;
 
                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                  User user =new User(data['id'],data['mobileNumber'],data['latitude'],data['longitude'],data['userName'],data['password'],data['mapAppear'],data['merchant_id']);
+                  User user =new User(data['id'],data['phone'],data['latitude'],data['longitude'],data['username'],data['password'],data['map_Appear'],data['merchant_id']);
                   Global.loginUser=user;
 
 
@@ -196,8 +196,8 @@ class _State extends State<Login>  with Validation {
                   prefs.setInt('map_Appear', data["map_Appear"]);
                   prefs.setString('userName', data["userName"]);
                   prefs.setString('password', data["password"]);
-                  prefs.setDouble('latitude',data['latitude']);
-                  prefs.setDouble('longitude', data['longitude']);
+                  prefs.setDouble('latitude',data["latitude"]);
+                  prefs.setDouble('longitude', data["longitude"]);
 
 
                   if(value["map_Appear"]>0){
