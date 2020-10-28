@@ -74,7 +74,7 @@ class User {
     return deliveryMen;
   }
 
-  // update username userpassword and also user status(true,false)
+   //update username userpassword and also user status(true,false)
   static Future <String> updateUserWithPassUserStatus(int id,
       String phoneNumber, String username, String password, bool state) async {
     String url = Global.url + "Talabatk/UpdateUserWithPassUserStatus";

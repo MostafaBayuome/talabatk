@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';
@@ -41,8 +42,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                  )),
 
                ],
-             )
-             ,
+             ),
               SizedBox(
                 height: 35,
               ),
@@ -146,7 +146,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                          color: Colors.white
                      )),
                      onPressed:  () {
-
+                      /*
                        Utils.toastMessage("جاري تنفيذ");
                        //edit state to 1 to be on delivery
                        Request.editRequest(request, 1).then((value) {
@@ -155,6 +155,8 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                              builder: (context) => ShopHomePage()
                          ));
                             });
+
+                        */
 
 
                      },
