@@ -1,3 +1,4 @@
+import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -36,28 +37,7 @@ class _State extends State<Login>  with Validation {
                 Align(
                   child: Utils.title(100.0, 100.0)
                 ),
-                /*
-                Align(
-                  child:  Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
-                          borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
-                          color:Color(int.parse(Global.secondaryColor))
-                      ),
-                      width: 140.0,
-                      height: 70.0,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'الدخول',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: Global.fontFamily,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18),
-                      )),
-                ),
-                */
+
                 Container(margin: EdgeInsets.only(top:25.0),),
                 Container(
                   margin: EdgeInsets.all(20.0),
@@ -199,20 +179,28 @@ class _State extends State<Login>  with Validation {
                   prefs.setString('password', data["password"]);
                   prefs.setDouble('latitude',data["latitude"]);
                   prefs.setDouble('longitude', data["longitude"]);
+                  prefs.setInt('merchant_id', data['merchant_id']);
 
-
-                  if(value["map_Appear"]>0){
+                  if(value["map_Appear"]== 1 ||value["map_Appear"]== 2 ){
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>ShopHomePage()
                       ));
                     }
-                  else{
+                  else if (value["map_Appear"]== 0 ){
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>CustomerHomePage()
                     ));
                   }
+                  else if(value["map_Appear"]== 9 )
+                    {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>DeliveryHomePage()
+                      ));
+
+                    }
                 }
               catch (Excepetion)
               {

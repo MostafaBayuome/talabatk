@@ -7,7 +7,7 @@ import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
-
+  //global toast_message send message in an argument
   static void toastMessage(String message){
     Fluttertoast.showToast(
         msg: message,
@@ -20,6 +20,7 @@ class Utils {
     );
   }
 
+  // global application title
   static  Widget title(double width,double height) {
     return Align(
 
@@ -56,6 +57,7 @@ class Utils {
 
   }
 
+  // for sign out deleting all prefrences for user
   static Future<void>  choiceAction(String choices,BuildContext context) async {
 
     if(choices.contains('تسجيل الخروج')){
@@ -67,19 +69,15 @@ class Utils {
       prefs.remove('userName');
       prefs.remove('latitude');
       prefs.remove('longitude');
-
+      prefs.remove('merchant_id');
 
       Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
           builder: (context) =>SignUp()
       ),ModalRoute.withName("/Home"));
     }
-
-
-
-
   }
 
-  // appbar for all users shop customer delivery
+  // appbar for all users shop, customer, delivery
   static Widget  appBarusers(BuildContext context,String title){
     return PreferredSize(
       preferredSize: Size.fromHeight(40.0),

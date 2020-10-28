@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 
 class PopMenu extends StatefulWidget {
-  PopMenu(List<User> delivery_men);
+  List<User> delivery_men;
+  PopMenu({Key key, @required this.delivery_men}): super(key: key);
 
   @override
-  PopMenuWidget createState() => PopMenuWidget();
+  PopMenuWidget createState() => PopMenuWidget(delivery_men);
 }
 
 class PopMenuWidget extends State {
+  List<User> delivery_men;
+  PopMenuWidget(this.delivery_men);
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<User>(
@@ -21,8 +24,7 @@ class PopMenuWidget extends State {
       },
       child: ListTile(
         leading: IconButton(
-          icon: Icon(Icons.two_wheeler),
-
+          icon: Icon(Icons.motorcycle),
         ),
         title: Text('Deleviry Men'),
         subtitle: Column(
@@ -33,9 +35,10 @@ class PopMenuWidget extends State {
         trailing: Icon(Icons.account_circle),
       ),
       itemBuilder: (BuildContext context) => <PopupMenuEntry<User>>[
-          
+
       ],
-    )
+    );
+
   }
 
 

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:http/http.dart' as http;
-
-
+// states of Request
+// 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
 class Request {
 
   int id;
@@ -15,6 +15,7 @@ class Request {
   String image_url;
   String image_url2;
   int state;
+  int delivery_id;
 
   Request.empty();
   Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state);
@@ -61,7 +62,7 @@ class Request {
     return req;
   }
 
-  // get all requests for exact shop to display requests to shop_home_page
+  // get all requests for shop with its id
   static Future <List<Request>> getShopRequests  () async {
     String url =Global.url+"Request/GetByMerchantId?merchantid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
@@ -81,6 +82,7 @@ class Request {
 
   }
 
+  //get all Customers request with all its states
   static Future <List<Request>> getCustumerRequests  () async {
     String url =Global.url+"Request/GetByUserId?userid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
@@ -102,6 +104,7 @@ class Request {
 
   }
 
+  // state 0 = waiting , 1 = on delivery , 2 = delivered/done , 3 = deleted/canceled
   static Future <void> editRequest (Request request, int state) async {
    String url = Global.url+"Request/EditRequest";
    final response= await  http.put(url,
@@ -114,7 +117,8 @@ class Request {
          "details": request.details,
          "image_url": request.image_url,
          "image_url2": request.image_url2,
-         "state": state
+         "state": state,
+         "delivery_id":request.delivery_id
        } ) );
   response.toString();
   }

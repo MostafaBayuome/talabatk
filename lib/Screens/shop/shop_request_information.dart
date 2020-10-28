@@ -1,6 +1,8 @@
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
+import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
+import 'package:Talabatk/Widgets/popmenu.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,8 +45,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                  )),
 
                ],
-             )
-             ,
+             ),
               SizedBox(
                 height: 35,
               ),
@@ -149,16 +150,26 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                      )),
                      onPressed:  () {
 
-                        User.getUserByMerchantId( Global.loginUser.id).then((value) => {
+                        User.getUserByMerchantId( Global.loginUser.id).then((value) {
                           if(value!=null){
-                            delivery_men=value.toList(),
-                            PopMenu(delivery_men),
-
+                            delivery_men=value;
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('اختار الطيار',
+                                      style : TextStyle(
+                                          color: Color(int.parse(Global.primaryColor)),
+                                          fontFamily: Global.fontFamily,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    content: setupAlertDialogContainer(),
+                                  );});
                           }
-
-
-
                        });
+                        /*
                        Utils.toastMessage("جاري تنفيذ");
                        //edit state to 1 to be on delivery
                        Request.editRequest(request, 1).then((value) {
@@ -167,6 +178,8 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                              builder: (context) => ShopHomePage()
                          ));
                             });
+
+                        */
 
 
                      },
@@ -180,26 +193,35 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
     );
   }
 
-    Future<void> choiceAction(String choices) async {
+  Widget setupAlertDialogContainer() {
+    return Container(
+      height: 200.0,
+      width: 200.0,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: delivery_men.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
 
-    if(choices.contains('تسجيل الخروج')){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      prefs.remove('phone');
-      prefs.remove('map_Appear');
-      prefs.remove('id');
-      prefs.remove('password');
-      prefs.remove('userName');
-      prefs.remove('latitude');
-      prefs.remove('longitude');
-
-      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
-          builder: (context) =>SignUp()
-      ),ModalRoute.withName("/Home"));
-
-    }
-
-
+            onTap: () {
+              request.delivery_id=delivery_men[index].id;
+              Request.editRequest(request, 1).then((value) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              });
+            },
+            title:Text(delivery_men[index].userName.toString(),textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15,
+                fontFamily: Global.fontFamily,
+                fontWeight: FontWeight.w400,), ),
+            subtitle: Text(delivery_men[index].mobileNumber.toString(),textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15,
+                fontFamily: Global.fontFamily,
+                fontWeight: FontWeight.w400,), ),
+          );
+        },
+      ),
+    );
   }
 
 

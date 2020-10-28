@@ -1,3 +1,4 @@
+import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Entities/global.dart';
@@ -32,7 +33,7 @@ Future<void> main()  async {
     runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
-          home:FirstEnter==null? app_info(): phone ==null ? SignUp() : map_Appear > 0 ? ShopHomePage() : CustomerHomePage() ,
+          home:FirstEnter==null? app_info(): phone ==null ? SignUp() : map_Appear > 0 ? ShopHomePage() : map_Appear!=9 ? CustomerHomePage() : DeliveryHomePage() ,
 
       )
    );

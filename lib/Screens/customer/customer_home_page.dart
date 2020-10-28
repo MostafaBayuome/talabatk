@@ -143,7 +143,6 @@ class _State extends State<CustomerHomePage>
             },
             title:Text(Locations[index].title.toString(),textAlign: TextAlign.center,
               style: TextStyle(fontSize: 15,
-                color:Color(int.parse(Global.primaryColor)),
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w400,), ),
           );
