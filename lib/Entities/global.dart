@@ -10,7 +10,8 @@ class  Global {
   static String url="http://talabatk.maxsystem-eg.com/api/";
   static bool visible_progress=false;
   static int userLocationIdDeliever;
+  static User selectedDeleviry;
 
-  }
+}
 
 

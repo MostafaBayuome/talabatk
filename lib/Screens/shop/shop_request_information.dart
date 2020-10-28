@@ -19,6 +19,7 @@ class ShopRequestInfromation extends StatefulWidget {
 
 class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
   Request request;
+  List<User> delivery_men;
   _ShopRequestInfromationState(this.request);
   String _title="Request Information";
   @override
@@ -42,7 +43,8 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                  )),
 
                ],
-             ),
+             )
+             ,
               SizedBox(
                 height: 35,
               ),
@@ -146,7 +148,17 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                          color: Colors.white
                      )),
                      onPressed:  () {
-                      /*
+
+                        User.getUserByMerchantId( Global.loginUser.id).then((value) => {
+                          if(value!=null){
+                            delivery_men=value.toList(),
+                            PopMenu(delivery_men),
+
+                          }
+
+
+
+                       });
                        Utils.toastMessage("جاري تنفيذ");
                        //edit state to 1 to be on delivery
                        Request.editRequest(request, 1).then((value) {
@@ -155,8 +167,6 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                              builder: (context) => ShopHomePage()
                          ));
                             });
-
-                        */
 
 
                      },
@@ -170,7 +180,27 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
     );
   }
 
+    Future<void> choiceAction(String choices) async {
 
+    if(choices.contains('تسجيل الخروج')){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.remove('phone');
+      prefs.remove('map_Appear');
+      prefs.remove('id');
+      prefs.remove('password');
+      prefs.remove('userName');
+      prefs.remove('latitude');
+      prefs.remove('longitude');
+
+      Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
+          builder: (context) =>SignUp()
+      ),ModalRoute.withName("/Home"));
+
+    }
+
+
+  }
 
 
 }
