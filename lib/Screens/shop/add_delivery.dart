@@ -17,13 +17,14 @@ class _State extends State<addDeliveryman> with Validation
   String phone='';
   String password='';
   String confirmPassword='';
+  String _title="Add Delivery";
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-
+        appBar: Utils.appBarusers(context,_title),
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(

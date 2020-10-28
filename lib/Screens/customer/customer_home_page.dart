@@ -23,44 +23,22 @@ class _State extends State<CustomerHomePage>
   List<Location> Locations =[];
   @override
   Widget build(BuildContext context) {
+    String _title="Home Page";
     return Scaffold (
-        appBar: AppBar(
-          backgroundColor:  Color(int.parse(Global.primaryColor)),
-          title: Text(Global.appName),
-          automaticallyImplyLeading: false,
-          actions: [
-            PopupMenuButton<String>(
-              onSelected: (value){
-                Utils.choiceAction(value, context);
-              },
-              itemBuilder: (BuildContext context){
-                return Constants.singleChoice.map((String choice){
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice,style: TextStyle(
-                        color: Color(int.parse(Global.primaryColor))
-                    ),),
-
-                  );
-                }).toList();
-              },
-            )
-          ],
-        ),
+        appBar: Utils.appBarusers(context,_title),
         body:customerMenuWidget()
-
 
     );
   }
 
-  Widget customerMenuWidget()
-  {
+  Widget customerMenuWidget() {
     return Center(
 
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-
+            Utils.title(100, 100),
+            const SizedBox(height: 150),
             RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -81,7 +59,7 @@ class _State extends State<CustomerHomePage>
                       style: TextStyle(fontSize: 20)
                   ),
                 )),
-            const SizedBox(height: 100),
+            const SizedBox(height: 40),
             RaisedButton(
                 onPressed: () {
 
@@ -121,7 +99,7 @@ class _State extends State<CustomerHomePage>
                       style: TextStyle(fontSize: 20)
                   ),
                 )),
-            const SizedBox(height: 100),
+            const SizedBox(height: 40),
             RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -142,14 +120,10 @@ class _State extends State<CustomerHomePage>
                       style: TextStyle(fontSize: 20)
                   ),
                 )),
-
-
-                       ]
+          ]
       ),
     );
-
   }
-
 
   Widget setupAlertDialogContainer() {
     return Container(

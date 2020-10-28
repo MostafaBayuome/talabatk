@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,20 +17,6 @@ class Utils {
         backgroundColor: Color(int.parse(Global.primaryColor)),
         textColor: Colors.white,
         fontSize: 16.0
-    );
-  }
-
-  static Widget appBar(double fontsize) {
-    return AppBar(
-      backgroundColor: Color(int.parse(Global.primaryColor)),
-      centerTitle: true,
-      title:Text(Global.appName,
-        style: TextStyle(
-            fontFamily: Global.fontFamily,
-            fontWeight: FontWeight.w900,
-            fontSize: fontsize
-        ),),
-      automaticallyImplyLeading: false,
     );
   }
 
@@ -90,6 +77,39 @@ class Utils {
 
 
 
+  }
+
+  // appbar for all users shop customer delivery
+  static Widget  appBarusers(BuildContext context,String title){
+    return PreferredSize(
+      preferredSize: Size.fromHeight(40.0),
+      child: AppBar(
+        backgroundColor:Color(int.parse(Global.primaryColor)),
+        title: Text(title,style: TextStyle(
+          color:Colors.white,
+          fontSize: 15
+        ),),
+        automaticallyImplyLeading: false,
+        //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value){
+              Utils.choiceAction(value, context);
+            },
+            itemBuilder: (BuildContext context){
+              return Constants.singleChoice.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice,style: TextStyle(
+                      color:Color(int.parse(Global.primaryColor))
+                  ),),
+                );
+              }).toList();
+            },
+          )
+        ],
+      ),
+    );
   }
 
 }

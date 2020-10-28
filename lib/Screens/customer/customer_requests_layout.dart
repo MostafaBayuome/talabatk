@@ -21,7 +21,7 @@ class _State extends State<CustomerRequestLayout>
   List<Request> deliveredList=[];
   List<Request> rejectedList=[];
   BuildContext currContext=null;
-
+  String _title="My Requests";
   @override
   Widget build(BuildContext context) {
     currContext=context;
@@ -29,35 +29,7 @@ class _State extends State<CustomerRequestLayout>
     return DefaultTabController(
       length: 4,
       child: new Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(int.parse(Global.primaryColor)),
-          centerTitle: true,
-          title:Text(Global.appName,
-            style: TextStyle(
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 25
-            ),),
-          automaticallyImplyLeading: false,
-          actions: [
-            PopupMenuButton<String>(
-              onSelected: (value){
-                Utils.choiceAction(value, context);
-              },
-              itemBuilder: (BuildContext context){
-                return Constants.singleChoice.map((String choice){
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice,style: TextStyle(
-                        color: Color(int.parse(Global.primaryColor))
-                    ),),
-
-                  );
-                }).toList();
-              },
-            )
-          ],
-        ),
+        appBar: Utils.appBarusers(context,_title),
         body: TabBarView(
           children: [
             new Container(

@@ -30,22 +30,12 @@ class _State extends State<UserRequest>{
   User shop;
   final detailsTextController = TextEditingController();
   String image1="",image2="";
-
+  String _title="Request Page";
   @override
   Widget build(BuildContext context) {
           return Scaffold(
             resizeToAvoidBottomPadding: false,
-              appBar:AppBar(
-                backgroundColor: Color(int.parse(Global.primaryColor)),
-                centerTitle: true,
-                title:Text(Global.appName,
-                  style: TextStyle(
-                      fontFamily: Global.fontFamily,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 30
-                  ),),
-                automaticallyImplyLeading: false,
-              ),
+            appBar:Utils.appBarusers(context,_title),
             body: Padding(
               padding: EdgeInsets.all(20),
               child: Column(

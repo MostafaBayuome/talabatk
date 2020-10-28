@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Talabatk/Entities/reply.dart';
 import 'package:Talabatk/Entities/request.dart';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 
@@ -22,21 +23,13 @@ class _ChatPage extends State<ChatPage>
   var _controller = TextEditingController();
   final _controllerList = ScrollController();
   String time="";
+  String _title="Forget Password";
   @override
   Widget build(BuildContext context) {
     getAllRequests();
+
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(int.parse(Global.primaryColor)),
-          centerTitle: true,
-          title:Text(Global.appName,
-            style: TextStyle(
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 30
-            ),),
-          automaticallyImplyLeading: false,
-        ),
+        appBar: Utils.appBarusers(context,_title),
         body: Column(
           children: <Widget>[
             Expanded(

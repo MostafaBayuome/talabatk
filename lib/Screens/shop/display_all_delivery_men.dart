@@ -13,14 +13,14 @@ class DisplayAllDeliveryMen extends StatefulWidget{
 class _State extends State<DisplayAllDeliveryMen> with Validation
 {
   List<User> delivery_men=[];
-
+  String _title="Shop delivery information";
   TextEditingController _userName =  new TextEditingController();
   TextEditingController _password =  new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Utils.appBar(20),
+      appBar: Utils.appBarusers(context,_title),
       body: Container(
         child: FutureBuilder(
           future: User.getUserByMerchantId(Global.loginUser.id),
@@ -28,12 +28,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
             if(snapshot.data == null) {
               return Container(
                 child: Center(
-                  child: Text("Loading...."  ,style: TextStyle(
-                      fontFamily: Global.fontFamily,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 25,
-                      color: Color(int.parse(Global.primaryColor))
-                  ),),
+                  child: CircularProgressIndicator(),
                 ),
               );
             }

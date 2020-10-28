@@ -31,35 +31,13 @@ class _GMapState extends State<Gmap> {
   _GMapState(this._currentPosition);
   Completer<GoogleMapController> _controller = Completer();
   double zoomVal=20.0;
-
+  String _title="Nearest shops";
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title:Text(Global.appName),
-        backgroundColor: Color(int.parse(Global.primaryColor)),
-        automaticallyImplyLeading: false,
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value){
-              Utils.choiceAction(value, context);
-            },
-            itemBuilder: (BuildContext context){
-              return Constants.singleChoice.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice,style: TextStyle(
-                      color: Color(int.parse(Global.primaryColor))
-                  ),),
-
-                );
-              }).toList();
-            },
-          )
-        ],
-      ), */
+      appBar: Utils.appBarusers(context,_title),
       body:Stack(
         children: [
           _googleMap(context),
@@ -144,8 +122,7 @@ class _GMapState extends State<Gmap> {
   }
 
 
-  Widget _boxes(String _image,double lat , double long, String name,int index,String mobileNumber,User shop)
-  {
+  Widget _boxes(String _image,double lat , double long, String name,int index,String mobileNumber,User shop) {
     return GestureDetector(
       onTap: (){
         _goToLocation(lat,long);

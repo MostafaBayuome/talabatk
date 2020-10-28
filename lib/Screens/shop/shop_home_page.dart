@@ -14,63 +14,41 @@ class ShopHomePage extends StatefulWidget {
 }
 
 class _State extends State<ShopHomePage>{
-
+  String _title="Home Page";
   @override
   Widget build(BuildContext context) {
 
 
     return  Scaffold (
-        appBar: AppBar(
-          backgroundColor:  Color(int.parse(Global.primaryColor)),
-          title: Text(Global.appName),
-          automaticallyImplyLeading: false,
-          actions: [
-            PopupMenuButton<String>(
-              onSelected: (value){
-                Utils.choiceAction(value, context);
-              },
-              itemBuilder: (BuildContext context){
-                return Constants.singleChoice.map((String choice){
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice,style: TextStyle(
-                        color: Color(int.parse(Global.primaryColor))
-                    ),),
-
-                  );
-                }).toList();
-              },
-            )
-          ],
-        ),
+        appBar: Utils.appBarusers(context,_title),
         body: Center(
 
           child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-              RaisedButton(
-              onPressed: () {
-
-                Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>addDeliveryman()
-                ));
-                },
-                    color: Color(int.parse(Global.primaryColor)),
-                    elevation: 10.0,
-                    textColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Text(
-                          'اضافه طيار',
-                          style: TextStyle(fontSize: 20)
-                      ),
-                    ))
-                  ,
-                const SizedBox(height: 100),
+                Utils.title(100, 100),
+                SizedBox(height: 150),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>addDeliveryman()
+                    ));
+                    },
+                        color: Color(int.parse(Global.primaryColor)),
+                        elevation: 10.0,
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          child: const Text(
+                              'اضافه طيار',
+                              style: TextStyle(fontSize: 20)
+                          ),
+                        )),
+                const SizedBox(height: 40),
                 RaisedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -91,7 +69,7 @@ class _State extends State<ShopHomePage>{
                           style: TextStyle(fontSize: 20)
                       ),
                     )) ,
-                const SizedBox(height: 100),
+                const SizedBox(height: 40),
                 RaisedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(

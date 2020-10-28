@@ -22,38 +22,12 @@ class _State  extends State<LocationEditor>{
   TextEditingController _locationNameController = new TextEditingController();
   TextEditingController _locationNoteController = new TextEditingController();
   Position _currentposition=null;
+  String _title="Location Editior";
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(int.parse(Global.primaryColor)),
-          centerTitle: true,
-          title:Text(Global.appName,
-            style: TextStyle(
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 30
-            ),),
-          automaticallyImplyLeading: false,
-          actions: [
-            PopupMenuButton<String>(
-              onSelected: (value){
-                Utils.choiceAction(value, context);
-              },
-              itemBuilder: (BuildContext context){
-                return Constants.singleChoice.map((String choice){
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice,style: TextStyle(
-                        color: Color(int.parse(Global.primaryColor))
-                    ),),
-
-                  );
-                }).toList();
-              },
-            )
-          ],),
+        appBar:Utils.appBarusers(context,_title),
       floatingActionButton:Container(
         child: FittedBox(
           child: FloatingActionButton(
@@ -75,12 +49,7 @@ class _State  extends State<LocationEditor>{
               {
                 return Container(
                   child: Center(
-                    child: Text("Loading...."  ,style: TextStyle(
-                        fontFamily: Global.fontFamily,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: Color(int.parse(Global.primaryColor))
-                    ),),
+                    child: CircularProgressIndicator()
                   ),
                 );
               }

@@ -19,33 +19,11 @@ class ShopRequestInfromation extends StatefulWidget {
 class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
   Request request;
   _ShopRequestInfromationState(this.request);
-
+  String _title="Request Information";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor:  Color(int.parse(Global.primaryColor)),
-        title: Text(Global.appName),
-        automaticallyImplyLeading: false,
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value){
-              Utils.choiceAction(value, context);
-            },
-            itemBuilder: (BuildContext context){
-              return Constants.singleChoice.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice,style: TextStyle(
-                      color: Color(int.parse(Global.primaryColor))
-                  ),),
-
-                );
-              }).toList();
-            },
-          )
-        ],
-      ),
+      appBar: Utils.appBarusers(context,_title),
 
       body: Padding(
         padding: const EdgeInsets.all(20.0),
