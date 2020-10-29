@@ -23,7 +23,7 @@ class _ChatPage extends State<ChatPage>
   var _controller = TextEditingController();
   final _controllerList = ScrollController();
   String time="";
-  String _title="Forget Password";
+  String _title="Chat";
   @override
   Widget build(BuildContext context) {
     getAllRequests();

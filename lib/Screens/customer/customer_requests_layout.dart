@@ -188,10 +188,8 @@ class _State extends State<CustomerRequestLayout>
       Request.getCustumerRequests().then((value)
       {
         setState(() {
-
           allCustomerRequest=value;
           arrangeRequestsWithState();
-
         });
       }
       );

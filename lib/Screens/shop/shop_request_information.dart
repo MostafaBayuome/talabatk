@@ -153,8 +153,8 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                         User.getUserByMerchantId( Global.loginUser.id).then((value) {
                           if(value!=null){
                             delivery_men=value;
-                            PopMenuWidget();
-                          /*  showDialog(
+                            // PopMenuWidget();
+                            showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
@@ -167,7 +167,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                                       textAlign: TextAlign.center,
                                     ),
                                     content: setupAlertDialogContainer(),
-                                  );});*/
+                                  );});
                           }
                        });
                         /*
