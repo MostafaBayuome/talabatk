@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
@@ -77,111 +79,105 @@ class _State extends State<CustomerRequestLayout>
       padding: EdgeInsets.all(20),
       itemCount: listItem.length,
       itemBuilder: (BuildContext context,int index){
-        return Container(
-          child:Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                child: Material(
-                  color: Colors.white,
-                  elevation: 8.0,
-                  borderRadius: BorderRadius.circular(30.0),
-                  shadowColor: Color(int.parse(Global.primaryColor)),
-                  child: Column(
+        width :MediaQuery.of(context).size.width;
+        padding :EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0);
+        return Card(
+          elevation: 5.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0.0),
+          ),
+          child: Container(
+              width :MediaQuery.of(context).size.width,
+              padding :EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 55.0,
+                height: 55.0,
 
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(), style: TextStyle(
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                                color: Color(int.parse(Global.primaryColor))
-                            )),
-                          ),
-                        ),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Text( "Request ID: "+ listItem[index].id.toString() , style: TextStyle(
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                                color: Color(int.parse(Global.primaryColor))
-                            )),
-                          ),
-                        ),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Text(listItem[index].request_date.toString(), style: TextStyle(
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                                color: Color(int.parse(Global.primaryColor))
-                            )),
-                          ),
-                        ),
-                        SizedBox(height: 10,),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Color(int.parse(Global.primaryColor))
-                            )),
-                          ),
-                        ),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Text(listItem[index].details, style: TextStyle(
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Color(int.parse(Global.primaryColor))
-                            )),
-                          ),
-                        ),
-                        if(listItem[index].state == 0 || listItem[index].state == 1)
-                           Container(
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Utils.title(55,55),
+                ),
+              ),
+               SizedBox(width: 8.0),
+               Column(
 
-                            child: Center(
-                                child: SizedBox.fromSize(
-                                  size: Size(60, 60), // button width and height
-                                  child: ClipOval(
-                                    child: Material(
-                                      color:  Color(int.parse(Global.primaryColor)), // button color
-                                      child: InkWell(
-                                        splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                        onTap: () {
-                                          //Send User to chat page
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) =>ChatPage( request: listItem[index] )
-                                          ));
-                                        }, // button pressed
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Icon(Icons.chat,color: Colors.white,), // icon
-                                            Text("محادثه", style: TextStyle(
-                                              color: Colors.white,
-                                            )), // text
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                            )),
-                        SizedBox(height : 5),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(),textAlign: TextAlign.center, style: TextStyle(
+                          fontFamily: Global.fontFamily,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
 
-                      ]
-                  ),
-                ),)),
+                      )),
+                    ),
+                    Container(
+                      child: Text( "Request ID: "+ listItem[index].id.toString() ,textAlign: TextAlign.center, style: TextStyle(
+                          fontFamily: Global.fontFamily,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+
+                      )),
+                    ),
+                    Container(
+                      child: Text(listItem[index].request_date.toString(),
+                          style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                      )),
+                    ),
+                    SizedBox(height: 3,),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
+                            fontFamily: Global.fontFamily,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+
+                        )),
+                      ),
+                    ),
+
+
+                    SizedBox(height : 5),
+                  ]
+              ),
+              if(listItem[index].state == 0 || listItem[index].state == 1)
+                Container(
+                    width: 60.0,
+                    height: 60.0,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+
+                    child: ClipOval(
+                      child: Material(
+
+                        child: InkWell(
+                          splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                          onTap: () {
+                            //Send User to chat page
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>ChatPage( request: listItem[index] )
+                            ));
+                          }, // button pressed
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.chat,color: Colors.blue), // icon
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    )),
+            ],
+
+            ),),
         );
       },
     );

@@ -5,18 +5,19 @@ import 'package:Talabatk/Entities/global.dart';
 
 class PopMenu extends StatefulWidget {
   List<User> delivery_men;
-  PopMenu({Key key, @required this.delivery_men}): super(key: key);
+
 
   @override
-  PopMenuWidget createState() => PopMenuWidget(delivery_men);
+  PopMenuWidget createState() => PopMenuWidget();
 }
 
 class PopMenuWidget extends State {
   List<User> delivery_men;
-  PopMenuWidget(this.delivery_men);
+
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<User>(
+
+    return PopupMenuButton(
       onSelected: (User value) {
         setState(() {
           Global.selectedDeleviry = value;
@@ -34,12 +35,17 @@ class PopMenuWidget extends State {
         ),
         trailing: Icon(Icons.account_circle),
       ),
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<User>>[
+        itemBuilder: (BuildContext context) {
+          return delivery_men.map((User choice) {
+            return PopupMenuItem(
+              value: choice,
+              child: Text(choice.userName , textAlign: TextAlign.center,),
+            );
+          }).toList();
+        },
 
-      ],
     );
 
   }
-
 
 }
