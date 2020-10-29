@@ -25,70 +25,148 @@ class _State extends State<ShopHomePage>{
           child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Utils.title(100, 100),
+                Utils.title(120, 120),
                 SizedBox(height: 150),
-                RaisedButton(
-                  onPressed: () {
+                InkWell(
+                  onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>addDeliveryman()
+                        builder: (context) =>addDeliveryman()
                     ));
-                    },
-                        color: Color(int.parse(Global.primaryColor)),
-                        elevation: 10.0,
-                        textColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: const Text(
-                              'اضافه طيار',
-                              style: TextStyle(fontSize: 20)
+                  },
+                  child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0.0,20.0),
+                                blurRadius: 30.0,
+                                color: Colors.black12
+                            )
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22.0)
+                      ),
+                      child:Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
+                            height: 50,
+                            width: 110.0,
+                            child: Text( 'اضافه طيار',style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white
+                            ),),
+                            decoration: BoxDecoration (
+                                color:Color(int.parse(Global.secondaryColor)),
+                                borderRadius: BorderRadius.only(
+
+                                    topLeft: Radius.circular(98.0),
+                                    bottomRight: Radius.circular(200)
+                                )
+                            ),
                           ),
-                        )),
-                const SizedBox(height: 40),
-                RaisedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>DisplayAllDeliveryMen()
-                      ));
-                    },
-                    color: Color(int.parse(Global.primaryColor)),
-                    elevation: 10.0,
-                    textColor: Colors.white,
-                    padding: const EdgeInsets.all(0.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Text(
-                          'عرض جميع الطيارين',
-                          style: TextStyle(fontSize: 20)
+                          Icon(Icons.add_circle,size:30.0)
+
+                        ],
+                      )
+
+                  ),
+                ),
+                 SizedBox(height: 40),
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>DisplayAllDeliveryMen()
+                    ));
+                  },
+                  child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0.0,20.0),
+                                blurRadius: 30.0,
+                                color: Colors.black12
+                            )
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22.0)
                       ),
-                    )) ,
-                const SizedBox(height: 40),
-                RaisedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ShopRequestLayout()
-                      ));
-                    },
-                    color: Color(int.parse(Global.primaryColor)),
-                    elevation: 10.0,
-                    textColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Text(
-                          'تنفيذ الطلبات',
-                          style: TextStyle(fontSize: 20)
+                      child:Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical:14.0,horizontal: 5.0 ),
+                            height: 50,
+                            width: 110.0,
+                            child: Text(   'عرض جميع الطيارين',style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white
+                            ),),
+                            decoration: BoxDecoration (
+                                color:Color(int.parse(Global.secondaryColor)),
+                                borderRadius: BorderRadius.only(
+
+                                    topLeft: Radius.circular(98.0),
+                                    bottomRight: Radius.circular(200)
+                                )
+                            ),
+                          ),
+                          Icon(Icons.list,size:30.0)
+
+                        ],
+                      )
+
+                  ),
+                ),
+                 SizedBox(height: 40),
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ShopRequestLayout()
+                    ));
+                  },
+                  child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0.0,20.0),
+                                blurRadius: 30.0,
+                                color: Colors.black12
+                            )
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22.0)
                       ),
-                    )),
+                      child:Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical:12.0,horizontal: 15.0 ),
+                            height: 50,
+                            width: 110.0,
+                            child: Text(  'تنفيذ الطلبات',style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white
+                            ),),
+                            decoration: BoxDecoration (
+                                color:Color(int.parse(Global.secondaryColor)),
+                                borderRadius: BorderRadius.only(
+
+                                    topLeft: Radius.circular(98.0),
+                                    bottomRight: Radius.circular(200)
+                                )
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward,size:30.0)
+
+                        ],
+                      )
+                  ),
+                ),
+
 
 
               ]

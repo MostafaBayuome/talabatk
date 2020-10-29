@@ -1,7 +1,7 @@
 import 'package:Talabatk/Widgets/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
 import 'gmap.dart';
@@ -19,14 +19,14 @@ class CustomerHomePage extends StatefulWidget {
 
 class _State extends State<CustomerHomePage>
 {
-
+  bool opened=true;
   List<Location> Locations =[];
   @override
   Widget build(BuildContext context) {
     String _title="Home Page";
     return Scaffold (
         appBar: Utils.appBarusers(context,_title),
-        body:customerMenuWidget()
+        body: customerMenuWidget()
 
     );
   }
@@ -37,89 +37,165 @@ class _State extends State<CustomerHomePage>
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Utils.title(100, 100),
-            const SizedBox(height: 150),
-            RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LocationEditor()
-                  ));
-                },
-                color: Color(int.parse(Global.primaryColor)),
-                elevation: 10.0,
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
-                      'اضافه موقع جديد',
-                      style: TextStyle(fontSize: 20)
+            Utils.title(120, 120),
+             SizedBox(height: 150),
+            InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LocationEditor()
+                ));
+              },
+              child: Container(
+
+                  width: 150,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0.0,20.0),
+                            blurRadius: 30.0,
+                            color: Colors.black12
+                        )
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(22.0)
                   ),
-                )),
-            const SizedBox(height: 40),
-            RaisedButton(
-                onPressed: () {
+                  child:Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 3.0 ),
+                        height: 50,
+                        width: 110.0,
+                        child: Text('اضافه موقع جديد',style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white
+                        ),),
+                        decoration: BoxDecoration (
+                            color:Color(int.parse(Global.secondaryColor)),
+                            borderRadius: BorderRadius.only(
 
+                                topLeft: Radius.circular(98.0),
+                                bottomRight: Radius.circular(200)
+                            )
+                        ),
+                      ),
+                      Icon(Icons.location_on,size:30.0)
 
-                  // get all location of user display it after user choose  redirect to gmap with exact latlng
-                  Location.getByIdLocation("Location/GetByIdLocation").then((value) {
-                    Locations=value;
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(' مكان التوصيل',
-                              style : TextStyle(
-                              color: Color(int.parse(Global.primaryColor)),
+                    ],
+                  )
+
+              ),
+            ),
+             SizedBox(height: 40),
+            InkWell(
+              onTap: (){
+                // get all location of user display it after user choose  redirect to gmap with exact latlng
+                Location.getByIdLocation("Location/GetByIdLocation").then((value) {
+                  Locations=value;
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(' مكان التوصيل',
+                            style : TextStyle(
+                                color: Color(int.parse(Global.primaryColor)),
                                 fontFamily: Global.fontFamily,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20),
-                              textAlign: TextAlign.center,
-                            ),
-                            content: setupAlertDialogContainer(),
-                          );});
+                            textAlign: TextAlign.center,
+                          ),
+                          content: setupAlertDialogContainer(),
+                        );});
 
-                  });
+                });
+              },
+              child: Container(
+                  width: 150,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0.0,20.0),
+                            blurRadius: 30.0,
+                            color: Colors.black12
+                        )
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(22.0)
+                  ),
+                  child:Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
+                        height: 50,
+                        width: 110.0,
+                        child: Text('لطلب اوردر',style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white
+                        ),),
+                        decoration: BoxDecoration (
+                            color:Color(int.parse(Global.secondaryColor)),
+                            borderRadius: BorderRadius.only(
 
-                },
-                color: Color(int.parse(Global.primaryColor)),
-                elevation: 10.0,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                padding: const EdgeInsets.all(0.0),
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
-                      'لطلب اوردر',
-                      style: TextStyle(fontSize: 20)
+                                topLeft: Radius.circular(98.0),
+                                bottomRight: Radius.circular(200)
+                            )
+                        ),
+                      ),
+                      Icon(Icons.home,size:30.0)
+
+                    ],
+                  )
+
+              ),
+            ),
+             SizedBox(height: 40),
+            InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CustomerRequestLayout()
+                ));
+              },
+              child: Container(
+                  width: 150,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0.0,20.0),
+                            blurRadius: 30.0,
+                            color: Colors.black12
+                        )
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(22.0)
                   ),
-                )),
-            const SizedBox(height: 40),
-            RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CustomerRequestLayout()
-                  ));
-                },
-                color: Color(int.parse(Global.primaryColor)),
-                elevation: 10.0,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                padding: const EdgeInsets.all(0.0),
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
-                      ' طلباتي',
-                      style: TextStyle(fontSize: 20)
-                  ),
-                )),
+                  child:Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
+                        height: 50,
+                        width: 110.0,
+                        child: Text(' طلباتي',style: TextStyle(
+                          fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                          color: Colors.white
+                        ),),
+                        decoration: BoxDecoration (
+                            color:Color(int.parse(Global.secondaryColor)),
+                            borderRadius: BorderRadius.only(
+
+                                topLeft: Radius.circular(98.0),
+                                bottomRight: Radius.circular(200)
+                            )
+                        ),
+                      ),
+                      Icon(Icons.shopping_cart,size:30.0)
+
+                    ],
+                  )
+
+              ),
+            ),
           ]
       ),
     );
