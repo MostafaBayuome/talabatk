@@ -43,6 +43,9 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
     return Excepetion;
   }
 }
+
+
+
 Future<Map<String, dynamic>> loginUser (String apiName, String mobileNumber , String password) async {
 
   try{

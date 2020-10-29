@@ -137,7 +137,7 @@ class _State extends State<Login>  with Validation {
     );
   }
 
-  
+  //Map_Appear = 0  customer, = 1  shop, = 2  pharmacy, = 9 delivery
   Widget submitButton() {
     if(Global.visible_progress){
       return CircularProgressIndicator();
@@ -193,8 +193,7 @@ class _State extends State<Login>  with Validation {
                         builder: (context) =>CustomerHomePage()
                     ));
                   }
-                  else if(value["map_Appear"]== 9 )
-                    {
+                  else if(value["map_Appear"]== 9 ) {
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>DeliveryHomePage()
@@ -202,12 +201,11 @@ class _State extends State<Login>  with Validation {
 
                     }
                 }
-              catch (Excepetion)
-              {
+              catch (Excepetion) {
                   print(Excepetion);
               }
               }
-            else{
+            else {
               Utils.toastMessage("البيانات خطاء");
             }
           });
