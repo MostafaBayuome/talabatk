@@ -33,7 +33,7 @@ Future<void> main()  async {
     runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
-          home:FirstEnter==null? app_info(): phone ==null ? SignUp() : map_Appear > 0 ? ShopHomePage() : map_Appear!=9 ? CustomerHomePage() : DeliveryHomePage() ,
+          home:FirstEnter==null? app_info(): phone ==null ? SignUp() : (map_Appear == 1 || map_Appear == 2) ? ShopHomePage() : (map_Appear!=9) ? CustomerHomePage() : DeliveryHomePage(),
 
       )
    );

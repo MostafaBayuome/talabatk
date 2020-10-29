@@ -97,14 +97,10 @@ class Request {
       Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
       customerRequest.add(request);
     }
-
     return customerRequest;
-
-
-
   }
 
-  // state 0 = waiting , 1 = on delivery , 2 = delivered/done , 3 = deleted/canceled
+  // state 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
   static Future <void> editRequest (Request request, int state) async {
    String url = Global.url+"Request/EditRequest";
    final response= await  http.put(url,
@@ -123,6 +119,22 @@ class Request {
   response.toString();
   }
 
+  // get all requests attached to deliveryMan
+  static Future <List<Request>> getRequestsAttachedToDeliveryMan  () async {
+    String url =Global.url+"Request/GetByDeliveryId?deliveryid="+Global.loginUser.id.toString();
+    final response = await http.get(url,headers:{"Content-Type": "application/json"});
+    var jsonData = json.decode(response.body);
+    List<Request> customerRequest =[];
+    for(var i in jsonData)
+    {
+      String date =i['request_date'].toString().substring(0,10);
+      String time = i['request_time'].toString().substring(0,5);
+      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
+      customerRequest.add(request);
+    }
+    return customerRequest;
 
+
+  }
 }
 

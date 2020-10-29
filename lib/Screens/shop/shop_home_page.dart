@@ -14,7 +14,7 @@ class ShopHomePage extends StatefulWidget {
 }
 
 class _State extends State<ShopHomePage>{
-  String _title="Home Page";
+  String _title="Shop Home Page";
   @override
   Widget build(BuildContext context) {
 
@@ -22,7 +22,6 @@ class _State extends State<ShopHomePage>{
     return  Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: Center(
-
           child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[

@@ -57,8 +57,8 @@ class _State extends State<SignUp> with Validation  {
             child: ListView(
                   children: <Widget>[
                 //future update remove _title() and put CircleAvatar()
-                Utils.title(100.0,100.0),
-                Container(margin: EdgeInsets.only(top:25.0),),
+                Utils.title(130.0,130.0),
+                Container(margin: EdgeInsets.only(top:10.0),),
                 Container(
                   margin: EdgeInsets.all(20.0),
                   child: Form(
@@ -187,117 +187,126 @@ class _State extends State<SignUp> with Validation  {
 
     }
     else
-    return RaisedButton(
-      color:Color(int.parse(Global.primaryColor)),
-      child: Text('تسجيل الدخول',style:TextStyle(
-        color: Colors.white,
-        fontFamily: Global.fontFamily,
-        fontWeight: FontWeight.w500,
-      ),),
-      onPressed: () async {
-        setState(() {
-          Global.visible_progress=true;
-        });
+    return Container(
+      height: 40,
+      width: 120,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
 
-        if(formKey.currentState.validate()) {
-          formKey.currentState.save();
-          // Sign up as shop
-          map_Appear=0;
-          if(dropdownValue=="صيدلية")     map_Appear=2;
-          else if(dropdownValue=="محل تجاري")     map_Appear=1;
-
-          if (map_Appear>0){
-            if (position == null) {
-              _getCurrentLocation();
-            }
-            else {
-              
-              signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
-                setState(() {
-                  Global.visible_progress=false;
-                });
-                if(value != null)
-                {
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
-                  Global.loginUser=user;
-
-                  //save all user data
-                  prefs.setInt('id',user.id);
-                  prefs.setString('phone', phone);
-                  prefs.setInt('map_Appear', map_Appear);
-                  prefs.setString('password', password);
-                  prefs.setString('userName', userName);
-                  prefs.setDouble('latitude',position.latitude);
-                  prefs.setDouble('longitude', position.longitude);
-
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ShopHomePage()
-                  ));
-                }
-                else{
-                  Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
-                }}
-              );
-
-            }
-          }
-          // sign up as customer
-          else {
-
-            if (position == null) {
-              setState(() {
-                Global.visible_progress=false;
-              });
-              _getCurrentLocation();
-            }
-            else {
-              signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
-                setState(() {
-                  Global.visible_progress=false;
-                });
-                if(value != null)
-                {
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                  User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
-                  Global.loginUser=user;
-
-                  //save all user data
-                  prefs.setInt('id',user.id);
-                  prefs.setString('phone', phone);
-                  prefs.setInt('map_Appear', map_Appear);
-                  prefs.setString('password', password);
-                  prefs.setString('userName', userName);
-                  prefs.setDouble('latitude',position.latitude);
-                  prefs.setDouble('longitude', position.longitude);
-
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CustomerHomePage()
-                  ));
-                }
-                else{
-                  setState(() {
-                    Global.visible_progress=false;
-                  });
-
-                  Utils.toastMessage("رقم الموبايل مستخدم مسبقا ");
-                }}
-              );
-
-            }
-          }
-        }
-        else{
+        ),
+        color:Color(int.parse(Global.primaryColor)),
+        child: Text('تسجيل',style:TextStyle(
+          color: Colors.white,
+          fontFamily: Global.fontFamily,
+          fontWeight: FontWeight.w700,
+          fontSize: 15
+        ),),
+        onPressed: () async {
           setState(() {
             Global.visible_progress=true;
           });
-        }
 
-      },
+          if(formKey.currentState.validate()) {
+            formKey.currentState.save();
+            // Sign up as shop
+            map_Appear=0;
+            if(dropdownValue=="صيدلية")     map_Appear=2;
+            else if(dropdownValue=="محل تجاري")     map_Appear=1;
+
+            if (map_Appear>0){
+              if (position == null) {
+                _getCurrentLocation();
+              }
+              else {
+
+                signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
+                  setState(() {
+                    Global.visible_progress=false;
+                  });
+                  if(value != null)
+                  {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                    User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
+                    Global.loginUser=user;
+
+                    //save all user data
+                    prefs.setInt('id',user.id);
+                    prefs.setString('phone', phone);
+                    prefs.setInt('map_Appear', map_Appear);
+                    prefs.setString('password', password);
+                    prefs.setString('userName', userName);
+                    prefs.setDouble('latitude',position.latitude);
+                    prefs.setDouble('longitude', position.longitude);
+
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ShopHomePage()
+                    ));
+                  }
+                  else{
+                    Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+                  }}
+                );
+
+              }
+            }
+            // sign up as customer
+            else {
+
+              if (position == null) {
+                setState(() {
+                  Global.visible_progress=false;
+                });
+                _getCurrentLocation();
+              }
+              else {
+                signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
+                  setState(() {
+                    Global.visible_progress=false;
+                  });
+                  if(value != null)
+                  {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                    User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
+                    Global.loginUser=user;
+
+                    //save all user data
+                    prefs.setInt('id',user.id);
+                    prefs.setString('phone', phone);
+                    prefs.setInt('map_Appear', map_Appear);
+                    prefs.setString('password', password);
+                    prefs.setString('userName', userName);
+                    prefs.setDouble('latitude',position.latitude);
+                    prefs.setDouble('longitude', position.longitude);
+
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CustomerHomePage()
+                    ));
+                  }
+                  else{
+                    setState(() {
+                      Global.visible_progress=false;
+                    });
+
+                    Utils.toastMessage("رقم الموبايل مستخدم مسبقا ");
+                  }}
+                );
+
+              }
+            }
+          }
+          else{
+            setState(() {
+              Global.visible_progress=true;
+            });
+          }
+
+        },
+      ),
     );
   }
 
@@ -377,7 +386,7 @@ class _State extends State<SignUp> with Validation  {
                 ));
               },
             ),
-            Text('انشاء حساب؟'),
+            Text('لديك حساب؟'),
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ));

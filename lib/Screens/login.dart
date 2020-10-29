@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,10 +36,10 @@ class _State extends State<Login>  with Validation {
             child: ListView(
               children: <Widget>[
                 Align(
-                  child: Utils.title(100.0, 100.0)
+                  child: Utils.title(130.0, 130.0)
                 ),
 
-                Container(margin: EdgeInsets.only(top:25.0),),
+                Container(margin: EdgeInsets.only(top:10.0),),
                 Container(
                   margin: EdgeInsets.all(20.0),
                   child: Form(
@@ -143,26 +144,35 @@ class _State extends State<Login>  with Validation {
       return CircularProgressIndicator();
     }
     else
-    return RaisedButton(
-      color: Color(int.parse(Global.primaryColor)),
-      child: Text('دخول',
-      style: TextStyle(
-        color: Colors.white,
-      ),),
-      onPressed: () {
+    return Container(
+      height: 40,
+      width: 120,
+      child:RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
 
-        if(formKey.currentState.validate())
-        {
-          setState(() {
-            Global.visible_progress=true;
-          });
-
-          formKey.currentState.save();
-          loginUser("Talabatk/GetUserByConditionPhone",mobileNumber, password).then((value) async {
+        ),
+        color: Color(int.parse(Global.primaryColor)),
+        child: Text('دخول',
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: Global.fontFamily,
+              fontWeight: FontWeight.w700,
+              fontSize: 15
+          ),),
+        onPressed: () {
+          if(formKey.currentState.validate())
+          {
             setState(() {
-              Global.visible_progress=false;
+              Global.visible_progress=true;
             });
-            if(value != null  && value['state'] == true){
+
+            formKey.currentState.save();
+            loginUser("Talabatk/GetUserByConditionPhone",mobileNumber, password).then((value) async {
+              setState(() {
+                Global.visible_progress=false;
+              });
+              if(value != null  && value['state'] == true){
 
                 try{
                   var data =value;
@@ -175,18 +185,18 @@ class _State extends State<Login>  with Validation {
                   prefs.setInt('id',data["id"]);
                   prefs.setString('phone', data["phone"]);
                   prefs.setInt('map_Appear', data["map_Appear"]);
-                  prefs.setString('userName', data["userName"]);
+                  prefs.setString('userName', data["username"]);
                   prefs.setString('password', data["password"]);
                   prefs.setDouble('latitude',data["latitude"]);
                   prefs.setDouble('longitude', data["longitude"]);
                   prefs.setInt('merchant_id', data['merchant_id']);
 
                   if(value["map_Appear"]== 1 ||value["map_Appear"]== 2 ){
-                      Navigator.of(context).pop();
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>ShopHomePage()
-                      ));
-                    }
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>ShopHomePage()
+                    ));
+                  }
                   else if (value["map_Appear"]== 0 ){
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
@@ -194,28 +204,32 @@ class _State extends State<Login>  with Validation {
                     ));
                   }
                   else if(value["map_Appear"]== 9 ) {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>DeliveryHomePage()
-                      ));
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>DeliveryHomePage()
+                    ));
 
-                    }
+                  }
                 }
-              catch (Excepetion) {
+                catch (Excepetion) {
                   print(Excepetion);
+                }
               }
+              else {
+                Utils.toastMessage("البيانات خطاء");
               }
-            else {
-              Utils.toastMessage("البيانات خطاء");
-            }
-          });
+            });
 
 
 
-        }},
+          }
+
+          },
+      ) ,
     );
 
   }
+
 
 
 
