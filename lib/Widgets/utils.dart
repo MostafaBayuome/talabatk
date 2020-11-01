@@ -1,12 +1,12 @@
 import 'package:Talabatk/Entities/constants.dart';
-import 'package:Talabatk/Screens/notification_page.dart';
+
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Screens/notification_page.dart';
+
 class Utils {
   //global toast_message send message in an argument
   static void toastMessage(String message){
@@ -79,7 +79,8 @@ class Utils {
   }
 
   // appbar for all users shop, customer, delivery
-  static Widget  appBarusers(BuildContext context,String title){
+  static Widget  appBarusers(BuildContext context,String title ){
+    int counter=0;
     return PreferredSize(
       preferredSize: Size.fromHeight(40.0),
       child: AppBar(
@@ -92,13 +93,34 @@ class Utils {
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
 
-          IconButton (
-            icon:Icon(Icons.notifications),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>Notification()
-              ));
-          },),
+          IconButton(icon: Icon(Icons.notifications), onPressed: () {
+
+              counter = 0;
+
+          }),
+          counter != 0 ? new Positioned(
+            right: 11,
+            top: 11,
+            child: new Container(
+              padding: EdgeInsets.all(2),
+              decoration: new BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              constraints: BoxConstraints(
+                minWidth: 14,
+                minHeight: 14,
+              ),
+              child: Text(
+                '$counter',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ) : new Container(),
           PopupMenuButton<String>(
             onSelected: (value){
               Utils.choiceAction(value, context);
