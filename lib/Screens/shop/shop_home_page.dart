@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:Talabatk/Entities/Notifications.dart';
 import 'package:Talabatk/Entities/constants.dart';
@@ -12,8 +13,7 @@ import '../signup.dart';
 import 'display_all_delivery_men.dart';
 
 class ShopHomePage extends StatefulWidget {
-  static const reprat_time = const Duration(seconds:20);
-  var timer=new Timer.periodic(reprat_time, (Timer t) => Notifications.getMyNotification());
+
   @override
   State<StatefulWidget> createState() => _State();
 
@@ -21,10 +21,20 @@ class ShopHomePage extends StatefulWidget {
 
 class _State extends State<ShopHomePage>{
   String _title="Shop Home Page";
+
   @override
   Widget build(BuildContext context) {
+    var reprat_time = const Duration(seconds:15);
+    var timer=new Timer.periodic(reprat_time, (Timer t) => Notifications.getMyNotification().then((value) {
+      if(value!=null){
+        setState(() {
+          Global.userNotifications.addAll(value);
+          String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
+          Global.prefs.setString("userNotification", jsonString);
 
-
+        });
+      }
+    }));
     return  Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: Center(

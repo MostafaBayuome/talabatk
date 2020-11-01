@@ -25,24 +25,32 @@ class Notifications {
     return Not;
   }
 
-  static getMyNotification() async {
-      String url =Global.url+"GetAllNotificationsByUserId?Id="+Global.loginUser.id.toString();
+  static Future<List<Notifications>> getMyNotification() async {
+      String url =Global.url+"notifications/GetAllNotificationsByUserId?Id="+Global.loginUser.id.toString();
       var response = await http.get(url,headers:{"Content-Type": "application/json"});
       var jsonData = json.decode(response.body);
-      List<Notifications> notification=(jsonData as List).map((i) => Notifications.fromJson(i)).toList();
-      if(notification.isNotEmpty){
-        Global.userNotifications.addAll(notification);
-        url = Global.url+"notifications/EditSeenForUser?Id="+Global.loginUser.id.toString()+"&seen=true";
-        response= await  http.put(url,
-            headers: {"Content-Type": "application/json"},
-            body:json.encode( {"id": 1} )
-        );
-        String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
-        Global.prefs.setString("userNotification", jsonString);
+      List<Notifications>notifications=[];
+      try{
+        for(var i in jsonData){
+          Notifications temp=new Notifications.empty();
+          temp.id=i['id'];
+          notifications.add(temp);
+        }
+       //  notification=(jsonData as List).map((i) => Notifications.fromJson(i)).toList();
+
+
+       if(notifications.length>0){
+        //url = Global.url+"notifications/EditSeenForUser?Id="+Global.loginUser.id.toString()+"&seen=true";
+        //response= await  http.put(url,
+         //   headers: {"Content-Type": "application/json"},
+      //      body:json.encode( {"id": 1} )
+     //   );
+           return notifications;
       }
-
-
-
+      return null;
+      }catch( e){
+        String ee=e.toString();
+      }
   }
 
   Map<String,dynamic> toJson() {

@@ -95,9 +95,9 @@ class Utils {
 
           IconButton(icon: Icon(Icons.notifications), onPressed: () {
 
-            counter = 0;
+
           }),
-          counter != 0 ? new Positioned(
+          Global.userNotifications.length>= 0 ? new Positioned(
             right: 11,
             top: 11,
             child: new Container(
@@ -111,7 +111,7 @@ class Utils {
                 minHeight: 14,
               ),
               child: Text(
-                '$counter',
+                Global.userNotifications.length.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 8,
