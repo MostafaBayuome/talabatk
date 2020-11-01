@@ -177,19 +177,19 @@ class _State extends State<Login>  with Validation {
                 try{
                   var data =value;
 
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
+
                   User user =new User(data['id'],data['phone'],data['latitude'],data['longitude'],data['username'],data['password'],data['map_Appear'],data['merchant_id']);
                   Global.loginUser=user;
 
 
-                  prefs.setInt('id',data["id"]);
-                  prefs.setString('phone', data["phone"]);
-                  prefs.setInt('map_Appear', data["map_Appear"]);
-                  prefs.setString('userName', data["username"]);
-                  prefs.setString('password', data["password"]);
-                  prefs.setDouble('latitude',data["latitude"]);
-                  prefs.setDouble('longitude', data["longitude"]);
-                  prefs.setInt('merchant_id', data['merchant_id']);
+                  Global.prefs.setInt('id',data["id"]);
+                  Global.prefs.setString('phone', data["phone"]);
+                  Global.prefs.setInt('map_Appear', data["map_Appear"]);
+                  Global.prefs.setString('userName', data["username"]);
+                  Global.prefs.setString('password', data["password"]);
+                  Global.prefs.setDouble('latitude',data["latitude"]);
+                  Global.prefs.setDouble('longitude', data["longitude"]);
+                  Global.prefs.setInt('merchant_id', data['merchant_id']);
 
                   if(value["map_Appear"]== 1 ||value["map_Appear"]== 2 ){
                     Navigator.of(context).pop();
