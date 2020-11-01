@@ -7,9 +7,10 @@ class Request {
 
   int id;
   int user_id;
+  String username;
   int merchant_id;
+  String merchantname;
   int location_id;
-
   String request_date;
   String request_time;
   String details;
@@ -137,5 +138,6 @@ class Request {
 
 
   }
+
 }
 

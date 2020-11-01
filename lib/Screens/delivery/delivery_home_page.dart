@@ -13,7 +13,7 @@ class DeliveryHomePage extends StatefulWidget {
 
 class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
-  String _title="Delivery Home Page";
+  String _title="الصفحه الرئيسيه";
   List<Request> allCustomerRequest=[];
   List<Request> processingList=[];
   List<Request> deliveredList=[];

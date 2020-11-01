@@ -22,7 +22,7 @@ class _State extends State<ShopRequestLayout> {
   List<Request> rejectedList=[];
   @override
   Widget build(BuildContext context) {
-    String _title="Requests";
+    String _title="طلباتي";
     currContext=context;
     getAllRequests();
     return  DefaultTabController(

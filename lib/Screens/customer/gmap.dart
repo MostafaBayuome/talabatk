@@ -31,7 +31,7 @@ class _GMapState extends State<Gmap> {
   _GMapState(this._currentPosition);
   Completer<GoogleMapController> _controller = Completer();
   double zoomVal=20.0;
-  String _title="Nearest shops";
+  String _title="المحلات القريبه";
 
 
   @override

@@ -1,14 +1,10 @@
 import 'dart:async';
-
 import 'package:Talabatk/Entities/Notifications.dart';
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/add_delivery.dart';
 import 'package:Talabatk/Screens/shop/shop_request_layout.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../signup.dart';
 import 'display_all_delivery_men.dart';
 
 class ShopHomePage extends StatefulWidget {
@@ -20,7 +16,7 @@ class ShopHomePage extends StatefulWidget {
 }
 
 class _State extends State<ShopHomePage>{
-  String _title="Shop Home Page";
+  String _title="الصفحه الرئيسيه";
   @override
   Widget build(BuildContext context) {
 

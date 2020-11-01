@@ -9,8 +9,6 @@ import 'customer_location_editor.dart';
 import 'package:Talabatk/Entities/location.dart';
 
 
-
-
 class CustomerHomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _State();
@@ -23,7 +21,7 @@ class _State extends State<CustomerHomePage>
   List<Location> Locations =[];
   @override
   Widget build(BuildContext context) {
-    String _title="Home Page";
+    String _title="الصفحه الرئيسيه";
     return Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: customerMenuWidget()
