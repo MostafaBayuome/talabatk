@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:Talabatk/Entities/Notifications.dart';
 import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/add_delivery.dart';
@@ -9,8 +12,11 @@ import '../signup.dart';
 import 'display_all_delivery_men.dart';
 
 class ShopHomePage extends StatefulWidget {
+  static const reprat_time = const Duration(seconds:20);
+  var timer=new Timer.periodic(reprat_time, (Timer t) => Notifications.getMyNotification());
   @override
   State<StatefulWidget> createState() => _State();
+
 }
 
 class _State extends State<ShopHomePage>{

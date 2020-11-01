@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:Talabatk/Entities/api_manger.dart';
@@ -226,19 +225,18 @@ class _State extends State<SignUp> with Validation  {
                   });
                   if(value != null)
                   {
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
 
                     User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
                     Global.loginUser=user;
 
                     //save all user data
-                    prefs.setInt('id',user.id);
-                    prefs.setString('phone', phone);
-                    prefs.setInt('map_Appear', map_Appear);
-                    prefs.setString('password', password);
-                    prefs.setString('userName', userName);
-                    prefs.setDouble('latitude',position.latitude);
-                    prefs.setDouble('longitude', position.longitude);
+                    Global.prefs.setInt('id',user.id);
+                    Global.prefs.setString('phone', phone);
+                    Global.prefs.setInt('map_Appear', map_Appear);
+                    Global.prefs.setString('password', password);
+                    Global.prefs.setString('userName', userName);
+                    Global.prefs.setDouble('latitude',position.latitude);
+                    Global.prefs.setDouble('longitude', position.longitude);
 
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
@@ -268,19 +266,19 @@ class _State extends State<SignUp> with Validation  {
                   });
                   if(value != null)
                   {
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
+
 
                     User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
                     Global.loginUser=user;
 
                     //save all user data
-                    prefs.setInt('id',user.id);
-                    prefs.setString('phone', phone);
-                    prefs.setInt('map_Appear', map_Appear);
-                    prefs.setString('password', password);
-                    prefs.setString('userName', userName);
-                    prefs.setDouble('latitude',position.latitude);
-                    prefs.setDouble('longitude', position.longitude);
+                    Global.prefs.setInt('id',user.id);
+                    Global.prefs.setString('phone', phone);
+                    Global.prefs.setInt('map_Appear', map_Appear);
+                    Global.prefs.setString('password', password);
+                    Global.prefs.setString('userName', userName);
+                    Global.prefs.setDouble('latitude',position.latitude);
+                    Global.prefs.setDouble('longitude', position.longitude);
 
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(

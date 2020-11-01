@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'global.dart';
-import 'package:http/http.dart' as http;
+
 import 'dart:convert';
 
 class DeliveryLocation {

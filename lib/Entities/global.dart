@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:Talabatk/Entities/Notifications.dart';
 import 'package:Talabatk/Entities/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class  Global {
-
+static SharedPreferences prefs ;
   static User loginUser = new User.empty();
   static String appName='Talabatk' ;
   static String fontFamily='NotoSansJP';
@@ -11,7 +15,8 @@ class  Global {
   static bool visible_progress=false;
   static int userLocationIdDeliever;
   static User selectedDeleviry;
-
+  static Timer notification_timer;
+  static List<Notifications>userNotifications=new List<Notifications>();
 }
 
 
