@@ -80,7 +80,7 @@ class Utils {
 
   // appbar for all users shop, customer, delivery
   static Widget  appBarusers(BuildContext context,String title ){
-    int counter=0;
+    int counter =0;
     return PreferredSize(
       preferredSize: Size.fromHeight(40.0),
       child: AppBar(
@@ -92,34 +92,53 @@ class Utils {
         automaticallyImplyLeading: false,
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
-
-          IconButton(icon: Icon(Icons.notifications), onPressed: () {
-
-
-          }),
-          Global.userNotifications.length>= 0 ? new Positioned(
-            right: 11,
-            top: 11,
-            child: new Container(
-              padding: EdgeInsets.all(2),
-              decoration: new BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(6),
+          /*   new Positioned(  // draw a red marble
+                  top: 8.0,
+                  right: 0.0,
+                  left: 12.0,
+                  child: Container(
+                    padding: EdgeInsets.all(2),
+                    decoration: new BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 10,
+                      minHeight: 10,
+                    ),
+                    child: Text(
+                      Global.userNotifications.length.toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )*/
+          IconButton(icon:Stack(
+              children: [
+                Icon(Icons.notifications),
+                counter == 0 ?
+                Positioned(
+                  left: 12,
+                  child: CircleAvatar(
+                    radius: 6,
+                    backgroundColor: Colors.red,
+                    child: Center(
+                      child: Text(
+                        "1",
+                        style: TextStyle(color: Colors.white,fontSize: 8),
+                      ),
+                    ),
+                  ),
+                     ) :
+                    Container()
+                  ],
               ),
-              constraints: BoxConstraints(
-                minWidth: 14,
-                minHeight: 14,
-              ),
-              child: Text(
-                Global.userNotifications.length.toString(),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 8,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ) : new Container(),
+              onPressed: () {
+
+                }),
           PopupMenuButton<String>(
             onSelected: (value){
               Utils.choiceAction(value, context);

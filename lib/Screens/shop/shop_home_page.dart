@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:Talabatk/Entities/Notifications.dart';
+import 'package:Talabatk/Entities/notifications.dart';
 import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/add_delivery.dart';

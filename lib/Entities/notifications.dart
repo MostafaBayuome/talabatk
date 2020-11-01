@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 import 'global.dart';
 import 'package:http/http.dart' as http;
 class Notifications {
@@ -13,6 +11,7 @@ class Notifications {
   String record_time;
   Notifications.empty();
   static fromJson(Map model) {
+
     Notifications Not=new Notifications.empty();
     Not.id=model['id'];
     Not.user_id=model['user_id'];
@@ -36,19 +35,11 @@ class Notifications {
           temp.id=i['id'];
           notifications.add(temp);
         }
-       //  notification=(jsonData as List).map((i) => Notifications.fromJson(i)).toList();
-
-
        if(notifications.length>0){
-        //url = Global.url+"notifications/EditSeenForUser?Id="+Global.loginUser.id.toString()+"&seen=true";
-        //response= await  http.put(url,
-         //   headers: {"Content-Type": "application/json"},
-      //      body:json.encode( {"id": 1} )
-     //   );
            return notifications;
       }
       return null;
-      }catch( e){
+      }catch(e){
         String ee=e.toString();
       }
   }

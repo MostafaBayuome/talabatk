@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:Talabatk/Entities/Notifications.dart';
+import 'package:Talabatk/Entities/notifications.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
