@@ -22,7 +22,7 @@ class _State  extends State<LocationEditor>{
   TextEditingController _locationNameController = new TextEditingController();
   TextEditingController _locationNoteController = new TextEditingController();
   Position _currentposition=null;
-  String _title="Location Editior";
+  String _title="تعديل المواقع";
   @override
   Widget build(BuildContext context) {
 

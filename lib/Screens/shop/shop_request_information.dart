@@ -23,7 +23,7 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
   Request request;
   List<User> delivery_men;
   _ShopRequestInfromationState(this.request);
-  String _title="Request Information";
+  String _title="الطلبات";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

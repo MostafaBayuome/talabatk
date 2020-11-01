@@ -12,7 +12,8 @@ class app_info extends StatefulWidget {
 
 class _State extends State<app_info>  {
 
-  // true signup => SHOP  false => CUSTOMER
+
+
   @override
   void initState()  {
     super.initState();

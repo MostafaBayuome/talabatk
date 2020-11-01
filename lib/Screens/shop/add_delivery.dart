@@ -17,7 +17,7 @@ class _State extends State<addDeliveryman> with Validation
   String phone='';
   String password='';
   String confirmPassword='';
-  String _title="Add Delivery";
+  String _title="اضافه طيار";
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();

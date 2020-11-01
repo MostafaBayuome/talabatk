@@ -30,7 +30,7 @@ class _State extends State<UserRequest>{
   User shop;
   final detailsTextController = TextEditingController();
   String image1="",image2="";
-  String _title="Request Page";
+  String _title="تفاصيل الطلب";
   @override
   Widget build(BuildContext context) {
           return Scaffold(

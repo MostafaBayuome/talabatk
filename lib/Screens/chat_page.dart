@@ -112,26 +112,20 @@ class _ChatPage extends State<ChatPage>
             setState(() {
             replyDetails = value;
                 });
-
           }
-
       }
       );
-
     });
   }
   Widget allReply()
   {
-
     // After 1 second, it takes you to the bottom of the ListView
     return ListView.builder(
 
       padding: EdgeInsets.all(8.0),
       itemCount: replyDetails.length,
       itemBuilder: (BuildContext context,int index){
-
         if(Global.loginUser.id==replyDetails[index].user_id) {
-
           return Container(
             child:Padding(
                 padding: const EdgeInsets.all(5.0),
