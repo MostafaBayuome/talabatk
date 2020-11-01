@@ -1,6 +1,4 @@
 import 'dart:ui';
-
-
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';

@@ -1,20 +1,18 @@
-
 import 'package:geolocator/geolocator.dart';
-
 import 'global.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class delevvity_location {
+class DeliveryLocation {
    int id;
    int user_id;
    double latitude;
    double longitude;
    String record_date;
    String record_time;
-   delevvity_location(this.id, this.user_id, this.latitude, this.longitude, this.record_date, this.record_time);
-   delevvity_location.empty();
-// Add location to Location table
+   DeliveryLocation(this.id, this.user_id, this.latitude, this.longitude, this.record_date, this.record_time);
+   DeliveryLocation.empty();
+  // Add location to Location table
   static Future<Map<String, dynamic>> addCurrentLocation (int user_id) async {
     try{
      var position =  await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -37,17 +35,19 @@ class delevvity_location {
       print(Excepetion);
     }
   }
-// get all user locations from Location table
-  static Future <delevvity_location> getLastLocation(int User_id) async {
+
+
+  // get all user locations from Location table
+  static Future <DeliveryLocation> getLastLocation(int User_id) async {
      String url =Global.url+"deleviry_location/getLastLocationByUserId?Id="+User_id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);
-     delevvity_location location ;
+     DeliveryLocation location ;
      location=fromJson(jsonData);
     return location;
   }
   static  fromJson(Map model) {
-    delevvity_location location=new delevvity_location.empty();
+    DeliveryLocation location=new DeliveryLocation.empty();
     location.id=model['id'];
     location.user_id=model['user_id'];
     location.latitude=model['merchant_id'];
