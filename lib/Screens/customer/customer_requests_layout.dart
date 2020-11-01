@@ -90,6 +90,7 @@ class _State extends State<CustomerRequestLayout>
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+
               Container(
                 width: 55.0,
                 height: 55.0,
@@ -104,12 +105,12 @@ class _State extends State<CustomerRequestLayout>
 
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(),textAlign: TextAlign.center, style: TextStyle(
-                          fontFamily: Global.fontFamily,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
 
+                    Container(
+                      child: Text("Shop Name ", textAlign: TextAlign.center, style: TextStyle(
+                        fontFamily: Global.fontFamily,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
                       )),
                     ),
                     Container(
@@ -123,7 +124,8 @@ class _State extends State<CustomerRequestLayout>
                     Container(
                       child: Text(listItem[index].request_date.toString(),
                           style: TextStyle(
-                          fontSize: 14,
+                            fontFamily: Global.fontFamily,
+                          fontSize: 13,
                           color: Colors.black,
                       )),
                     ),
@@ -134,7 +136,7 @@ class _State extends State<CustomerRequestLayout>
                         child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                             fontFamily: Global.fontFamily,
                             fontWeight: FontWeight.w600,
-                            fontSize: 15,
+                            fontSize: 12,
 
                         )),
                       ),

@@ -1,5 +1,4 @@
 import 'package:Talabatk/Entities/constants.dart';
-
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
+
   //global toast_message send message in an argument
   static void toastMessage(String message){
     Fluttertoast.showToast(
@@ -95,8 +95,7 @@ class Utils {
 
           IconButton(icon: Icon(Icons.notifications), onPressed: () {
 
-              counter = 0;
-
+            counter = 0;
           }),
           counter != 0 ? new Positioned(
             right: 11,

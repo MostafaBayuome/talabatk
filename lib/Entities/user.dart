@@ -44,7 +44,7 @@ class User {
     return nearestShop;
   }
 
-   //get user by merchant id user=deliveryMan
+   //get user by merchant_id user=deliveryMan
   static Future <List<User>> getUserByMerchantId(int merchant_id) async {
     String url = Global.url + "Talabatk/GetUserByMerchantId?merchant_id=" +
         merchant_id.toString();
@@ -90,6 +90,15 @@ class User {
         })
     );
     return response.body.toString();
+  }
+
+  static Future <String> getUseNameWithId (int user_id) async {
+    String url = Global.url + "Talabatk/GetUserByCondition?id=" + user_id.toString();
+    final response = await http.get(
+        url, headers: {"Content-Type": "application/json"});
+
+    var jsonData = json.decode(response.body);
+    return jsonData['username'];
   }
 
 

@@ -1,5 +1,6 @@
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Entities/global.dart';
 import 'Entities/user.dart';
@@ -8,12 +9,14 @@ import 'Screens/customer/customer_home_page.dart';
 import 'Screens/shop/shop_home_page.dart';
 import 'Screens/signup.dart';
 
+final  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 Future<void> main()  async {
    WidgetsFlutterBinding.ensureInitialized();
    SharedPreferences prefs =await SharedPreferences.getInstance();
 
 
-  // if mobileNumber and check not null then it will redirect to the correct homepage
+
+   // if mobileNumber and check not null then it will redirect to the correct homepage
    var FirstEnter=prefs.getInt('FirstEnter');
 
    var phone=prefs.getString('phone');

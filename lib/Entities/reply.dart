@@ -13,6 +13,7 @@ String reply_time;
 String image_url;
 bool state;
 
+
 Reply( this.request_id, this.user_id, this.reply_detail, this.reply_date,
       this.reply_time, this.image_url, this.state);
 Reply.id(this.id,this.request_id, this.user_id, this.reply_detail, this.reply_date,
