@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:Talabatk/Entities/notification.dart';
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,10 +28,14 @@ Future<void> main()  async {
    var longitude=Global.prefs.getDouble('longitude');
    var merchant_id=Global.prefs.getInt('merchant_id');
 
+
    if(phone!=null)
      {
+       var userNotification=Global.prefs.getString('userNotification');
+       Global.userNotifications=(userNotification as List).map((i) => Notifications.fromJson(i)).toList();
        User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear,merchant_id);
        Global.loginUser=user;
+
      }
     runApp(
       MaterialApp(

@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 
-import 'deleviry_Location.dart';
 import 'global.dart';
 import 'package:http/http.dart' as http;
 class Notifications {
@@ -38,11 +37,25 @@ class Notifications {
             headers: {"Content-Type": "application/json"},
             body:json.encode( {"id": 1} )
         );
-        Global.
+        String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
+        Global.prefs.setString("userNotification", jsonString);
       }
 
 
 
+  }
+
+  Map<String,dynamic> toJson() {
+    Map<String,dynamic> toJson(){
+      return {
+        "id": this.id,
+        "user_id": this.user_id,
+        "Type": this.Type,
+        "seen": this.seen,
+        "Description": this.Description,
+        "record_date": this.record_date,
+        "record_time": this.record_time
+      };}
   }
 
 }
