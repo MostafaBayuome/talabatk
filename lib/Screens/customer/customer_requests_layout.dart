@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:Talabatk/Entities/constants.dart';
+
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';
@@ -24,6 +24,7 @@ class _State extends State<CustomerRequestLayout>
   List<Request> rejectedList=[];
   BuildContext currContext=null;
   String _title="My Requests";
+
   @override
   Widget build(BuildContext context) {
     currContext=context;
@@ -79,18 +80,16 @@ class _State extends State<CustomerRequestLayout>
       padding: EdgeInsets.all(20),
       itemCount: listItem.length,
       itemBuilder: (BuildContext context,int index){
-        width :MediaQuery.of(context).size.width;
-        padding :EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0);
         return Card(
           elevation: 5.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: Container(
               width :MediaQuery.of(context).size.width,
               padding :EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
@@ -149,30 +148,26 @@ class _State extends State<CustomerRequestLayout>
               ),
               if(listItem[index].state == 0 || listItem[index].state == 1)
                 Container(
-                    width: 60.0,
-                    height: 60.0,
+                    width: 70.0,
+                    height: 70.0,
                     alignment: Alignment.center,
+
                     padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
 
-                    child: ClipOval(
-                      child: Material(
+                    child: InkWell(
 
-                        child: InkWell(
-                          splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                          onTap: () {
-                            //Send User to chat page
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>ChatPage( request: listItem[index] )
-                            ));
-                          }, // button pressed
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(Icons.chat,color: Colors.blue), // icon
+                      onTap: () {
+                        //Send User to chat page
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>ChatPage( request: listItem[index] )
+                        ));
+                      }, // button pressed
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.chat,color: Colors.blue), // icon
 
-                            ],
-                          ),
-                        ),
+                        ],
                       ),
                     )),
             ],

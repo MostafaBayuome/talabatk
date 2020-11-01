@@ -6,7 +6,6 @@ import 'package:Talabatk/Entities/global.dart';
 class PopMenu extends StatefulWidget {
   List<User> delivery_men;
 
-
   @override
   PopMenuWidget createState() => PopMenuWidget();
 }
