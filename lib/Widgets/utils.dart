@@ -1,11 +1,12 @@
 import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Screens/notification_page.dart';
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../Screens/notification_page.dart';
 class Utils {
   //global toast_message send message in an argument
   static void toastMessage(String message){
@@ -90,6 +91,14 @@ class Utils {
         automaticallyImplyLeading: false,
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
+
+          IconButton (
+            icon:Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>Notification()
+              ));
+          },),
           PopupMenuButton<String>(
             onSelected: (value){
               Utils.choiceAction(value, context);
@@ -105,6 +114,7 @@ class Utils {
               }).toList();
             },
           )
+
         ],
       ),
     );
