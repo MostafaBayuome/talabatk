@@ -1,14 +1,9 @@
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
-import 'package:Talabatk/Screens/shop/display_all_delivery_men.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
-import 'package:Talabatk/Screens/shop/shop_request_information.dart';
-import '../signup.dart';
-import 'add_delivery.dart';
+
 
 class ShopRequestLayout extends StatefulWidget {
   @override
@@ -143,10 +138,7 @@ class _State extends State<ShopRequestLayout> {
                           )),
                         ),
                       ),
-
-
-                      SizedBox(height : 5),
-                    ]
+                      SizedBox(height : 5),]
                 ),
                 if(listItem[index].state == 0 || listItem[index].state == 1)
                   Container(
@@ -168,12 +160,10 @@ class _State extends State<ShopRequestLayout> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Icon(Icons.chat,color: Colors.blue), // icon
-
                           ],
                         ),
                       )),
               ],
-
             ),),
         );
       },
