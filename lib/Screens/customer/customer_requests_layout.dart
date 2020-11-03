@@ -107,7 +107,7 @@ class _State extends State<CustomerRequestLayout>
                   children: [
 
                     Container(
-                      child: Text("Shop Name ", textAlign: TextAlign.center, style: TextStyle(
+                      child: Text(listItem[index].user_name , textAlign: TextAlign.center, style: TextStyle(
                         fontFamily: Global.fontFamily,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -116,26 +116,28 @@ class _State extends State<CustomerRequestLayout>
                     Container(
                       child: Text( "Request ID: "+ listItem[index].id.toString() ,textAlign: TextAlign.center, style: TextStyle(
                           fontFamily: Global.fontFamily,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+
+                          fontSize: 13,
 
                       )),
                     ),
+                    SizedBox(height: 3,),
                     Container(
                       child: Text(listItem[index].request_date.toString(),
                           style: TextStyle(
                             fontFamily: Global.fontFamily,
+
                           fontSize: 13,
                           color: Colors.black,
                       )),
                     ),
-                    SizedBox(height: 3,),
+
                     Container(
                       child: Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                             fontFamily: Global.fontFamily,
-                            fontWeight: FontWeight.w600,
+
                             fontSize: 12,
 
                         )),

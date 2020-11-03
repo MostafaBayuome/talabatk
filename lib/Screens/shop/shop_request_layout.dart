@@ -104,7 +104,7 @@ class _State extends State<ShopRequestLayout> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(),textAlign: TextAlign.center, style: TextStyle(
+                        child: Text(listItem[index].user_name.toString(),textAlign: TextAlign.center, style: TextStyle(
                           fontFamily: Global.fontFamily,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -114,11 +114,12 @@ class _State extends State<ShopRequestLayout> {
                       Container(
                         child: Text( "Request ID: "+ listItem[index].id.toString() ,textAlign: TextAlign.center, style: TextStyle(
                           fontFamily: Global.fontFamily,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+
+                          fontSize: 13,
 
                         )),
                       ),
+                      SizedBox(height: 3,),
                       Container(
                         child: Text(listItem[index].request_date.toString(),
                             style: TextStyle(
@@ -126,14 +127,13 @@ class _State extends State<ShopRequestLayout> {
                               color: Colors.black,
                             )),
                       ),
-                      SizedBox(height: 3,),
                       Container(
                         child: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                             fontFamily: Global.fontFamily,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
+
+                            fontSize: 13,
 
                           )),
                         ),

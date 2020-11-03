@@ -1,15 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
-
-import 'package:Talabatk/Entities/notifications.dart';
-import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/add_delivery.dart';
 import 'package:Talabatk/Screens/shop/shop_request_layout.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../signup.dart';
+
 import 'display_all_delivery_men.dart';
 
 class ShopHomePage extends StatefulWidget {
@@ -24,17 +20,8 @@ class _State extends State<ShopHomePage>{
 
   @override
   Widget build(BuildContext context) {
-    var reprat_time = const Duration(seconds:15);
-    var timer=new Timer.periodic(reprat_time, (Timer t) => Notifications.getMyNotification().then((value) {
-      if(value!=null){
-        setState(() {
-          Global.userNotifications.addAll(value);
-          String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
-          Global.prefs.setString("userNotification", jsonString);
 
-        });
-      }
-    }));
+    getNotifications();
     return  Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: Center(
@@ -196,7 +183,22 @@ class _State extends State<ShopHomePage>{
 
 
 
-
+  Future getNotifications(){
+    return new  Future.delayed( const Duration(seconds:10) , ()
+    {
+      NotificationDetails.getMyNotification().then((value) {
+        if(value!=null){
+          Global.userNotifications.clear();
+          setState(() {
+            Global.userNotifications=value ;
+            //  String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
+            //  print(jsonString);
+            //  Global.prefs.setString("userNotification", jsonString);
+          });
+        }
+      });
+    });
+  }
 
 
 }

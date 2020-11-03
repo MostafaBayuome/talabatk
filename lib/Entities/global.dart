@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:Talabatk/Entities/notifications.dart';
+import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +16,7 @@ static SharedPreferences prefs ;
   static int userLocationIdDeliever;
   static User selectedDeleviry;
   static Timer notification_timer;
-  static List<Notifications>userNotifications=new List<Notifications>();
+  static List<NotificationDetails>userNotifications=new List<NotificationDetails>();
 }
 
 

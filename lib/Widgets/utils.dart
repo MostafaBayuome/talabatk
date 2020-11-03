@@ -1,4 +1,6 @@
 import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Entities/notification_details.dart';
+import 'package:Talabatk/Screens/notification_page.dart';
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -92,34 +94,11 @@ class Utils {
         automaticallyImplyLeading: false,
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
-          /*   new Positioned(  // draw a red marble
-                  top: 8.0,
-                  right: 0.0,
-                  left: 12.0,
-                  child: Container(
-                    padding: EdgeInsets.all(2),
-                    decoration: new BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 10,
-                      minHeight: 10,
-                    ),
-                    child: Text(
-                      Global.userNotifications.length.toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                )*/
+
           IconButton(icon:Stack(
               children: [
                 Icon(Icons.notifications),
-                counter == 0 ?
+                Global.userNotifications.length  != 0 ?
                 Positioned(
                   left: 12,
                   child: CircleAvatar(
@@ -127,7 +106,7 @@ class Utils {
                     backgroundColor: Colors.red,
                     child: Center(
                       child: Text(
-                        "1",
+                        Global.userNotifications.length.toString(),
                         style: TextStyle(color: Colors.white,fontSize: 8),
                       ),
                     ),
@@ -137,7 +116,9 @@ class Utils {
                   ],
               ),
               onPressed: () {
-
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>Notification_Page()
+                ));
                 }),
           PopupMenuButton<String>(
             onSelected: (value){

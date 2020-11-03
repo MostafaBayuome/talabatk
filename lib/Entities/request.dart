@@ -7,7 +7,7 @@ class Request {
 
   int id;
   int user_id;
-  String username;
+  String user_name;
   int merchant_id;
   String merchantname;
   int location_id;
@@ -20,7 +20,7 @@ class Request {
   int delivery_id;
 
   Request.empty();
-  Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state);
+  Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state,this.user_name);
 
   static Future<void> addRequest(String apiName,int user_id,int merchant_id,int location_id,
       String request_data,String request_time,String details, String image_url, String image_url2) async {
@@ -73,14 +73,13 @@ class Request {
     for(var i in jsonData)
     {
 
-      String date =i['request_date'].toString().substring(0,10);
-      String time = i['request_time'].toString().substring(0,5);
+      String date =i['request_Date'].toString().substring(0,10);
+      String time = i['request_Time'].toString().substring(0,5);
       // merchant_id equals Global.loginUser.id
-      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
-      customerRequest.add(request);
-    }
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name']);
+      customerRequest.add(request); }
     
-    return customerRequest;
+      return customerRequest;
 
   }
 
@@ -93,10 +92,10 @@ class Request {
     for(var i in jsonData)
     {
 
-      String date =i['request_date'].toString().substring(0,10);
-      String time = i['request_time'].toString().substring(0,5);
+     String date =i['request_Date'].toString().substring(0,10);
+     String time = i['request_Time'].toString().substring(0,5);
       // merchant_id equals Global.loginUser.id
-      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name']);
       customerRequest.add(request);
     }
     return customerRequest;
@@ -123,18 +122,19 @@ class Request {
 
   // get all requests attached to deliveryMan
   static Future <List<Request>> getRequestsAttachedToDeliveryMan  () async {
+
     String url =Global.url+"Request/GetByDeliveryId?deliveryid="+Global.loginUser.id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);
     List<Request> customerRequest =[];
     for(var i in jsonData)
     {
-      String date =i['request_date'].toString().substring(0,10);
-      String time = i['request_time'].toString().substring(0,5);
-      Request request = Request(i['id'],i['user_id'],i['merchant_id'],i['location_id'],date,time,i['details'],i['image_url'],i['image_url2'],i['state']);
+      String date =i['request_Date'].toString().substring(0,10);
+      String time = i['request_Time'].toString().substring(0,5);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name']);
       customerRequest.add(request);
     }
-    return customerRequest;
+     return customerRequest;
 
 
   }

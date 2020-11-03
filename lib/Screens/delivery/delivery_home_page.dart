@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:convert';
+
+
 import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +25,17 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var reprat_time = const Duration(seconds:15);
+    var timer=new Timer.periodic(reprat_time, (Timer t) => NotificationDetails.getMyNotification().then((value) {
+      if(value!=null){
+        setState(() {
+          Global.userNotifications.addAll(value);
+          String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
+          Global.prefs.setString("userNotification", jsonString);
+
+        });
+      }
+    }));
     getAllRequests();
     return DefaultTabController(
       length: 2,
@@ -86,7 +102,7 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        child: Text("Merchant ID: "+ listItem[index].merchant_id.toString(),textAlign: TextAlign.center, style: TextStyle(
+                        child: Text(  listItem[index].user_name,textAlign: TextAlign.center, style: TextStyle(
                           fontFamily: Global.fontFamily,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -96,26 +112,27 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                       Container(
                         child: Text( "Request ID: "+ listItem[index].id.toString() ,textAlign: TextAlign.center, style: TextStyle(
                           fontFamily: Global.fontFamily,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+
+                          fontSize: 13,
 
                         )),
                       ),
+                      SizedBox(height: 3,),
                       Container(
                         child: Text(listItem[index].request_date.toString(),
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 13,
                               color: Colors.black,
                             )),
                       ),
-                      SizedBox(height: 3,),
+
                       Container(
                         child: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                             fontFamily: Global.fontFamily,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
+
+                            fontSize: 12,
 
                           )),
                         ),
