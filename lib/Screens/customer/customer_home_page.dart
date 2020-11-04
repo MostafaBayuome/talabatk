@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,8 +17,7 @@ class CustomerHomePage extends StatefulWidget {
 }
 
 
-class _State extends State<CustomerHomePage>
-{
+class _State extends State<CustomerHomePage> {
   bool opened=true;
   List<Location> Locations =[];
   @override
@@ -232,22 +229,18 @@ class _State extends State<CustomerHomePage>
   }
 
 
-Future getNotifications(){
- return new  Future.delayed( const Duration(seconds:2), ()
- {
-   NotificationDetails.getMyNotification().then((value) {
-    if(value!=null){
-      Global.userNotifications.clear();
-      setState(() {
-        Global.userNotifications.addAll(value);
-        //  String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
-        //  print(jsonString);
-        //  Global.prefs.setString("userNotification", jsonString);
-
+  Future getNotifications(){
+     return new  Future.delayed( const Duration(seconds:10), ()
+       {
+         NotificationDetails.getMyNotification().then((value) {
+          if(value!=null){
+            Global.userNotifications.clear();
+            setState(() {
+              Global.userNotifications=value ;
+            });
+          }
+        });
       });
     }
-  });
-});
-}
 
-}
+  }

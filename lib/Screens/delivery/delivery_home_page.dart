@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-
-
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
-
 import '../chat_page.dart';
 
 
@@ -25,17 +21,7 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var reprat_time = const Duration(seconds:15);
-    var timer=new Timer.periodic(reprat_time, (Timer t) => NotificationDetails.getMyNotification().then((value) {
-      if(value!=null){
-        setState(() {
-          Global.userNotifications.addAll(value);
-          String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
-          Global.prefs.setString("userNotification", jsonString);
-
-        });
-      }
-    }));
+    getNotifications();
     getAllRequests();
     return DefaultTabController(
       length: 2,
@@ -90,7 +76,6 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                 Container(
                   width: 55.0,
                   height: 55.0,
-
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Utils.title(55,55),
@@ -139,10 +124,10 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                       ),
                       SizedBox(height : 5),]
                 ),
-                if(listItem[index].state == 0 || listItem[index].state == 1)
+                if(listItem[index].state == 1)
                   Container(
-                      width: 70.0,
-                      height: 70.0,
+                      width: 30.0,
+                      height: 30.0,
                       alignment: Alignment.center,
 
                       padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
@@ -162,12 +147,34 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                           ],
                         ),
                       )),
+                if(listItem[index].state == 1)
+                  Container(
+                    width: 30.0,
+                    height: 30.0,
+                    alignment: Alignment.center,
+
+                    padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+
+                    child: InkWell(
+
+                      onTap: () {
+                        //Send delivery_man to googlemaps
+
+                      }, // button pressed
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.gps_fixed,color: Colors.blue), // icon
+                        ],
+                      ),
+                    )),
               ],
             ),),
         );
       },
     );
   }
+
   Future getAllRequests() {
     return  Future.delayed(const Duration(seconds: 5), () {
       Request.getRequestsAttachedToDeliveryMan().then((value)
@@ -180,7 +187,6 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
       );
     });
   }
-
   // 1 on delivery, 2 delivered
   void arrangeRequestsWithState() {
 
@@ -189,11 +195,28 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
     for(int i=0;i<allCustomerRequest.length;i++)
     {
+      setState(() {
         if(allCustomerRequest[i].state==1)
-        processingList.add(allCustomerRequest[i]);
-       else if(allCustomerRequest[i].state==2)
-        deliveredList.add(allCustomerRequest[i]);
+          processingList.add(allCustomerRequest[i]);
+        else if(allCustomerRequest[i].state==2)
+          deliveredList.add(allCustomerRequest[i]);
+      });
+
     }
+  }
+
+  Future getNotifications(){
+    return new  Future.delayed( const Duration(seconds:10), ()
+    {
+      NotificationDetails.getMyNotification().then((value) {
+        if(value!=null){
+          Global.userNotifications.clear();
+          setState(() {
+            Global.userNotifications=value ;
+          });
+        }
+      });
+    });
   }
 
 }

@@ -30,7 +30,7 @@ class _State extends State<UserRequest>{
   User shop;
   final detailsTextController = TextEditingController();
   String image1="",image2="";
-  String _title="تفاصيل الطلب";
+  String _title="الطلب";
   @override
   Widget build(BuildContext context) {
           return Scaffold(
@@ -44,9 +44,9 @@ class _State extends State<UserRequest>{
                   Center(
                     child: Text("تفاصيل الطلب",
                       style: TextStyle(
-                        color: Color(int.parse(Global.primaryColor)),
+
                         fontFamily: Global.fontFamily,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                         fontSize: 18),),
                   ),
                   Container(

@@ -201,14 +201,17 @@ class _State extends State<CustomerRequestLayout>
     rejectedList.clear();
     for(int i=0;i<allCustomerRequest.length;i++)
     {
-      if(allCustomerRequest[i].state==0)
-        waitingList.add(allCustomerRequest[i]);
-      else if(allCustomerRequest[i].state==1)
-        processingList.add(allCustomerRequest[i]);
-      else if(allCustomerRequest[i].state==2)
-        deliveredList.add(allCustomerRequest[i]);
-      else
-        rejectedList.add(allCustomerRequest[i]);
+      setState(() {
+
+        if(allCustomerRequest[i].state==0)
+          waitingList.add(allCustomerRequest[i]);
+        else if(allCustomerRequest[i].state==1)
+          processingList.add(allCustomerRequest[i]);
+        else if(allCustomerRequest[i].state==2)
+          deliveredList.add(allCustomerRequest[i]);
+        else
+          rejectedList.add(allCustomerRequest[i]);
+      });
     }
   }
 

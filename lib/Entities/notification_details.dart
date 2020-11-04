@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-
 import 'global.dart';
 import 'package:http/http.dart' as http;
+
 class NotificationDetails {
   int id;
   int user_id;
@@ -65,7 +64,6 @@ class NotificationDetails {
         "record_time": this.record_Time
       };}
   }
-
 
   static Future <void> editNotification (NotificationDetails notifications) async {
     String url = Global.url+"notifications/Updatenotifications";
