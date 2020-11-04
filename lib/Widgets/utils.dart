@@ -94,8 +94,8 @@ class Utils {
         automaticallyImplyLeading: false,
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
-
-          IconButton(icon:Stack(
+      if(title != "Notifications" )
+           IconButton(icon:Stack(
               children: [
                 Icon(Icons.notifications),
                 Global.userNotifications.length  != 0 ?
@@ -128,9 +128,7 @@ class Utils {
               return Constants.singleChoice.map((String choice){
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice,style: TextStyle(
-                      color:Color(int.parse(Global.primaryColor))
-                  ),),
+                  child: Text(choice),
                 );
               }).toList();
             },

@@ -1,28 +1,24 @@
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
-import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
-import 'package:Talabatk/Widgets/popmenu.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
-import 'package:Talabatk/Screens/signup.dart';
 
 
-class ShopRequestInfromation extends StatefulWidget {
+
+class ShopRequestInformation extends StatefulWidget {
   Request request;
-  ShopRequestInfromation({Key key, @required this.request}) : super(key: key);
+  ShopRequestInformation({Key key, @required this.request}) : super(key: key);
   @override
-  _ShopRequestInfromationState createState() => _ShopRequestInfromationState(request);
+  _ShopRequestInformationState createState() => _ShopRequestInformationState(request);
 }
 
-class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
+class _ShopRequestInformationState extends State<ShopRequestInformation> {
   Request request;
   List<User> delivery_men;
-  _ShopRequestInfromationState(this.request);
+  _ShopRequestInformationState(this.request);
   String _title="الطلبات";
   @override
   Widget build(BuildContext context) {
@@ -41,13 +37,12 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                      fontFamily: Global.fontFamily,
                      fontWeight: FontWeight.w600,
                      fontSize: 25,
-                     color: Color(int.parse(Global.primaryColor))
-                 )),
 
+                 )),
                ],
              ),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -56,24 +51,24 @@ class _ShopRequestInfromationState extends State<ShopRequestInfromation> {
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
                       fontSize: 22,
-                      color: Color(int.parse(Global.primaryColor))
+
                   )),
                   SizedBox(width: 20,),
                   Text("الوقت", style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
                       fontSize: 22,
-                      color: Color(int.parse(Global.primaryColor))
+
                   )),
 
                 ],
               ),
-             SizedBox(height: 20,),
+             SizedBox(height: 100,),
              Text(request.details, style: TextStyle(
                  fontFamily: Global.fontFamily,
-                 fontWeight: FontWeight.w600,
+
                  fontSize: 20,
-                 color: Color(int.parse(Global.primaryColor))
+
              )),
              SizedBox(height: 20,),
              /*** IMAGES WIDGET WILL BE ADDED HERE FUTURE WORK ***/

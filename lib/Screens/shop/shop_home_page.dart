@@ -182,7 +182,6 @@ class _State extends State<ShopHomePage>{
   }
 
 
-
   Future getNotifications(){
     return new  Future.delayed( const Duration(seconds:10) , ()
     {
@@ -191,14 +190,10 @@ class _State extends State<ShopHomePage>{
           Global.userNotifications.clear();
           setState(() {
             Global.userNotifications=value ;
-            //  String jsonString = jsonEncode(Global.userNotifications.map((i) => i.toJson()).toList()).toString();
-            //  print(jsonString);
-            //  Global.prefs.setString("userNotification", jsonString);
           });
         }
       });
     });
+
   }
-
-
 }
