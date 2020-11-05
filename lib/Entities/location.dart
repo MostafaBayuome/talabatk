@@ -51,7 +51,7 @@ class Location {
 
 
   static Future <Location>GetLocationsById(int id) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     String url =Global.url+"Location/GetLocationsById"+"?Id="+id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);

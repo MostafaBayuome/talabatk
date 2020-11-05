@@ -1,26 +1,34 @@
 import 'dart:async';
 
+import 'package:Talabatk/Entities/location.dart';
+import 'package:Talabatk/Entities/request.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GmapDelivery extends StatefulWidget {
   LatLng deliveryPosition;
-  GmapDelivery({Key key, @required this.deliveryPosition}): super(key: key);
+  Request request;
+  LatLng customerPosition;
+  GmapDelivery({Key key, @required this.deliveryPosition , @required this.request, @required this.customerPosition}): super(key: key);
   @override
-  _GmapDeliveryState createState() => _GmapDeliveryState(deliveryPosition);
+  _GmapDeliveryState createState() => _GmapDeliveryState(deliveryPosition,request,customerPosition);
 }
 
 class _GmapDeliveryState extends State<GmapDelivery> {
-  // Delivery position
+
+  LatLng customerPosition;
+  Request request;
+
   List<Marker> allMarkers =[];
   LatLng _deliveryPosition;
-  _GmapDeliveryState(this._deliveryPosition);
+  _GmapDeliveryState(this._deliveryPosition,this.request,this.customerPosition);
   Completer<GoogleMapController> _controller = Completer();
   Marker marker;
 
   @override
   void initState() {
     super.initState();
+
     allMarkers.add(Marker(
         markerId:MarkerId("deliveryid"),
         infoWindow: InfoWindow(title:"مكان الطيار"),
@@ -30,15 +38,26 @@ class _GmapDeliveryState extends State<GmapDelivery> {
           BitmapDescriptor.hueBlue,
         )
     ));
+    allMarkers.add(Marker(
+        markerId:MarkerId("customerid"),
+        infoWindow: InfoWindow(title:"مكان التوصيل"),
+        draggable: false,
+        position: customerPosition,
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueViolet,
+        )
+    ));
+
+
+
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: [
           _googleMap(context),
-
-
         ],
       ),
     );
@@ -58,12 +77,18 @@ class _GmapDeliveryState extends State<GmapDelivery> {
             zoom: 15),
         onMapCreated: (GoogleMapController controller){
           _controller.complete(controller);
+
         },
         markers: Set.from(allMarkers),
       ),
 
     );
   }
+
+
+
+
+
 
 
 

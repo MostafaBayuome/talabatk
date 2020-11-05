@@ -1,7 +1,8 @@
 import 'package:Talabatk/Entities/delivery_location.dart';
+import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Screens/shop/shop_request_information.dart';
 import 'package:Talabatk/Widgets/utils.dart';
-import 'package:Talabatk/gmap_delivery.dart';
+import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/gmap_delivery.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Entities/global.dart';
@@ -89,10 +90,12 @@ class _State extends State<ShopRequestLayout> {
           ),
           child:  InkWell(
             onTap: (){
-            
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>ShopRequestInformation(request: listItem[index])
-              ));
+              if(listItem[index].state == 0){
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>ShopRequestInformation(request: listItem[index])
+                ));
+              }
+
             },
             child: Container(
               width :MediaQuery.of(context).size.width,
@@ -112,7 +115,6 @@ class _State extends State<ShopRequestLayout> {
                   ),
                   SizedBox(width: 8.0),
                   Column(
-
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
@@ -191,11 +193,16 @@ class _State extends State<ShopRequestLayout> {
 
                             DeliveryLocation.GetByIdLastLocation(listItem[index].delivery_id).then((value) {
 
-                              LatLng latlng = new LatLng(value.latitude,  value.longitude);
+                              LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
 
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>GmapDelivery( deliveryPosition: latlng)
-                              ));
+                              Location.GetLocationsById(listItem[index].location_id).then((value) {
+
+                                LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)
+                                ));
+                              });
+
 
                             });
                           }, // button pressed
