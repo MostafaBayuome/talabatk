@@ -3,8 +3,6 @@ import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Screens/customer/customer_request_page.dart';
@@ -22,7 +20,7 @@ class Gmap extends StatefulWidget {
 class _GMapState extends State<Gmap> {
   List<User> nearestShops=[];
   List<Marker> allMarkers =[];
-
+  BitmapDescriptor pinLocationIcon;
   List<User> pharmacy=[];
   List<User> shops=[];
   //0 all SHOP 1 All pharmacy 2 All supermarket
@@ -69,6 +67,15 @@ class _GMapState extends State<Gmap> {
             zoom: 15),
         onMapCreated: (GoogleMapController controller){
            _controller.complete(controller);
+           setState(() {
+             allMarkers.add(Marker(
+                 markerId:MarkerId("myMarker"),
+                 infoWindow: InfoWindow(title:"مكان التوصيل"),
+                 draggable: false,
+                 position: _currentPosition,
+                 icon: pinLocationIcon
+             ));
+           });
         },
         markers: Set.from(allMarkers),
       ),
@@ -81,20 +88,18 @@ class _GMapState extends State<Gmap> {
   void initState() {
     super.initState();
     getAllNearestShops();
-    allMarkers.add(Marker(
-        markerId:MarkerId("myMarker"),
-        infoWindow: InfoWindow(title:"مكان التوصيل"),
-        draggable: false,
-        position: _currentPosition,
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueBlue,
-        )
-    ));
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'images/destinationmarker.png').then((onValue) {
+      pinLocationIcon = onValue;
+    });
+
+
 
   }
 
   Future<void> getAllNearestShops() async  {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     User.getNearestShops("Talabatk/GetNearestShops",Global.loginUser.mobileNumber).then((value){
       nearestShops=value;
 

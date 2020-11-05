@@ -116,8 +116,8 @@ class Request {
          "image_url2": request.image_url2,
          "state": state,
          "delivery_id":request.delivery_id,
-         "request_Date":request.request_date,
-         "request_Time":request.request_time
+         "request_date":request.request_date,
+         "request_time":request.request_time
        } ) );
   response.toString();
   }

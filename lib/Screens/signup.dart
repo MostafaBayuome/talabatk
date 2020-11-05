@@ -50,7 +50,6 @@ class _State extends State<SignUp> with Validation  {
 
 
     return Scaffold(
-
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -107,12 +106,7 @@ class _State extends State<SignUp> with Validation  {
             )));
   }
 
-
-
-
-
   Widget nameField(){
-
     return TextFormField(
       textAlign: TextAlign.right,
       keyboardType: TextInputType.text,
@@ -141,7 +135,6 @@ class _State extends State<SignUp> with Validation  {
       },
     );
   }
-
 
   Widget passwordField() {
     return  TextFormField(
@@ -180,6 +173,7 @@ class _State extends State<SignUp> with Validation  {
       },
     );
   }
+
   Widget submitButton()  {
     if(Global.visible_progress){
       return CircularProgressIndicator();

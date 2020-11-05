@@ -1,5 +1,4 @@
 import 'package:Talabatk/Entities/constants.dart';
-import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
 
@@ -82,7 +82,7 @@ class Utils {
 
   // appbar for all users shop, customer, delivery
   static Widget  appBarusers(BuildContext context,String title ){
-    int counter =0;
+
     return PreferredSize(
       preferredSize: Size.fromHeight(40.0),
       child: AppBar(
@@ -116,6 +116,7 @@ class Utils {
                   ],
               ),
               onPressed: () {
+
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>Notification_Page()
                 ));
@@ -138,5 +139,17 @@ class Utils {
       ),
     );
   }
+
+  // send Lat,long and it will open google maps
+  static Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
+
+
 
 }

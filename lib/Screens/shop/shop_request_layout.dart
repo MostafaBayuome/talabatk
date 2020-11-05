@@ -1,9 +1,12 @@
+import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Screens/shop/shop_request_information.dart';
 import 'package:Talabatk/Widgets/utils.dart';
+import 'package:Talabatk/gmap_delivery.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class ShopRequestLayout extends StatefulWidget {
@@ -151,8 +154,8 @@ class _State extends State<ShopRequestLayout> {
                   ),
                   if(listItem[index].state == 0 || listItem[index].state == 1)
                     Container(
-                        width: 70.0,
-                        height: 70.0,
+                        width: 30.0,
+                        height: 30.0,
                         alignment: Alignment.center,
 
                         padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
@@ -171,7 +174,39 @@ class _State extends State<ShopRequestLayout> {
                               Icon(Icons.chat,color: Colors.blue), // icon
                             ],
                           ),
-                        )),
+                        )
+                    ),
+                  if(listItem[index].state == 1)
+                    Container(
+                        width: 30.0,
+                        height: 30.0,
+                        alignment: Alignment.center,
+
+                        padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+
+                        child: InkWell(
+
+                          onTap: () {
+                          //get last location of delivery plus location of customer to deliver
+
+                            DeliveryLocation.GetByIdLastLocation(listItem[index].delivery_id).then((value) {
+
+                              LatLng latlng = new LatLng(value.latitude,  value.longitude);
+
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>GmapDelivery( deliveryPosition: latlng)
+                              ));
+
+                            });
+                          }, // button pressed
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.location_on,color:  Color(int.parse(Global.secondaryColor))), // icon
+                            ],
+                          ),
+                        )
+                    ),
                 ],
               ),),
           ),

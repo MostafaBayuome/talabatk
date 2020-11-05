@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'global.dart';
 import 'package:http/http.dart' as http;
@@ -9,28 +10,26 @@ class DeliveryLocation {
    int user_id;
    double latitude;
    double longitude;
-   String record_date;
-   String record_time;
-   DeliveryLocation(this.id, this.user_id, this.latitude, this.longitude, this.record_date, this.record_time);
+   String record_Date;
+   String record_Time;
+
+   DeliveryLocation(this.id, this.user_id, this.latitude, this.longitude, this.record_Date, this.record_Time);
    DeliveryLocation.empty();
   // Add location to Location table
-  static Future<Map<String, dynamic>> addCurrentLocation (int user_id) async {
+  static Future<String> addCurrentLocation (int user_id,Position position) async {
     try{
-     var position =  await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      String url= Global.url+"deleviry_location/add_DeleviryLocation";
+
+      String url= Global.url+"delevvity_Locations/Addelevvity_Locations";
       final response= await  http.post(url,
           headers: {"Content-Type": "application/json"},
           body:json.encode( {
             "user_id": user_id,
             "latitude": position.latitude,
             "longitude": position.longitude,
-            "record_date": "",
-            "record_time": "",
 
           } )
       );
-      Map<String, dynamic> convert =  json.decode(response.body);
-      return  convert;
+      return  "Done";
     }catch(Excepetion)
     {
       print(Excepetion);
@@ -39,22 +38,13 @@ class DeliveryLocation {
 
 
   // get all user locations from Location table
-  static Future <DeliveryLocation> getLastLocation(int User_id) async {
-     String url =Global.url+"deleviry_location/getLastLocationByUserId?Id="+User_id.toString();
+  static Future <DeliveryLocation> GetByIdLastLocation(int User_id) async {
+     String url =Global.url+"delevvity_Locations/GetByIdLastLocation?Id="+User_id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
-    var jsonData = json.decode(response.body);
-     DeliveryLocation location ;
-     location=fromJson(jsonData);
-    return location;
-  }
-  static  fromJson(Map model) {
-    DeliveryLocation location=new DeliveryLocation.empty();
-    location.id=model['id'];
-    location.user_id=model['user_id'];
-    location.latitude=model['merchant_id'];
-    location.longitude=model['location_id'];
-    location.record_date=model['request_date'];
-    location.record_time=model['request_time'];
+    var data = json.decode(response.body);
+
+     DeliveryLocation location = new DeliveryLocation(data['id'], data['user_id'],  data['latitude'], data['longitude'],  data['record_Date'], data['record_Time']);
+
     return location;
   }
 
