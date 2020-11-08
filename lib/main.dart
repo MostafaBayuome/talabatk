@@ -1,16 +1,17 @@
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Entities/notification_details.dart';
 import 'Entities/global.dart';
 import 'Entities/user.dart';
 import 'Screens/app_info.dart';
 import 'Screens/customer/customer_home_page.dart';
 import 'Screens/shop/shop_home_page.dart';
 import 'Screens/signup.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 Future<void> main()  async {
    WidgetsFlutterBinding.ensureInitialized();
+   sendNotification();
     Global.prefs =await SharedPreferences.getInstance();
 
 
@@ -40,4 +41,41 @@ Future<void> main()  async {
 
 
 
+}
+
+
+void sendNotification() async {
+  try{
+    await _demoNotification();
+  }catch(e){
+    String ee=e.toString();
+    print(ee);
+  }
+
+}
+
+Future<void> _demoNotification() async {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  new FlutterLocalNotificationsPlugin();
+  var initializationSettingsAndroid;
+  var initializationSettingsIOS;
+  var initializationSettings;
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      '1', 'Channel Name', 'desc',
+      importance: Importance.Max,
+      priority: Priority.High,
+      ticker: 'test ticker',);
+
+  var iOSChannelSpecifics = IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics, iOS: iOSChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(1, 'Hello, buddy',
+      'A message from flutter buddy', platformChannelSpecifics,
+      payload: 'test oayload');
+}
+Future onDidReceiveLocalNotification(
+    int id, String title, String body, String payload) async {
+
+      String ss=body;
 }
