@@ -153,6 +153,9 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    ),
                                     title: Text('اختار الطيار',
                                       style : TextStyle(
                                           color: Color(int.parse(Global.primaryColor)),
@@ -191,6 +194,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
 
   Widget setupAlertDialogContainer() {
     return Container(
+
       height: 200.0,
       width: 200.0,
       child: ListView.builder(

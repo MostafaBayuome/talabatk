@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'global.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

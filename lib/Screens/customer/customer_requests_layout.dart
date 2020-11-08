@@ -1,9 +1,13 @@
 import 'dart:ui';
+import 'package:Talabatk/Entities/delivery_location.dart';
+import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
+import 'package:Talabatk/Screens/gmap_delivery.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class CustomerRequestLayout extends StatefulWidget{
@@ -172,6 +176,38 @@ class _State extends State<CustomerRequestLayout>
                         ],
                       ),
                     )),
+              if(listItem[index].state == 1)
+                Container(
+                    width: 30.0,
+                    height: 30.0,
+                    alignment: Alignment.center,
+
+                    padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+
+                    child: InkWell(
+
+                      onTap: () {
+                        //get last location of delivery plus location of customer to deliver
+
+                        DeliveryLocation.getByIdLastLocation(listItem[index].delivery_id).then((value) {
+                          LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
+                          Location.GetLocationsById(listItem[index].location_id).then((value) {
+                            LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)
+                            ));
+                          });
+
+                        });
+                      }, // button pressed
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.location_on,color:  Color(int.parse(Global.secondaryColor))), // icon
+                        ],
+                      ),
+                    )
+                ),
             ],
 
             ),),
