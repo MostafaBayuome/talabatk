@@ -105,7 +105,7 @@ class _GmapDeliveryState extends State<GmapDelivery> {
 
   Future getLastLocationOfDelivery(){
     try{
-      Global.location_timer = Timer.periodic(Duration(seconds: 30), (Timer t) async {
+      Global.delivery_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
         DeliveryLocation.getByIdLastLocation(Global.loginUser.id).then((value) {
           if(value!=null){
 

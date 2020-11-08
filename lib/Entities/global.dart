@@ -17,7 +17,7 @@ static SharedPreferences prefs;
   static Timer notification_timer;
   static Timer chat_timer;
   static Timer location_timer;
-
+    static Timer delivery_timer;
   static List<NotificationDetails>userNotifications=new List<NotificationDetails>();
 
 
