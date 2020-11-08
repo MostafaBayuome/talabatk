@@ -115,19 +115,22 @@ class _State extends State<CustomerHomePage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          backgroundColor: Colors.white,
+
                           title: Column(
                             children: [
                               Utils.title(50.0,50.0),
                               SizedBox(height : 10.0),
                               Text(' مكان التوصيل',
                               style : TextStyle(
-                                  color: Color(int.parse(Global.primaryColor)),
+                                  color: Colors.black,
                                   fontFamily: Global.fontFamily,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20),
+                                  fontSize: 22),
                               textAlign: TextAlign.center,
-                            ) ],
+                            ),
+                              Divider(
+                                  color: Colors.black
+                              )],
                           ),
                           content: setupAlertDialogContainer(),
                         );
@@ -245,9 +248,10 @@ class _State extends State<CustomerHomePage> {
               ));
             },
             title:Text(Locations[index].title.toString(),textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15,
+              style: TextStyle(fontSize: 18,
                 fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w400,), ),
+                fontWeight: FontWeight.w400,
+                 color: Colors.black), ),
           );
         },
       ),
