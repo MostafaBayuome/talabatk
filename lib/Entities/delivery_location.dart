@@ -38,7 +38,7 @@ class DeliveryLocation {
 
 
   // get all user locations from Location table
-  static Future <DeliveryLocation> GetByIdLastLocation(int User_id) async {
+  static Future <DeliveryLocation> getByIdLastLocation(int User_id) async {
 
      String url =Global.url+"delevvity_Locations/GetByIdLastLocation?Id="+User_id.toString();
     final response = await http.get(url,headers:{"Content-Type": "application/json"});

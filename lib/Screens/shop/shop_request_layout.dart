@@ -191,12 +191,9 @@ class _State extends State<ShopRequestLayout> {
                           onTap: () {
                           //get last location of delivery plus location of customer to deliver
 
-                            DeliveryLocation.GetByIdLastLocation(listItem[index].delivery_id).then((value) {
-
+                            DeliveryLocation.getByIdLastLocation(listItem[index].delivery_id).then((value) {
                               LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
-
                               Location.GetLocationsById(listItem[index].location_id).then((value) {
-
                                 LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)

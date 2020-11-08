@@ -188,7 +188,7 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.gps_fixed,color: Colors.blue), // icon
+                          Icon(Icons.gps_fixed,color:  Color(int.parse(Global.secondaryColor))), // icon
                         ],
                       ),
                     )),
