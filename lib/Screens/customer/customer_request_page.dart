@@ -9,7 +9,7 @@ import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../chat_page.dart';
+
 
 
 class UserRequest extends StatefulWidget

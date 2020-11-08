@@ -5,8 +5,8 @@ import 'package:Talabatk/Screens/shop/add_delivery.dart';
 import 'package:Talabatk/Screens/shop/shop_request_layout.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
-
 import 'display_all_delivery_men.dart';
+
 
 class ShopHomePage extends StatefulWidget {
 
@@ -17,11 +17,21 @@ class ShopHomePage extends StatefulWidget {
 
 class _State extends State<ShopHomePage>{
   String _title="Shop Home Page";
+  @override
+  void initState() {
+    super.initState();
+    getNotifications();
+  }
+
+  @override
+  void dispose() {
+    Global.notification_timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    getNotifications();
     return  Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: Center(
@@ -181,10 +191,9 @@ class _State extends State<ShopHomePage>{
 
   }
 
+   Future getNotifications(){
 
-  Future getNotifications(){
-    return new  Future.delayed( const Duration(seconds:10) , ()
-    {
+    Global.notification_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
       NotificationDetails.getMyNotification().then((value) {
         if(value!=null){
           Global.userNotifications.clear();

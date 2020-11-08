@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import '../chat_page.dart';
 
 
@@ -18,11 +21,27 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
   List<Request> allCustomerRequest=[];
   List<Request> processingList=[];
   List<Request> deliveredList=[];
-
+  Position position=null;
+  Timer request_timer;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    getCurrentLocation();
     getNotifications();
     getAllRequests();
+  }
+  @override
+  void dispose() {
+    Global.notification_timer?.cancel();
+    Global.location_timer?.cancel();
+    request_timer?.cancel();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+
+
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -159,12 +178,17 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
                       onTap: () {
                         //Send delivery_man to googlemaps
+                        Location.GetLocationsById(listItem[index].location_id).then((value) async {
+                          double lat = value.latitude;
+                          double long = value.longitude;
+                          Utils.openMap(lat,long);
+                        });
 
                       }, // button pressed
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.gps_fixed,color: Colors.blue), // icon
+                          Icon(Icons.gps_fixed,color:  Color(int.parse(Global.secondaryColor))), // icon
                         ],
                       ),
                     )),
@@ -176,7 +200,8 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
   }
 
   Future getAllRequests() {
-    return  Future.delayed(const Duration(seconds: 5), () {
+
+    request_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
       Request.getRequestsAttachedToDeliveryMan().then((value)
       {
         setState(() {
@@ -186,6 +211,8 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
       }
       );
     });
+
+
   }
   // 1 on delivery, 2 delivered
   void arrangeRequestsWithState() {
@@ -206,8 +233,8 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
   }
 
   Future getNotifications(){
-    return new  Future.delayed( const Duration(seconds:10), ()
-    {
+
+    Global.notification_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
       NotificationDetails.getMyNotification().then((value) {
         if(value!=null){
           Global.userNotifications.clear();
@@ -217,6 +244,22 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
         }
       });
     });
+
   }
+
+  Future getCurrentLocation(){
+
+
+     Global.location_timer = Timer.periodic(Duration(seconds: 60), (Timer t) async {
+      try{
+        position =  await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        DeliveryLocation.addCurrentLocation(Global.loginUser.id,position);
+      }on Exception{
+        print(Exception);
+      }
+    });
+
+  }
+
 
 }

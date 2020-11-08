@@ -1,5 +1,7 @@
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
+import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
+import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:Talabatk/Screens/shop/shop_request_layout.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -44,15 +46,26 @@ class _State extends State<Notification_Page> {
                               if(notifications[index].type=="request")
                                 {
                                   NotificationDetails.editNotification(notifications[index]).then((value) {
-                                    notifications.removeAt(index);
-                                    setState(() {
-                                      Global.userNotifications=notifications;
-                                    });
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) =>ShopRequestLayout()
-                                    ));
-                                  });
+                                notifications.removeAt(index);
+                                setState(() {
+                                Global.userNotifications=notifications;
+                                });
+                                Navigator.of(context).pop();
+                                if(Global.loginUser.mapAppear == 1 || Global.loginUser.mapAppear == 2){
+                                Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>ShopRequestLayout()
+                                ));
+                                }
+                                else if(Global.loginUser.mapAppear == 0) {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>CustomerRequestLayout()
+                                  ));
+                                }
+                                else {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>DeliveryHomePage()
+                                ));
+                                }});
 
                                 }
                           },

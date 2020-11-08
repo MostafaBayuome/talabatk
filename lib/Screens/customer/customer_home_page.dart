@@ -20,10 +20,26 @@ class CustomerHomePage extends StatefulWidget {
 class _State extends State<CustomerHomePage> {
   bool opened=true;
   List<Location> Locations =[];
+
+
+  @override
+  void initState() {
+
+    super.initState();
+    getNotifications();
+
+  }
+
+  @override
+  void dispose() {
+    Global.notification_timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
 
-   getNotifications();
+
    String _title="الصفحه الرئيسيه";
     return Scaffold (
         appBar: Utils.appBarusers(context,_title),
@@ -229,18 +245,21 @@ class _State extends State<CustomerHomePage> {
   }
 
 
+
+
   Future getNotifications(){
-     return new  Future.delayed( const Duration(seconds:10), ()
-       {
-         NotificationDetails.getMyNotification().then((value) {
-          if(value!=null){
-            Global.userNotifications.clear();
-            setState(() {
-              Global.userNotifications=value ;
-            });
-          }
-        });
+
+    Global.notification_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
+      NotificationDetails.getMyNotification().then((value) {
+        if(value!=null){
+          Global.userNotifications.clear();
+          setState(() {
+            Global.userNotifications=value ;
+          });
+        }
       });
-    }
+    });
+
+  }
 
   }

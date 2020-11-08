@@ -20,7 +20,7 @@ class Request {
   int delivery_id;
 
   Request.empty();
-  Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state,this.user_name);
+  Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state,this.user_name,this.delivery_id);
 
   static Future<void> addRequest(String apiName,int user_id,int merchant_id,int location_id,
       String request_data,String request_time,String details, String image_url, String image_url2) async {
@@ -76,12 +76,11 @@ class Request {
       String date =i['request_Date'].toString().substring(0,10);
       String time = i['request_Time'].toString().substring(0,5);
       // merchant_id equals Global.loginUser.id
-      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name']);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['request_delivery_id']);
       customerRequest.add(request); }
-    
       return customerRequest;
 
-  }
+     }
 
   //get all Customers request with all its states
   static Future <List<Request>> getCustumerRequests  () async {
@@ -95,7 +94,7 @@ class Request {
      String date =i['request_Date'].toString().substring(0,10);
      String time = i['request_Time'].toString().substring(0,5);
       // merchant_id equals Global.loginUser.id
-      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name']);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['delivery_id']);
       customerRequest.add(request);
     }
     return customerRequest;
@@ -116,8 +115,8 @@ class Request {
          "image_url2": request.image_url2,
          "state": state,
          "delivery_id":request.delivery_id,
-         "request_Date":request.request_date,
-         "request_Time":request.request_time
+         "request_date":request.request_date,
+         "request_time":request.request_time
        } ) );
   response.toString();
   }
@@ -133,7 +132,7 @@ class Request {
     {
       String date =i['request_Date'].toString().substring(0,10);
       String time = i['request_Time'].toString().substring(0,5);
-      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name']);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['delivery_id']);
       customerRequest.add(request);
     }
      return customerRequest;
