@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Rate.dart';
 class  Global {
 
 static SharedPreferences prefs;
@@ -20,6 +22,8 @@ static SharedPreferences prefs;
     static Timer delivery_timer;
   static List<NotificationDetails>userNotifications=new List<NotificationDetails>();
 
+  static String selectedRate="اختر تقييم";
+static List<Rate> rateList=[];
 
 }
 

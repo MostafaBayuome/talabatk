@@ -34,8 +34,7 @@ Future<void> main()  async {
      }
     runApp(
       MaterialApp(
-        debugShowCheckedModeBanner: false,
-          home:FirstEnter==null? app_info(): phone ==null ? SignUp() : (map_Appear == 1 || map_Appear == 2) ? ShopHomePage() : (map_Appear!=9) ? CustomerHomePage() : DeliveryHomePage(),
+        debugShowCheckedModeBanner: false, home:FirstEnter==null? app_info(): phone ==null ? SignUp() : (map_Appear == 1 || map_Appear == 2) ? ShopHomePage() : (map_Appear!=9) ? CustomerHomePage() : DeliveryHomePage(),
       )
    );
 
@@ -67,12 +66,12 @@ Future<void> _demoNotification() async {
       ticker: 'test ticker',);
 
   var iOSChannelSpecifics = IOSNotificationDetails();
-  var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics, iOS: iOSChannelSpecifics);
+  //var platformChannelSpecifics = NotificationDetails(
+   //   android: androidPlatformChannelSpecifics, iOS: iOSChannelSpecifics);
 
-  await flutterLocalNotificationsPlugin.show(1, 'Hello, buddy',
-      'A message from flutter buddy', platformChannelSpecifics,
-      payload: 'test oayload');
+ // await flutterLocalNotificationsPlugin.show(1, 'Hello, buddy',
+    //  'A message from flutter buddy', platformChannelSpecifics,
+  //    payload: 'test oayload');
 }
 Future onDidReceiveLocalNotification(
     int id, String title, String body, String payload) async {

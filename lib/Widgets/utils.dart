@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/Rate.dart';
 import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
 import 'package:Talabatk/Screens/signup.dart';
@@ -149,7 +150,6 @@ class Utils {
       throw 'Could not open the map.';
     }
   }
-
 
 
 }

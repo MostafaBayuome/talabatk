@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:Talabatk/Entities/Rate.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
+import 'package:Talabatk/Widgets/Alert_Dailog.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
@@ -22,11 +24,18 @@ class _State extends State<CustomerRequestLayout>
   List<Request> rejectedList=[];
   BuildContext currContext=null;
   String _title="طلباتي";
+  String selectedRate="اختر تقييم";
 
+  int count=0;
   @override
   Widget build(BuildContext context) {
+
+
     currContext=context;
     getAllRequests();
+   if(Global.rateList.length==0) Rate.getRates().then((value) => {
+      Global.rateList=value
+    });
     return DefaultTabController(
       length: 4,
       child: new Scaffold(
@@ -168,6 +177,40 @@ class _State extends State<CustomerRequestLayout>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(Icons.chat,color: Colors.blue), // icon
+
+                        ],
+                      ),
+                    ))
+              else if (listItem[index].state == 2)
+                Container(
+                    width: 70.0,
+                    height: 70.0,
+                    alignment: Alignment.center,
+
+                    padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+
+                    child: InkWell(
+
+                      onTap: () {
+                        //Send User to chat page
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return MyDailog();
+                              },
+                            );
+                          },
+                        );
+
+
+                      }, // button pressed
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon (Icons.star,color: Colors.yellow), // icon
 
                         ],
                       ),

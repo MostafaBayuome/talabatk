@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/Rate.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +28,7 @@ class _State extends State<CustomerHomePage> {
 
     super.initState();
     getNotifications();
+    Rate.getRates();
 
   }
 

@@ -2,7 +2,7 @@ import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Screens/shop/shop_request_information.dart';
 import 'package:Talabatk/Widgets/utils.dart';
-import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talbatk/Talabatk-GitHub/lib/Screens/gmap_delivery.dart';
+import '../gmap_delivery.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Entities/global.dart';
