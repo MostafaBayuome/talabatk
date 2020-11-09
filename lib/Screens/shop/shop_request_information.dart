@@ -153,12 +153,16 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    ),
+
                                     title: Text('اختار الطيار',
                                       style : TextStyle(
                                           color: Color(int.parse(Global.primaryColor)),
                                           fontFamily: Global.fontFamily,
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 20),
+                                          fontSize: 22),
                                       textAlign: TextAlign.center,
                                     ),
                                     content: setupAlertDialogContainer(),
@@ -191,6 +195,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
 
   Widget setupAlertDialogContainer() {
     return Container(
+
       height: 200.0,
       width: 200.0,
       child: ListView.builder(
@@ -207,11 +212,11 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
               });
             },
             title:Text(delivery_men[index].userName.toString(),textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15,
+              style: TextStyle(fontSize: 18,
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w400,), ),
             subtitle: Text(delivery_men[index].mobileNumber.toString(),textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15,
+              style: TextStyle(fontSize: 18,
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w400,), ),
           );

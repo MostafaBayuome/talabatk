@@ -94,7 +94,7 @@ class Request {
      String date =i['request_Date'].toString().substring(0,10);
      String time = i['request_Time'].toString().substring(0,5);
       // merchant_id equals Global.loginUser.id
-      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['delivery_id']);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['request_delivery_id']);
       customerRequest.add(request);
     }
     return customerRequest;

@@ -80,4 +80,5 @@ class NotificationDetails {
         } ) );
     response.toString();
   }
+
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GmapDelivery extends StatefulWidget {
+
   LatLng deliveryPosition;
   Request request;
   LatLng customerPosition;
@@ -106,7 +107,7 @@ class _GmapDeliveryState extends State<GmapDelivery> {
   Future getLastLocationOfDelivery(){
     try{
       Global.delivery_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
-        DeliveryLocation.getByIdLastLocation(Global.loginUser.id).then((value) {
+        DeliveryLocation.getByIdLastLocation(request.delivery_id).then((value) {
           if(value!=null){
 
             setState(() {
@@ -115,7 +116,7 @@ class _GmapDeliveryState extends State<GmapDelivery> {
               {
                 allMarkers[1] = Marker(
                     markerId:MarkerId("deliveryid"),
-                    infoWindow: InfoWindow(title:value.id.toString()),
+                    infoWindow: InfoWindow(title:"مكان الطيار"),
                     draggable: false,
                     position: _deliveryPosition,
                     icon: deliveryIcon
@@ -123,13 +124,13 @@ class _GmapDeliveryState extends State<GmapDelivery> {
               }
             });
           }
+
         });
       });
     }catch(Exception)
     {
       print(Exception);
     }
-
 
   }
 

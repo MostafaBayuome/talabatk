@@ -41,7 +41,6 @@ class _State extends State<CustomerHomePage> {
   @override
   Widget build(BuildContext context) {
 
-
    String _title="الصفحه الرئيسيه";
     return Scaffold (
         appBar: Utils.appBarusers(context,_title),
@@ -114,17 +113,31 @@ class _State extends State<CustomerHomePage> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(' مكان التوصيل',
-                            style : TextStyle(
-                                color: Color(int.parse(Global.primaryColor)),
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20),
-                            textAlign: TextAlign.center,
+                        return  AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          ),
+
+                          title: Column(
+                            children: [
+                              Utils.title(50.0,50.0),
+                              SizedBox(height : 10.0),
+                              Text(' مكان التوصيل',
+                              style : TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: Global.fontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 22),
+                              textAlign: TextAlign.center,
+                            ),
+                              Divider(
+                                  color: Colors.black
+                              )],
                           ),
                           content: setupAlertDialogContainer(),
-                        );});
+                        );
+
+                      });
 
                 });
               },
@@ -222,7 +235,7 @@ class _State extends State<CustomerHomePage> {
 
   Widget setupAlertDialogContainer() {
     return Container(
-      height: 200.0,
+      height: 220.0,
       width: 200.0,
       child: ListView.builder(
         shrinkWrap: true,
@@ -237,16 +250,15 @@ class _State extends State<CustomerHomePage> {
               ));
             },
             title:Text(Locations[index].title.toString(),textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15,
+              style: TextStyle(fontSize: 18,
                 fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w400,), ),
+                fontWeight: FontWeight.w400,
+                 color: Colors.black), ),
           );
         },
       ),
     );
   }
-
-
 
 
   Future getNotifications(){
