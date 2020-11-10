@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'global.dart';
 
 
-// merchant_id = 0 if its (shop, pharmacy, customer)
+// merchant_id = 0  if its (shop, pharmacy, customer)
 Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id) async {
   try{
 
@@ -24,13 +24,13 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
     );
     var convertDatatoJson =  response.body;
     Map<String, dynamic> convert;
+    // if user signed up with phone already assigned to user will return user_exist if not will return new user with all its  information
     if(!convertDatatoJson.contains("user_exist")) {
         convert =json.decode(response.body);
        if (map_Appear > 0)
           Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, username, " ");
        else
-          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "المكان الرئيسي", " ");
-
+          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "المكان الاول", " ");
     }
     else{
       return null;

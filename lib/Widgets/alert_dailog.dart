@@ -1,4 +1,4 @@
-import 'package:Talabatk/Entities/Rate.dart';
+import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

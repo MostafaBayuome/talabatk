@@ -1,7 +1,7 @@
-import 'package:Talabatk/Entities/Rate.dart';
+import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
-import 'package:Talabatk/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -40,6 +40,7 @@ class Utils {
         ),
 
       ),);
+      //old title
       /*Container(
           decoration: BoxDecoration(
               border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
@@ -76,7 +77,7 @@ class Utils {
       prefs.remove('merchant_id');
 
       Navigator.of(context).pushAndRemoveUntil(  MaterialPageRoute(
-          builder: (context) =>SignUp()
+          builder: (context) =>Login()
       ),ModalRoute.withName("/Home"));
     }
   }
@@ -117,11 +118,11 @@ class Utils {
                   ],
               ),
               onPressed: () {
-
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>Notification_Page()
                 ));
                 }),
+
           PopupMenuButton<String>(
             onSelected: (value){
               Utils.choiceAction(value, context);

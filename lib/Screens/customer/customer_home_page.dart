@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:Talabatk/Entities/Rate.dart';
+import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -126,8 +126,8 @@ class _State extends State<CustomerHomePage> {
                               style : TextStyle(
                                   color: Colors.black,
                                   fontFamily: Global.fontFamily,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 22),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20),
                               textAlign: TextAlign.center,
                             ),
                               Divider(
@@ -235,7 +235,7 @@ class _State extends State<CustomerHomePage> {
 
   Widget setupAlertDialogContainer() {
     return Container(
-      height: 220.0,
+      height: 200.0,
       width: 200.0,
       child: ListView.builder(
         shrinkWrap: true,
@@ -250,7 +250,7 @@ class _State extends State<CustomerHomePage> {
               ));
             },
             title:Text(Locations[index].title.toString(),textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18,
+              style: TextStyle(fontSize: 15,
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w400,
                  color: Colors.black), ),

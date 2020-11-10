@@ -13,6 +13,7 @@ class GmapDelivery extends StatefulWidget {
   GmapDelivery({Key key, @required this.deliveryPosition , @required this.request, @required this.customerPosition}): super(key: key);
   @override
   _GmapDeliveryState createState() => _GmapDeliveryState(deliveryPosition,request,customerPosition);
+
 }
 
 class _GmapDeliveryState extends State<GmapDelivery> {
@@ -42,9 +43,9 @@ class _GmapDeliveryState extends State<GmapDelivery> {
         'images/deliveryicon.png').then((onValue) {
       deliveryIcon = onValue;
     });
-
     getLastLocationOfDelivery();
   }
+
   @override
   void dispose() {
     Global.location_timer?.cancel();
@@ -61,7 +62,6 @@ class _GmapDeliveryState extends State<GmapDelivery> {
       ),
     );
   }
-
 
   Widget _googleMap(BuildContext context)  {
     return Container(
@@ -102,8 +102,6 @@ class _GmapDeliveryState extends State<GmapDelivery> {
     );
   }
 
-
-
   Future getLastLocationOfDelivery(){
     try{
       Global.delivery_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
@@ -131,29 +129,5 @@ class _GmapDeliveryState extends State<GmapDelivery> {
     {
       print(Exception);
     }
-
   }
-
-  /*
-  updateMarker(id){
-
-    final marker = markers.values.toList().firstWhere((item) => item.markerId == id);
-
-    Marker _marker = Marker(
-      markerId: marker.markerId,
-      onTap: () {
-        print("tapped");
-      },
-      position: LatLng(marker.position.latitude, marker.position.longitude),
-      icon: marker.icon,
-      infoWindow: InfoWindow(title: 'my new Title'),
-    );
-
-    setState(() {
-      //the marker is identified by the markerId and not with the index of the list
-      markers[id] = _marker;
-    });
-  }
-  */
-
 }

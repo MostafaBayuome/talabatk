@@ -3,7 +3,7 @@ import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Rate.dart';
+import 'rate.dart';
 class  Global {
 
 static SharedPreferences prefs;

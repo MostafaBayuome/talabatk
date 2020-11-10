@@ -1,9 +1,7 @@
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/api_manger.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Entities/validation.dart';

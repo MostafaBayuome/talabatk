@@ -13,10 +13,9 @@ class DeliveryLocation {
 
    DeliveryLocation(this.id, this.user_id, this.latitude, this.longitude, this.record_Date, this.record_Time);
    DeliveryLocation.empty();
-  // Add location to Location table
-  static Future<String> addCurrentLocation (int user_id,Position position) async {
-    try{
-
+   // Add location to Location table
+   static Future<String> addCurrentLocation (int user_id,Position position) async {
+   try{
       String url= Global.url+"delevvity_Locations/Addelevvity_Locations";
       final response= await  http.post(url,
           headers: {"Content-Type": "application/json"},
@@ -24,10 +23,8 @@ class DeliveryLocation {
             "user_id": user_id,
             "latitude": position.latitude,
             "longitude": position.longitude,
-
-          } )
-      );
-      return  "Done";
+          } ));
+      return "Done";
     }catch(Excepetion)
     {
       print(Excepetion);

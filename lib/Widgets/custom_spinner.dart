@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomSpinner extends StatefulWidget {
+class CustomSpinner extends StatefulWidget{
 @override
 CustomSpinnerWidget createState() => CustomSpinnerWidget();
 }
@@ -13,7 +13,7 @@ class CustomSpinnerWidget extends State {
     'مستخدم',
     'محل تجاري',
     'صيدلية'
-  ] ;
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

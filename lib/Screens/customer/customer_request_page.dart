@@ -1,7 +1,8 @@
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:Talabatk/Entities/global.dart';
@@ -23,10 +24,10 @@ class UserRequest extends StatefulWidget
 
 class _State extends State<UserRequest>{
   _State(this.shop);
-  File image;
   final picker = ImagePicker();
   List<Asset> images = List<Asset>();
-  String _error = 'No Error Dectected';
+  List <File> fileImageArray = [];
+  List  <Uint8List> arrbytes =[];
   User shop;
   final detailsTextController = TextEditingController();
   String image1="",image2="";
@@ -50,7 +51,6 @@ class _State extends State<UserRequest>{
                         fontSize: 18),),
                   ),
                   Container(
-
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
@@ -71,23 +71,14 @@ class _State extends State<UserRequest>{
                   Expanded(
                     child: buildGridView(),
                    ),
-                  Container(
-                    width: 80,
-                    height: 80,
-                    child:  Center(
-                      child: image == null
-                          ? Text('')
-                          : Image.file(image),
-                    ),
-                  ),
                   SizedBox(height: 10),
                   Row(
-                     mainAxisAlignment: MainAxisAlignment.center ,//Center Row contents horizontally,
+                     mainAxisAlignment: MainAxisAlignment.center,//Center Row contents horizontally,
                     children: [
                       Container(
                           child: Center(
                             child: SizedBox.fromSize(
-                              size: Size(80, 80), // button width and height
+                              size: Size(70, 70), // button width and height
                               child: ClipOval(
                                 child: Material(
                                   color:  Color(int.parse(Global.primaryColor)), // button color
@@ -115,7 +106,7 @@ class _State extends State<UserRequest>{
 
                           child: Center(
                             child: SizedBox.fromSize(
-                              size: Size(80, 80), // button width and height
+                              size: Size(70, 70), // button width and height
                               child: ClipOval(
                                 child: Material(
                                   color:  Color(int.parse(Global.primaryColor)), // button color
@@ -142,21 +133,30 @@ class _State extends State<UserRequest>{
 
                     ],
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 15),
                   Container(
                       child: Center(
                         child:  Global.visible_progress ?
                                    CircularProgressIndicator() :
                                    RaisedButton(
-                                          onPressed: () {
+                                          onPressed: () async {
                                             setState(() {
                                               Global.visible_progress=true;
                                             });
                                       if(images.length>0)
                                         {
                                             image1=images[0].name.toString();
+
                                           if(images.length>1)
                                             image2=images[1].name.toString();
+
+
+                                          for(int i=0;i<images.length;i++)
+                                            {
+                                              File file = File ( await FlutterAbsolutePath.getAbsolutePath(images[i].identifier));
+                                              Uint8List tempbyte = file.readAsBytesSync();
+                                              arrbytes.add(tempbyte);
+                                            }
                                         }
                                       Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2).then((value) {
                                         setState(() {
@@ -193,10 +193,16 @@ class _State extends State<UserRequest>{
       crossAxisCount: 2,
       children: List.generate(images.length, (index) {
         Asset asset = images[index];
-        return AssetThumb(
-          asset: asset,
-          width: 100,
-          height: 100,
+        print(images[index].name);
+
+        return FittedBox(
+          fit:BoxFit.fill,
+          child: AssetThumb(
+            asset: asset,
+            width: 500,
+            height: 500,
+            quality: 100,
+          ),
         );
       }),
     );
@@ -204,19 +210,18 @@ class _State extends State<UserRequest>{
   Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
-
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 2,
-       // enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
+           maxImages: 2,
+           //enableCamera: true,
+          selectedAssets: images,
+          cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+          materialOptions: MaterialOptions(
           actionBarColor: "#abcdef",
-          actionBarTitle: "Example App",
+          actionBarTitle: "Talabatk",
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
+          selectCircleStrokeColor: "#FFFFFF",
         ),
       );
     } on Exception catch (e) {
@@ -228,7 +233,7 @@ class _State extends State<UserRequest>{
 
     setState(() {
       images = resultList;
-      _error = error;
+
     });
   }
   void _showPicker(context) {
@@ -245,7 +250,8 @@ class _State extends State<UserRequest>{
                         onTap: () {
                           loadAssets();
                           Navigator.of(context).pop();
-                        }), /*
+                        }),
+                  /*
                     new ListTile(
                       leading: new Icon(Icons.photo_camera),
                       title: new Text('Camera'),
@@ -261,18 +267,8 @@ class _State extends State<UserRequest>{
         }
     );
   }
-  //Select an Image via gallery or camera
-  Future getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
 
-    setState(() {
-      if (pickedFile != null) {
-        image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+
 
 
 }
