@@ -1,17 +1,24 @@
+import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 class use_policy extends StatefulWidget {
+  String username;
+  use_policy({Key key, @required this.username}): super(key: key);
+
   @override
-  _State createState() => _State();
+  _State createState() => _State(username);
 }
 
 class _State extends State<use_policy>  {
 
-  // true signup => SHOP  false => CUSTOMER
+   String username;
+   _State(this.username);
+
   @override
   void initState()  {
     super.initState();
@@ -47,7 +54,7 @@ class _State extends State<use_policy>  {
                  width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen1.png"),
+                           image : AssetImage("images/screens/${username}1.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
@@ -56,7 +63,7 @@ class _State extends State<use_policy>  {
                    width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen2.png"),
+                           image : AssetImage("images/screens/${username}2.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
@@ -65,7 +72,7 @@ class _State extends State<use_policy>  {
                    width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen3.png"),
+                           image : AssetImage("images/screens/${username}3.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
@@ -74,7 +81,7 @@ class _State extends State<use_policy>  {
                    width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen4.png"),
+                           image : AssetImage("images/screens/${username}4.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
@@ -83,7 +90,19 @@ class _State extends State<use_policy>  {
                    width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen5.png"),
+                           image : AssetImage("images/screens/${username}5.png"),
+                           fit:BoxFit.fitHeight
+                       )
+                   )
+               ), SizedBox(width: 5,),
+
+
+
+               Container(
+                   width: 250,
+                   decoration: BoxDecoration(
+                       image: DecorationImage(
+                           image : AssetImage("images/screens/${username}6.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
@@ -92,7 +111,7 @@ class _State extends State<use_policy>  {
                    width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen1.png"),
+                           image : AssetImage("images/screens/${username}7.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
@@ -101,29 +120,23 @@ class _State extends State<use_policy>  {
                    width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
-                           image : AssetImage("images/screens/screen1.png"),
+                           image : AssetImage("images/screens/${username}8.png"),
                            fit:BoxFit.fitHeight
                        )
                    )
-               ), SizedBox(width: 5,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/screen1.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 5,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/screen1.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 5,),
+               ),
+               SizedBox(width: 5,),
+               if(username=="shop")
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}9.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ),
+
             ] ),
            ])
           ),
@@ -136,7 +149,7 @@ class _State extends State<use_policy>  {
                       borderRadius: BorderRadius.circular(30)
                   ),
                   onPressed: () async {
-                    /*
+
                     try{
                       SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.setInt('FirstEnter',1);
@@ -148,11 +161,11 @@ class _State extends State<use_policy>  {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>Login()
                     ));
-                    */
+
                   },
                   color: Color(int.parse(Global.primaryColor)),
                   child: Text(
-                   'Next',
+                   'التالي',
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white

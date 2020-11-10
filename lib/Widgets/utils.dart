@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
 
-  //global toast_message send message in an argument
+  // global toast_message send message in an argument
   static void toastMessage(String message){
     Fluttertoast.showToast(
         msg: message,

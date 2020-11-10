@@ -39,29 +39,61 @@ class _State extends State<app_info> with TickerProviderStateMixin {
                   tag:'title',
                   child: Utils.title(growAnimation.value, growAnimation.value)),
            ),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: RaisedButton(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: RaisedButton(
 
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>use_policy()
-                    ));
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>use_policy(username: "shop",)
+                      ));
                     },
-                  color: Color(int.parse(Global.primaryColor)),
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white
+                    color: Color(int.parse(Global.primaryColor)),
+                    child: Text(
+                      'محل تجاري',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white
+                      ),
                     ),
                   ),
+
                 ),
-              )
+              SizedBox(width: 20,),
+              Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: RaisedButton(
+
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>use_policy(username: "customer",)
+                      ));
+                    },
+                    color: Color(int.parse(Global.primaryColor)),
+                    child: Text(
+                      'عميل',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+
+                ),
+              ],
+            ),
+                Container(),
             ],
 
           ),

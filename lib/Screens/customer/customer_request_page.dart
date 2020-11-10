@@ -158,7 +158,7 @@ class _State extends State<UserRequest>{
                                               arrbytes.add(tempbyte);
                                             }
                                         }
-                                      Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2).then((value) {
+                                      Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
                                         setState(() {
                                           Global.visible_progress=false;
                                         });

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:http/http.dart' as http;
+import 'dart:typed_data';
 // states of Request
 // 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
 class Request {
@@ -16,6 +17,8 @@ class Request {
   String details;
   String image_url;
   String image_url2;
+  Uint8List imagebyte;
+  Uint8List imagebyte2;
   int state;
   int delivery_id;
 
@@ -23,7 +26,7 @@ class Request {
   Request(this.id, this.user_id,this.merchant_id, this.location_id, this.request_date, this.request_time, this.details ,this.image_url,this.image_url2,this.state,this.user_name,this.delivery_id);
 
   static Future<void> addRequest(String apiName,int user_id,int merchant_id,int location_id,
-      String request_data,String request_time,String details, String image_url, String image_url2) async {
+      String request_data,String request_time,String details, String image_url, String image_url2, Uint8List imagebyte,Uint8List imagebyte2) async {
 
     String url = Global.url+apiName;
     final response= await  http.post(url,
@@ -136,8 +139,6 @@ class Request {
       customerRequest.add(request);
     }
      return customerRequest;
-
-
   }
 
 }
