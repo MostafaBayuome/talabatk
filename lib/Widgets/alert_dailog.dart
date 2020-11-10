@@ -1,5 +1,6 @@
 import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:Talabatk/Entities/user_rate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,8 @@ class MyDailog extends StatefulWidget {
 
 class _MyDialogState extends State<MyDailog> {
   Color _c = Colors.redAccent;
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -27,12 +30,12 @@ class _MyDialogState extends State<MyDailog> {
         textAlign: TextAlign.center,
       ),
       content: Container(
-        height: 150,
+        height: 220,
         child: Column(
           children: [
             Container(
               width: 220,
-              height: 100,
+              height: 80,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: Global.rateList.length,
@@ -59,6 +62,8 @@ class _MyDialogState extends State<MyDailog> {
 
                           selectedRate2=Global.rateList[index].title_ar;
                           Global.selectedRate=selectedRate2;
+                          Global.selectedRateID=Global.rateList[index].id;
+
                         });
                       },
                       child:SizedBox(width: 30,height: 30, child: Icon(
@@ -73,12 +78,30 @@ class _MyDialogState extends State<MyDailog> {
             ),
             Container(
               width:  200.0,
-              height: 50,
+              height: 40,
               child: Text(Global.selectedRate , textAlign: TextAlign.center, style: TextStyle(
                 fontFamily: Global.fontFamily,
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               )),
+            ),
+            Container(
+              width:  200.0,
+              height: 40,
+              child: FlatButton(
+                child:Text("ارسل"),
+                onPressed: (){
+                  if(Global.selectedRateID==0){
+
+                  }
+                  else{
+                    User_rate.addUserRate(new User_rate(0, Global.loginUser.id, Global.selectedRequestID, Global.selectedRateID, "comment", "note")).then((value) => {
+                      print(value)
+                    });
+                  }
+                },
+
+                  ),
             ),
           ],
         ),

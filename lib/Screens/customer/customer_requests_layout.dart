@@ -196,6 +196,7 @@ class _State extends State<CustomerRequestLayout>
                     child: InkWell(
 
                       onTap: () {
+                        Global.selectedRequestID=listItem[index].id;
                         //Send User to chat page
                         showDialog(
                           context: context,
@@ -214,7 +215,7 @@ class _State extends State<CustomerRequestLayout>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon (Icons.star,color: Colors.yellow), // icon
+                          Image.asset('images/feedback.png'), // icon
 
                         ],
                       ),

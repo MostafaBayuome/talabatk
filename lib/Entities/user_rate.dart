@@ -27,7 +27,7 @@ User_rate(this.id, this.user_id, this.merchant_id, this.rate_id, this.comment,
     }
     return usersRates;
   }
-  static Future<void> addUserRate(User_rate user_rate) async {
+  static Future<String> addUserRate(User_rate user_rate) async {
 
     String url = Global.url+"User_rate/AddUser_rate";
     final response= await  http.post(url,
@@ -39,6 +39,6 @@ User_rate(this.id, this.user_id, this.merchant_id, this.rate_id, this.comment,
           "comment": user_rate.comment,
           "note": user_rate.note
         } ) );
-    response.toString();
+   return response.toString();
   }
 }

@@ -23,6 +23,8 @@ static SharedPreferences prefs;
   static List<NotificationDetails>userNotifications=new List<NotificationDetails>();
 
   static String selectedRate="اختر تقييم";
+static int selectedRateID=0;
+static int selectedRequestID=0;
 static List<Rate> rateList=[];
 
 }
