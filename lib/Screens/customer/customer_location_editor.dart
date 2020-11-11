@@ -17,7 +17,7 @@ class LocationEditor extends StatefulWidget {
 class _State  extends State<LocationEditor>{
 
   String _locationName = null;
-  String _locationNote=null;
+  String _locationNote = null;
 
   TextEditingController _locationNameController = new TextEditingController();
   TextEditingController _locationNoteController = new TextEditingController();
@@ -180,7 +180,7 @@ class _State  extends State<LocationEditor>{
 
   // get current location of user
   Future<Position> _getLocation() async{
-    _currentposition = await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    _currentposition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(_currentposition);
     return _currentposition;
   }

@@ -50,12 +50,16 @@ Future<Map<String, dynamic>> loginUser (String apiName, String mobileNumber , St
 
   try{
     String url =Global.url+apiName;
-    final response = await http.get(url+"?mobileNumber="+mobileNumber,headers:{"Content-Type": "application/json"} );
-    Map<String, dynamic> convertDatatoJson =  json.decode(response.body);
-    if(password==convertDatatoJson["password"])
-    {
-      return  convertDatatoJson;
+    final response = await http.post(url+"?mobileNumber="+mobileNumber+"&password="+password,headers:{"Content-Type": "application/json"} );
+    if(response.body.isNotEmpty) {
+      Map<String, dynamic> convertDatatoJson =  json.decode(response.body);
+      if(password==convertDatatoJson["password"])
+      {
+        return  convertDatatoJson;
+      }
     }
+
+
     return null;
   }
   catch (Excepetion)

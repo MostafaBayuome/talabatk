@@ -166,7 +166,7 @@ class _State extends State<Login>  with Validation {
             });
 
             formKey.currentState.save();
-            loginUser("Talabatk/GetUserByConditionPhone",mobileNumber, password).then((value) async {
+            loginUser("Talabatk/GetUserByConditionPhoneAndPassword",mobileNumber, password).then((value) async {
               setState(() {
                 Global.visible_progress=false;
               });
@@ -174,7 +174,6 @@ class _State extends State<Login>  with Validation {
 
                 try{
                   var data =value;
-
 
                   User user =new User(data['id'],data['phone'],data['latitude'],data['longitude'],data['username'],data['password'],data['map_Appear'],data['merchant_id']);
                   Global.loginUser=user;
