@@ -234,7 +234,7 @@ class _State extends State<SignUp> with Validation  {
 
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ShopHomePage()
+                        builder: (context) => Login()
                     ));
                   }
                   else{
@@ -293,7 +293,7 @@ class _State extends State<SignUp> with Validation  {
           }
           else{
             setState(() {
-              Global.visible_progress=true;
+              Global.visible_progress=false;
             });
           }
 
