@@ -131,7 +131,8 @@ class _State extends State<CustomerHomePage> {
                               textAlign: TextAlign.center,
                             ),
                               Divider(
-                                  color: Colors.black
+                                  color:Color(int.parse(Global.primaryColor)),
+
                               )],
                           ),
                           content: setupAlertDialogContainer(),

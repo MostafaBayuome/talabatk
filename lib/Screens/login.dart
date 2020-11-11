@@ -136,7 +136,7 @@ class _State extends State<Login>  with Validation {
     );
   }
 
-  //Map_Appear = 0  customer, = 1  shop, = 2  pharmacy, = 9 delivery
+  //Map_Appear   0 customer, 1 shop, 2  pharmacy, 9 delivery, 3 restaurant
   Widget submitButton() {
     if(Global.visible_progress){
       return CircularProgressIndicator();
@@ -188,7 +188,7 @@ class _State extends State<Login>  with Validation {
                   Global.prefs.setDouble('longitude', data["longitude"]);
                   Global.prefs.setInt('merchant_id', data['merchant_id']);
 
-                  if(value["map_Appear"]== 1 ||value["map_Appear"]== 2 ){
+                  if(value["map_Appear"]== 1 || value["map_Appear"]== 2 || value["map_Appear"]== 3 ){
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>ShopHomePage()

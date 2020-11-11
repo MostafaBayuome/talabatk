@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
@@ -5,6 +8,7 @@ import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
+
 
 
 
@@ -20,13 +24,52 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
   List<User> delivery_men;
   _ShopRequestInformationState(this.request);
   String _title="الطلبات";
+  String arrbytes;
+  String arrbytes2;
+  Uint8List arrBytes;
+  Uint8List arrBytes2;
+  @override
+  void initState() {
+    super.initState();
+
+    try{
+      if(request.image_url != "NotImage" )
+      {
+
+        Request.drawImageFromServer(request.image_url).then((value) {
+          setState(() {
+            if(value!=null)
+              arrbytes= value;
+              arrBytes =base64.decode(arrbytes);
+          });
+        });
+        if(request.image_url2 != "NotImage")
+        {
+          Request.drawImageFromServer(request.image_url2).then((value){
+            setState(() {
+              if(value!=null)
+                arrbytes2= value;
+              arrBytes2=base64.decode(arrbytes2);
+            });
+          });
+        }
+      }
+
+    }
+    catch (Ex)
+    {
+      print(Ex);
+    }
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Utils.appBarusers(context,_title),
-
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(5.0),
          child: Column(
 
            children: [
@@ -36,13 +79,13 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                  Text(request.request_date.toString(), style: TextStyle(
                      fontFamily: Global.fontFamily,
                      fontWeight: FontWeight.w600,
-                     fontSize: 25,
+                     fontSize: 18,
 
                  )),
                ],
              ),
               SizedBox(
-                height: 15,
+                height: 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,20 +93,18 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                   Text(request.request_time.toString(), style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
-                      fontSize: 22,
+                      fontSize: 16,
 
                   )),
                   SizedBox(width: 20,),
                   Text("الوقت", style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
-                      fontSize: 22,
-
+                      fontSize: 14,
                   )),
-
                 ],
               ),
-             SizedBox(height: 100,),
+             SizedBox(height: 5,),
              Text(request.details, style: TextStyle(
                  fontFamily: Global.fontFamily,
 
@@ -71,7 +112,40 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
 
              )),
              SizedBox(height: 20,),
-             /*** IMAGES WIDGET WILL BE ADDED HERE FUTURE WORK ***/
+             Column(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               children: <Widget>[
+
+                 if(request.image_url != '' )
+                 Container(
+                     height: 450,
+                     width: 400,
+                     child:  ListView(
+                         scrollDirection: Axis.horizontal,
+                         children: <Widget>[
+                           Row(
+                               children: <Widget>[
+                                if(arrBytes!=null)
+                                 Container(
+                                     width: 250,
+                                      child:Image.memory(arrBytes),
+                                 ),
+                                 SizedBox(width:7 ,),
+                                 if(arrBytes2!=null)
+                                 Container(
+                                     width: 250,
+                                    child: Image.memory(arrBytes2),
+                                 )
+
+                               ] ),
+                         ])
+                 ),
+
+               ],
+
+             ),
+
+
              Expanded(
                child: Row(
                  crossAxisAlignment: CrossAxisAlignment.end,
@@ -193,6 +267,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
     );
   }
 
+   // display all dilevry main to assign to one the request
   Widget setupAlertDialogContainer() {
     return Container(
 

@@ -146,24 +146,37 @@ class _State extends State<UserRequest>{
                                       if(images.length>0)
                                         {
                                             image1=images[0].name.toString();
-
                                           if(images.length>1)
                                             image2=images[1].name.toString();
-
 
                                           for(int i=0;i<images.length;i++)
                                             {
                                               File file = File ( await FlutterAbsolutePath.getAbsolutePath(images[i].identifier));
                                               Uint8List tempbyte = file.readAsBytesSync();
+                                              String temp= tempbyte.toString();
+                                              print(temp);
                                               arrbytes.add(tempbyte);
+
                                             }
                                         }
-                                      Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
-                                        setState(() {
-                                          Global.visible_progress=false;
+                                      if(arrbytes.length==2){
+                                        Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
+                                          setState(() {
+                                            Global.visible_progress=false;
+                                          });
+                                          Utils.toastMessage('لقد تم ارسال طلبك');
                                         });
-                                      Utils.toastMessage('لقد تم ارسال طلبك');
-                                      });
+                                      }
+                                      else
+                                        {
+                                          Request.addRequest1("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),"","",null,null).then((value) {
+                                            setState(() {
+                                              Global.visible_progress=false;
+                                            });
+                                            Utils.toastMessage('لقد تم ارسال طلبك');
+                                          });
+                                        }
+
                                     },
                                     elevation: 2.0,
                                     color: Color(int.parse(Global.primaryColor)),

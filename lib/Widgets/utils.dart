@@ -67,6 +67,7 @@ class Utils {
 
     if(choices.contains('تسجيل الخروج')){
       SharedPreferences prefs = await SharedPreferences.getInstance();
+
       prefs.remove('phone');
       prefs.remove('map_Appear');
       prefs.remove('id');

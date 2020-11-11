@@ -206,6 +206,7 @@ class _State extends State<SignUp> with Validation  {
             map_Appear=0;
             if(dropdownValue=="صيدلية")     map_Appear=2;
             else if(dropdownValue=="محل تجاري")     map_Appear=1;
+            else if(dropdownValue=="مطعم")  map_Appear=3;
 
             if (map_Appear>0){
               if (position == null) {
@@ -337,7 +338,7 @@ class _State extends State<SignUp> with Validation  {
                   dropdownValue = data;
                 });
               },
-              items: <String>['مستخدم', 'محل تجاري', 'صيدلية'].map((String value) {
+              items: <String>['مستخدم', 'محل تجاري', 'صيدلية','مطعم'].map((String value) {
                 return new DropdownMenuItem<String>(
                   value: value,
                   child: new Text(value),

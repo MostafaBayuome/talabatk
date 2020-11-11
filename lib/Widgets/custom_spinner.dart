@@ -12,7 +12,8 @@ class CustomSpinnerWidget extends State {
   List <String> spinnerItems = [
     'مستخدم',
     'محل تجاري',
-    'صيدلية'
+    'صيدلية',
+    'مطعم'
   ];
   @override
   Widget build(BuildContext context) {

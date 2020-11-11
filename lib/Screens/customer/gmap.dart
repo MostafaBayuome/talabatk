@@ -21,9 +21,11 @@ class _GMapState extends State<Gmap> {
   List<User> nearestShops=[];
   List<Marker> allMarkers =[];
   BitmapDescriptor pinLocationIcon;
+  BitmapDescriptor pinPharmacyIcon;
   List<User> pharmacy=[];
   List<User> shops=[];
-  //0 all SHOP 1 All pharmacy 2 All supermarket
+  List<User> restaurants=[];
+  //0 all SHOP 1 All pharmacy 2 All supermarket 3 All Restaurants
   int numberOfList=0;
   LatLng _currentPosition;
   _GMapState(this._currentPosition);
@@ -44,6 +46,7 @@ class _GMapState extends State<Gmap> {
             children: [
               pharmacyIcon(),
               shopIcon(),
+              restaurantIcon()
             ],
           ),
           _buildContainer(),
@@ -109,6 +112,8 @@ class _GMapState extends State<Gmap> {
           shops.add(nearestShops[i]);
         else if(nearestShops[i].mapAppear==2)
           pharmacy.add(nearestShops[i]);
+        else if (nearestShops[i].mapAppear==3)
+          restaurants.add(nearestShops[i]);
 
         LatLng _position = new LatLng(nearestShops[i].latitude, nearestShops[i].longitude);
         setState(() {
@@ -144,7 +149,7 @@ class _GMapState extends State<Gmap> {
                 children: [
                   Container(
                     width: 180,
-                    height: 200,
+                    height: 180,
                     child: ClipRRect(
                       borderRadius: new BorderRadius.circular(24.0),
                       child: Image(
@@ -224,6 +229,8 @@ class _GMapState extends State<Gmap> {
         shopList=pharmacy;
       else if(numberOfList == 2)
         shopList=shops;
+      else if(numberOfList == 3)
+        shopList=restaurants;
     });
     return Align(
       alignment: Alignment.bottomCenter,
@@ -238,10 +245,13 @@ class _GMapState extends State<Gmap> {
             String image= "images/";
             String pharmacy = "snake.png";
             String supermarket = "supermarket.png";
+            String restaurants = "restaurant.png";
             if(shopList[i].mapAppear==1)
               image+=supermarket;
             else if (shopList[i].mapAppear==2)
               image+=pharmacy;
+            else if( shopList[i].mapAppear==3)
+               image+=restaurants;
 
 
             return Padding(
@@ -265,13 +275,13 @@ class _GMapState extends State<Gmap> {
   //PHARMACY
   Widget pharmacyIcon() {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         alignment: Alignment.topCenter,
         child:FlatButton(
           child: Column (
             mainAxisSize : MainAxisSize.min,
             children: [
-              Icon(Icons.local_pharmacy,color:Color(int.parse(Global.primaryColor)),
+              Icon(Icons.local_pharmacy,color:Colors.lightGreen,
               size: 30,),
 
             ],
@@ -291,9 +301,7 @@ class _GMapState extends State<Gmap> {
         infoWindow: InfoWindow(title:"مكان التوصيل"),
         draggable: false,
         position: _currentPosition,
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueBlue,
-        )
+        icon: pinLocationIcon
     ));
     for(int i=0;i<pharmacy.length;i++)
       {
@@ -305,7 +313,7 @@ class _GMapState extends State<Gmap> {
               draggable: false,
               position: _position,
               icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueViolet,
+                BitmapDescriptor.hueGreen,
               )
           ));
         });
@@ -319,13 +327,13 @@ class _GMapState extends State<Gmap> {
   // SHOP
   Widget shopIcon(){
    return Container(
-        padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         alignment: Alignment.topCenter,
         child:FlatButton(
           child: Column (
             mainAxisSize : MainAxisSize.min,
             children: [
-              Icon(Icons.shopping_cart,color:Color(int.parse(Global.primaryColor)),
+              Icon(Icons.shopping_cart,color:Colors.blue,
               size: 30,),
 
             ],
@@ -347,9 +355,7 @@ class _GMapState extends State<Gmap> {
         infoWindow: InfoWindow(title:"مكان التوصيل"),
         draggable: false,
         position: _currentPosition,
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueBlue,
-        )
+        icon: pinLocationIcon
     ));
     for(int i=0;i<shops.length;i++)
       {
@@ -361,7 +367,7 @@ class _GMapState extends State<Gmap> {
               draggable: false,
               position: _position,
               icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueViolet,
+                BitmapDescriptor.hueBlue,
               )
           ));
         });
@@ -372,6 +378,56 @@ class _GMapState extends State<Gmap> {
     });
   }
 
+  //RESTAURANT
+  Widget restaurantIcon() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      alignment: Alignment.topCenter,
+      child:FlatButton(
+        child: Column (
+          mainAxisSize : MainAxisSize.min,
+          children: [
+            Icon(Icons.restaurant,color:Colors.redAccent,
+              size: 30,),
 
+          ],
+        ),
+        onPressed: () {
+          getAllRestaurants();
+        },
+      ), );
+  }
+  void getAllRestaurants()  {
+    setState(() {
+      allMarkers.clear();
+      nearestShops.clear();
+    });
+    allMarkers.add(Marker(
+        markerId:MarkerId("myMarker"),
+        infoWindow: InfoWindow(title:"مكان التوصيل"),
+        draggable: false,
+        position: _currentPosition,
+        icon:pinLocationIcon
+    ));
+    for(int i=0;i<restaurants.length;i++)
+    {
+      LatLng _position = new LatLng(restaurants[i].latitude, restaurants[i].longitude);
+      setState(() {
+        allMarkers.add(Marker(
+            markerId:MarkerId(restaurants[i].id.toString()),
+            infoWindow: InfoWindow(title:restaurants[i].userName),
+            draggable: false,
+            position: _position,
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueRed,
+            )
+        ));
+      });
+    }
+    setState(() {
+      numberOfList=3;
+    });
+
+  }
 
 }

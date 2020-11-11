@@ -36,13 +36,35 @@ class Request {
            "merchant_id": merchant_id,
            "location_id":location_id,
            "details": details,
-           "image_url": image_url,
+           "image_url":  image_url,
            "image_url2": image_url2,
+           "image_bytel":base64.encode(imagebyte),
+           "image_byte2":base64.encode(imagebyte2),
            "state": 0
          } ) );
 
       response.toString();
       //future work return int to work on requests
+  }
+
+  static Future<void> addRequest1(String apiName,int user_id,int merchant_id,int location_id,
+      String request_data,String request_time,String details, String image_url, String image_url2, Uint8List imagebyte,Uint8List imagebyte2) async {
+
+    String url = Global.url+apiName;
+    final response= await  http.post(url,
+        headers: {"Content-Type": "application/json"},
+        body:json.encode( {
+          "user_id": user_id,
+          "merchant_id": merchant_id,
+          "location_id":location_id,
+          "details": details,
+          "image_url":  image_url,
+          "image_url2": image_url2,
+          "state": 0
+        } ) );
+
+    response.toString();
+    //future work return int to work on requests
   }
 
   static Future <List<Request>> getRequestsByUser(int id) async {
@@ -141,5 +163,12 @@ class Request {
      return customerRequest;
   }
 
+  static Future <String> drawImageFromServer  (String image_url) async {
+    String url =Global.url+"Request/api/DrawImage_FromServer?imgurl="+image_url;
+    final response = await http.get(url,headers:{"Content-Type": "application/json"});
+    var jsonData = json.decode(response.body);
+    var temp =jsonData;
+    return temp;
+  }
 }
 
