@@ -212,6 +212,26 @@ class _State extends State<ShopRequestLayout> {
                           ),
                         )
                     ),
+                  if(listItem[index].state == 1)
+                    Container(
+                        width: 25.0,
+                        height: 30.0,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+                        child: InkWell(
+                          onTap: () {
+                            Request.editRequest(listItem[index], 2).then((value) {
+                              Utils.toastMessage("تم تاكيد توصيل الطلب");
+                            });
+                          }, // button pressed
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.done,color:  Colors.green), // icon
+                            ],
+                          ),
+                        )
+                    ),
                 ],
               ),),
           ),

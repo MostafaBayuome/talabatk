@@ -1,4 +1,3 @@
-import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/constants.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Screens/notification_page.dart';

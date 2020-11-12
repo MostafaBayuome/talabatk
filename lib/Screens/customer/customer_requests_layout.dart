@@ -232,7 +232,6 @@ class _State extends State<CustomerRequestLayout>
 
                       onTap: () {
                         //get last location of delivery plus location of customer to deliver
-
                         DeliveryLocation.getByIdLastLocation(listItem[index].delivery_id).then((value) {
                           LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
                           Location.GetLocationsById(listItem[index].location_id).then((value) {
@@ -257,18 +256,11 @@ class _State extends State<CustomerRequestLayout>
                     width: 25.0,
                     height: 30.0,
                     alignment: Alignment.center,
-
                     padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
-
                     child: InkWell(
-
                       onTap: () {
-                        //get last location of delivery plus location of customer to deliver
-
                         Request.editRequest(listItem[index], 2).then((value) {
                           Utils.toastMessage("تم تاكيد توصيل الطلب");
-                          
-
                         });
                       }, // button pressed
                       child: Column(

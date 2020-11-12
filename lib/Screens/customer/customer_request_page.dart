@@ -11,18 +11,16 @@ import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-
-class UserRequest extends StatefulWidget
-{
+class UserRequest extends StatefulWidget {
   User shop;
   UserRequest({Key key, @required this.shop}) : super(key: key);
-
   @override
   State<StatefulWidget> createState() =>_State(shop);
 }
 
 class _State extends State<UserRequest>{
+
+
   _State(this.shop);
   final picker = ImagePicker();
   List<Asset> images = List<Asset>();
@@ -32,6 +30,8 @@ class _State extends State<UserRequest>{
   final detailsTextController = TextEditingController();
   String image1="",image2="";
   String _title="الطلب";
+
+
   @override
   Widget build(BuildContext context) {
           return Scaffold(
@@ -146,8 +146,15 @@ class _State extends State<UserRequest>{
                                       if(images.length>0)
                                         {
                                             image1=images[0].name.toString();
+                                            image1 = image1.replaceAll(".","-");
+                                            image1+=".png";
                                           if(images.length>1)
-                                            image2=images[1].name.toString();
+                                            {
+                                              image2=images[1].name.toString();
+                                              image2 = image2.replaceAll(".","-");
+                                              image2+=".png";
+                                            }
+
 
                                           for(int i=0;i<images.length;i++)
                                             {
@@ -198,8 +205,6 @@ class _State extends State<UserRequest>{
             ),
           );
   }
-
-
 
   Widget buildGridView() {
     return GridView.count(
@@ -282,6 +287,28 @@ class _State extends State<UserRequest>{
   }
 
 
+  void removeUncessaryDots(String image,int number) {
+    bool firstDote=false;
+    for (int i = image.length; i >= 0; i--) {
+
+      if(!firstDote && image[i]==".")
+        {
+          firstDote=true;
+        }
+      else if(image[i]==".")
+        {
+          image.replaceAll(".","-");
+        }
+
+    }
+      setState(() {
+        if(number==1)
+          image1 = image;
+        else if(number==2)
+          image2 = image;
+      });
+
+  }
 
 
 }

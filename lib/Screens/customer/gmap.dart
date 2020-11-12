@@ -132,12 +132,14 @@ class _GMapState extends State<Gmap> {
   }
 
 
-  Widget _boxes(String _image,double lat , double long, String name,int index,String mobileNumber,User shop) {
+  Widget _boxesBuilder(String _image,double lat , double long, String name,int index,String mobileNumber,User shop) {
     return GestureDetector(
       onTap: (){
         _goToLocation(lat,long);
       },
       child: Container(
+        height: 200,
+          width: 200,
           child:new FittedBox(
             child: Material(
               color: Colors.white,
@@ -148,12 +150,12 @@ class _GMapState extends State<Gmap> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 180,
-                    height: 180,
+                    width: 100,
+                    height: 100,
                     child: ClipRRect(
                       borderRadius: new BorderRadius.circular(24.0),
                       child: Image(
-                        fit:BoxFit.fill,
+                        fit: BoxFit.fill,
                         image:AssetImage(_image),
                       ),
                     ),
@@ -162,48 +164,48 @@ class _GMapState extends State<Gmap> {
                     children: [
                       Container(
                        child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: Text(name, style: TextStyle(
                             fontFamily: Global.fontFamily,
                             fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: Color(int.parse(Global.primaryColor))
+                            fontSize: 12,
+
                         )),
                                ),
                         ),
-
-                      RaisedButton(
-                       onPressed: () {
-                         // send user to request screen to request items from exact shop
-
-                         Navigator.of(context).push(MaterialPageRoute(
-                           builder: (context) => UserRequest(shop:shop),
-                         ));
-
-                       },
-                       elevation: 2.0,
-                          color: Color(int.parse(Global.primaryColor)),
-                          textColor: Colors.white,
-                          padding: const EdgeInsets.all(0.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(10.0),
-                            child: const Text(
-                                'طلب اوردر',
-                                style: TextStyle(fontSize: 15)
+                      Container(
+                        height: 30,
+                        width: 70,
+                        child: RaisedButton(
+                         onPressed: () {
+                           // send user to request screen to request items from exact shop
+                           Navigator.of(context).push(MaterialPageRoute(
+                             builder: (context) => UserRequest(shop:shop),
+                           ));
+                             },
+                            color: Color(int.parse(Global.primaryColor)),
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.all(0.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
-                          )
-                          ),
+                            child: Container(
+                              padding: const EdgeInsets.all(0.0),
+                              child: const Text(
+                                  'طلب اوردر',
+                                  style: TextStyle(fontSize: 12)
+                              ),
+                            )
+                            ),
+                      ),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Text(mobileNumber, style: TextStyle(
                               fontFamily: Global.fontFamily,
                               fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Color(int.parse(Global.primaryColor))
+                              fontSize: 8,
+
                           )),
                         ),
                       ),
@@ -235,8 +237,8 @@ class _GMapState extends State<Gmap> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20.0),
-        height: 180.0,
+        margin: EdgeInsets.symmetric(vertical: 5.0),
+        height: 150.0,
         child: ListView.builder(
           itemCount: shopList.length,
           itemBuilder: (BuildContext context,int i)
@@ -256,7 +258,7 @@ class _GMapState extends State<Gmap> {
 
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: _boxes(
+              child: _boxesBuilder(
                    image,
                   shopList[i].latitude, shopList[i].longitude,shopList[i].userName,i,shopList[i].mobileNumber,shopList[i]),
             );
