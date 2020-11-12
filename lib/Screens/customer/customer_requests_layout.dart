@@ -105,8 +105,8 @@ class _State extends State<CustomerRequestLayout>
             children: <Widget>[
 
               Container(
-                width: 55.0,
-                height: 55.0,
+                width: 50.0,
+                height: 50.0,
 
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
@@ -163,7 +163,7 @@ class _State extends State<CustomerRequestLayout>
               ),
               if(listItem[index].state == 0 || listItem[index].state == 1)
                 Container(
-                    width: 70.0,
+                    width: 60.0,
                     height: 70.0,
                     alignment: Alignment.center,
 
@@ -215,14 +215,14 @@ class _State extends State<CustomerRequestLayout>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Image.asset('images/feedback.png'), // icon
+                          Icon(Icons.star,color:Colors.yellowAccent), // icon
 
                         ],
                       ),
                     )),
               if(listItem[index].state == 1)
                 Container(
-                    width: 30.0,
+                    width: 25.0,
                     height: 30.0,
                     alignment: Alignment.center,
 
@@ -248,6 +248,33 @@ class _State extends State<CustomerRequestLayout>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(Icons.location_on,color:  Color(int.parse(Global.secondaryColor))), // icon
+                        ],
+                      ),
+                    )
+                ),
+              if(listItem[index].state == 1)
+                Container(
+                    width: 25.0,
+                    height: 30.0,
+                    alignment: Alignment.center,
+
+                    padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
+
+                    child: InkWell(
+
+                      onTap: () {
+                        //get last location of delivery plus location of customer to deliver
+
+                        Request.editRequest(listItem[index], 2).then((value) {
+                          Utils.toastMessage("تم تاكيد توصيل الطلب");
+                          
+
+                        });
+                      }, // button pressed
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.done,color:  Colors.green), // icon
                         ],
                       ),
                     )

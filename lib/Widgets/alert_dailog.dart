@@ -1,6 +1,7 @@
 import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/user_rate.dart';
+import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,8 @@ class _MyDialogState extends State<MyDailog> {
                   }
                   else{
                     User_rate.addUserRate(new User_rate(0, Global.loginUser.id, Global.selectedRequestID, Global.selectedRateID, "comment", "note")).then((value) => {
-                      print(value)
+                      Utils.toastMessage("شكرا لتقييمك الطلب"),
+                        Navigator.pop(context)
                     });
                   }
                 },

@@ -5,12 +5,12 @@ class User_rate {
 
   int id;
   int user_id;
-  int merchant_id;
+  int quest_id;
   int rate_id;
   String comment;
   String note;
 
-User_rate(this.id, this.user_id, this.merchant_id, this.rate_id, this.comment,
+User_rate(this.id, this.user_id, this.quest_id, this.rate_id, this.comment,
       this.note);
   User_rate.empty();
 
@@ -33,7 +33,7 @@ User_rate(this.id, this.user_id, this.merchant_id, this.rate_id, this.comment,
     final response= await  http.post(url,
         headers: {"Content-Type": "application/json"},
         body:json.encode( {
-          "merchant_id": user_rate.merchant_id,
+          "quest_id": user_rate.quest_id,
           "user_id": user_rate.user_id,
           "rate_id":user_rate.rate_id,
           "comment": user_rate.comment,

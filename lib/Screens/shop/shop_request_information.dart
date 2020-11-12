@@ -127,13 +127,13 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                                children: <Widget>[
                                 if(arrBytes!=null)
                                  Container(
-                                     width: 250,
+                                     width: 380,
                                       child:Image.memory(arrBytes),
                                  ),
                                  SizedBox(width:7 ,),
                                  if(arrBytes2!=null)
                                  Container(
-                                     width: 250,
+                                     width: 380,
                                     child: Image.memory(arrBytes2),
                                  )
 
