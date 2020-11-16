@@ -231,13 +231,19 @@ class _State extends State<CustomerRequestLayout>
                       onTap: () {
                         //get last location of delivery plus location of customer to deliver
                         DeliveryLocation.getByIdLastLocation(listItem[index].delivery_id).then((value) {
-                          LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
-                          Location.GetLocationsById(listItem[index].location_id).then((value) {
-                            LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)
-                            ));
-                          });
+                          if(value!=null){
+                            LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
+                            Location.GetLocationsById(listItem[index].location_id).then((value) {
+                              LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)
+                              ));
+                            });
+                          }else{
+                            Utils.toastMessage('الطيار لم يتحرك بعد .....');
+                          }
+
+
 
                         });
                       }, // button pressed
@@ -258,7 +264,14 @@ class _State extends State<CustomerRequestLayout>
                     child: InkWell(
                       onTap: () {
                         Request.editRequest(listItem[index], 2).then((value) {
-                          Utils.toastMessage("تم تاكيد توصيل الطلب");
+                          if(value=='لم يتم الارسال'){
+                            Utils.toastMessage('لم يقترب منك الطيار بعد');
+                          }else{
+                            print(value);
+                            Utils.toastMessage("تم تاكيد توصيل الطلب");
+                          }
+
+
                         });
                       }, // button pressed
                       child: Column(
@@ -269,9 +282,7 @@ class _State extends State<CustomerRequestLayout>
                       ),
                     )
                 ),
-            ],
-
-            ),),
+            ],),),
         );
       },
     );

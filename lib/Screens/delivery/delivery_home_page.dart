@@ -18,11 +18,14 @@ class DeliveryHomePage extends StatefulWidget {
 class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
   String _title="الصفحه الرئيسيه";
+
   List<Request> allCustomerRequest=[];
   List<Request> processingList=[];
   List<Request> deliveredList=[];
+
   Position position=null;
   Timer request_timer;
+
   @override
   void initState() {
     super.initState();
@@ -191,7 +194,14 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                       child: InkWell(
                         onTap: () {
                           Request.editRequest(listItem[index], 2).then((value) {
-                            Utils.toastMessage("تم تاكيد توصيل الطلب");
+                            if(value=='لم يتم الارسال'){
+                              Utils.toastMessage('لم يقترب منك الطيار بعد');
+                            }else{
+                              print(value);
+                              Utils.toastMessage("تم تاكيد توصيل الطلب");
+                            }
+
+
                           });
                         }, // button pressed
                         child: Column(
@@ -216,7 +226,7 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
       {
         setState(() {
           allCustomerRequest=value;
-          arrangeRequestsWithState();
+            arrangeRequestsWithState();
         });
       }
       );

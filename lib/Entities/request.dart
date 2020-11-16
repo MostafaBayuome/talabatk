@@ -76,6 +76,7 @@ class Request {
     List<Request> Requests=(jsonData as List).map((i) => Request.fromJson(i)).toList();
     return Requests;
   }
+
   static fromJson(Map model) {
     Request req=new Request.empty();
     req.id=model['id'];
@@ -127,26 +128,40 @@ class Request {
   }
 
   // state 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
-  static Future <void> editRequest (Request request, int state) async {
-   String url = Global.url+"Request/EditRequest";
-   final response= await  http.put(url,
-       headers: {"Content-Type": "application/json"},
-       body:json.encode( {
-         "id": request.id,
-         "user_id": request.user_id,
-         "merchant_id": request.merchant_id,
-         "location_id":request.location_id,
-         "details": request.details,
-         "image_url": request.image_url,
-         "image_url2": request.image_url2,
-         "state": state,
-         "delivery_id":request.delivery_id,
-         "request_date":request.request_date,
-         "request_time":request.request_time,
-         "delivery_id ":request.delivery_id
+  static Future <String> editRequest (Request request, int state) async {
+    try{
+      String url = Global.url+"Request/EditRequest";
+      final response= await  http.put(url,
+          headers: {"Content-Type": "application/json"},
+          body:json.encode( {
+            "id": request.id,
+            "user_id": request.user_id,
+            "merchant_id": request.merchant_id,
+            "location_id":request.location_id,
+            "details": request.details,
+            "image_url": request.image_url,
+            "image_url2": request.image_url2,
+            "state": state,
+            "delivery_id":request.delivery_id,
+            "request_date":request.request_date,
+            "request_time":request.request_time,
+            "delivery_id ":request.delivery_id
 
-       } ) );
-  response.toString();
+          } ) );
+      if(response.body.toString()=='لم يتم الارسال')
+        {
+          return response.body.toString() ;
+        }
+      else{
+        return 'تم الارسال';
+      }
+
+    }
+    catch(Exception)
+    {
+      return null;
+    }
+
   }
 
   // get all requests attached to deliveryMan
@@ -173,5 +188,7 @@ class Request {
     var temp =jsonData;
     return temp;
   }
+
+
 }
 
