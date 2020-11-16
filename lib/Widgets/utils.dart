@@ -100,7 +100,7 @@ class Utils {
            IconButton(icon:Stack(
               children: [
                 Icon(Icons.notifications),
-                Global.userNotifications.length  != 0 ?
+                Global.userNotifications.length > 0 ?
                 Positioned(
                   left: 12,
                   child: CircleAvatar(

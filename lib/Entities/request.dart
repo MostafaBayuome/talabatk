@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 // states of Request
 // 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
+
 class Request {
 
   int id;

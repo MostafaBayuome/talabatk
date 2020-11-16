@@ -150,9 +150,7 @@ class _State extends State<CustomerRequestLayout>
                         padding: const EdgeInsets.all(0.0),
                         child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                             fontFamily: Global.fontFamily,
-
                             fontSize: 12,
-
                         )),
                       ),
                     ),
@@ -188,18 +186,14 @@ class _State extends State<CustomerRequestLayout>
                     width: 70.0,
                     height: 70.0,
                     alignment: Alignment.center,
-
                     padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
-
                     child: InkWell(
-
                       onTap: () {
                         Global.selectedRequestID=listItem[index].id;
                         //Send User to chat page
                         showDialog(
                           context: context,
                           builder: (context) {
-
                             return StatefulBuilder(
                               builder: (context, setState) {
                                 return MyDailog();
@@ -207,14 +201,11 @@ class _State extends State<CustomerRequestLayout>
                             );
                           },
                         );
-
-
                       }, // button pressed
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(Icons.star,color:Colors.yellowAccent), // icon
-
                         ],
                       ),
                     )),

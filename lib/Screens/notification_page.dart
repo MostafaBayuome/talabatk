@@ -7,6 +7,7 @@ import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 
 class Notification_Page extends StatefulWidget {
+
   @override
   _State createState() => _State();
 
@@ -23,7 +24,9 @@ class _State extends State<Notification_Page> {
             if(snapshot.data == null) {
               return Container(
                 child: Center(
-                  child: CircularProgressIndicator(),
+                  child: Container(
+                    child: Text('No Notification here'),
+                  ),
                 ),
               );
             }
@@ -46,8 +49,9 @@ class _State extends State<Notification_Page> {
                               if(notifications[index].type=="request")
                                 {
                                   NotificationDetails.editNotification(notifications[index]).then((value) {
-                                notifications.removeAt(index);
+
                                 setState(() {
+                                  notifications.removeAt(index);
                                 Global.userNotifications=notifications;
                                 });
                                 Navigator.of(context).pop();

@@ -19,13 +19,12 @@ static SharedPreferences prefs;
   static Timer notification_timer;
   static Timer chat_timer;
   static Timer location_timer;
-    static Timer delivery_timer;
+  static Timer delivery_timer;
   static List<NotificationDetails>userNotifications=new List<NotificationDetails>();
-
   static String selectedRate="اختر تقييم";
-static int selectedRateID=0;
-static int selectedRequestID=0;
-static List<Rate> rateList=[];
+  static int selectedRateID=0;
+  static int selectedRequestID=0;
+  static List<Rate> rateList=[];
 
 }
 
