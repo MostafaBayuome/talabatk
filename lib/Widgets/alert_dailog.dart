@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyDailog extends StatefulWidget {
+
   List<Rate>_rateList=[];
   Alert_Dailog(){
    _rateList=Global.rateList;
