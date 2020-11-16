@@ -54,23 +54,21 @@ class _State extends State<ForgetPassword>
       },
     );
   }
+
   Widget submitButton()  {
-
-
       return RaisedButton(
         color:Color(int.parse(Global.primaryColor)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
         child: Text('Reset Password',style:TextStyle(
           color: Colors.white,
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w500,
         ),),
         onPressed: () async {
-
-
-
+          Utils.toastMessage("Message will be delivered soon with new password");
         },
-      );
-  }
-
+      );}
 
 }

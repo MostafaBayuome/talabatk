@@ -7,7 +7,7 @@ import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import '../chat_page.dart';
+
 
 
 class DeliveryHomePage extends StatefulWidget {
@@ -109,15 +109,12 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                           fontFamily: Global.fontFamily,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-
                         )),
                       ),
                       Container(
                         child: Text( "Request ID: "+ listItem[index].id.toString() ,textAlign: TextAlign.center, style: TextStyle(
                           fontFamily: Global.fontFamily,
-
                           fontSize: 13,
-
                         )),
                       ),
                       SizedBox(height: 3,),
@@ -128,30 +125,25 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                               color: Colors.black,
                             )),
                       ),
-
                       Container(
                         child: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                             fontFamily: Global.fontFamily,
-
                             fontSize: 12,
-
                           )),
                         ),
                       ),
                       SizedBox(height : 5),]
                 ),
+                /*
                 if(listItem[index].state == 1)
                   Container(
                       width: 30.0,
                       height: 30.0,
                       alignment: Alignment.center,
-
                       padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
-
                       child: InkWell(
-
                         onTap: () {
                           //Send User to chat page
                           Navigator.of(context).push(MaterialPageRoute(
@@ -165,14 +157,13 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                           ],
                         ),
                       )),
+                */
                 if(listItem[index].state == 1)
                   Container(
                     width: 30.0,
                     height: 30.0,
                     alignment: Alignment.center,
-
                     padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
-
                     child: InkWell(
 
                       onTap: () {

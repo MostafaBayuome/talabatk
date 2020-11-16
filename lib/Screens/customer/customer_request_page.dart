@@ -67,7 +67,7 @@ class _State extends State<UserRequest>{
                         ),
                       )
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 25),
                   Expanded(
                     child: buildGridView(),
                    ),
@@ -129,8 +129,6 @@ class _State extends State<UserRequest>{
                               ),
                             )
                           )),
-
-
                     ],
                   ),
                   SizedBox(height: 15),
@@ -143,8 +141,7 @@ class _State extends State<UserRequest>{
                                             setState(() {
                                               Global.visible_progress=true;
                                             });
-                                      if(images.length>0)
-                                        {
+                                      if(images.length>0) {
                                             image1=images[0].name.toString();
                                             image1 = image1.replaceAll(".","-");
                                             image1+=".png";
@@ -163,26 +160,41 @@ class _State extends State<UserRequest>{
                                               String temp= tempbyte.toString();
                                               print(temp);
                                               arrbytes.add(tempbyte);
-
                                             }
                                         }
-                                      if(arrbytes.length==2){
-                                        Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
-                                          setState(() {
-                                            Global.visible_progress=false;
-                                          });
-                                          Utils.toastMessage('لقد تم ارسال طلبك');
+                                      if(detailsTextController.text.toString().length!=0 || images.length != 0 ){
+                                        try{
+                                          if(arrbytes.length == 2 ){
+                                            Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
+                                              setState(() {
+                                                Global.visible_progress=false;
+                                              });
+                                              Utils.toastMessage('لقد تم ارسال طلبك');
+                                            });
+                                          }// 1 image doesn't work
+                                          else
+                                          {
+                                            Request.addRequest1("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),"","",null,null).then((value) {
+                                              setState(() {
+                                                Global.visible_progress=false;
+                                              });
+                                              Utils.toastMessage('لقد تم ارسال طلبك');
+                                            });
+                                          }
+                                        }catch(Exception)
+                                            {
+                                              setState(() {
+                                                Global.visible_progress=false;
+                                              });
+                                            }
+
+                                      }else{
+                                        Utils.toastMessage('برجاء ادخال الطلب');
+                                        setState(() {
+                                          Global.visible_progress=false;
                                         });
                                       }
-                                      else
-                                        {
-                                          Request.addRequest1("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),"","",null,null).then((value) {
-                                            setState(() {
-                                              Global.visible_progress=false;
-                                            });
-                                            Utils.toastMessage('لقد تم ارسال طلبك');
-                                          });
-                                        }
+
 
                                     },
                                     elevation: 2.0,
@@ -269,6 +281,8 @@ class _State extends State<UserRequest>{
                           loadAssets();
                           Navigator.of(context).pop();
                         }),
+                  
+                  //get image from camera
                   /*
                     new ListTile(
                       leading: new Icon(Icons.photo_camera),
@@ -285,8 +299,6 @@ class _State extends State<UserRequest>{
         }
     );
   }
-
-
   void removeUncessaryDots(String image,int number) {
     bool firstDote=false;
     for (int i = image.length; i >= 0; i--) {
@@ -309,6 +321,5 @@ class _State extends State<UserRequest>{
       });
 
   }
-
 
 }

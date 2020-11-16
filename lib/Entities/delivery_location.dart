@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class DeliveryLocation {
+
    int id;
    int user_id;
    double latitude;
@@ -35,11 +36,17 @@ class DeliveryLocation {
   // get all user locations from Location table
   static Future <DeliveryLocation> getByIdLastLocation(int User_id) async {
 
+   try{
      String url =Global.url+"delevvity_Locations/GetByIdLastLocation?Id="+User_id.toString();
-    final response = await http.get(url,headers:{"Content-Type": "application/json"});
-    var data = json.decode(response.body);
-    DeliveryLocation location = new DeliveryLocation(data['id'], data['user_id'],  data['latitude'], data['longitude'],  data['record_Date'], data['record_Time']);
-    return location;
+     final response = await http.get(url,headers:{"Content-Type": "application/json"});
+     var data = json.decode(response.body);
+     DeliveryLocation location = new DeliveryLocation(data['id'], data['user_id'],  data['latitude'], data['longitude'],  data['record_Date'], data['record_Time']);
+     return location;
+   }catch(Exception)
+    {
+      return null;
+    }
+
 
   }
 

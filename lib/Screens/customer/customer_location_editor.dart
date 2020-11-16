@@ -1,4 +1,3 @@
-import 'package:Talabatk/Entities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +10,6 @@ import 'customer_home_page.dart';
 class LocationEditor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _State();
-
 }
 
 class _State  extends State<LocationEditor>{
@@ -22,6 +20,9 @@ class _State  extends State<LocationEditor>{
   TextEditingController _locationNameController = new TextEditingController();
   TextEditingController _locationNoteController = new TextEditingController();
   Position _currentposition=null;
+
+
+  int _state = 0;
   String _title="تعديل المواقع";
   @override
   Widget build(BuildContext context) {
@@ -63,8 +64,8 @@ class _State  extends State<LocationEditor>{
                     title:Center(
                       child: RaisedButton(
 
-                            onPressed: () {
-
+                            onPressed: () { 
+                              // long press delete location future work
                             },
                             color: Color(int.parse(Global.primaryColor)),
                             elevation: 10.0,
@@ -102,6 +103,7 @@ class _State  extends State<LocationEditor>{
           color: Color(int.parse(Global.primaryColor))
       )),
       onPressed: () async {
+        
         setState((){
           _locationName = _locationNameController.text;
           _locationNote = _locationNoteController.text;
@@ -110,17 +112,23 @@ class _State  extends State<LocationEditor>{
           {
             // save new position post request
             // send user to CustomerHomePage()
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            int user_id=prefs.getInt('id');
-            Location.addLocation("Location/AddLocation",user_id,_currentposition.latitude,_currentposition.longitude,_locationName,_locationNote).then((value){
-              Utils.toastMessage("تم الاضافه");
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CustomerHomePage()
-              ));
-            });
-
-
+            if(_state==0)
+              {
+                //_state for controlling user press not to add same location
+                _state=1;
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                int user_id=prefs.getInt('id');
+                Location.addLocation("Location/AddLocation",user_id,_currentposition.latitude,_currentposition.longitude,_locationName,_locationNote).then((value){
+                  Utils.toastMessage("تم الاضافه");
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CustomerHomePage()
+                  ));
+                });
+              }
           }
+        else{
+          Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+        }
       },
     );
     // set up the AlertDialog
@@ -166,7 +174,7 @@ class _State  extends State<LocationEditor>{
         ],
       ),
       actions: [
-        okButton,
+           okButton ,
       ],
     );
     // show the dialog
@@ -184,6 +192,10 @@ class _State  extends State<LocationEditor>{
     print(_currentposition);
     return _currentposition;
   }
+
+
+
+
 
 }
 

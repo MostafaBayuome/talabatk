@@ -176,7 +176,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                        });
                      },
                    ),
-                   SizedBox(width: 20,),
+                   /*
                    SizedBox.fromSize(
                      size: Size(60, 60), // button width and height
                      child: ClipOval(
@@ -201,7 +201,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                          ),
                        ),
                      ),
-                   ),
+                   ), */
                    SizedBox(width: 20,),
                    RaisedButton(
                      elevation: 2.0,

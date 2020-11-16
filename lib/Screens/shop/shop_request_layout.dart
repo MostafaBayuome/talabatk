@@ -147,15 +147,13 @@ class _State extends State<ShopRequestLayout> {
                             padding: const EdgeInsets.all(0.0),
                             child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
                               fontFamily: Global.fontFamily,
-
                               fontSize: 13,
-
                             )),
                           ),
                         ),
                         SizedBox(height : 5),]
                   ),
-                  if(listItem[index].state == 0 || listItem[index].state == 1)
+                  if(listItem[index].state == 1)
                     Container(
                         width: 30.0,
                         height: 30.0,
@@ -193,13 +191,19 @@ class _State extends State<ShopRequestLayout> {
                           //get last location of delivery plus location of customer to deliver
 
                             DeliveryLocation.getByIdLastLocation(listItem[index].delivery_id).then((value) {
-                              LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
-                              Location.GetLocationsById(listItem[index].location_id).then((value) {
-                                LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)
-                                ));
-                              });
+
+                              if(value!=null){
+                                LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
+                                Location.GetLocationsById(listItem[index].location_id).then((value) {
+                                  LatLng customerPosition = new LatLng(value.latitude,  value.longitude);
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>GmapDelivery( deliveryPosition: deliveryPosition , request:listItem[index] ,customerPosition: customerPosition)
+                                  ));
+                                });
+                              }else{
+                                Utils.toastMessage('الطيار لم يتحرك بعد .....');
+                              }
+
 
 
                             });
@@ -212,6 +216,7 @@ class _State extends State<ShopRequestLayout> {
                           ),
                         )
                     ),
+                  /*
                   if(listItem[index].state == 1)
                     Container(
                         width: 25.0,
@@ -232,6 +237,7 @@ class _State extends State<ShopRequestLayout> {
                           ),
                         )
                     ),
+                  */
                 ],
               ),),
           ),

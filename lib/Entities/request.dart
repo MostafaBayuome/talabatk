@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
+
 // states of Request
 // 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
 class Request {
@@ -141,7 +142,9 @@ class Request {
          "state": state,
          "delivery_id":request.delivery_id,
          "request_date":request.request_date,
-         "request_time":request.request_time
+         "request_time":request.request_time,
+         "delivery_id ":request.delivery_id
+
        } ) );
   response.toString();
   }
@@ -157,7 +160,7 @@ class Request {
     {
       String date =i['request_Date'].toString().substring(0,10);
       String time = i['request_Time'].toString().substring(0,5);
-      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['delivery_id']);
+      Request request = Request(i['request_id'],i['request_user_id'],i['request_merchant_id'],i['request_location_id'],date,time,i['request_details'],i['request_image_url'],i['request_image_url2'],i['request_state'],i['user_name'],i['request_delivery_id']);
       customerRequest.add(request);
     }
      return customerRequest;

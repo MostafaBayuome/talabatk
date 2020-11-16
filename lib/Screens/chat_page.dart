@@ -48,6 +48,7 @@ class _ChatPage extends State<ChatPage>
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
+                    /*
                     IconButton(
                       icon: Icon(Icons.photo,color: Color(int.parse(Global.primaryColor))),
                       iconSize: 25.0,
@@ -55,7 +56,7 @@ class _ChatPage extends State<ChatPage>
                       onPressed: () {
                         // Get Image from Gallery
                       },
-                    ),
+                    ), */
                     Expanded(
                       child: TextField(
                         controller: _controller,

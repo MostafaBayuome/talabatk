@@ -156,12 +156,10 @@ class _State extends State<CustomerRequestLayout>
                         )),
                       ),
                     ),
-
-
                     SizedBox(height : 5),
                   ]
               ),
-              if(listItem[index].state == 0 || listItem[index].state == 1)
+              if(listItem[index].state == 1)
                 Container(
                     width: 60.0,
                     height: 70.0,
