@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Widgets/utils.dart';
@@ -25,7 +26,6 @@ class _State extends State<CustomerHomePage> {
 
   @override
   void initState() {
-
     super.initState();
     getNotifications();
     Rate.getRates();
@@ -41,7 +41,7 @@ class _State extends State<CustomerHomePage> {
   @override
   Widget build(BuildContext context) {
 
-   String _title="الصفحه الرئيسيه";
+    String _title=AppLocalizations.of(context).translate('home_page');
     return Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: customerMenuWidget()
@@ -83,11 +83,13 @@ class _State extends State<CustomerHomePage> {
                         padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 3.0 ),
                         height: 50,
                         width: 110.0,
-                        child: Text('اضافه موقع جديد',style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white
-                        ),),
+                        child: Center(
+                          child: Text(AppLocalizations.of(context).translate('add_new_location'),style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white
+                          ),),
+                        ),
                         decoration: BoxDecoration (
                             color:Color(int.parse(Global.secondaryColor)),
                             borderRadius: BorderRadius.only(
@@ -122,7 +124,7 @@ class _State extends State<CustomerHomePage> {
                             children: [
                               Utils.title(50.0,50.0),
                               SizedBox(height : 10.0),
-                              Text(' مكان التوصيل',
+                              Text(AppLocalizations.of(context).translate('place_of_delivery'),
                               style : TextStyle(
                                   color: Colors.black,
                                   fontFamily: Global.fontFamily,
@@ -161,11 +163,13 @@ class _State extends State<CustomerHomePage> {
                         padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
                         height: 50,
                         width: 110.0,
-                        child: Text('لطلب اوردر',style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white
-                        ),),
+                        child: Center(
+                          child:Text(AppLocalizations.of(context).translate('request_an_order'),style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white
+                          ),)
+                        ),
                         decoration: BoxDecoration (
                             color:Color(int.parse(Global.secondaryColor)),
                             borderRadius: BorderRadius.only(
@@ -208,11 +212,13 @@ class _State extends State<CustomerHomePage> {
                         padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
                         height: 50,
                         width: 110.0,
-                        child: Text(' طلباتي',style: TextStyle(
-                          fontSize: 18,
-                            fontWeight: FontWeight.w800,
-                          color: Colors.white
-                        ),),
+                        child: Center(
+                          child: Text(AppLocalizations.of(context).translate('my_orders'),style: TextStyle(
+                            fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                            color: Colors.white
+                          ),),
+                        ),
                         decoration: BoxDecoration (
                             color:Color(int.parse(Global.secondaryColor)),
                             borderRadius: BorderRadius.only(
@@ -223,10 +229,8 @@ class _State extends State<CustomerHomePage> {
                         ),
                       ),
                       Icon(Icons.shopping_cart,size:30.0)
-
                     ],
                   )
-
               ),
             ),
           ]

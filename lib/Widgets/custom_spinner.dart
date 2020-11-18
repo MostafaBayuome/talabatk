@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,16 +8,18 @@ CustomSpinnerWidget createState() => CustomSpinnerWidget();
 }
 
 class CustomSpinnerWidget extends State {
-  String dropdownValue = 'مستخدم';
 
-  List <String> spinnerItems = [
-    'مستخدم',
-    'محل تجاري',
-    'صيدلية',
-    'مطعم'
-  ];
+
+
   @override
   Widget build(BuildContext context) {
+    String dropdownValue = AppLocalizations.of(context).translate('customer');
+    List <String> spinnerItems = [
+      AppLocalizations.of(context).translate('customer'),
+      AppLocalizations.of(context).translate('super_market'),
+      AppLocalizations.of(context).translate('pharmacy'),
+      AppLocalizations.of(context).translate('restaurant')
+    ];
     return Scaffold(
       body: Center(
         child :

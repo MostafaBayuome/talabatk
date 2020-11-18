@@ -38,7 +38,8 @@ class _State extends State<app_info> with TickerProviderStateMixin {
               child:Hero(
                   tag:'title',
                   child: Utils.title(growAnimation.value, growAnimation.value)),
-           ),
+
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

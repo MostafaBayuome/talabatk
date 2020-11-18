@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   url_launcher: ^5.7.2
   google_maps_flutter: ^0.5.32
   geolocator: ^6.0.0+4
@@ -20,9 +22,9 @@ dependencies:
   location: ^3.0.0
   image_picker: ^0.6.7+11
   multi_image_picker: ^4.7.14
-  cupertino_icons: ^1.0.0
   flutter_local_notifications: ^0.8.2
   flutter_absolute_path: ^1.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -39,3 +41,5 @@ flutter:
   assets:
     - images/
     - images/screens/
+    - i18n/ar.json
+    - i18n/en.json

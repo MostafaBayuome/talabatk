@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/location.dart';
@@ -17,7 +18,7 @@ class DeliveryHomePage extends StatefulWidget {
 
 class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
-  String _title="الصفحه الرئيسيه";
+
 
   List<Request> allCustomerRequest=[];
   List<Request> processingList=[];
@@ -43,6 +44,8 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    String _title=AppLocalizations.of(context).translate('home_page');
 
     return DefaultTabController(
       length: 2,
@@ -131,7 +134,7 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                       Container(
                         child: Padding(
                           padding: const EdgeInsets.all(0.0),
-                          child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
+                          child: Text(listItem[index].request_time.toString()  + AppLocalizations.of(context).translate('time'), style: TextStyle(
                             fontFamily: Global.fontFamily,
                             fontSize: 12,
                           )),
@@ -139,28 +142,6 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                       ),
                       SizedBox(height : 5),]
                 ),
-                /*
-                if(listItem[index].state == 1)
-                  Container(
-                      width: 30.0,
-                      height: 30.0,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
-                      child: InkWell(
-                        onTap: () {
-                          //Send User to chat page
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>ChatPage( request: listItem[index] )
-                          ));
-                        }, // button pressed
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.chat,color: Colors.blue), // icon
-                          ],
-                        ),
-                      )),
-                */
                 if(listItem[index].state == 1)
                   Container(
                     width: 30.0,
@@ -195,10 +176,10 @@ class _DeliveryHomePageState extends State<DeliveryHomePage> {
                         onTap: () {
                           Request.editRequest(listItem[index], 2).then((value) {
                             if(value=='لم يتم الارسال'){
-                              Utils.toastMessage('لم يقترب منك الطيار بعد');
+                              Utils.toastMessage(AppLocalizations.of(context).translate('delivery_place1'));
                             }else{
                               print(value);
-                              Utils.toastMessage("تم تاكيد توصيل الطلب");
+                              Utils.toastMessage(AppLocalizations.of(context).translate('order_confirmed'));
                             }
 
 

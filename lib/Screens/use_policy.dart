@@ -126,17 +126,6 @@ class _State extends State<use_policy>  {
                    )
                ),
                SizedBox(width: 5,),
-               if(username=="shop")
-                 Container(
-                     width: 250,
-                     decoration: BoxDecoration(
-                         image: DecorationImage(
-                             image : AssetImage("images/screens/${username}9.png"),
-                             fit:BoxFit.fitHeight
-                         )
-                     )
-                 ),
-
             ] ),
            ])
           ),
@@ -165,7 +154,7 @@ class _State extends State<use_policy>  {
                   },
                   color: Color(int.parse(Global.primaryColor)),
                   child: Text(
-                   'التالي',
+                   'Next',
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white

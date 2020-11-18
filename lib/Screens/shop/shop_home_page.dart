@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/add_delivery.dart';
@@ -16,7 +17,7 @@ class ShopHomePage extends StatefulWidget {
 }
 
 class _State extends State<ShopHomePage>{
-  String _title="Shop Home Page";
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +32,7 @@ class _State extends State<ShopHomePage>{
 
   @override
   Widget build(BuildContext context) {
-
+    String _title= AppLocalizations.of(context).translate('home_page');
     return  Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: Center(
@@ -65,11 +66,13 @@ class _State extends State<ShopHomePage>{
                             padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
                             height: 50,
                             width: 110.0,
-                            child: Text( 'اضافه طيار',style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.white
-                            ),),
+                            child: Center(
+                              child:Text( AppLocalizations.of(context).translate('add_delivery'),style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white
+                              ),),
+                            ),
                             decoration: BoxDecoration (
                                 color:Color(int.parse(Global.secondaryColor)),
                                 borderRadius: BorderRadius.only(
@@ -112,11 +115,13 @@ class _State extends State<ShopHomePage>{
                             padding: EdgeInsets.symmetric(vertical:14.0,horizontal: 5.0 ),
                             height: 50,
                             width: 110.0,
-                            child: Text(   'عرض جميع الطيارين',style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.white
-                            ),),
+                            child: Center(
+                              child: Text(  AppLocalizations.of(context).translate('show_all_delivery_men'),style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white
+                              ),),
+                            ),
                             decoration: BoxDecoration (
                                 color:Color(int.parse(Global.secondaryColor)),
                                 borderRadius: BorderRadius.only(
@@ -159,11 +164,13 @@ class _State extends State<ShopHomePage>{
                             padding: EdgeInsets.symmetric(vertical:12.0,horizontal: 15.0 ),
                             height: 50,
                             width: 110.0,
-                            child: Text(  'تنفيذ الطلبات',style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.white
-                            ),),
+                            child: Center(
+                              child: Text( AppLocalizations.of(context).translate('orders'),style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white
+                              ),),
+                            ),
                             decoration: BoxDecoration (
                                 color:Color(int.parse(Global.secondaryColor)),
                                 borderRadius: BorderRadius.only(
@@ -180,15 +187,10 @@ class _State extends State<ShopHomePage>{
                   ),
                 ),
 
-
-
               ]
           ),
         )
-
-
     );
-
   }
 
    Future getNotifications(){

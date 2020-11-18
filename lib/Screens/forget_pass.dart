@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,7 @@ class _State extends State<ForgetPassword>
                   padding: EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: mobileField(),
-                      ),
+                      mobileField(),
                       Container(margin: EdgeInsets.only(top:50.0),),
                       submitButton()
                     ],
@@ -42,11 +40,11 @@ class _State extends State<ForgetPassword>
   }
   Widget mobileField(){
     return TextFormField(
-      textAlign: TextAlign.right,
+
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        labelText: 'رقم الموبيل',
-        hintText: '',
+        labelText: AppLocalizations.of(context).translate('mobile_field'),
+        hintText: AppLocalizations.of(context).translate('mobile_field'),
       ),
 
       onSaved: (String value){
@@ -61,13 +59,13 @@ class _State extends State<ForgetPassword>
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
         ),
-        child: Text('Reset Password',style:TextStyle(
+        child: Text(AppLocalizations.of(context).translate('reset_password'),style:TextStyle(
           color: Colors.white,
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w500,
         ),),
         onPressed: () async {
-          Utils.toastMessage("Message will be delivered soon with new password");
+          Utils.toastMessage(AppLocalizations.of(context).translate('message_reset_password'));
         },
       );}
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/reply.dart';
 import 'package:Talabatk/Entities/request.dart';
 import 'package:Talabatk/Widgets/utils.dart';
@@ -23,11 +24,11 @@ class _ChatPage extends State<ChatPage>
   var _controller = TextEditingController();
   final _controllerList = ScrollController();
   String time="";
-  String _title="Chat";
+
   @override
   Widget build(BuildContext context) {
     getAllRequests();
-
+    String _title= AppLocalizations.of(context).translate('chat');
     return Scaffold(
         appBar: Utils.appBarusers(context,_title),
         body: Column(
@@ -48,28 +49,17 @@ class _ChatPage extends State<ChatPage>
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    /*
-                    IconButton(
-                      icon: Icon(Icons.photo,color: Color(int.parse(Global.primaryColor))),
-                      iconSize: 25.0,
-                      color: Theme.of(context).primaryColor,
-                      onPressed: () {
-                        // Get Image from Gallery
-                      },
-                    ), */
                     Expanded(
                       child: TextField(
                         controller: _controller,
-
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration (
                           border:  InputBorder.none,
                           suffixIcon: IconButton(
-
                             onPressed: () => _controller.clear(),
                             icon: Icon(Icons.clear ,color: Color(int.parse(Global.primaryColor)),),
                           ),
-                          hintText: 'Send a message...',
+                          hintText:  AppLocalizations.of(context).translate('send_message'),
                         ),
                       ),
                     ),

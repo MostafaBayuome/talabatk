@@ -1,6 +1,9 @@
+
+
 class Validation {
 
    String validateUserName(String value) {
+
      if(value.length<3)
      {
        return 'Please Enter your name';

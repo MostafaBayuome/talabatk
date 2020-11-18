@@ -1,4 +1,4 @@
-import 'package:Talabatk/Entities/constants.dart';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -64,7 +64,7 @@ class Utils {
   // for sign out deleting all prefrences for user
   static Future<void>  choiceAction(String choices,BuildContext context) async {
 
-    if(choices.contains('تسجيل الخروج')){
+    if(choices.contains('تسجيل الخروج')|| choices.contains("SignOut")){
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       prefs.remove('phone');
@@ -84,7 +84,11 @@ class Utils {
 
   // appbar for all users shop, customer, delivery
   static Widget  appBarusers(BuildContext context,String title ){
-
+    String SignOut=AppLocalizations.of(context).translate('sign_out');
+    List<String> singleChoice = <String> [
+      SignOut
+    ];
+    String _title=title;
     return PreferredSize(
       preferredSize: Size.fromHeight(40.0),
       child: AppBar(
@@ -96,7 +100,7 @@ class Utils {
         automaticallyImplyLeading: false,
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
-      if(title != "Notifications" )
+        if(_title != "Notifications" || _title != "تنبيه")
            IconButton(icon:Stack(
               children: [
                 Icon(Icons.notifications),
@@ -128,7 +132,7 @@ class Utils {
               Utils.choiceAction(value, context);
             },
             itemBuilder: (BuildContext context){
-              return Constants.singleChoice.map((String choice){
+              return  singleChoice.map((String choice){
                 return PopupMenuItem<String>(
                   value: choice,
                   child: Text(choice),

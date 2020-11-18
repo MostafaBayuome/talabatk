@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
@@ -79,7 +80,7 @@ class _GmapDeliveryState extends State<GmapDelivery> {
            setState(() {
              allMarkers.add(Marker(
                  markerId:MarkerId("customerid"),
-                 infoWindow: InfoWindow(title:"مكان التوصيل"),
+                 infoWindow: InfoWindow(title:AppLocalizations.of(context).translate('Place_to_delivery_to') ),
                  draggable: false,
                  position: customerPosition,
                  icon:  LocationIcon
@@ -87,7 +88,7 @@ class _GmapDeliveryState extends State<GmapDelivery> {
 
              allMarkers.add(Marker(
                  markerId:MarkerId("deliveryid"),
-                 infoWindow: InfoWindow(title:"مكان الطيار"),
+                   infoWindow: InfoWindow(title:AppLocalizations.of(context).translate('delivery_location') ),
                  draggable: false,
                  position: _deliveryPosition,
                  icon: deliveryIcon
@@ -114,7 +115,7 @@ class _GmapDeliveryState extends State<GmapDelivery> {
               {
                 allMarkers[1] = Marker(
                     markerId:MarkerId("deliveryid"),
-                    infoWindow: InfoWindow(title:"مكان الطيار"),
+                    infoWindow: InfoWindow(title:AppLocalizations.of(context).translate('delivery_location')),
                     draggable: false,
                     position: _deliveryPosition,
                     icon: deliveryIcon

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'app_localizations.dart';
 import 'rate.dart';
 class  Global {
 
@@ -25,6 +25,10 @@ static SharedPreferences prefs;
   static int selectedRateID=0;
   static int selectedRequestID=0;
   static List<Rate> rateList=[];
+
+
+  // appLanguage for changing application language
+  static AppLanguage appLanguage = AppLanguage();
 
 }
 

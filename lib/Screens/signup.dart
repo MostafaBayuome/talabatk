@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:Talabatk/Entities/user.dart';
@@ -5,8 +6,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:Talabatk/Entities/api_manger.dart';
 import 'package:Talabatk/Entities/validation.dart';
 import 'package:Talabatk/Entities/global.dart';
-import 'package:Talabatk/Screens/shop/shop_home_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';
+import 'package:provider/provider.dart';
 import 'customer/customer_home_page.dart';
 import 'login.dart';
 
@@ -18,7 +19,7 @@ class SignUp extends StatefulWidget {
 
 class _State extends State<SignUp> with Validation  {
 
-  String dropdownValue = 'مستخدم';
+  String dropdownValue = "";
   int map_Appear;
   String userName='';
   String phone='';
@@ -47,8 +48,8 @@ class _State extends State<SignUp> with Validation  {
 
   @override
   Widget build(BuildContext context) {
-
-
+    dropdownValue= AppLocalizations.of(context).translate('customer');
+    var appLanguage = Provider.of<AppLanguage>(context);
     return Scaffold(
         body: Padding(
             padding: EdgeInsets.all(10),
@@ -58,32 +59,21 @@ class _State extends State<SignUp> with Validation  {
                 Utils.title(130.0,130.0),
                 Container(margin: EdgeInsets.only(top:10.0),),
                 Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(10.0),
                   child: Form(
                     key: formKey,
                     child: Column(
                       children: [
 
-                       Directionality(
-                        textDirection: TextDirection.rtl,
-                         child: nameField(),
-                         ),
-                       Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: mobileField(),
-                        ),
-                       Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: passwordField(),
-                        ),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: passwordFieldConfirmation(),
-                        ),
+                         nameField(),
+                         mobileField(),
+                         passwordField(),
+                         passwordFieldConfirmation(),
+
 
                         Container(margin: EdgeInsets.only(top:10.0),),
                         Text(
-                          'موقعك',
+                          AppLocalizations.of(context).translate('position'),
                           style: TextStyle(fontSize: 20,
                             color:Color(int.parse(Global.primaryColor)),
                             fontFamily: Global.fontFamily,
@@ -94,25 +84,72 @@ class _State extends State<SignUp> with Validation  {
                         DropDown(),//Account Type Spinner (user,shop,pharmacy)
                         Container(margin: EdgeInsets.only(top:15.0),),
                         submitButton(),
+                        Container(margin: EdgeInsets.only(top:5.0),),
 
                       ],
                     ),
                   ),
                 ),
 
-                SizedBox(height: 10),
+
                 sendToLogin(),
+                    Container(margin: EdgeInsets.only(top:10.0),),
+                    Center(
+                      child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
+                        fontFamily: Global.fontFamily,
+                        fontWeight: FontWeight.w500,),),
+                    ),
+                    Container(margin: EdgeInsets.only(top:5.0),),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+
+                            ),
+                            color: Color(int.parse(Global.primaryColor)),
+                            onPressed: () {
+                              appLanguage.changeLanguage(Locale("en"));
+                            },
+                            child: Text('English',  style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15
+                            )),
+                          ),
+                          SizedBox(width: 10),
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+
+                            ),
+                            color: Color(int.parse(Global.primaryColor)),
+                            onPressed: () {
+                              appLanguage.changeLanguage(Locale("ar"));
+                            },
+                            child: Text('عربي' , style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15
+                            )),
+                          ) ,
+                        ],
+                      ) ,
+                    )
               ],
             )));
   }
 
   Widget nameField(){
     return TextFormField(
-      textAlign: TextAlign.right,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
-        labelText: 'الاسم',
-        hintText: 'محمد',
+        labelText: AppLocalizations.of(context).translate('name_field'),
+        hintText: AppLocalizations.of(context).translate('name_field_hint'),
       ),
       validator: validateUserName,
       onSaved: (String value){
@@ -123,11 +160,10 @@ class _State extends State<SignUp> with Validation  {
 
   Widget mobileField(){
     return TextFormField(
-      textAlign: TextAlign.right,
-      keyboardType: TextInputType.number,
+
       decoration: InputDecoration(
-        labelText: 'رقم الموبيل',
-        hintText: '',
+        labelText: AppLocalizations.of(context).translate('mobile_field'),
+        hintText: AppLocalizations.of(context).translate('mobile_field'),
       ),
       validator: validateMobileNumber,
       onSaved: (String value){
@@ -140,10 +176,10 @@ class _State extends State<SignUp> with Validation  {
     return  TextFormField(
       controller: _pass,
       obscureText: true,
-      textAlign: TextAlign.right,
+
       decoration: InputDecoration(
-        labelText: 'كلمه المرور',
-        hintText: 'كلمه المرور',
+        labelText:  AppLocalizations.of(context).translate('password_field'),
+        hintText: '',
       ),
       validator: validatePassword ,
       onSaved: (String value){
@@ -156,10 +192,9 @@ class _State extends State<SignUp> with Validation  {
     return  TextFormField(
       controller:_confirmPass,
       obscureText: true,
-      textAlign: TextAlign.right,
       decoration: InputDecoration(
-        labelText: 'تاكيد كلمه المرور',
-        hintText: 'تاكيد كلمه المرور',
+        labelText:  AppLocalizations.of(context).translate('password_field_confirmation') ,
+        hintText: '',
       ),
       validator: (val){
         if(val.isEmpty)
@@ -189,7 +224,7 @@ class _State extends State<SignUp> with Validation  {
 
         ),
         color:Color(int.parse(Global.primaryColor)),
-        child: Text('تسجيل',style:TextStyle(
+        child: Text(AppLocalizations.of(context).translate('login'),style:TextStyle(
           color: Colors.white,
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w700,
@@ -204,9 +239,9 @@ class _State extends State<SignUp> with Validation  {
             formKey.currentState.save();
             // Sign up as shop
             map_Appear=0;
-            if(dropdownValue=="صيدلية")     map_Appear=2;
-            else if(dropdownValue=="محل تجاري")     map_Appear=1;
-            else if(dropdownValue=="مطعم")  map_Appear=3;
+            if(dropdownValue=="صيدلية" || dropdownValue=="pharmacy" )  map_Appear=2;
+            else if(dropdownValue=="محل تجاري" || dropdownValue=="Super market")  map_Appear=1;
+            else if(dropdownValue=="مطعم"|| dropdownValue=="restaurant") map_Appear=3;
 
             if (map_Appear>0){
               if (position == null) {
@@ -239,7 +274,7 @@ class _State extends State<SignUp> with Validation  {
                     ));
                   }
                   else{
-                    Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+                    Utils.toastMessage(AppLocalizations.of(context).translate('right_info'));
                   }}
                 );
 
@@ -321,7 +356,7 @@ class _State extends State<SignUp> with Validation  {
 
   // get current location of user
   Future<Position> _getLocation() async{
-    Position position = await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
     return position;
   }
@@ -330,7 +365,15 @@ class _State extends State<SignUp> with Validation  {
     return   Container(
         child: Row(
           children: <Widget>[
-
+            Container(
+              margin:EdgeInsets.all(15) ,
+              child: Text(
+                AppLocalizations.of(context).translate('account_type'),
+                style: TextStyle(fontSize: 13,
+                  fontFamily: Global.fontFamily,
+                  fontWeight: FontWeight.w500,),
+              ),
+            ),
             new DropdownButton<String>(
               value: dropdownValue,
               onChanged: (String data) {
@@ -338,7 +381,10 @@ class _State extends State<SignUp> with Validation  {
                   dropdownValue = data;
                 });
               },
-              items: <String>['مستخدم', 'محل تجاري', 'صيدلية','مطعم'].map((String value) {
+              items: <String>[AppLocalizations.of(context).translate('customer') ,
+                AppLocalizations.of(context).translate('super_market'),
+                AppLocalizations.of(context).translate('pharmacy'),
+                AppLocalizations.of(context).translate('restaurant')].map((String value) {
                 return new DropdownMenuItem<String>(
                   value: value,
                   child: new Text(value),
@@ -346,15 +392,7 @@ class _State extends State<SignUp> with Validation  {
               }).toList(),
 
             ),
-            Container(
-              margin:EdgeInsets.all(15) ,
-              child: Text(
-                'نوع الحساب',
-                style: TextStyle(fontSize: 13,
-                  fontFamily: Global.fontFamily,
-                  fontWeight: FontWeight.w500,),
-              ),
-            )
+
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         )
@@ -365,11 +403,11 @@ class _State extends State<SignUp> with Validation  {
     return   Container(
         child: Row(
           children: <Widget>[
-
+            Text(AppLocalizations.of(context).translate('have_acount')),
             FlatButton(
               textColor: Color(int.parse(Global.primaryColor)),
               child: Text(
-                'تسجيل الدخول',
+                AppLocalizations.of(context).translate('login_user'),
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
@@ -379,7 +417,7 @@ class _State extends State<SignUp> with Validation  {
                 ));
               },
             ),
-            Text('لديك حساب؟'),
+
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ));

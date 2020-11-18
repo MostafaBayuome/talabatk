@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,11 +12,11 @@ import 'package:Talabatk/Screens/signup.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'customer/customer_home_page.dart';
 import 'forget_pass.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
   _State createState() => _State();
-
 }
 
 class _State extends State<Login>  with Validation {
@@ -27,6 +28,7 @@ class _State extends State<Login>  with Validation {
 
   @override
   Widget build(BuildContext context) {
+    var appLanguage = Provider.of<AppLanguage>(context);
     return Scaffold(
 
         body: Padding(
@@ -44,14 +46,9 @@ class _State extends State<Login>  with Validation {
                     key: formKey,
                     child: Column(
                       children: [
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: mobileField(),
-                      ),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child:passwordField(),
-                      ),
+                        mobileField(),
+                        passwordField(),
+
                         forgetPasswordButton(),
                         Container(margin: EdgeInsets.only(top:25.0),),
                         submitButton()
@@ -64,27 +61,76 @@ class _State extends State<Login>  with Validation {
                 Container(
                     child: Row(
                       children: <Widget>[
-                      FlatButton(
-                        textColor: Color(int.parse(Global.primaryColor)),
-                        child: Text(
-                        ' انشاء حساب',
-                        style: TextStyle(fontSize: 20,
-                        fontFamily: Global.fontFamily,
-                        fontWeight: FontWeight.w500,),
-                        ),
-                        onPressed: () {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>SignUp()
-                        ));
-                        },
-                        ),
-                          Text('ليس لديك حساب؟ ' ,style: TextStyle(
+
+                         Text( AppLocalizations.of(context).translate('dont_have_acount')  ,style: TextStyle(
                           fontFamily: Global.fontFamily,
                           fontWeight: FontWeight.w500,),),
+                        FlatButton(
+                          textColor: Color(int.parse(Global.primaryColor)),
+                          child: Text(
+                            AppLocalizations.of(context).translate('create_account') ,
+                            style: TextStyle(fontSize: 20,
+                              fontFamily: Global.fontFamily,
+                              fontWeight: FontWeight.w500,),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>SignUp()
+                            ));
+                          },
+                        ),
                           ],
                     mainAxisAlignment: MainAxisAlignment.center,
                     )),
+                Container(margin: EdgeInsets.only(top:80.0),),
+                  Center(
+                  child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
+                    fontFamily: Global.fontFamily,
+                    fontWeight: FontWeight.w500,),),
+                ),
+                Container(margin: EdgeInsets.only(top:5.0),),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+
+                        ),
+                        color: Color(int.parse(Global.primaryColor)),
+                        onPressed: () {
+                          appLanguage.changeLanguage(Locale("en"));
+                        },
+                        child: Text('English',  style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: Global.fontFamily,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15
+                        )),
+                      ),
+                      SizedBox(width: 10),
+                      RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+
+                        ),
+                        color: Color(int.parse(Global.primaryColor)),
+                        onPressed: () {
+                          appLanguage.changeLanguage(Locale("ar"));
+                        },
+                        child: Text('عربي' , style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: Global.fontFamily,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15
+                              )),
+                      ) ,
+                    ],
+                  ) ,
+                )
+
 
               ],
             )));
@@ -94,12 +140,11 @@ class _State extends State<Login>  with Validation {
   Widget mobileField(){
 
     return TextFormField(
-      textDirection: TextDirection.rtl,
-      textAlign: TextAlign.right,
+
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        labelText: 'رقم الموبيل',
-        hintText: '',
+       labelText: AppLocalizations.of(context).translate('mobile_field'),
+        hintText: AppLocalizations.of(context).translate('mobile_field'),
       ),
       validator:validateMobileNumber ,
       onSaved: (String value){
@@ -111,11 +156,9 @@ class _State extends State<Login>  with Validation {
   Widget passwordField() {
     return  TextFormField(
       obscureText: true,
-      textDirection: TextDirection.rtl,
-      textAlign: TextAlign.right,
       decoration: InputDecoration(
-        labelText: 'كلمه المرور',
-        hintText: 'كلمه المرور',
+        labelText: AppLocalizations.of(context).translate('password_field'),
+        hintText: AppLocalizations.of(context).translate('password_field'),
       ),
       validator: validatePassword ,
       onSaved: (String value){
@@ -132,7 +175,7 @@ class _State extends State<Login>  with Validation {
         ));
       },
       textColor: Color(int.parse(Global.primaryColor)),
-      child: Text('هل نسيت كلمة المرور؟'),
+      child: Text( AppLocalizations.of(context).translate('forgetPasswordButton')),
     );
   }
 
@@ -151,7 +194,7 @@ class _State extends State<Login>  with Validation {
 
         ),
         color: Color(int.parse(Global.primaryColor)),
-        child: Text('دخول',
+        child: Text(AppLocalizations.of(context).translate('login') ,
           style: TextStyle(
               color: Colors.white,
               fontFamily: Global.fontFamily,
@@ -213,7 +256,7 @@ class _State extends State<Login>  with Validation {
                 }
               }
               else {
-                Utils.toastMessage(" خطأ في البيانات");
+                Utils.toastMessage(AppLocalizations.of(context).translate('data_error') );
               }
             });
 

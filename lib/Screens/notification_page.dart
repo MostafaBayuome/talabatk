@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
 import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
@@ -16,8 +17,9 @@ class _State extends State<Notification_Page> {
   List<NotificationDetails> notifications = [];
   @override
   Widget build(BuildContext context) {
+    String _notification=AppLocalizations.of(context).translate('notification');
     return Scaffold(
-        appBar: Utils.appBarusers(context, "Notifications"),
+        appBar: Utils.appBarusers(context, _notification),
         body: FutureBuilder(
           future: NotificationDetails.getMyNotification(),
           builder:(BuildContext context,AsyncSnapshot snapshot){
@@ -25,7 +27,7 @@ class _State extends State<Notification_Page> {
               return Container(
                 child: Center(
                   child: Container(
-                    child: Text('No Notification here'),
+                    child: Text(AppLocalizations.of(context).translate('no_notification_here')),
                   ),
                 ),
               );

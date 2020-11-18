@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,8 +9,10 @@ import 'package:Talabatk/Widgets/utils.dart';
 import 'customer_home_page.dart';
 
 class LocationEditor extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => _State();
+
 }
 
 class _State  extends State<LocationEditor>{
@@ -23,10 +26,11 @@ class _State  extends State<LocationEditor>{
 
 
   int _state = 0;
-  String _title="تعديل المواقع";
+
   @override
   Widget build(BuildContext context) {
 
+    String _title= AppLocalizations.of(context).translate('edit_location');
     return Scaffold(
         appBar:Utils.appBarusers(context,_title),
       floatingActionButton:Container(
@@ -96,7 +100,7 @@ class _State  extends State<LocationEditor>{
   showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = FlatButton(
-      child: Text("تثبيت",style: TextStyle(
+      child: Text(AppLocalizations.of(context).translate('add_location'),style: TextStyle(
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w600,
           fontSize: 15,
@@ -119,7 +123,7 @@ class _State  extends State<LocationEditor>{
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 int user_id=prefs.getInt('id');
                 Location.addLocation("Location/AddLocation",user_id,_currentposition.latitude,_currentposition.longitude,_locationName,_locationNote).then((value){
-                  Utils.toastMessage("تم الاضافه");
+                  Utils.toastMessage(AppLocalizations.of(context).translate('added_successfully'));
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CustomerHomePage()
                   ));
@@ -127,7 +131,7 @@ class _State  extends State<LocationEditor>{
               }
           }
         else{
-          Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+          Utils.toastMessage(AppLocalizations.of(context).translate('right_info'));
         }
       },
     );
@@ -135,7 +139,7 @@ class _State  extends State<LocationEditor>{
     AlertDialog alert = AlertDialog(
       contentPadding: const EdgeInsets.all(16.0),
       title: Center(
-          child:Text("اضف مكانك الحالي" ,style: TextStyle(
+          child:Text(AppLocalizations.of(context).translate('add_your_current_location'),style: TextStyle(
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w800,
           fontSize: 15,
@@ -145,7 +149,6 @@ class _State  extends State<LocationEditor>{
 
       content:Row(
         children: [
-
           IconButton(
             icon: Icon(Icons.location_on),
             color: Color(int.parse(Global.primaryColor)),
@@ -158,14 +161,14 @@ class _State  extends State<LocationEditor>{
               controller: _locationNameController,
               autofocus: true,
               decoration: new InputDecoration(
-                  labelText: 'اسم المكان' , hintText: 'العمل',),
+                  labelText: AppLocalizations.of(context).translate('place_name') , hintText: AppLocalizations.of(context).translate('work'),),
             ),
           ),
           Expanded(
             child: new TextField(
               controller: _locationNoteController,
               decoration: new InputDecoration(
-                labelText: 'ملاحظاتك' , hintText: 'ملاحظات',),
+                labelText: AppLocalizations.of(context).translate('your_notes'),),
             ),
           )
 
@@ -185,18 +188,12 @@ class _State  extends State<LocationEditor>{
       },
     );
   }
-
   // get current location of user
   Future<Position> _getLocation() async{
     _currentposition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(_currentposition);
     return _currentposition;
   }
-
-
-
-
-
 }
 
 
