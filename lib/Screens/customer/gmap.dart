@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -31,13 +32,12 @@ class _GMapState extends State<Gmap> {
   _GMapState(this._currentPosition);
   Completer<GoogleMapController> _controller = Completer();
   double zoomVal=20.0;
-  String _title="المحلات القريبه";
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Utils.appBarusers(context,_title),
+      appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('nearest_shop') ),
       body:Stack(
         children: [
           _googleMap(context),

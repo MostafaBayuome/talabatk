@@ -46,6 +46,28 @@
   "place_name": "Place name",
   "work": "work",
   "your_notes": "Notes",
-  "add_your_current_location":"Add your current location"
+  "add_your_current_location":"Add your current location",
+  "nearest_shop": "Nearest Shop",
+  "request": "Request",
+  "request_info": "Request information",
+  "call": "Call",
+  "upload_photo": "Upload Photo",
+  "request_order": "Request Order",
+  "request_have_been_sent": "Request have been sent",
+  "fill_the_request": "Please fill the request",
+  "my_orders": "My orders",
+  "add_new_delivery": "Add new Deliveryman",
+  "add": "Add",
+  "show_all_delivery": "Show all delivery men",
+  "delivery_account_added": "Delivery account has added successfully",
+  "update_info": "Update info",
+  "update": "Update",
+  "updating_information": "Updating information",
+  "information_update":"Information updated",
+  "delete": "Delete",
+  "delete_done": "Deleted Successfully",
+  "orders": "Orders",
+  "delivery_didnt_move": "Deliveryman has not yet made a move"
+
 }
 

@@ -191,7 +191,6 @@ class _State extends State<Login>  with Validation {
       child:RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
-
         ),
         color: Color(int.parse(Global.primaryColor)),
         child: Text(AppLocalizations.of(context).translate('login') ,

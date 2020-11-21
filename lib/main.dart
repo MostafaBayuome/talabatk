@@ -12,13 +12,11 @@ import 'Screens/customer/customer_home_page.dart';
 import 'Screens/shop/shop_home_page.dart';
 import 'Screens/signup.dart';
 
+
 Future<void> main()  async {
     WidgetsFlutterBinding.ensureInitialized();
 
-
-
-   Global.prefs =await SharedPreferences.getInstance();
-
+    Global.prefs =await SharedPreferences.getInstance();
    // if mobileNumber and check not null then it will redirect to the correct homepage
    var FirstEnter=Global.prefs.getInt('FirstEnter');
 
@@ -37,7 +35,6 @@ Future<void> main()  async {
        Global.loginUser=user;
      }
 
-
     await Global.appLanguage.fetchLocale();
     final AppLanguage appLanguage=Global.appLanguage;
     runApp(
@@ -48,17 +45,14 @@ Future<void> main()  async {
               debugShowCheckedModeBanner: false,
               locale: model.appLocal,
               supportedLocales: [
-
                 Locale('ar', 'EG'),
                 Locale('en', 'US'),
-
               ],
               localizationsDelegates: [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-
               home:  FirstEnter==null? app_info(): phone ==null ? SignUp() : (map_Appear == 1 || map_Appear == 2) ? ShopHomePage() : (map_Appear!=9) ? CustomerHomePage() : DeliveryHomePage(),
             );
           }),

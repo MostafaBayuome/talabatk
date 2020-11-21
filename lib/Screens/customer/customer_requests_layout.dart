@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Entities/location.dart';
@@ -27,7 +28,7 @@ class _State extends State<CustomerRequestLayout>
   List<Request> deliveredList=[];
   List<Request> rejectedList=[];
   BuildContext currContext=null;
-  String _title="طلباتي";
+
   String selectedRate="اختر تقييم";
 
   int count=0;
@@ -43,7 +44,7 @@ class _State extends State<CustomerRequestLayout>
     return DefaultTabController(
       length: 4,
       child: new Scaffold(
-        appBar: Utils.appBarusers(context,_title),
+        appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('my_orders') ),
         body: TabBarView(
           children: [
             new Container(
@@ -140,21 +141,21 @@ class _State extends State<CustomerRequestLayout>
                           style: TextStyle(
                             fontFamily: Global.fontFamily,
 
-                          fontSize: 13,
+                          fontSize: 12,
                           color: Colors.black,
                       )),
                     ),
-
+                    SizedBox(height : 5),
                     Container(
                       child: Padding(
                         padding: const EdgeInsets.all(0.0),
-                        child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
+                        child: Text(AppLocalizations.of(context).translate('time')+": "+ listItem[index].request_time.toString()   , style: TextStyle(
                             fontFamily: Global.fontFamily,
                             fontSize: 12,
                         )),
                       ),
                     ),
-                    SizedBox(height : 5),
+
                   ]
               ),
               if(listItem[index].state == 1)

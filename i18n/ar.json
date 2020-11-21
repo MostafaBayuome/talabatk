@@ -46,5 +46,27 @@
   "place_name": "اسم المكان",
   "work": "العمل",
   "your_notes": "ملاحظاتك",
-  "add_your_current_location":"اضف مكانك الحالي"
+  "add_your_current_location":"اضف مكانك الحالي",
+  "nearest_shop": "المحلات القريبه",
+  "request": "الطلب",
+  "request_info": "تفاصيل الطلب",
+  "call": "اتصال",
+  "upload_photo":" رفع صوره",
+  "request_order": "طلب اوردر",
+  "request_have_been_sent": "لقد تم ارسال طلبك",
+  "fill_the_request": "برجاء ادخال الطلب",
+  "my_orders": "طلباتي",
+  "add_new_delivery": "اضافه طيار",
+  "add": "اضافه",
+  "show_all_delivery": "عرض تفاصيل الطيارين",
+  "delivery_account_added": "لقد تم اضافه طيار",
+  "update_info": "تحديث البيانات",
+  "update": "تحديث",
+  "updating_information": "جاري تحديث البيانات",
+  "information_update":"تم تحديث البيانات",
+  "delete": "مسح",
+  "delete_done": "تم المسح",
+  "orders": "الطلبات",
+  "delivery_didnt_move": "الطيار لم يتحرك بعد ....."
+
 }

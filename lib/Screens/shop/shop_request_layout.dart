@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/delivery_location.dart';
 import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Screens/gmap_delivery.dart';
@@ -29,13 +30,13 @@ class _State extends State<ShopRequestLayout> {
   @override
   Widget build(BuildContext context) {
 
-    String _title="طلباتي";
+
     currContext=context;
     getAllRequests();
     return  DefaultTabController(
       length: 4,
       child: new Scaffold(
-        appBar: Utils.appBarusers(context,_title),
+        appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('orders') ),
         body: TabBarView(
           children: [
             new Container(
@@ -145,7 +146,7 @@ class _State extends State<ShopRequestLayout> {
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
-                            child: Text(listItem[index].request_time.toString()  +"الوقت ", style: TextStyle(
+                            child: Text(AppLocalizations.of(context).translate('time') +": "+ listItem[index].request_time.toString()   , style: TextStyle(
                               fontFamily: Global.fontFamily,
                               fontSize: 13,
                             )),
@@ -201,11 +202,8 @@ class _State extends State<ShopRequestLayout> {
                                   ));
                                 });
                               }else{
-                                Utils.toastMessage('الطيار لم يتحرك بعد .....');
+                                Utils.toastMessage(AppLocalizations.of(context).translate('delivery_didnt_move'));
                               }
-
-
-
                             });
                           }, // button pressed
                           child: Column(

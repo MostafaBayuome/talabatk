@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
@@ -36,14 +37,14 @@ class _State extends State<UserRequest>{
   Widget build(BuildContext context) {
           return Scaffold(
             resizeToAvoidBottomPadding: false,
-            appBar:Utils.appBarusers(context,_title),
+            appBar:Utils.appBarusers(context,AppLocalizations.of(context).translate('request') ),
             body: Padding(
               padding: EdgeInsets.all(20),
               child: Column(
 
                 children: [
                   Center(
-                    child: Text("تفاصيل الطلب",
+                    child: Text(AppLocalizations.of(context).translate('request_info') ,
                       style: TextStyle(
 
                         fontFamily: Global.fontFamily,
@@ -91,7 +92,7 @@ class _State extends State<UserRequest>{
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Icon(Icons.call,color: Colors.white,), // icon
-                                        Text("اتصال"  , style: TextStyle(
+                                        Text(AppLocalizations.of(context).translate('call')  , style: TextStyle(
                                         color: Colors.white,
                                    ),), // text
                                       ],
@@ -119,8 +120,9 @@ class _State extends State<UserRequest>{
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Icon(Icons.add_a_photo,color: Colors.white,), // icon
-                                        Text("   رفع صوره", style: TextStyle(
+                                        Text(AppLocalizations.of(context).translate('upload_photo') , style: TextStyle(
                                           color: Colors.white,
+                                          fontSize: 10
                                         )), // text
                                       ],
                                     ),
@@ -178,7 +180,7 @@ class _State extends State<UserRequest>{
                                               setState(() {
                                                 Global.visible_progress=false;
                                               });
-                                              Utils.toastMessage('لقد تم ارسال طلبك');
+                                              Utils.toastMessage(AppLocalizations.of(context).translate('request_have_been_sent') );
                                             });
                                           }
                                         }catch(Exception)
@@ -189,7 +191,7 @@ class _State extends State<UserRequest>{
                                             }
 
                                       }else{
-                                        Utils.toastMessage('برجاء ادخال الطلب');
+                                        Utils.toastMessage(AppLocalizations.of(context).translate('fill_the_request') );
                                         setState(() {
                                           Global.visible_progress=false;
                                         });
@@ -205,9 +207,9 @@ class _State extends State<UserRequest>{
                                       borderRadius: BorderRadius.circular(18.0),
                                     ),
                                     child: Container(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: const Text('طلب اوردر',
-                                          style: TextStyle(fontSize: 20)
+                                      padding:  EdgeInsets.all(10.0),
+                                      child: Text(AppLocalizations.of(context).translate('request_order') ,
+                                          style: TextStyle(fontSize: 15)
                                       ),
                                     )
                                 ),

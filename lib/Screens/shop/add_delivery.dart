@@ -1,4 +1,5 @@
 import 'package:Talabatk/Entities/api_manger.dart';
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/validation.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
@@ -17,14 +18,14 @@ class _State extends State<addDeliveryman> with Validation
   String phone='';
   String password='';
   String confirmPassword='';
-  String _title="اضافه طيار";
+
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        appBar: Utils.appBarusers(context,_title),
+        appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('add_new_delivery') ),
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -39,22 +40,20 @@ class _State extends State<addDeliveryman> with Validation
                     child: Column(
                       children: [
                         Utils.title(100.0,100.0),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: nameField(),
-                        ),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: mobileField(),
-                        ),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: passwordField(),
-                        ),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: passwordFieldConfirmation(),
-                        ),
+
+
+                        nameField(),
+
+
+
+                      mobileField(),
+
+
+                        passwordField(),
+
+
+                    passwordFieldConfirmation(),
+
 
 
                         Container(margin: EdgeInsets.only(top:30.0),),
@@ -72,13 +71,11 @@ class _State extends State<addDeliveryman> with Validation
 
 
   Widget nameField(){
-
     return TextFormField(
-      textAlign: TextAlign.right,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
-        labelText: 'الاسم',
-        hintText: 'محمد',
+        labelText: AppLocalizations.of(context).translate('name_field'),
+        hintText: AppLocalizations.of(context).translate('name_field_hint'),
       ),
       validator: validateUserName,
       onSaved: (String value){
@@ -86,14 +83,12 @@ class _State extends State<addDeliveryman> with Validation
       },
     );
   }
-
   Widget mobileField(){
     return TextFormField(
-      textAlign: TextAlign.right,
-      keyboardType: TextInputType.number,
+
       decoration: InputDecoration(
-        labelText: 'رقم الموبيل',
-        hintText: '',
+        labelText: AppLocalizations.of(context).translate('mobile_field'),
+        hintText: AppLocalizations.of(context).translate('mobile_field'),
       ),
       validator: validateMobileNumber,
       onSaved: (String value){
@@ -106,10 +101,10 @@ class _State extends State<addDeliveryman> with Validation
     return  TextFormField(
       controller: _pass,
       obscureText: true,
-      textAlign: TextAlign.right,
+
       decoration: InputDecoration(
-        labelText: 'كلمه المرور',
-        hintText: 'كلمه المرور',
+        labelText:  AppLocalizations.of(context).translate('password_field'),
+        hintText: '',
       ),
       validator: validatePassword ,
       onSaved: (String value){
@@ -122,32 +117,33 @@ class _State extends State<addDeliveryman> with Validation
     return  TextFormField(
       controller:_confirmPass,
       obscureText: true,
-      textAlign: TextAlign.right,
       decoration: InputDecoration(
-        labelText: 'تاكيد كلمه المرور',
-        hintText: 'تاكيد كلمه المرور',
+        labelText:  AppLocalizations.of(context).translate('password_field_confirmation') ,
+        hintText: '',
       ),
-        validator: (val){
-          if(val.isEmpty)
-            return 'Empty';
-          if(val != _pass.text)
-            return 'Not Match';
-          return null;
-        },
+      validator: (val){
+        if(val.isEmpty)
+          return 'Empty';
+        if(val != _pass.text)
+          return 'Not Match';
+        return null;
+      },
       onSaved: (String value){
         confirmPassword=value;
       },
     );
   }
-
   Widget submitButton()  {
     if(Global.visible_progress){
       return CircularProgressIndicator();
     }
     else
       return RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
         color:Color(int.parse(Global.primaryColor)),
-        child: Text('اضافه طيار',style:TextStyle(
+        child: Text(AppLocalizations.of(context).translate('add'),style:TextStyle(
           color: Colors.white,
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w500,
@@ -165,7 +161,7 @@ class _State extends State<addDeliveryman> with Validation
                   });
             if(value != null)
                 {
-                  Utils.toastMessage('لقد تم اضافه طيار');
+                  Utils.toastMessage(AppLocalizations.of(context).translate('delivery_account_added') );
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => ShopHomePage()
@@ -173,7 +169,7 @@ class _State extends State<addDeliveryman> with Validation
 
                 }
             else{
-              Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+              Utils.toastMessage(AppLocalizations.of(context).translate('right_info'));
             }
           });
 

@@ -1,3 +1,4 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Entities/validation.dart';
@@ -13,14 +14,14 @@ class DisplayAllDeliveryMen extends StatefulWidget{
 class _State extends State<DisplayAllDeliveryMen> with Validation
 {
   List<User> delivery_men=[];
-  String _title="عرض تفاصيل الطيارين";
+
   TextEditingController _userName =  new TextEditingController();
   TextEditingController _password =  new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Utils.appBarusers(context,_title),
+      appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('show_all_delivery') ),
       body: Container(
         child: FutureBuilder(
           future: User.getUserByMerchantId(Global.loginUser.id),
@@ -85,7 +86,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                  mainAxisAlignment: MainAxisAlignment.center,
                                  children: <Widget>[
                                    Icon(Icons.call,color: Colors.white,size: 15,), // icon
-                                   Text("اتصال"  , style: TextStyle(
+                                   Text(AppLocalizations.of(context).translate('call')  , style: TextStyle(
                                      fontSize: 10,
                                      color: Colors.white,
                                    ),), // text
@@ -112,18 +113,19 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                            mainAxisSize: MainAxisSize.min,
                                            children: <Widget>[
                                              Utils.title(50.0,50.0),
-                                             Directionality(
-                                               textDirection: TextDirection.rtl,
-                                               child: nameField(),
-                                             ),
-                                             Directionality(
-                                               textDirection: TextDirection.rtl,
-                                               child: passwordField(),
-                                             ),
+
+
+                                             nameField(),
+                                             passwordField(),
+
                                              Container(margin: EdgeInsets.only(top:15.0),),
                                              new RaisedButton(
-                                               color:Color(int.parse(Global.primaryColor)),
-                                               child: new Text("تحديث" ,style:TextStyle(
+                                                 shape: RoundedRectangleBorder(
+                                                   borderRadius: BorderRadius.circular(18.0),
+                                                 ),
+                                               child:RaisedButton(
+                                                 color:Color(int.parse(Global.primaryColor)),
+                                                 child: new Text( AppLocalizations.of(context).translate('update') ,style:TextStyle(
                                                  color: Colors.white,
                                                  fontFamily: Global.fontFamily,
                                                  fontWeight: FontWeight.w500,
@@ -132,7 +134,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                                  String username = _userName.text;
                                                  String password = _password.text;
                                                  if(username.length>=6 && password.length>=6){
-                                                   Utils.toastMessage("جاري تحديث البيانات");
+                                                   Utils.toastMessage(AppLocalizations.of(context).translate('updating_information')  );
                                                    User.updateUserWithPassUserStatus(delivery_men[index].id, delivery_men[index].mobileNumber, username, password, true).then((value) {
                                                      setState((){
                                                               delivery_men[index].userName=username;
@@ -140,15 +142,15 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                                      });
                                                      _password.clear();
                                                      _userName.clear();
-                                                     Utils.toastMessage("تم تحديث البيانات");
+                                                     Utils.toastMessage(AppLocalizations.of(context).translate('information_update') );
                                                      Navigator.pop(context);
                                                    });
                                                  }
                                                  else{
-                                                   Utils.toastMessage("من فضلك ادخل البيانات صحيحه");
+                                                   Utils.toastMessage(AppLocalizations.of(context).translate('right_info') );
                                                  }
                                                },
-                                             )
+                                             ))
                                            ],
                                          ),
                                        ),
@@ -159,7 +161,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                  mainAxisAlignment: MainAxisAlignment.center,
                                  children: <Widget>[
                                    Icon(Icons.update,color: Colors.white,size: 15,), // icon
-                                   Text("تحديث البيانات"  , style: TextStyle(
+                                   Text(AppLocalizations.of(context).translate('update_info')  , style: TextStyle(
                                      fontSize:8,
                                      color: Colors.white,
                                    ),), // text
@@ -182,7 +184,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                  User.updateUserWithPassUserStatus(delivery_men[index].id, delivery_men[index].mobileNumber,  delivery_men[index].userName, delivery_men[index].password, false).then((value){
                                    if(value=="updated_successfully")
                                    {
-                                     Utils.toastMessage("تم المسح");
+                                     Utils.toastMessage(AppLocalizations.of(context).translate('delete_done') );
                                      setState(() {
                                        delivery_men.removeAt(index);
                                      });
@@ -193,7 +195,7 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
                                  mainAxisAlignment: MainAxisAlignment.center,
                                  children: <Widget>[
                                    Icon(Icons.delete,color: Colors.white,size: 15,), // icon
-                                   Text("مسح"  , style: TextStyle(
+                                   Text(AppLocalizations.of(context).translate('delete')  , style: TextStyle(
                                      fontSize: 10,
                                      color: Colors.white,
                                    ),), // text
@@ -221,12 +223,12 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
   Widget nameField(){
 
     return TextFormField(
-      textAlign: TextAlign.right,
+
       keyboardType: TextInputType.text,
       controller:_userName,
       decoration: InputDecoration(
-        labelText: 'الاسم',
-        hintText: 'محمد',
+        labelText: AppLocalizations.of(context).translate('name_field'),
+        hintText: AppLocalizations.of(context).translate('name_field_hint'),
       ),
 
     );
@@ -235,11 +237,9 @@ class _State extends State<DisplayAllDeliveryMen> with Validation
   Widget passwordField() {
     return  TextFormField(
       controller: _password,
-
-      textAlign: TextAlign.right,
       decoration: InputDecoration(
-        labelText: 'كلمه المرور',
-        hintText: 'كلمه المرور',
+        labelText:  AppLocalizations.of(context).translate('password_field'),
+        hintText: '',
       ),
       validator: validatePassword ,
 
