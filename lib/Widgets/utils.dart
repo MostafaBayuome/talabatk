@@ -1,10 +1,12 @@
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
+import 'package:Talabatk/Widgets/change_lan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,7 +39,6 @@ class Utils {
                 fit:BoxFit.fill
             )
         ),
-
       ),);
       //old title
       /*Container(
@@ -64,6 +65,7 @@ class Utils {
   // for sign out deleting all prefrences for user
   static Future<void>  choiceAction(String choices,BuildContext context) async {
 
+
     if(choices.contains('تسجيل الخروج')|| choices.contains("SignOut")){
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -80,12 +82,21 @@ class Utils {
           builder: (context) =>Login()
       ),ModalRoute.withName("/Home"));
     }
+    else if(choices.contains('الاعدادات')||choices.contains("Settings")){
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>Settings()
+      ));
+    }
+
   }
 
   // appbar for all users shop, customer, delivery
   static Widget  appBarusers(BuildContext context,String title ){
     String SignOut=AppLocalizations.of(context).translate('sign_out');
+    String settings=AppLocalizations.of(context).translate('settings');
+
     List<String> singleChoice = <String> [
+      settings,
       SignOut
     ];
     String _title=title;

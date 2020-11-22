@@ -71,7 +71,9 @@
   "running": "Running ...",
   "dont_agree": "Refuse request",
   "accept_request": "Accept request",
-  "choose_delivery": "Choose deliveryman"
+  "choose_delivery": "Choose deliveryman",
+  "change_lang": "التغيير الي العربيه",
+  "settings": "Settings"
 
 }
 
