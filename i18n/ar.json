@@ -67,6 +67,12 @@
   "delete": "مسح",
   "delete_done": "تم المسح",
   "orders": "الطلبات",
-  "delivery_didnt_move": "الطيار لم يتحرك بعد ....."
+  "delivery_didnt_move": "الطيار لم يتحرك بعد .....",
+  "running": "جاري تنفيذ",
+  "dont_agree": "لا اوافق",
+  "accept_request": "تنفيذ الطلب",
+  "choose_delivery": "اختار الطيار"
+
+
 
 }

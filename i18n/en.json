@@ -67,7 +67,11 @@
   "delete": "Delete",
   "delete_done": "Deleted Successfully",
   "orders": "Orders",
-  "delivery_didnt_move": "Deliveryman has not yet made a move"
+  "delivery_didnt_move": "Deliveryman has not yet made a move",
+  "running": "Running ...",
+  "dont_agree": "Refuse request",
+  "accept_request": "Accept request",
+  "choose_delivery": "Choose deliveryman"
 
 }
 

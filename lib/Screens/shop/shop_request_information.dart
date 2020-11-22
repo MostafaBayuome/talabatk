@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/user.dart';
-import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
-
-
 
 
 class ShopRequestInformation extends StatefulWidget {
@@ -23,7 +20,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
   Request request;
   List<User> delivery_men;
   _ShopRequestInformationState(this.request);
-  String _title="الطلبات";
+
   String arrbytes;
   String arrbytes2;
   Uint8List arrBytes;
@@ -67,7 +64,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Utils.appBarusers(context,_title),
+      appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('orders')),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
          child: Column(
@@ -97,7 +94,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
 
                   )),
                   SizedBox(width: 20,),
-                  Text("الوقت", style: TextStyle(
+                  Text(AppLocalizations.of(context).translate('time'), style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
@@ -159,14 +156,14 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                      shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(20.0),
                      ),
-                     child: Text("لا اوافق" ,style: TextStyle(
+                     child: Text(AppLocalizations.of(context).translate('dont_agree'),style: TextStyle(
                          fontFamily: Global.fontFamily,
                          fontWeight: FontWeight.w600,
                          fontSize: 14,
                          color: Colors.white
                      ),),
                      onPressed:  () {
-                       Utils.toastMessage("جاري تنفيذ");
+                       Utils.toastMessage(AppLocalizations.of(context).translate('running'));
                         //update state of request to 3
                        Request.editRequest(request, 3).then((value) {
                          Navigator.of(context).pop();
@@ -211,7 +208,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                      shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(20.0),
                      ),
-                     child: Text("تنفيذ الطلب" ,style: TextStyle(
+                     child: Text( AppLocalizations.of(context).translate('accept_request') ,style: TextStyle(
                          fontFamily: Global.fontFamily,
                          fontWeight: FontWeight.w600,
                          fontSize: 14,
@@ -231,7 +228,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                     ),
 
-                                    title: Text('اختار الطيار',
+                                    title: Text(AppLocalizations.of(context).translate('choose_delivery') ,
                                       style : TextStyle(
                                           color: Color(int.parse(Global.primaryColor)),
                                           fontFamily: Global.fontFamily,
