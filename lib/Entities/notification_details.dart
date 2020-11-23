@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:Talabatk/Widgets/local_notification_state.dart';
+
 import 'global.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,6 +44,8 @@ class NotificationDetails {
           temp.record_Date=i['record_Date'].toString().substring(0,10);
           temp.record_Time=i['record_Time'].toString().substring(0,5);
           notifications.add(temp);
+          LocalNotificationState ob = new LocalNotificationState(temp.type,temp.description,temp.id);
+          ob.showNotification();
         }
        if(notifications.length>0){
            return notifications;

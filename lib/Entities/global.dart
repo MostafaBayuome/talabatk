@@ -20,7 +20,7 @@ static SharedPreferences prefs;
   static Timer chat_timer;
   static Timer location_timer;
   static Timer delivery_timer;
-  static List<NotificationDetails>userNotifications=new List<NotificationDetails>();
+  static List<NotificationDetails> userNotifications =new List<NotificationDetails>();
   static String selectedRate="اختر تقييم";
   static int selectedRateID=0;
   static int selectedRequestID=0;
