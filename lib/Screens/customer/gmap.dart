@@ -28,8 +28,8 @@ class _GMapState extends State<Gmap> {
   List<User> restaurants=[];
   //0 all SHOP 1 All pharmacy 2 All supermarket 3 All Restaurants
   int numberOfList=0;
-  LatLng _currentPosition;
-  _GMapState(this._currentPosition);
+  LatLng currentPosition;
+  _GMapState(this.currentPosition);
   Completer<GoogleMapController> _controller = Completer();
   double zoomVal=20.0;
 
@@ -66,7 +66,7 @@ class _GMapState extends State<Gmap> {
         mapType: MapType.normal  ,
         zoomControlsEnabled: false,
         initialCameraPosition:  CameraPosition(
-            target:_currentPosition,
+            target:currentPosition,
             zoom: 15),
         onMapCreated: (GoogleMapController controller){
            _controller.complete(controller);
@@ -75,7 +75,7 @@ class _GMapState extends State<Gmap> {
                  markerId:MarkerId("myMarker"),
                  infoWindow: InfoWindow(title:"مكان التوصيل"),
                  draggable: false,
-                 position: _currentPosition,
+                 position: currentPosition,
                  icon: pinLocationIcon
              ));
            });
@@ -103,7 +103,7 @@ class _GMapState extends State<Gmap> {
 
   Future<void> getAllNearestShops() async  {
 
-    User.getNearestShops("Talabatk/GetNearestShops",Global.loginUser.mobileNumber).then((value){
+    User.getNearestShops("Talabatk/GetNearestShops",currentPosition.latitude,currentPosition.longitude).then((value){
       nearestShops=value;
 
       for(int i=0;i<nearestShops.length;i++)
@@ -302,7 +302,7 @@ class _GMapState extends State<Gmap> {
         markerId:MarkerId("myMarker"),
         infoWindow: InfoWindow(title:"مكان التوصيل"),
         draggable: false,
-        position: _currentPosition,
+        position: currentPosition,
         icon: pinLocationIcon
     ));
     for(int i=0;i<pharmacy.length;i++)
@@ -356,7 +356,7 @@ class _GMapState extends State<Gmap> {
         markerId:MarkerId("myMarker"),
         infoWindow: InfoWindow(title:"مكان التوصيل"),
         draggable: false,
-        position: _currentPosition,
+        position: currentPosition,
         icon: pinLocationIcon
     ));
     for(int i=0;i<shops.length;i++)
@@ -408,7 +408,7 @@ class _GMapState extends State<Gmap> {
         markerId:MarkerId("myMarker"),
         infoWindow: InfoWindow(title:"مكان التوصيل"),
         draggable: false,
-        position: _currentPosition,
+        position: currentPosition,
         icon:pinLocationIcon
     ));
     for(int i=0;i<restaurants.length;i++)

@@ -21,8 +21,8 @@ class User {
       this.password, this.mapAppear, this.merchant_id);
 
    //get all nearest shops
-  static Future <List<User>> getNearestShops(String apiName, String phone) async {
-    String url = Global.url + apiName + "?mobileNumber=" + phone;
+  static Future <List<User>> getNearestShops(String apiName, double latitude,double longitude) async {
+    String url = Global.url + apiName + "?latitude=" + latitude.toString()+"&longitude="+longitude.toString();
     final response = await http.get(
         url, headers: {"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);

@@ -63,7 +63,9 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('orders')),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -215,7 +217,6 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                          color: Colors.white
                      )),
                      onPressed:  () {
-
                         User.getUserByMerchantId( Global.loginUser.id).then((value) {
                           if(value!=null){
                             delivery_men=value;
@@ -236,11 +237,10 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                                           fontSize: 22),
                                       textAlign: TextAlign.center,
                                     ),
-                                    content: setupAlertDialogContainer(),
+                                     content: setupAlertDialogContainer(),
                                   );});
                           }
                        });
-
                         /*
                        Utils.toastMessage("جاري تنفيذ");
                        //edit state to 1 to be on delivery
@@ -264,7 +264,7 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
     );
   }
 
-   // display all dilevry main to assign to one the request
+   // display all deliverymen to assign the request to one of them
   Widget setupAlertDialogContainer() {
     return Container(
 

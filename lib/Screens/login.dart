@@ -258,11 +258,7 @@ class _State extends State<Login>  with Validation {
                 Utils.toastMessage(AppLocalizations.of(context).translate('data_error') );
               }
             });
-
-
-
           }
-
           },
       ) ,
     );

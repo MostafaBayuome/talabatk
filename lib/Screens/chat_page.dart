@@ -13,9 +13,9 @@ class ChatPage extends StatefulWidget{
   ChatPage({Key key, @required this.request}) : super(key: key);
   @override
   State<StatefulWidget> createState() =>_ChatPage(request);
+
 }
-class _ChatPage extends State<ChatPage>
-{
+class _ChatPage extends State<ChatPage> {
   // check for displaying time
   bool check=false;
   List<Reply> replyDetails=[];
@@ -27,7 +27,7 @@ class _ChatPage extends State<ChatPage>
 
   @override
   Widget build(BuildContext context) {
-    getAllRequests();
+    getAllReplies();
     String _title= AppLocalizations.of(context).translate('chat');
     return Scaffold(
         appBar: Utils.appBarusers(context,_title),
@@ -68,8 +68,7 @@ class _ChatPage extends State<ChatPage>
                       iconSize: 25.0,
                       color: Theme.of(context).primaryColor,
                       onPressed: () {
-                        if(_controller.text.length != 0)
-                        {
+                        if(_controller.text.length != 0) {
                           //send postReq to reply
                           print (_controller.text);
                           Reply reply = new Reply(request.id , Global.loginUser.id, _controller.text, "", "" , "",true);
@@ -78,9 +77,7 @@ class _ChatPage extends State<ChatPage>
                             _controller.clear();
                             _controllerList.jumpTo(_controllerList.position.maxScrollExtent);
                           });
-
                         }
-
                       },
                     ),
                   ],
@@ -94,12 +91,11 @@ class _ChatPage extends State<ChatPage>
 
     );
   }
-  Future getAllRequests() {
+  Future getAllReplies() {
     return  Future.delayed(const Duration(seconds: 2), () {
       Reply.getRepliesByRequestID(request.id).then((value)
       {
-        if(value.length!=replyDetails.length)
-          {
+        if(value.length!=replyDetails.length) {
             setState(() {
             replyDetails = value;
                 });
@@ -108,8 +104,7 @@ class _ChatPage extends State<ChatPage>
       );
     });
   }
-  Widget allReply()
-  {
+  Widget allReply() {
     // After 1 second, it takes you to the bottom of the ListView
     return ListView.builder(
 
@@ -221,9 +216,7 @@ class _ChatPage extends State<ChatPage>
                       ]
                   ),)),
           );
-        }
-
-      },
+        }},
       controller: _controllerList,
     );
 

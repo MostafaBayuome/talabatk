@@ -7,13 +7,9 @@ import 'package:Talabatk/Screens/shop/shop_request_layout.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'display_all_delivery_men.dart';
-
-
 class ShopHomePage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => _State();
-
 }
 
 class _State extends State<ShopHomePage>{
@@ -76,14 +72,12 @@ class _State extends State<ShopHomePage>{
                             decoration: BoxDecoration (
                                 color:Color(int.parse(Global.secondaryColor)),
                                 borderRadius: BorderRadius.only(
-
                                     topLeft: Radius.circular(98.0),
                                     bottomRight: Radius.circular(200)
                                 )
                             ),
                           ),
                           Icon(Icons.add_circle,size:30.0)
-
                         ],
                       )
 

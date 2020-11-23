@@ -30,7 +30,7 @@ class _State extends State<UserRequest>{
   User shop;
   final detailsTextController = TextEditingController();
   String image1="",image2="";
-  String _title="الطلب";
+
 
 
   @override
@@ -171,7 +171,7 @@ class _State extends State<UserRequest>{
                                               setState(() {
                                                 Global.visible_progress=false;
                                               });
-                                              Utils.toastMessage('لقد تم ارسال طلبك');
+                                              Utils.toastMessage(AppLocalizations.of(context).translate('request_have_been_sent') );
                                             });
                                           }// 1 image doesn't work
                                           else
@@ -301,27 +301,6 @@ class _State extends State<UserRequest>{
         }
     );
   }
-  void removeUncessaryDots(String image,int number) {
-    bool firstDote=false;
-    for (int i = image.length; i >= 0; i--) {
 
-      if(!firstDote && image[i]==".")
-        {
-          firstDote=true;
-        }
-      else if(image[i]==".")
-        {
-          image.replaceAll(".","-");
-        }
-
-    }
-      setState(() {
-        if(number==1)
-          image1 = image;
-        else if(number==2)
-          image2 = image;
-      });
-
-  }
 
 }

@@ -14,12 +14,13 @@ import 'Screens/signup.dart';
 
 
 Future<void> main()  async {
+
     WidgetsFlutterBinding.ensureInitialized();
 
     Global.prefs =await SharedPreferences.getInstance();
    // if mobileNumber and check not null then it will redirect to the correct homepage
-   var FirstEnter=Global.prefs.getInt('FirstEnter');
 
+   var FirstEnter=Global.prefs.getInt('FirstEnter');
    var phone=Global.prefs.getString('phone');
    var map_Appear=Global.prefs.getInt('map_Appear');
    var user_id=Global.prefs.getInt('id');

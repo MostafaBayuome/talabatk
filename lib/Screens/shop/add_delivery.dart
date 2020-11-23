@@ -39,22 +39,12 @@ class _State extends State<addDeliveryman> with Validation
                     key: formKey,
                     child: Column(
                       children: [
+
                         Utils.title(100.0,100.0),
-
-
                         nameField(),
-
-
-
-                      mobileField(),
-
-
+                        mobileField(),
                         passwordField(),
-
-
-                    passwordFieldConfirmation(),
-
-
+                        passwordFieldConfirmation(),
 
                         Container(margin: EdgeInsets.only(top:30.0),),
                         submitButton(),
@@ -96,7 +86,6 @@ class _State extends State<addDeliveryman> with Validation
       },
     );
   }
-
   Widget passwordField() {
     return  TextFormField(
       controller: _pass,
@@ -112,7 +101,6 @@ class _State extends State<addDeliveryman> with Validation
       },
     );
   }
-
   Widget passwordFieldConfirmation() {
     return  TextFormField(
       controller:_confirmPass,

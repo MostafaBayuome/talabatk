@@ -11,7 +11,7 @@
   "create_account": "انشاء حساب",
   "dont_have_acount": "ليس لديك حساب؟ ",
   "have_acount": "لديك حساب؟",
-  "change_language": "تغيير اللغه",
+  "change_language": "Change Language",
   "position": "موقعك",
   "account_type": "نوع الحساب",
   "customer": "مستخدم",
@@ -73,7 +73,8 @@
   "accept_request": "تنفيذ الطلب",
   "choose_delivery": "اختار الطيار",
   "change_lang": "Change to English",
-  "settings": "الاعدادات"
+  "settings": "الاعدادات",
+  "requests_are_under_implementation": "الطلبات تحت التنفيذ"
 
 
 

@@ -130,6 +130,7 @@ class Request {
 
   // state 0 = waiting, 1 = on delivery, 2 = delivered/done, 3 = deleted/canceled
   static Future <String> editRequest (Request request, int state) async {
+
     try{
       String url = Global.url+"Request/EditRequest";
       final response= await  http.put(url,
@@ -147,7 +148,6 @@ class Request {
             "request_date":request.request_date,
             "request_time":request.request_time,
             "delivery_id ":request.delivery_id
-
           } ) );
       if(response.body.toString()=='لم يتم الارسال')
         {
@@ -156,7 +156,6 @@ class Request {
       else{
         return 'تم الارسال';
       }
-
     }
     catch(Exception)
     {
@@ -189,7 +188,6 @@ class Request {
     var temp =jsonData;
     return temp;
   }
-
 
 }
 

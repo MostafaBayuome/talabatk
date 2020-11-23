@@ -25,7 +25,7 @@ class _SettingsState extends State<Settings> {
                 Center(
                   child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
                     fontFamily: Global.fontFamily,
-                    fontWeight: FontWeight.w500,),),
+                    fontWeight: FontWeight.w400,),),
                 ),
                 Container(margin: EdgeInsets.only(top:5.0),),
                 Container(
@@ -35,7 +35,6 @@ class _SettingsState extends State<Settings> {
                       RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-
                         ),
                         color: Color(int.parse(Global.primaryColor)),
                         onPressed: () {
@@ -52,7 +51,6 @@ class _SettingsState extends State<Settings> {
                       RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-
                         ),
                         color: Color(int.parse(Global.primaryColor)),
                         onPressed: () {
@@ -71,4 +69,6 @@ class _SettingsState extends State<Settings> {
               ],
             )));
   }
+
+
 }

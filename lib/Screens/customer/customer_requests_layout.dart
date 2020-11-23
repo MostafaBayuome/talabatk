@@ -22,14 +22,13 @@ class _State extends State<CustomerRequestLayout>
 {
 
   List<Request> allCustomerRequest=[];
-  String title="الطلبات تحت التنفيذ";
   List<Request> waitingList=[];
   List<Request> processingList=[];
   List<Request> deliveredList=[];
   List<Request> rejectedList=[];
   BuildContext currContext=null;
 
-  String selectedRate="اختر تقييم";
+
 
   int count=0;
   @override
@@ -178,7 +177,6 @@ class _State extends State<CustomerRequestLayout>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(Icons.chat,color: Colors.blue), // icon
-
                         ],
                       ),
                     ))
@@ -232,11 +230,8 @@ class _State extends State<CustomerRequestLayout>
                               ));
                             });
                           }else{
-                            Utils.toastMessage('الطيار لم يتحرك بعد .....');
+                            Utils.toastMessage(AppLocalizations.of(context).translate('delivery_place1'));
                           }
-
-
-
                         });
                       }, // button pressed
                       child: Column(
@@ -257,13 +252,12 @@ class _State extends State<CustomerRequestLayout>
                       onTap: () {
                         Request.editRequest(listItem[index], 2).then((value) {
                           if(value=='لم يتم الارسال'){
-                            Utils.toastMessage('لم يقترب منك الطيار بعد');
+                            Utils.toastMessage(AppLocalizations.of(context).translate('delivery_place1'));
+
                           }else{
                             print(value);
-                            Utils.toastMessage("تم تاكيد توصيل الطلب");
+                            Utils.toastMessage(AppLocalizations.of(context).translate('order_confirmed'));
                           }
-
-
                         });
                       }, // button pressed
                       child: Column(

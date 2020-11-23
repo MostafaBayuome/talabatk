@@ -73,14 +73,11 @@ class _State extends State<ShopRequestLayout> {
           indicatorPadding: EdgeInsets.all(5.0),
           indicatorColor: Color(int.parse(Global.primaryColor)),
         ),
-
       ),
     );
-
   }
 
   allRequests(IconData icon,String title,List<Request> listItem) {
-
 
     return   ListView.builder(
       padding: EdgeInsets.all(20),
@@ -258,8 +255,7 @@ class _State extends State<ShopRequestLayout> {
 
     });
   }
-  void arrangeRequestsWithState()
-  {
+  void arrangeRequestsWithState() {
     waitingList.clear();
     processingList.clear();
     deliveredList.clear();

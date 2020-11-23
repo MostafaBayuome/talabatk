@@ -11,7 +11,7 @@
   "create_account": "Create Account",
   "dont_have_acount": "Don't have acount?",
   "have_acount": "Do you have account?",
-  "change_language": "Change Language",
+  "change_language": "تغيير اللغه",
   "position": "position",
   "account_type": "Account type",
   "customer": "Customer",
@@ -73,7 +73,8 @@
   "accept_request": "Accept request",
   "choose_delivery": "Choose deliveryman",
   "change_lang": "التغيير الي العربيه",
-  "settings": "Settings"
+  "settings": "Settings",
+  "requests_are_under_implementation": "Requests are under implementation"
 
 }
 
