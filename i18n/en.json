@@ -74,7 +74,13 @@
   "choose_delivery": "Choose deliveryman",
   "change_lang": "التغيير الي العربيه",
   "settings": "Settings",
-  "requests_are_under_implementation": "Requests are under implementation"
+  "requests_are_under_implementation": "Requests are under implementation",
+  "atara": "Atara",
+  "The_mobile_number_is_already_used":"The mobile number is already used"
+
+
+
+
 
 }
 

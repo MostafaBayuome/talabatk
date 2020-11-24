@@ -19,7 +19,7 @@ class SignUp extends StatefulWidget {
 
 class _State extends State<SignUp> with Validation  {
 
-  String dropdownValue = "";
+  String dropdownValue = "Customer" ;
   int map_Appear;
   String userName='';
   String phone='';
@@ -36,9 +36,9 @@ class _State extends State<SignUp> with Validation  {
     super.initState();
   }
 
-    void _getCurrentLocation() async {
+  void _getCurrentLocation() async {
     try{
-      position =  await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      position =  await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       print(position.latitude);
       print(position.longitude);
     }on Exception{
@@ -48,7 +48,7 @@ class _State extends State<SignUp> with Validation  {
 
   @override
   Widget build(BuildContext context) {
-    dropdownValue= AppLocalizations.of(context).translate('customer');
+   // dropdownValue= AppLocalizations.of(context).translate('customer');
     var appLanguage = Provider.of<AppLanguage>(context);
     return Scaffold(
         body: Padding(
@@ -242,6 +242,7 @@ class _State extends State<SignUp> with Validation  {
             if(dropdownValue=="صيدلية" || dropdownValue=="pharmacy" )  map_Appear=2;
             else if(dropdownValue=="محل تجاري" || dropdownValue=="Super market")  map_Appear=1;
             else if(dropdownValue=="مطعم"|| dropdownValue=="restaurant") map_Appear=3;
+            else if(dropdownValue=="عطاره"|| dropdownValue=="Atara") map_Appear=4;
 
             if (map_Appear>0){
               if (position == null) {
@@ -320,7 +321,7 @@ class _State extends State<SignUp> with Validation  {
                       Global.visible_progress=false;
                     });
 
-                    Utils.toastMessage("رقم الموبايل مستخدم مسبقا ");
+                    Utils.toastMessage( AppLocalizations.of(context).translate('The_mobile_number_is_already_used'));
                   }}
                 );
 
@@ -374,7 +375,7 @@ class _State extends State<SignUp> with Validation  {
                   fontWeight: FontWeight.w500,),
               ),
             ),
-            new DropdownButton<String>(
+             DropdownButton<String>(
               value: dropdownValue,
               onChanged: (String data) {
                 setState(() {
@@ -384,8 +385,11 @@ class _State extends State<SignUp> with Validation  {
               items: <String>[AppLocalizations.of(context).translate('customer') ,
                 AppLocalizations.of(context).translate('super_market'),
                 AppLocalizations.of(context).translate('pharmacy'),
-                AppLocalizations.of(context).translate('restaurant')].map((String value) {
-                return new DropdownMenuItem<String>(
+                AppLocalizations.of(context).translate('restaurant'),
+                AppLocalizations.of(context).translate('atara'),
+              ]
+                  .map((String value) {
+                return DropdownMenuItem<String>(
                   value: value,
                   child: new Text(value),
                 );

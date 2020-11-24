@@ -15,7 +15,7 @@
   "position": "موقعك",
   "account_type": "نوع الحساب",
   "customer": "مستخدم",
-  "super_market": "محل تجاري",
+  "super_market": "سوبر ماركت",
   "pharmacy": "صيدليه",
   "restaurant": "مطعم",
   "right_info":"من فضلك ادخل البيانات صحيحه",
@@ -74,9 +74,9 @@
   "choose_delivery": "اختار الطيار",
   "change_lang": "Change to English",
   "settings": "الاعدادات",
-  "requests_are_under_implementation": "الطلبات تحت التنفيذ"
-
-
+  "requests_are_under_implementation": "الطلبات تحت التنفيذ",
+  "atara": "عطاره",
+  "The_mobile_number_is_already_used":"رقم الموبايل مستخدم مسبقا "
 
 
 }

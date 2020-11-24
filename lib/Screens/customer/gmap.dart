@@ -26,7 +26,9 @@ class _GMapState extends State<Gmap> {
   List<User> pharmacy=[];
   List<User> shops=[];
   List<User> restaurants=[];
-  //0 all SHOP 1 All pharmacy 2 All supermarket 3 All Restaurants
+  List<User> atar=[];
+
+  //0 all SHOP 1 All pharmacy 2 All supermarket 3 All Restaurants 4 All Atara
   int numberOfList=0;
   LatLng currentPosition;
   _GMapState(this.currentPosition);
@@ -46,7 +48,8 @@ class _GMapState extends State<Gmap> {
             children: [
               pharmacyIcon(),
               shopIcon(),
-              restaurantIcon()
+              restaurantIcon(),
+              ataraIcon(),
             ],
           ),
           _buildContainer(),
@@ -91,6 +94,7 @@ class _GMapState extends State<Gmap> {
   void initState() {
     super.initState();
     getAllNearestShops();
+
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
         'images/destinationmarker.png').then((onValue) {
@@ -114,6 +118,8 @@ class _GMapState extends State<Gmap> {
           pharmacy.add(nearestShops[i]);
         else if (nearestShops[i].mapAppear==3)
           restaurants.add(nearestShops[i]);
+        else if(nearestShops[i].mapAppear==4)
+          atar.add(nearestShops[i]);
 
         LatLng _position = new LatLng(nearestShops[i].latitude, nearestShops[i].longitude);
         setState(() {
@@ -225,7 +231,7 @@ class _GMapState extends State<Gmap> {
   Widget _buildContainer() {
     List<User> shopList =[];
     setState(() {
-      if(  numberOfList == 0)
+      if (numberOfList == 0)
         shopList=nearestShops;
       else if(numberOfList == 1)
         shopList=pharmacy;
@@ -233,6 +239,8 @@ class _GMapState extends State<Gmap> {
         shopList=shops;
       else if(numberOfList == 3)
         shopList=restaurants;
+      else if(numberOfList == 4)
+        shopList=atar;
     });
     return Align(
       alignment: Alignment.bottomCenter,
@@ -248,12 +256,16 @@ class _GMapState extends State<Gmap> {
             String pharmacy = "snake.png";
             String supermarket = "supermarket.png";
             String restaurants = "restaurant.png";
+            String atar= "atar.png";
+
             if(shopList[i].mapAppear==1)
               image+=supermarket;
             else if (shopList[i].mapAppear==2)
               image+=pharmacy;
             else if( shopList[i].mapAppear==3)
                image+=restaurants;
+            else if(shopList[i].mapAppear==4)
+              image+=atar;
 
 
             return Padding(
@@ -428,6 +440,58 @@ class _GMapState extends State<Gmap> {
     }
     setState(() {
       numberOfList=3;
+    });
+
+  }
+
+  //ATARA
+  Widget ataraIcon() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      alignment: Alignment.topCenter,
+      child:FlatButton(
+        child: Column (
+          mainAxisSize : MainAxisSize.min,
+          children: [
+            Icon(Icons.wb_shade,color:Colors.deepOrangeAccent,
+              size: 30,),
+
+          ],
+        ),
+        onPressed: () {
+          getAllAtaras();
+        },
+      ), );
+  }
+  void getAllAtaras()  {
+    setState(() {
+      allMarkers.clear();
+      nearestShops.clear();
+    });
+    allMarkers.add(Marker(
+        markerId:MarkerId("myMarker"),
+        infoWindow: InfoWindow(title:"مكان التوصيل"),
+        draggable: false,
+        position: currentPosition,
+        icon:pinLocationIcon
+    ));
+    for(int i=0;i<atar.length;i++)
+    {
+      LatLng _position = new LatLng(atar[i].latitude, atar[i].longitude);
+      setState(() {
+        allMarkers.add(Marker(
+            markerId:MarkerId(atar[i].id.toString()),
+            infoWindow: InfoWindow(title:atar[i].userName),
+            draggable: false,
+            position: _position,
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueOrange,
+            )
+        ));
+      });
+    }
+    setState(() {
+      numberOfList=4;
     });
 
   }

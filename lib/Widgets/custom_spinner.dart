@@ -18,12 +18,12 @@ class CustomSpinnerWidget extends State {
       AppLocalizations.of(context).translate('customer'),
       AppLocalizations.of(context).translate('super_market'),
       AppLocalizations.of(context).translate('pharmacy'),
-      AppLocalizations.of(context).translate('restaurant')
+      AppLocalizations.of(context).translate('restaurant'),
+      AppLocalizations.of(context).translate('atara'),
     ];
     return Scaffold(
       body: Center(
-        child :
-        Column(children: <Widget>[
+        child : Column(children: <Widget>[
           DropdownButton<String>(
             value: dropdownValue,
             onChanged: (String data) {
