@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
@@ -15,6 +17,8 @@ class Notification_Page extends StatefulWidget {
 }
 class _State extends State<Notification_Page> {
   List<NotificationDetails> notifications = [];
+
+  Timer request_timer;
   @override
   Widget build(BuildContext context) {
     String _notification=AppLocalizations.of(context).translate('notification');
@@ -34,6 +38,7 @@ class _State extends State<Notification_Page> {
             }
             else{
               notifications = snapshot.data;
+              edit_all_notification();
               return ListView.builder(
                 itemCount: notifications.length,
                 itemBuilder: (BuildContext context,int index){
@@ -136,6 +141,29 @@ class _State extends State<Notification_Page> {
     );
   }
 
+  @override
+  void dispose() {
+    request_timer?.cancel();
+    super.dispose();
+  }
+
+  Future edit_all_notification() {
+
+    request_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
+       for(int i =0;i<notifications.length;i++){
+         NotificationDetails.editNotification(notifications[i]).then((value) {
+
+           setState(() {
+             notifications.removeAt(i);
+             Global.userNotifications=notifications;
+           });
 
 
+
+         });
+       }
+    });
+
+
+  }
 }
