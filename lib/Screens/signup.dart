@@ -19,7 +19,7 @@ class SignUp extends StatefulWidget {
 
 class _State extends State<SignUp> with Validation  {
 
-  String dropdownValue = "Customer" ;
+  String dropdownValue = "Select" ;
   int map_Appear;
   String userName='';
   String phone='';
@@ -29,7 +29,7 @@ class _State extends State<SignUp> with Validation  {
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
-
+  var appLanguage;
   @override
   void initState()  {
     _getCurrentLocation();
@@ -47,9 +47,9 @@ class _State extends State<SignUp> with Validation  {
   }
 
   @override
-  Widget build(BuildContext context) {
-   // dropdownValue= AppLocalizations.of(context).translate('customer');
-    var appLanguage = Provider.of<AppLanguage>(context);
+    Widget build(BuildContext context) {
+     appLanguage = Provider.of<AppLanguage>(context);
+
     return Scaffold(
         body: Padding(
             padding: EdgeInsets.all(10),
@@ -111,7 +111,16 @@ class _State extends State<SignUp> with Validation  {
                             ),
                             color: Color(int.parse(Global.primaryColor)),
                             onPressed: () {
-                              appLanguage.changeLanguage(Locale("en"));
+
+
+
+
+
+                                  appLanguage.changeLanguage(Locale("en"));
+
+
+
+
                             },
                             child: Text('English',  style: TextStyle(
                                 color: Colors.white,
@@ -128,7 +137,7 @@ class _State extends State<SignUp> with Validation  {
                             ),
                             color: Color(int.parse(Global.primaryColor)),
                             onPressed: () {
-                              appLanguage.changeLanguage(Locale("ar"));
+                                  appLanguage.changeLanguage(Locale("ar"));
                             },
                             child: Text('عربي' , style: TextStyle(
                                 color: Colors.white,
@@ -210,7 +219,7 @@ class _State extends State<SignUp> with Validation  {
   }
 
   Widget submitButton()  {
-    if(Global.visible_progress){
+    if(Global.visible_progress ){
       return CircularProgressIndicator();
 
     }
@@ -224,13 +233,22 @@ class _State extends State<SignUp> with Validation  {
 
         ),
         color:Color(int.parse(Global.primaryColor)),
-        child: Text(AppLocalizations.of(context).translate('login'),style:TextStyle(
+        child: Text(AppLocalizations.of(context).translate('signup'),style:TextStyle(
           color: Colors.white,
           fontFamily: Global.fontFamily,
           fontWeight: FontWeight.w700,
           fontSize: 15
         ),),
         onPressed: () async {
+
+          if(dropdownValue== "Select")
+            {
+              Utils.toastMessage(AppLocalizations.of(context).translate('select_type'));
+              return;
+            }
+          else{
+
+          }
           setState(() {
             Global.visible_progress=true;
           });
@@ -362,8 +380,10 @@ class _State extends State<SignUp> with Validation  {
     return position;
   }
 
+
+
   Widget DropDown() {
-    return   Container(
+       return   Container(
         child: Row(
           children: <Widget>[
             Container(
@@ -382,7 +402,9 @@ class _State extends State<SignUp> with Validation  {
                   dropdownValue = data;
                 });
               },
-              items: <String>[AppLocalizations.of(context).translate('customer') ,
+              items: <String>[
+                "Select",
+                AppLocalizations.of(context).translate('customer'),
                 AppLocalizations.of(context).translate('super_market'),
                 AppLocalizations.of(context).translate('pharmacy'),
                 AppLocalizations.of(context).translate('restaurant'),
@@ -394,9 +416,7 @@ class _State extends State<SignUp> with Validation  {
                   child: new Text(value),
                 );
               }).toList(),
-
             ),
-
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         )
