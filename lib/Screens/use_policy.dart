@@ -1,9 +1,9 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 
 class use_policy extends StatefulWidget {
@@ -36,7 +36,6 @@ class _State extends State<use_policy>  {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Align(
-
                 child:Hero(
                     tag:'title',
                     child: Utils.title(50, 50)),
@@ -47,10 +46,9 @@ class _State extends State<use_policy>  {
              child:  ListView(
                  scrollDirection: Axis.horizontal,
                  children: <Widget>[
-             Row(
-             children: <Widget>[
-
-               Container(
+              Row(
+               children: <Widget>[
+                 Container(
                  width: 250,
                    decoration: BoxDecoration(
                        image: DecorationImage(
@@ -127,18 +125,18 @@ class _State extends State<use_policy>  {
                ),
                SizedBox(width: 5,),
             ] ),
+
            ])
           ),
+
               Padding(
                 padding: const EdgeInsets.all(0),
                 child: RaisedButton(
-
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)
                   ),
                   onPressed: () async {
-
                     try{
                       SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.setInt('FirstEnter',1);
@@ -150,11 +148,10 @@ class _State extends State<use_policy>  {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>Login()
                     ));
-
                   },
                   color: Color(int.parse(Global.primaryColor)),
                   child: Text(
-                   'Next',
+                    AppLocalizations.of(context).translate('next'),
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white

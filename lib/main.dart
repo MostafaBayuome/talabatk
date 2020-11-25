@@ -15,6 +15,7 @@ import 'Screens/signup.dart';
 
 Future<void> main()  async {
 
+
     WidgetsFlutterBinding.ensureInitialized();
 
     Global.prefs =await SharedPreferences.getInstance();

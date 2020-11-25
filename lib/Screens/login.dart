@@ -83,53 +83,60 @@ class _State extends State<Login>  with Validation {
                           ],
                     mainAxisAlignment: MainAxisAlignment.center,
                     )),
-                Container(margin: EdgeInsets.only(top:80.0),),
-                  Center(
-                  child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
-                    fontFamily: Global.fontFamily,
-                    fontWeight: FontWeight.w500,),),
-                ),
-                Container(margin: EdgeInsets.only(top:5.0),),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
 
-                        ),
-                        color: Color(int.parse(Global.primaryColor)),
-                        onPressed: () {
-                          appLanguage.changeLanguage(Locale("en"));
-                        },
-                        child: Text('English',  style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: Global.fontFamily,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15
-                        )),
-                      ),
-                      SizedBox(width: 10),
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
+                Container(margin: EdgeInsets.only(top:40.0),),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Center(
+                      child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
+                        fontFamily: Global.fontFamily,
+                        fontWeight: FontWeight.w500,),),
+                    ),
+                    Container(margin: EdgeInsets.only(top:5.0),),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
 
-                        ),
-                        color: Color(int.parse(Global.primaryColor)),
-                        onPressed: () {
-                          appLanguage.changeLanguage(Locale("ar"));
-                        },
-                        child: Text('عربي' , style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: Global.fontFamily,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15
-                              )),
+                            ),
+                            color: Color(int.parse(Global.primaryColor)),
+                            onPressed: () {
+                              appLanguage.changeLanguage(Locale("en"));
+                            },
+                            child: Text('English',  style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15
+                            )),
+                          ),
+                          SizedBox(width: 10),
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+
+                            ),
+                            color: Color(int.parse(Global.primaryColor)),
+                            onPressed: () {
+                              appLanguage.changeLanguage(Locale("ar"));
+                            },
+                            child: Text('عربي' , style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: Global.fontFamily,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15
+                            )),
+                          ) ,
+                        ],
                       ) ,
-                    ],
-                  ) ,
+                    )
+                  ],
                 )
+
 
 
               ],
@@ -179,7 +186,7 @@ class _State extends State<Login>  with Validation {
     );
   }
 
-  //Map_Appear   0 customer, 1 shop, 2  pharmacy, 9 delivery, 3 restaurant
+  //Map_Appear   0 customer, 1 shop, 2  pharmacy, 3 restaurant , 4 atara , 9 delivery
   Widget submitButton() {
     if(Global.visible_progress){
       return CircularProgressIndicator();

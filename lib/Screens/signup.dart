@@ -29,11 +29,12 @@ class _State extends State<SignUp> with Validation  {
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
-  var appLanguage;
+
   @override
   void initState()  {
     _getCurrentLocation();
     super.initState();
+
   }
 
   void _getCurrentLocation() async {
@@ -48,7 +49,7 @@ class _State extends State<SignUp> with Validation  {
 
   @override
     Widget build(BuildContext context) {
-     appLanguage = Provider.of<AppLanguage>(context);
+
 
     return Scaffold(
         body: Padding(
@@ -93,62 +94,7 @@ class _State extends State<SignUp> with Validation  {
 
 
                 sendToLogin(),
-                    Container(margin: EdgeInsets.only(top:10.0),),
-                    Center(
-                      child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
-                        fontFamily: Global.fontFamily,
-                        fontWeight: FontWeight.w500,),),
-                    ),
-                    Container(margin: EdgeInsets.only(top:5.0),),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
 
-                            ),
-                            color: Color(int.parse(Global.primaryColor)),
-                            onPressed: () {
-
-
-
-
-
-                                  appLanguage.changeLanguage(Locale("en"));
-
-
-
-
-                            },
-                            child: Text('English',  style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15
-                            )),
-                          ),
-                          SizedBox(width: 10),
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-
-                            ),
-                            color: Color(int.parse(Global.primaryColor)),
-                            onPressed: () {
-                                  appLanguage.changeLanguage(Locale("ar"));
-                            },
-                            child: Text('عربي' , style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: Global.fontFamily,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15
-                            )),
-                          ) ,
-                        ],
-                      ) ,
-                    )
               ],
             )));
   }
@@ -380,8 +326,6 @@ class _State extends State<SignUp> with Validation  {
     return position;
   }
 
-
-
   Widget DropDown() {
        return   Container(
         child: Row(
@@ -401,6 +345,7 @@ class _State extends State<SignUp> with Validation  {
                 setState(() {
                   dropdownValue = data;
                 });
+                dropdownValue=data;
               },
               items: <String>[
                 "Select",
@@ -422,7 +367,6 @@ class _State extends State<SignUp> with Validation  {
         )
     );
   }
-
   Widget sendToLogin(){
     return   Container(
         child: Row(

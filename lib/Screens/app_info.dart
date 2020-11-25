@@ -1,6 +1,8 @@
+import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
+import 'package:provider/provider.dart';
 import 'use_policy.dart';
 
 
@@ -25,6 +27,7 @@ class _State extends State<app_info> with TickerProviderStateMixin {
   }
   @override
   Widget build(BuildContext context) {
+    var appLanguage = Provider.of<AppLanguage>(context);
     return Scaffold(
       body: Container(
         child: Padding(
@@ -58,7 +61,7 @@ class _State extends State<app_info> with TickerProviderStateMixin {
                     },
                     color: Color(int.parse(Global.primaryColor)),
                     child: Text(
-                      'محل تجاري',
+                      AppLocalizations.of(context).translate('shop'),
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.white
@@ -83,7 +86,7 @@ class _State extends State<app_info> with TickerProviderStateMixin {
                     },
                     color: Color(int.parse(Global.primaryColor)),
                     child: Text(
-                      'عميل',
+                        AppLocalizations.of(context).translate('customer'),
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.white
@@ -95,6 +98,58 @@ class _State extends State<app_info> with TickerProviderStateMixin {
               ],
             ),
                 Container(),
+              Container(margin: EdgeInsets.only(top:10.0),),
+
+              Column(
+               children: [
+                 Center(
+                   child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
+                     fontFamily: Global.fontFamily,
+                     fontWeight: FontWeight.w500,),),
+                 ),
+                 Container(margin: EdgeInsets.only(top:5.0),),
+                 Container(
+                   child: Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       RaisedButton(
+                         shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(18.0),
+
+                         ),
+                         color: Color(int.parse(Global.primaryColor)),
+                         onPressed: () {
+                           appLanguage.changeLanguage(Locale("en"));
+                         },
+                         child: Text('English',  style: TextStyle(
+                             color: Colors.white,
+                             fontFamily: Global.fontFamily,
+                             fontWeight: FontWeight.w700,
+                             fontSize: 15
+                         )),
+                       ),
+                       SizedBox(width: 10),
+                       RaisedButton(
+                         shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(18.0),
+
+                         ),
+                         color: Color(int.parse(Global.primaryColor)),
+                         onPressed: () {
+                           appLanguage.changeLanguage(Locale("ar"));
+                         },
+                         child: Text('عربي' , style: TextStyle(
+                             color: Colors.white,
+                             fontFamily: Global.fontFamily,
+                             fontWeight: FontWeight.w700,
+                             fontSize: 15
+                         )),
+                       ) ,
+                     ],
+                   ) ,
+                 ),
+               ],
+              )
             ],
 
           ),
