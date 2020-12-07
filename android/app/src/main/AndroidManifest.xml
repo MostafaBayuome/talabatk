@@ -7,10 +7,10 @@
          FlutterApplication and put your custom class here. -->
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="Talabatk: Ease of delivery"
@@ -58,15 +58,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
 
     </application>
 </manifest>

@@ -1,9 +1,9 @@
-import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class use_policy extends StatefulWidget {
@@ -36,128 +36,134 @@ class _State extends State<use_policy>  {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Align(
+
                 child:Hero(
                     tag:'title',
                     child: Utils.title(50, 50)),
               ),
-           Container(
-             height: 500,
-             width: 350,
-             child:  ListView(
-                 scrollDirection: Axis.horizontal,
-                 children: <Widget>[
-              Row(
+           new Flexible(
+             child: Container(
+               height: 500,
+               width: 350,
+               child:  ListView(
+                   scrollDirection: Axis.horizontal,
+                   children: <Widget>[
+               Row(
                children: <Widget>[
+
                  Container(
-                 width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}1.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width:7 ,),
-               Container(
                    width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}2.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 7,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}3.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 7,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}4.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width:7 ,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}5.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 5,),
-
-
-
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}6.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 5,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}7.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ), SizedBox(width: 5,),
-               Container(
-                   width: 250,
-                   decoration: BoxDecoration(
-                       image: DecorationImage(
-                           image : AssetImage("images/screens/${username}8.png"),
-                           fit:BoxFit.fitHeight
-                       )
-                   )
-               ),
-               SizedBox(width: 5,),
-            ] ),
-
-           ])
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}1.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width:7 ,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}2.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width: 7,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}3.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width: 7,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}4.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width:7 ,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}5.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width: 5,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}6.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width: 5,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}7.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ), SizedBox(width: 5,),
+                 Container(
+                     width: 250,
+                     decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image : AssetImage("images/screens/${username}8.png"),
+                             fit:BoxFit.fitHeight
+                         )
+                     )
+                 ),
+                 SizedBox(width: 5,),
+              ] ),
+             ])
           ),
+             flex: 7,
+           ),
+              new Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: RaisedButton(
 
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: RaisedButton(
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  onPressed: () async {
-                    try{
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setInt('FirstEnter',1);
-                    }
-                    catch (Excepetion)
-                    {}
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>Login()
-                    ));
-                  },
-                  color: Color(int.parse(Global.primaryColor)),
-                  child: Text(
-                    AppLocalizations.of(context).translate('next'),
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    onPressed: () async {
+
+                      try{
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('FirstEnter',1);
+                      }
+                      catch (Excepetion)
+                      {}
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>Login()
+                      ));
+
+                    },
+                    color: Color(int.parse(Global.primaryColor)),
+                    child: Text(
+                     'Next',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white
+                      ),
                     ),
                   ),
                 ),
+                flex: 1,
               )
             ],
 

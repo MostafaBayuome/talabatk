@@ -55,7 +55,8 @@ class _State extends State<UserRequest>{
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
                           child: TextField(
-                            maxLines: 10,
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
                             decoration: InputDecoration.collapsed(hintText: ""),
                             controller: detailsTextController,
                           ),
