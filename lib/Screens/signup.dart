@@ -2,6 +2,7 @@ import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:Talabatk/Entities/user.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:Talabatk/Entities/api_manger.dart';
 import 'package:Talabatk/Entities/validation.dart';
@@ -26,6 +27,7 @@ class _State extends State<SignUp> with Validation  {
   String password='';
   String confirmPassword='';
   Position position=null;
+  Address address;
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
@@ -213,35 +215,39 @@ class _State extends State<SignUp> with Validation  {
                 _getCurrentLocation();
               }
               else {
+                final coordinates= new Coordinates( position.latitude,position.longitude);
+                convertCoordinatesToAddress(coordinates).then((value){
+                  address=value;
+                  signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1,address.addressLine).then((value) async {
+                    setState(() {
+                      Global.visible_progress=false;
+                    });
+                    if(value != null)
+                    {
 
-                signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
-                  setState(() {
-                    Global.visible_progress=false;
-                  });
-                  if(value != null)
-                  {
+                      User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
+                      Global.loginUser=user;
 
-                    User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
-                    Global.loginUser=user;
+                      //save all user data
+                      Global.prefs.setInt('id',user.id);
+                      Global.prefs.setString('phone', phone);
+                      Global.prefs.setInt('map_Appear', map_Appear);
+                      Global.prefs.setString('password', password);
+                      Global.prefs.setString('userName', userName);
+                      Global.prefs.setDouble('latitude',position.latitude);
+                      Global.prefs.setDouble('longitude', position.longitude);
 
-                    //save all user data
-                    Global.prefs.setInt('id',user.id);
-                    Global.prefs.setString('phone', phone);
-                    Global.prefs.setInt('map_Appear', map_Appear);
-                    Global.prefs.setString('password', password);
-                    Global.prefs.setString('userName', userName);
-                    Global.prefs.setDouble('latitude',position.latitude);
-                    Global.prefs.setDouble('longitude', position.longitude);
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Login()
+                      ));
+                    }
+                    else{
+                      Utils.toastMessage(AppLocalizations.of(context).translate('right_info'));
+                    }}
+                  );
+                });
 
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Login()
-                    ));
-                  }
-                  else{
-                    Utils.toastMessage(AppLocalizations.of(context).translate('right_info'));
-                  }}
-                );
 
               }
             }
@@ -255,39 +261,44 @@ class _State extends State<SignUp> with Validation  {
                 _getCurrentLocation();
               }
               else {
-                signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1).then((value) async {
-                  setState(() {
-                    Global.visible_progress=false;
-                  });
-                  if(value != null)
-                  {
-
-
-                    User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
-                    Global.loginUser=user;
-
-                    //save all user data
-                    Global.prefs.setInt('id',user.id);
-                    Global.prefs.setString('phone', phone);
-                    Global.prefs.setInt('map_Appear', map_Appear);
-                    Global.prefs.setString('password', password);
-                    Global.prefs.setString('userName', userName);
-                    Global.prefs.setDouble('latitude',position.latitude);
-                    Global.prefs.setDouble('longitude', position.longitude);
-
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CustomerHomePage()
-                    ));
-                  }
-                  else{
+                final coordinates= new Coordinates( position.latitude,position.longitude);
+                convertCoordinatesToAddress(coordinates).then((value){
+                  address=value;
+                  signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1,address.addressLine).then((value) async {
                     setState(() {
                       Global.visible_progress=false;
                     });
+                    if(value != null)
+                    {
 
-                    Utils.toastMessage( AppLocalizations.of(context).translate('The_mobile_number_is_already_used'));
-                  }}
-                );
+
+                      User user =new User(value['id'],phone,position.latitude,position.longitude,userName,password,map_Appear,-1);
+                      Global.loginUser=user;
+
+                      //save all user data
+                      Global.prefs.setInt('id',user.id);
+                      Global.prefs.setString('phone', phone);
+                      Global.prefs.setInt('map_Appear', map_Appear);
+                      Global.prefs.setString('password', password);
+                      Global.prefs.setString('userName', userName);
+                      Global.prefs.setDouble('latitude',position.latitude);
+                      Global.prefs.setDouble('longitude', position.longitude);
+
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CustomerHomePage()
+                      ));
+                    }
+                    else{
+                      setState(() {
+                        Global.visible_progress=false;
+                      });
+
+                      Utils.toastMessage( AppLocalizations.of(context).translate('The_mobile_number_is_already_used'));
+                    }}
+                  );
+                });
+
 
               }
             }
@@ -389,6 +400,11 @@ class _State extends State<SignUp> with Validation  {
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ));
+  }
+
+  Future<Address> convertCoordinatesToAddress(Coordinates coordinates) async{
+    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    return addresses.first;
   }
 
 }

@@ -20,8 +20,6 @@ class UserRequest extends StatefulWidget {
 }
 
 class _State extends State<UserRequest>{
-
-
   _State(this.shop);
   final picker = ImagePicker();
   List<Asset> images = List<Asset>();
@@ -31,8 +29,6 @@ class _State extends State<UserRequest>{
   final detailsTextController = TextEditingController();
   String image1="",image2="";
 
-
-
   @override
   Widget build(BuildContext context) {
           return Scaffold(
@@ -41,12 +37,10 @@ class _State extends State<UserRequest>{
             body: Padding(
               padding: EdgeInsets.all(20),
               child: Column(
-
                 children: [
                   Center(
                     child: Text(AppLocalizations.of(context).translate('request_info') ,
                       style: TextStyle(
-
                         fontFamily: Global.fontFamily,
                         fontWeight: FontWeight.w600,
                         fontSize: 18),),
@@ -147,14 +141,11 @@ class _State extends State<UserRequest>{
                                             image1=images[0].name.toString();
                                             image1 = image1.replaceAll(".","-");
                                             image1+=".png";
-                                          if(images.length>1)
-                                            {
+                                          if(images.length>1) {
                                               image2=images[1].name.toString();
                                               image2 = image2.replaceAll(".","-");
                                               image2+=".png";
                                             }
-
-
                                           for(int i=0;i<images.length;i++)
                                             {
                                               File file = File ( await FlutterAbsolutePath.getAbsolutePath(images[i].identifier));
@@ -189,15 +180,12 @@ class _State extends State<UserRequest>{
                                                 Global.visible_progress=false;
                                               });
                                             }
-
                                       }else{
                                         Utils.toastMessage(AppLocalizations.of(context).translate('fill_the_request') );
                                         setState(() {
                                           Global.visible_progress=false;
                                         });
                                       }
-
-
                                     },
                                     elevation: 2.0,
                                     color: Color(int.parse(Global.primaryColor)),

@@ -5,7 +5,6 @@ import 'package:Talabatk/Screens/gmap_delivery.dart';
 import 'package:Talabatk/Screens/shop/shop_request_information.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
-import '../gmap_delivery.dart';
 import 'package:Talabatk/Screens/chat_page.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/request.dart';
@@ -182,14 +181,10 @@ class _State extends State<ShopRequestLayout> {
                         alignment: Alignment.center,
 
                         padding: EdgeInsets.symmetric(horizontal: 3.0,vertical: 3.0),
-
                         child: InkWell(
-
                           onTap: () {
                           //get last location of delivery plus location of customer to deliver
-
                             DeliveryLocation.getByIdLastLocation(listItem[index].delivery_id).then((value) {
-
                               if(value!=null){
                                 LatLng deliveryPosition = new LatLng(value.latitude,  value.longitude);
                                 Location.GetLocationsById(listItem[index].location_id).then((value) {
@@ -240,26 +235,26 @@ class _State extends State<ShopRequestLayout> {
       },
     );
   }
+
   Future getAllRequests() {
     return  Future.delayed(const Duration(seconds: 2), () {
       Request.getShopRequests().then((value)
       {
         setState(() {
-
           allCustomerRequest=value;
           arrangeRequestsWithState();
-
         });
       }
       );
-
     });
   }
   void arrangeRequestsWithState() {
+
     waitingList.clear();
     processingList.clear();
     deliveredList.clear();
     rejectedList.clear();
+
     for(int i=0;i<allCustomerRequest.length;i++)
     {
 
@@ -275,5 +270,6 @@ class _State extends State<ShopRequestLayout> {
 
     }
   }
+
 
 }

@@ -1,5 +1,6 @@
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Talabatk/Entities/global.dart';
@@ -23,8 +24,7 @@ class _State  extends State<LocationEditor>{
   TextEditingController _locationNameController = new TextEditingController();
   TextEditingController _locationNoteController = new TextEditingController();
   Position _currentposition=null;
-
-
+  Address address;
   int _state = 0;
 
   @override
@@ -116,18 +116,25 @@ class _State  extends State<LocationEditor>{
           {
             // save new position post request
             // send user to CustomerHomePage()
-            if(_state==0)
-              {
+            if(_state==0) {
                 //_state for controlling user press not to add same location
                 _state=1;
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 int user_id=prefs.getInt('id');
-                Location.addLocation("Location/AddLocation",user_id,_currentposition.latitude,_currentposition.longitude,_locationName,_locationNote).then((value){
-                  Utils.toastMessage(AppLocalizations.of(context).translate('added_successfully'));
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CustomerHomePage()
-                  ));
+
+
+                final coordinates= new Coordinates(_currentposition.latitude,_currentposition.longitude);
+                convertCoordinatesToAddress(coordinates).then((value){
+                  address=value;
+                  Location.addLocation("Location/AddLocation",user_id,_currentposition.latitude,_currentposition.longitude,_locationName,address.addressLine).then((value){
+                    Utils.toastMessage(AppLocalizations.of(context).translate('added_successfully'));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CustomerHomePage()
+                    ));
+                  });
+
                 });
+
               }
           }
         else{
@@ -193,6 +200,11 @@ class _State  extends State<LocationEditor>{
     _currentposition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(_currentposition);
     return _currentposition;
+  }
+
+  Future<Address> convertCoordinatesToAddress(Coordinates coordinates) async{
+    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    return addresses.first;
   }
 }
 

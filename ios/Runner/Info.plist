@@ -49,5 +49,10 @@
 
     <key>NSMicrophoneUsageDescription</key>
     <string>Allow access to microphone</string>
+    <key>io.flutter.embedded_views_preview</key>
+    	<true/>
+
+    <key>NSLocationWhenInUsageDescription</key>
+    <string>The app needs access to location when open. </string>
 </dict>
 </plist>

@@ -149,21 +149,17 @@ class _State extends State<Notification_Page> {
 
   Future edit_all_notification() {
 
+
     request_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
        for(int i =0;i<notifications.length;i++){
          NotificationDetails.editNotification(notifications[i]).then((value) {
-
            setState(() {
              notifications.removeAt(i);
              Global.userNotifications=notifications;
            });
-
-
-
          });
        }
     });
-
 
   }
 }

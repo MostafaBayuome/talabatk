@@ -5,13 +5,13 @@ import 'global.dart';
 
 
 // merchant_id = 0  if its (shop, pharmacy, customer)
-Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id) async {
+Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id,String addressLine) async {
   try{
 
     String url = Global.url+apiName;
     final response= await  http.post(url,
         headers: {"Content-Type": "application/json"},
-        body:json.encode( {
+        body:json.encode({
           "phone": phone,
           "password": password,
           "username":username,
@@ -20,7 +20,7 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
           "state": state,
           "map_Appear": map_Appear,
           "merchant_id":merchant_id
-        } )
+        })
     );
     var convertDatatoJson =  response.body;
     Map<String, dynamic> convert;
@@ -28,9 +28,9 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
     if(!convertDatatoJson.contains("user_exist")) {
         convert =json.decode(response.body);
        if (map_Appear > 0)
-          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, username, " ");
+          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, username, addressLine);
        else
-          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "المكان الاول", " ");
+          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "المكان الاول", addressLine);
     }
     else{
       return null;

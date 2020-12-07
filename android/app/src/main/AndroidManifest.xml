@@ -13,12 +13,12 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <application
         android:name="io.flutter.app.FlutterApplication"
-
-
         android:label="Talabatk: Ease of delivery"
         android:icon="@mipmap/ic_launcher">
+
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCoPnIZX3O-DS4nc8LFzRS3nIJoT2yDm74"/>
+
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
