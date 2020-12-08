@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:Talabatk/Entities/app_localizations.dart';
+import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
 import 'package:Talabatk/Widgets/utils.dart';
@@ -17,10 +18,11 @@ class ShopRequestInformation extends StatefulWidget {
 }
 
 class _ShopRequestInformationState extends State<ShopRequestInformation> {
+
   Request request;
   List<User> delivery_men;
   _ShopRequestInformationState(this.request);
-
+  String address="";
   String arrbytes;
   String arrbytes2;
   Uint8List arrBytes;
@@ -28,7 +30,11 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
   @override
   void initState() {
     super.initState();
-
+    Location.GetLocationsById(request.location_id).then((value) {
+      setState(() {
+        address=value.note;
+      });
+    } );
     try{
       if(request.image_url != "NotImage" )
       {
@@ -78,28 +84,26 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                  Text(request.request_date.toString(), style: TextStyle(
                      fontFamily: Global.fontFamily,
                      fontWeight: FontWeight.w600,
-                     fontSize: 18,
+                     fontSize: 14,
 
                  )),
                ],
              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
+             SizedBox(height: 5,),
+             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(request.request_time.toString(), style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
-                      fontSize: 16,
+                      fontSize: 14,
 
                   )),
                   SizedBox(width: 20,),
                   Text(AppLocalizations.of(context).translate('time'), style: TextStyle(
                       fontFamily: Global.fontFamily,
                       fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                      fontSize: 12,
                   )),
                 ],
               ),
@@ -107,10 +111,10 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
              Text(request.details, style: TextStyle(
                  fontFamily: Global.fontFamily,
 
-                 fontSize: 20,
+                 fontSize: 15,
 
              )),
-             SizedBox(height: 20,),
+             SizedBox(height: 10,),
              Column(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: <Widget>[
@@ -143,8 +147,12 @@ class _ShopRequestInformationState extends State<ShopRequestInformation> {
                ],
 
              ),
-
-
+             SizedBox(height: 10,),
+             Container(
+               child: Text(
+                  address
+               ),
+             ),
              Expanded(
                child: Row(
                  crossAxisAlignment: CrossAxisAlignment.end,

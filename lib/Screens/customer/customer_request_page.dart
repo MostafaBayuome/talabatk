@@ -12,6 +12,7 @@ import 'package:Talabatk/Entities/user.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class UserRequest extends StatefulWidget {
   User shop;
   UserRequest({Key key, @required this.shop}) : super(key: key);
@@ -38,6 +39,7 @@ class _State extends State<UserRequest>{
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
+
                   Center(
                     child: Text(AppLocalizations.of(context).translate('request_info') ,
                       style: TextStyle(
@@ -45,90 +47,92 @@ class _State extends State<UserRequest>{
                         fontWeight: FontWeight.w600,
                         fontSize: 18),),
                   ),
-                  Container(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        borderOnForeground: true,
-                        elevation: 10,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: TextField(
-                            maxLines: null,
-                            keyboardType: TextInputType.multiline,
-                            decoration: InputDecoration.collapsed(hintText: ""),
-                            controller: detailsTextController,
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: Container(
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                        ),
-                      )
+                          borderOnForeground: true,
+                          elevation: 10,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: TextField(
+                              maxLines: null,
+                              keyboardType: TextInputType.multiline,
+                              decoration: InputDecoration.collapsed(hintText: ""),
+                              controller: detailsTextController,
+                            ),
+                          ),
+                        )
+                    ),
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 20),
                   Expanded(
                     child: buildGridView(),
                    ),
-                  SizedBox(height: 10),
-                  Row(
-                     mainAxisAlignment: MainAxisAlignment.center,//Center Row contents horizontally,
-                    children: [
-                      Container(
-                          child: Center(
-                            child: SizedBox.fromSize(
-                              size: Size(70, 70), // button width and height
-                              child: ClipOval(
-                                child: Material(
-                                  color:  Color(int.parse(Global.primaryColor)), // button color
-                                  child: InkWell(
-                                    splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                    onTap: () {
-                                      launch('tel://${shop.mobileNumber}');
-                                    }, // button pressed
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(Icons.call,color: Colors.white,), // icon
-                                        Text(AppLocalizations.of(context).translate('call')  , style: TextStyle(
-                                        color: Colors.white,
-                                   ),), // text
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          )),
-                      SizedBox(width: 20),
-                      Container(
-
-                          child: Center(
-                            child: SizedBox.fromSize(
-                              size: Size(70, 70), // button width and height
-                              child: ClipOval(
-                                child: Material(
-                                  color:  Color(int.parse(Global.primaryColor)), // button color
-                                  child: InkWell(
-                                    splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                    onTap: () {
-                                      _showPicker(context);
-                                    }, // button pressed
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(Icons.add_a_photo,color: Colors.white,), // icon
-                                        Text(AppLocalizations.of(context).translate('upload_photo') , style: TextStyle(
+                  Expanded(
+                    child: Row(
+                       mainAxisAlignment: MainAxisAlignment.center,//Center Row contents horizontally,
+                      children: [
+                        Container(
+                            child: Center(
+                              child: SizedBox.fromSize(
+                                size: Size(70, 70), // button width and height
+                                child: ClipOval(
+                                  child: Material(
+                                    color:  Color(int.parse(Global.primaryColor)), // button color
+                                    child: InkWell(
+                                      splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                                      onTap: () {
+                                        launch('tel://${shop.mobileNumber}');
+                                      }, // button pressed
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(Icons.call,color: Colors.white,), // icon
+                                          Text(AppLocalizations.of(context).translate('call')  , style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 10
-                                        )), // text
-                                      ],
+                                     ),), // text
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                          )),
-                    ],
+                              )
+                            )),
+                        SizedBox(width: 20),
+                        Container(
+                            child: Center(
+                              child: SizedBox.fromSize(
+                                size: Size(70, 70), // button width and height
+                                child: ClipOval(
+                                  child: Material(
+                                    color:  Color(int.parse(Global.primaryColor)), // button color
+                                    child: InkWell(
+                                      splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                                      onTap: () {
+                                        _showPicker(context);
+                                      }, // button pressed
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(Icons.add_a_photo,color: Colors.white,), // icon
+                                          Text(AppLocalizations.of(context).translate('upload_photo') , style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10
+                                          )), // text
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            )),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 15),
                   Container(
                       child: Center(
                         child:  Global.visible_progress ?
@@ -203,6 +207,7 @@ class _State extends State<UserRequest>{
                                     )
                                 ),
                               )),
+
                 ],
               ),
             ),
@@ -220,8 +225,8 @@ class _State extends State<UserRequest>{
           fit:BoxFit.fill,
           child: AssetThumb(
             asset: asset,
-            width: 500,
-            height: 500,
+            width: 700,
+            height: 700,
             quality: 100,
           ),
         );

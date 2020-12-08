@@ -80,8 +80,8 @@
   "select_type": "Please select account type",
   "signup": "Sign Up",
   "shop": "Shop",
-  "next": "Next"
-
+  "next": "Next",
+  "address": "Address"
 
 
 }

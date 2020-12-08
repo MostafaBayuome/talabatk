@@ -131,20 +131,21 @@ class _State extends State<ShopRequestLayout> {
 
                           )),
                         ),
+                        SizedBox(height: 3,),
                         Container(
                           child: Text(listItem[index].request_date.toString(),
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 color: Colors.black,
                               )),
                         ),
-                        SizedBox(height: 3,),
+                        SizedBox(height: 2,),
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
                             child: Text(AppLocalizations.of(context).translate('time') +": "+ listItem[index].request_time.toString()   , style: TextStyle(
                               fontFamily: Global.fontFamily,
-                              fontSize: 13,
+                              fontSize: 11,
                             )),
                           ),
                         ),

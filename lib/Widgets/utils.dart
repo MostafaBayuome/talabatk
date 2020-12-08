@@ -1,7 +1,7 @@
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
-import 'package:Talabatk/Widgets/change_lan.dart';
+import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talabatk/Talabatk-GitHub/lib/Screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
