@@ -154,8 +154,8 @@ class _GMapState extends State<Gmap> {
         _goToLocation(lat,long);
       },
       child: Container(
-        height: 200,
-          width: 200,
+        height: 130,
+          width: 150,
           child:new FittedBox(
             child: Material(
               color: Colors.white,
@@ -214,6 +214,7 @@ class _GMapState extends State<Gmap> {
                             )
                             ),
                       ),
+                     /*
                       Container(
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
@@ -225,6 +226,7 @@ class _GMapState extends State<Gmap> {
                           )),
                         ),
                       ),
+                      */
                       ]
                   ),
 
