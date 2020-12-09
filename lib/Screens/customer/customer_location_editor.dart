@@ -19,10 +19,10 @@ class LocationEditor extends StatefulWidget {
 class _State  extends State<LocationEditor>{
 
   String _locationName = null;
-  String _locationNote = null;
+
 
   TextEditingController _locationNameController = new TextEditingController();
-  TextEditingController _locationNoteController = new TextEditingController();
+
   Position _currentposition=null;
   Address address;
   int _state = 0;
@@ -110,7 +110,7 @@ class _State  extends State<LocationEditor>{
         
         setState((){
           _locationName = _locationNameController.text;
-          _locationNote = _locationNoteController.text;
+
         });
         if(_currentposition!=null && _locationName!=null)
           {
@@ -163,7 +163,7 @@ class _State  extends State<LocationEditor>{
               _currentposition = _getLocation() as Position;
             },
           ),
-            Expanded(
+          Expanded(
             child: new TextField(
               controller: _locationNameController,
               autofocus: true,
@@ -171,15 +171,6 @@ class _State  extends State<LocationEditor>{
                   labelText: AppLocalizations.of(context).translate('place_name') , hintText: AppLocalizations.of(context).translate('work'),),
             ),
           ),
-          Expanded(
-            child: new TextField(
-              controller: _locationNoteController,
-              decoration: new InputDecoration(
-                labelText: AppLocalizations.of(context).translate('your_notes'),),
-            ),
-          )
-
-
 
         ],
       ),

@@ -28,7 +28,6 @@ class Utils {
   // global application title
   static  Widget title(double width,double height) {
     return Align(
-
       child: Container(
         width: width,
         height: height,
@@ -59,11 +58,10 @@ class Utils {
                 fontWeight: FontWeight.w900,
                 fontSize: 18),
           )) */
-
   }
 
   // for sign out deleting all prefrences for user
-  static Future<void>  choiceAction(String choices,BuildContext context) async {
+  static Future<void>  choiceAction(String choices,BuildContext context,String title) async {
 
 
     if(choices.contains('تسجيل الخروج')|| choices.contains("SignOut")){
@@ -82,7 +80,7 @@ class Utils {
           builder: (context) =>Login()
       ),ModalRoute.withName("/Home"));
     }
-    else if(choices.contains('الاعدادات')||choices.contains("Settings")){
+    else if((choices.contains('الاعدادات')|| choices.contains("Settings")) && (title != "Settings" && title != "الاعدادات" ) ){
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>Settings()
       ));
@@ -111,7 +109,7 @@ class Utils {
         automaticallyImplyLeading: false,
         //actionsIconTheme: IconThemeData(color:Color(int.parse(Global.primaryColor))),
         actions: [
-        if(_title != "Notifications" || _title != "تنبيه")
+        if(_title != "Notifications" && _title != "تنبيه")
            IconButton(icon:Stack(
               children: [
                 Icon(Icons.notifications),
@@ -140,7 +138,7 @@ class Utils {
 
           PopupMenuButton<String>(
             onSelected: (value){
-              Utils.choiceAction(value, context);
+              Utils.choiceAction(value, context,title);
             },
             itemBuilder: (BuildContext context){
               return  singleChoice.map((String choice){

@@ -33,10 +33,9 @@ class _State extends State<SignUp> with Validation  {
   final TextEditingController _pass = TextEditingController();
 
   @override
-  void initState()  {
+  void initState() {
     _getCurrentLocation();
     super.initState();
-
   }
 
   void _getCurrentLocation() async {
@@ -57,8 +56,8 @@ class _State extends State<SignUp> with Validation  {
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
-                  children: <Widget>[
-                //future update remove _title() and put CircleAvatar()
+               children: <Widget>[
+
                 Utils.title(130.0,130.0),
                 Container(margin: EdgeInsets.only(top:10.0),),
                 Container(
@@ -93,12 +92,11 @@ class _State extends State<SignUp> with Validation  {
                     ),
                   ),
                 ),
-
-
                 sendToLogin(),
 
               ],
             )));
+
   }
 
   Widget nameField(){

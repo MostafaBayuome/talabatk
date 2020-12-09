@@ -45,8 +45,7 @@ class _State extends State<CustomerHomePage> {
     return Scaffold (
         appBar: Utils.appBarusers(context,_title),
         body: customerMenuWidget()
-
-    );
+   );
   }
 
   Widget customerMenuWidget() {
@@ -55,184 +54,205 @@ class _State extends State<CustomerHomePage> {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Utils.title(120, 120),
-             SizedBox(height: 150),
-            InkWell(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LocationEditor()
-                ));
-              },
-              child: Container(
 
-                  width: 150,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0.0,20.0),
-                            blurRadius: 30.0,
-                            color: Colors.black12
-                        )
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22.0)
-                  ),
-                  child:Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 3.0 ),
-                        height: 50,
-                        width: 110.0,
-                        child: Center(
-                          child: Text(AppLocalizations.of(context).translate('add_new_location'),style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white
-                          ),),
-                        ),
-                        decoration: BoxDecoration (
-                            color:Color(int.parse(Global.secondaryColor)),
-                            borderRadius: BorderRadius.only(
+             Expanded(
+                flex: 2,
+                child: Row(
+                  children: [
+                    Expanded(child: Container(),flex: 3),
+                    Expanded(child: Utils.title(120, 120),flex:3),
+                    Expanded(child: Container(),flex:3)
 
-                                topLeft: Radius.circular(98.0),
-                                bottomRight: Radius.circular(200)
-                            )
-                        ),
-                      ),
-                      Icon(Icons.location_on,size:30.0)
-
-                    ],
-                  )
-
+                  ],
+                ),
               ),
-            ),
-             SizedBox(height: 40),
-            InkWell(
-              onTap: (){
-                // get all location of user display it after user choose  redirect to gmap with exact latlng
-                Location.getByIdLocation("Location/GetByIdLocation").then((value) {
-                  Locations=value;
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return  AlertDialog(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                          ),
+             Expanded(flex:1,child: Container()),
+             Expanded(
+              flex: 3,
+                child: Column(
 
-                          title: Column(
-                            children: [
-                              Utils.title(50.0,50.0),
-                              SizedBox(height : 10.0),
-                              Text(AppLocalizations.of(context).translate('place_of_delivery'),
-                              style : TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: Global.fontFamily,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20),
-                              textAlign: TextAlign.center,
+                children: [
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LocationEditor()
+                    ));
+                  },
+                  child: Container(
+
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0.0,20.0),
+                                blurRadius: 30.0,
+                                color: Colors.black12
+                            )
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22.0)
+                      ),
+                      child:Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 3.0 ),
+                            height: 50,
+                            width: 110.0,
+                            child: Center(
+                              child: Text(AppLocalizations.of(context).translate('add_new_location'),style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white
+                              ),),
                             ),
-                              Divider(
-                                  color:Color(int.parse(Global.primaryColor)),
+                            decoration: BoxDecoration (
+                                color:Color(int.parse(Global.secondaryColor)),
+                                borderRadius: BorderRadius.only(
 
-                              )],
+                                    topLeft: Radius.circular(98.0),
+                                    bottomRight: Radius.circular(200)
+                                )
+                            ),
                           ),
-                          content: setupAlertDialogContainer(),
-                        );
+                          Icon(Icons.location_on,size:30.0)
 
-                      });
+                        ],
+                      )
 
-                });
-              },
-              child: Container(
-                  width: 150,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0.0,20.0),
-                            blurRadius: 30.0,
-                            color: Colors.black12
-                        )
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22.0)
                   ),
-                  child:Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
-                        height: 50,
-                        width: 110.0,
-                        child: Center(
-                          child:Text(AppLocalizations.of(context).translate('request_an_order'),style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white
-                          ),)
-                        ),
-                        decoration: BoxDecoration (
-                            color:Color(int.parse(Global.secondaryColor)),
-                            borderRadius: BorderRadius.only(
+                ),
 
-                                topLeft: Radius.circular(98.0),
-                                bottomRight: Radius.circular(200)
+                SizedBox(height: 30),
+                InkWell(
+                  onTap: (){
+                    // get all location of user display it after user choose  redirect to gmap with exact latlng
+                    Location.getByIdLocation("Location/GetByIdLocation").then((value) {
+                      Locations=value;
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return  AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              ),
+
+                              title: Column(
+                                children: [
+                                  Utils.title(50.0,50.0),
+                                  SizedBox(height : 10.0),
+                                  Text(AppLocalizations.of(context).translate('place_of_delivery'),
+                                    style : TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: Global.fontFamily,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Divider(
+                                    color:Color(int.parse(Global.primaryColor)),
+
+                                  )],
+                              ),
+                              content: setupAlertDialogContainer(),
+                            );
+
+                          });
+
+                    });
+                  },
+                  child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0.0,20.0),
+                                blurRadius: 30.0,
+                                color: Colors.black12
                             )
-                        ),
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22.0)
                       ),
-                      Icon(Icons.home,size:30.0)
+                      child:Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
+                            height: 50,
+                            width: 110.0,
+                            child: Center(
+                                child:Text(AppLocalizations.of(context).translate('request_an_order'),style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white
+                                ),)
+                            ),
+                            decoration: BoxDecoration (
+                                color:Color(int.parse(Global.secondaryColor)),
+                                borderRadius: BorderRadius.only(
 
-                    ],
-                  )
+                                    topLeft: Radius.circular(98.0),
+                                    bottomRight: Radius.circular(200)
+                                )
+                            ),
+                          ),
+                          Icon(Icons.home,size:30.0)
 
-              ),
-            ),
-             SizedBox(height: 40),
-            InkWell(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CustomerRequestLayout()
-                ));
-              },
-              child: Container(
-                  width: 150,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0.0,20.0),
-                            blurRadius: 30.0,
-                            color: Colors.black12
-                        )
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22.0)
+                        ],
+                      )
+
                   ),
-                  child:Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
-                        height: 50,
-                        width: 110.0,
-                        child: Center(
-                          child: Text(AppLocalizations.of(context).translate('my_orders'),style: TextStyle(
-                            fontSize: 14,
-                              fontWeight: FontWeight.w800,
-                            color: Colors.white
-                          ),),
-                        ),
-                        decoration: BoxDecoration (
-                            color:Color(int.parse(Global.secondaryColor)),
-                            borderRadius: BorderRadius.only(
+                ),
 
-                                topLeft: Radius.circular(98.0),
-                                bottomRight: Radius.circular(200)
+                SizedBox(height: 30),
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CustomerRequestLayout()
+                    ));
+                  },
+                  child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0.0,20.0),
+                                blurRadius: 30.0,
+                                color: Colors.black12
                             )
-                        ),
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22.0)
                       ),
-                      Icon(Icons.shopping_cart,size:30.0)
-                    ],
-                  )
-              ),
-            ),
+                      child:Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0 ),
+                            height: 50,
+                            width: 110.0,
+                            child: Center(
+                              child: Text(AppLocalizations.of(context).translate('my_orders'),style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white
+                              ),),
+                            ),
+                            decoration: BoxDecoration (
+                                color:Color(int.parse(Global.secondaryColor)),
+                                borderRadius: BorderRadius.only(
+
+                                    topLeft: Radius.circular(98.0),
+                                    bottomRight: Radius.circular(200)
+                                )
+                            ),
+                          ),
+                          Icon(Icons.shopping_cart,size:30.0)
+                        ],
+                      )
+                  ),
+                )
+              ],
+            ))
+
           ]
       ),
     );

@@ -48,11 +48,9 @@ class _State extends State<Login>  with Validation {
                       children: [
                         mobileField(),
                         passwordField(),
-
                         forgetPasswordButton(),
                         Container(margin: EdgeInsets.only(top:25.0),),
                         submitButton()
-
 
                       ],
                     ),
@@ -65,14 +63,14 @@ class _State extends State<Login>  with Validation {
                          Text( AppLocalizations.of(context).translate('dont_have_acount')  ,style: TextStyle(
                           fontFamily: Global.fontFamily,
                           fontWeight: FontWeight.w500,),),
-                        FlatButton(
+                         FlatButton(
                           textColor: Color(int.parse(Global.primaryColor)),
                           child: Text(
                             AppLocalizations.of(context).translate('create_account') ,
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 15,
                               fontFamily: Global.fontFamily,
                               fontWeight: FontWeight.w500,),
-                          ),
+                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
                             Navigator.of(context).push(MaterialPageRoute(

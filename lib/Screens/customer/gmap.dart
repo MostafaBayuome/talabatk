@@ -40,22 +40,32 @@ class _GMapState extends State<Gmap> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Utils.appBarusers(context,AppLocalizations.of(context).translate('nearest_shop') ),
-      body:Stack(
+      body:Column(
         children: [
-          _googleMap(context),
-          Row(
-            mainAxisAlignment:  MainAxisAlignment.center,
-            children: [
-              pharmacyIcon(),
-              shopIcon(),
-              restaurantIcon(),
-              ataraIcon(),
-            ],
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(child: pharmacyIcon()),
+                Expanded(child: shopIcon()),
+                Expanded(child: restaurantIcon()),
+                Expanded(child:ataraIcon()),
+              ],
+            ),
           ),
-          _buildContainer(),
-          
+          Expanded(
+            flex:12,
+            child: Stack(
+              children: [
+                _googleMap(context),
+
+                _buildContainer(),
+              ],
+            ),
+          ),
         ],
-      ),
+      )
     );
   }
 
@@ -289,14 +299,15 @@ class _GMapState extends State<Gmap> {
   //PHARMACY
   Widget pharmacyIcon() {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
         alignment: Alignment.topCenter,
         child:FlatButton(
           child: Column (
             mainAxisSize : MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(Icons.local_pharmacy,color:Colors.lightGreen,
-              size: 30,),
+              size: 25,),
 
             ],
           ),
@@ -341,15 +352,13 @@ class _GMapState extends State<Gmap> {
   // SHOP
   Widget shopIcon(){
    return Container(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         alignment: Alignment.topCenter,
         child:FlatButton(
           child: Column (
             mainAxisSize : MainAxisSize.min,
             children: [
               Icon(Icons.shopping_cart,color:Colors.blue,
-              size: 30,),
-
+              size: 25,),
             ],
           ),
           onPressed: () {
@@ -395,14 +404,14 @@ class _GMapState extends State<Gmap> {
   //RESTAURANT
   Widget restaurantIcon() {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
       alignment: Alignment.topCenter,
       child:FlatButton(
         child: Column (
           mainAxisSize : MainAxisSize.min,
           children: [
             Icon(Icons.restaurant,color:Colors.redAccent,
-              size: 30,),
+              size: 25,),
 
           ],
         ),
@@ -447,14 +456,14 @@ class _GMapState extends State<Gmap> {
   //ATARA
   Widget ataraIcon() {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
       alignment: Alignment.topCenter,
       child:FlatButton(
         child: Column (
           mainAxisSize : MainAxisSize.min,
           children: [
             Icon(Icons.wb_shade,color:Colors.deepOrangeAccent,
-              size: 30,),
+              size: 25,),
 
           ],
         ),

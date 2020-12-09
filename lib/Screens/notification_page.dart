@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
@@ -17,7 +16,6 @@ class Notification_Page extends StatefulWidget {
 }
 class _State extends State<Notification_Page> {
   List<NotificationDetails> notifications = [];
-
   Timer request_timer;
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,13 @@ class _State extends State<Notification_Page> {
               return Container(
                 child: Center(
                   child: Container(
-                    child: Text(AppLocalizations.of(context).translate('no_notification_here')),
+                    child: Text(AppLocalizations.of(context).translate('no_notification_here'),style: TextStyle(
+                      fontFamily: Global.fontFamily,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 20,
+                      color: Color(int.parse(Global.primaryColor)),
+                     ),
+                    ),
                   ),
                 ),
               );
@@ -45,7 +49,6 @@ class _State extends State<Notification_Page> {
                   return Padding(
                       padding: EdgeInsets.all(15),
                       child:   Card(
-
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -56,10 +59,9 @@ class _State extends State<Notification_Page> {
                               if(notifications[index].type=="request")
                                 {
                                   NotificationDetails.editNotification(notifications[index]).then((value) {
-
-                                setState(() {
-                                  notifications.removeAt(index);
-                                Global.userNotifications=notifications;
+                                  setState(() {
+                                    notifications.removeAt(index);
+                                   Global.userNotifications=notifications;
                                 });
                                 Navigator.of(context).pop();
                                 if(Global.loginUser.mapAppear == 1 || Global.loginUser.mapAppear == 2){
@@ -148,7 +150,6 @@ class _State extends State<Notification_Page> {
   }
 
   Future edit_all_notification() {
-
 
     request_timer = Timer.periodic(Duration(seconds: 10), (Timer t) async {
        for(int i =0;i<notifications.length;i++){
