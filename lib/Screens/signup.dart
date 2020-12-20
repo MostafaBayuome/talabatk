@@ -8,7 +8,7 @@ import 'package:Talabatk/Entities/api_manger.dart';
 import 'package:Talabatk/Entities/validation.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Widgets/utils.dart';
-import 'package:provider/provider.dart';
+
 import 'customer/customer_home_page.dart';
 import 'login.dart';
 

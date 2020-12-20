@@ -1,5 +1,7 @@
 import 'package:Talabatk/Entities/app_localizations.dart';
+import 'package:Talabatk/Screens/customer/customer_home_page.dart';
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
+import 'package:Talabatk/Screens/forget_pass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,8 +12,7 @@ import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:Talabatk/Widgets/utils.dart';
-import 'customer/customer_home_page.dart';
-import 'forget_pass.dart';
+
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/login.dart';
 import 'package:Talabatk/Screens/notification_page.dart';
-import 'file:///C:/Users/Etch/OneDrive/Desktop/WORK/Talabatk/Talabatk-GitHub/lib/Screens/settings.dart';
+import 'package:Talabatk/Screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Talabatk/Entities/global.dart';
-import 'package:provider/provider.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 

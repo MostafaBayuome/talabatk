@@ -104,7 +104,6 @@ class _GMapState extends State<Gmap> {
   void initState() {
     super.initState();
     getAllNearestShops();
-
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
         'images/destinationmarker.png').then((onValue) {

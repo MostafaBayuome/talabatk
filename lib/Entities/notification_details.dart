@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:Talabatk/Widgets/local_notification_state.dart';
-
 import 'global.dart';
 import 'package:http/http.dart' as http;
 

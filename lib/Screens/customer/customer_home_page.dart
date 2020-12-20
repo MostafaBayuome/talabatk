@@ -2,13 +2,14 @@ import 'dart:async';
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Entities/rate.dart';
 import 'package:Talabatk/Entities/notification_details.dart';
+import 'package:Talabatk/Screens/customer/gmap.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/customer/customer_requests_layout.dart';
-import 'gmap.dart';
+
 import 'customer_location_editor.dart';
 import 'package:Talabatk/Entities/location.dart';
 
