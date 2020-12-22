@@ -9,14 +9,14 @@ import 'global.dart';
 Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id,List<Address> addresses) async {
   try{
 
-    String url ="";
+    String url = Global.url+apiName;
     if(addresses!= null){
       String country = addresses[2].countryName;
       String governorate = addresses[2].adminArea;
       String city = addresses[2].subAdminArea;
       url = Global.url+apiName+"?cites=$city&goverments=$governorate&countres=$country";
     }
-    url = Global.url+apiName;
+
     final response= await  http.post(url,
         headers: {"Content-Type": "application/json"},
         body:json.encode({
