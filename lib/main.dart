@@ -18,7 +18,7 @@ Future<void> main()  async {
 
     WidgetsFlutterBinding.ensureInitialized();
     Global.prefs =await SharedPreferences.getInstance();
-   // if mobileNumber and check not null then it will redirect to the correct homepage
+   // if mobileNumber plus check not null then it will redirect to the correct homepage
 
    var FirstEnter=Global.prefs.getInt('FirstEnter');
    var phone=Global.prefs.getString('phone');

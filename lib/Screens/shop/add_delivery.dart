@@ -7,11 +7,11 @@ import 'package:Talabatk/Widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class addDeliveryman extends StatefulWidget{
+class AddDeliveryman extends StatefulWidget{
   @override
   _State createState() => _State();
 }
-class _State extends State<addDeliveryman> with Validation
+class _State extends State<AddDeliveryman> with Validation
 {
   int map_Appear=9;
   String userName='';
@@ -45,7 +45,6 @@ class _State extends State<addDeliveryman> with Validation
                         mobileField(),
                         passwordField(),
                         passwordFieldConfirmation(),
-
                         Container(margin: EdgeInsets.only(top:30.0),),
                         submitButton(),
 
@@ -143,7 +142,7 @@ class _State extends State<addDeliveryman> with Validation
 
           if(formKey.currentState.validate()) {
             formKey.currentState.save();
-            signUp("Talabatk/AddUser", phone, password, userName ,Global.loginUser.latitude, Global.loginUser.longitude, true, map_Appear,Global.loginUser.id," ").then((value) async {
+            signUp("Talabatk/AddUser", phone, password, userName ,Global.loginUser.latitude, Global.loginUser.longitude, true, map_Appear,Global.loginUser.id,null).then((value) async {
               setState(() {
                  Global.visible_progress=false;
                   });
@@ -159,10 +158,7 @@ class _State extends State<addDeliveryman> with Validation
             else{
               Utils.toastMessage(AppLocalizations.of(context).translate('right_info'));
             }
-          });
-
-
-            }
+          });}
           else{
             setState(() {
               Global.visible_progress=false;

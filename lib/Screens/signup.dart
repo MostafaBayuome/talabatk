@@ -26,7 +26,7 @@ class _State extends State<SignUp> with Validation  {
   String password='';
   String confirmPassword='';
   Position position=null;
-  Address address;
+  List<Address> address;
   final formKey = GlobalKey <FormState>();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
@@ -206,7 +206,7 @@ class _State extends State<SignUp> with Validation  {
             else if(dropdownValue=="محل تجاري" || dropdownValue=="Super market")  map_Appear=1;
             else if(dropdownValue=="مطعم"|| dropdownValue=="restaurant") map_Appear=3;
             else if(dropdownValue=="عطاره"|| dropdownValue=="Atara") map_Appear=4;
-            else if(dropdownValue=="طيار حر " || dropdownValue=="Free delivery man") map_Appear=10;
+            else if(dropdownValue=="طيار حر" || dropdownValue=="Free delivery man") map_Appear=10;
 
             if (map_Appear>0){
               if (position == null) {
@@ -214,9 +214,9 @@ class _State extends State<SignUp> with Validation  {
               }
               else {
                 final coordinates= new Coordinates( position.latitude,position.longitude);
-                convertCoordinatesToAddress(coordinates).then((value){
+                  convertCoordinatesToAddress(coordinates).then((value){
                   address=value;
-                  signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1,address.addressLine).then((value) async {
+                  signUp("Talabatk/AddUser", phone, password, userName ,position.latitude, position.longitude, true, map_Appear,-1,address).then((value) async {
                     setState(() {
                       Global.visible_progress=false;
                     });
@@ -262,7 +262,7 @@ class _State extends State<SignUp> with Validation  {
                 final coordinates= new Coordinates( position.latitude,position.longitude);
                 convertCoordinatesToAddress(coordinates).then((value){
                   address=value;
-                  signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1,address.addressLine).then((value) async {
+                  signUp("Talabatk/AddUser", phone, password,userName, position.latitude, position.longitude, true, map_Appear,-1,address).then((value) async {
                     setState(() {
                       Global.visible_progress=false;
                     });
@@ -401,9 +401,9 @@ class _State extends State<SignUp> with Validation  {
         ));
   }
 
-  Future<Address> convertCoordinatesToAddress(Coordinates coordinates) async{
+  Future<List<Address>> convertCoordinatesToAddress(Coordinates coordinates) async{
     var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
-    return addresses.first;
+    return addresses;
   }
 
 }

@@ -1,3 +1,4 @@
+import 'package:geocoder/geocoder.dart';
 import 'package:http/http.dart' as http;
 import 'location.dart';
 import 'dart:convert';
@@ -5,10 +6,17 @@ import 'global.dart';
 
 
 // merchant_id = 0  if it isn't delivery man   (Delivery man not same as Free Delivery man)
-Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id,String addressLine) async {
+Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id,List<Address> addresses) async {
   try{
 
-    String url = Global.url+apiName;
+    String url ="";
+    if(addresses!= null){
+      String country = addresses[2].countryName;
+      String governorate = addresses[2].adminArea;
+      String city = addresses[2].subAdminArea;
+      url = Global.url+apiName+"?cites=$city&goverments=$governorate&countres=$country";
+    }
+    url = Global.url+apiName;
     final response= await  http.post(url,
         headers: {"Content-Type": "application/json"},
         body:json.encode({
@@ -29,7 +37,14 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
 
         convert =json.decode(response.body);
         // (map_Appear != 10) to not add free delivery man location
-       if (map_Appear > 0 && map_Appear != 10)
+
+        String addressLine ="";
+        if(addresses!= null){
+           addressLine = addresses.first.addressLine;
+        }
+        //addressLine = address when user first signed up with all its details
+
+        if (map_Appear > 0 && map_Appear != 10)
           Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, username, addressLine);
        else if(map_Appear != 10)
           Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "First Place", addressLine);

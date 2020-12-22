@@ -55,7 +55,7 @@ class _State extends State<ShopHomePage>{
                     InkWell(
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>addDeliveryman()
+                            builder: (context) =>AddDeliveryman()
                         ));
                       },
                       child: Container(
