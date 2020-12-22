@@ -19,7 +19,7 @@ class _State extends State<app_info> with TickerProviderStateMixin {
   @override
   void initState(){
     super.initState();
-    controller= AnimationController(vsync: this,duration: const Duration(seconds: 3))
+    controller= AnimationController(vsync: this,duration: const Duration(seconds: 3),)
       ..addListener(() { setState(() {
       });});
     growAnimation = Tween<double>(begin: 0,end: 200).animate(controller);

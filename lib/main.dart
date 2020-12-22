@@ -1,4 +1,5 @@
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
+import 'package:Talabatk/Screens/freedeliveryman/free_delivery_home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -29,8 +30,7 @@ Future<void> main()  async {
    var longitude=Global.prefs.getDouble('longitude');
    var merchant_id=Global.prefs.getInt('merchant_id');
 
-   if(phone!=null)
-     {
+   if(phone!=null) {
        User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear,merchant_id);
        Global.loginUser=user;
      }
@@ -53,12 +53,11 @@ Future<void> main()  async {
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: FirstEnter==null? app_info(): phone ==null ? SignUp() : (map_Appear == 1 || map_Appear == 2) ? ShopHomePage() : (map_Appear!=9) ? CustomerHomePage() : DeliveryHomePage(),
+              //Map_Appear:  0 Customer, 1 Shop, 2 Pharmacy, 3 Restaurant , 4 Atara , 9 Delivery man, 10 Free delivery man
+              home: FirstEnter==null? app_info(): phone ==null ? SignUp() : (map_Appear == 1 || map_Appear == 2 || map_Appear ==3 || map_Appear == 4) ? ShopHomePage() : (map_Appear==0) ? CustomerHomePage() : (map_Appear==9) ? DeliveryHomePage():FreeDeliveryHomePage(),
             );
           }),
         )
    );
-
-
 
 }

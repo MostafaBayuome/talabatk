@@ -8,7 +8,6 @@ import 'package:Talabatk/Entities/api_manger.dart';
 import 'package:Talabatk/Entities/validation.dart';
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Widgets/utils.dart';
-
 import 'customer/customer_home_page.dart';
 import 'login.dart';
 
@@ -207,6 +206,7 @@ class _State extends State<SignUp> with Validation  {
             else if(dropdownValue=="محل تجاري" || dropdownValue=="Super market")  map_Appear=1;
             else if(dropdownValue=="مطعم"|| dropdownValue=="restaurant") map_Appear=3;
             else if(dropdownValue=="عطاره"|| dropdownValue=="Atara") map_Appear=4;
+            else if(dropdownValue=="طيار حر " || dropdownValue=="Free delivery man") map_Appear=10;
 
             if (map_Appear>0){
               if (position == null) {
@@ -363,6 +363,7 @@ class _State extends State<SignUp> with Validation  {
                 AppLocalizations.of(context).translate('pharmacy'),
                 AppLocalizations.of(context).translate('restaurant'),
                 AppLocalizations.of(context).translate('atara'),
+                AppLocalizations.of(context).translate('free_delivery_man')
               ]
                   .map((String value) {
                 return DropdownMenuItem<String>(

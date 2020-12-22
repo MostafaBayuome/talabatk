@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'global.dart';
 
 
-// merchant_id = 0  if its (shop, pharmacy, customer)
+// merchant_id = 0  if it isn't delivery man   (Delivery man not same as Free Delivery man)
 Future<Map<String, dynamic>> signUp (String apiName,String phone,String password,String username,double latitude,double longitude,bool state,int  map_Appear,int merchant_id,String addressLine) async {
   try{
 
@@ -26,11 +26,14 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
     Map<String, dynamic> convert;
     // if user signed up with phone already assigned to user will return user_exist if not will return new user with all its  information
     if(!convertDatatoJson.contains("user_exist")) {
+
         convert =json.decode(response.body);
-       if (map_Appear > 0)
+        // (map_Appear != 10) to not add free delivery man location
+       if (map_Appear > 0 && map_Appear != 10)
           Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, username, addressLine);
-       else
-          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "المكان الاول", addressLine);
+       else if(map_Appear != 10)
+          Location.addLocation("Location/AddLocation", convert['id'], latitude, longitude, "First Place", addressLine);
+
     }
     else{
       return null;
@@ -47,8 +50,7 @@ Future<Map<String, dynamic>> signUp (String apiName,String phone,String password
 
 
 Future<Map<String, dynamic>> loginUser (String apiName, String mobileNumber , String password) async {
-
-  try{
+  try {
     String url =Global.url+apiName;
     final response = await http.post(url+"?mobileNumber="+mobileNumber+"&password="+password,headers:{"Content-Type": "application/json"} );
     if(response.body.isNotEmpty) {
@@ -58,16 +60,12 @@ Future<Map<String, dynamic>> loginUser (String apiName, String mobileNumber , St
         return  convertDatatoJson;
       }
     }
-
-
     return null;
   }
-  catch (Excepetion)
-  {
+  catch (Excepetion) {
     print(Excepetion);
     return null;
   }
-
 }
 
 

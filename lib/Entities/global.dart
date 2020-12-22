@@ -6,7 +6,7 @@ import 'app_localizations.dart';
 import 'rate.dart';
 class  Global {
 
-static SharedPreferences prefs;
+  static SharedPreferences prefs;
   static User loginUser = new User.empty();
   static String appName='Talabatk' ;
   static String fontFamily='NotoSansJP';

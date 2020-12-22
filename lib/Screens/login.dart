@@ -1,6 +1,7 @@
 import 'package:Talabatk/Entities/app_localizations.dart';
 import 'package:Talabatk/Screens/customer/customer_home_page.dart';
 import 'package:Talabatk/Screens/delivery/delivery_home_page.dart';
+import 'package:Talabatk/Screens/freedeliveryman/free_delivery_home_page.dart';
 import 'package:Talabatk/Screens/forget_pass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,6 @@ import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Screens/shop/shop_home_page.dart';
 import 'package:Talabatk/Screens/signup.dart';
 import 'package:Talabatk/Widgets/utils.dart';
-
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -22,16 +22,15 @@ class Login extends StatefulWidget {
 
 class _State extends State<Login>  with Validation {
 
+
   String mobileNumber='';
   String password='';
   Position position;
   final formKey = GlobalKey <FormState>();
-
   @override
   Widget build(BuildContext context) {
     var appLanguage = Provider.of<AppLanguage>(context);
     return Scaffold(
-
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -90,7 +89,8 @@ class _State extends State<Login>  with Validation {
                     Center(
                       child: Text( AppLocalizations.of(context).translate('change_language')  ,style: TextStyle(
                         fontFamily: Global.fontFamily,
-                        fontWeight: FontWeight.w500,),),
+                        fontSize: 12
+                        ),),
                     ),
                     Container(margin: EdgeInsets.only(top:5.0),),
                     Container(
@@ -135,9 +135,6 @@ class _State extends State<Login>  with Validation {
                     )
                   ],
                 )
-
-
-
               ],
             )));
   }
@@ -158,7 +155,6 @@ class _State extends State<Login>  with Validation {
       },
     );
   }
-
   Widget passwordField() {
     return  TextFormField(
       obscureText: true,
@@ -172,7 +168,6 @@ class _State extends State<Login>  with Validation {
       },
     );
   }
-
   Widget forgetPasswordButton() {
     return FlatButton(
       onPressed: (){
@@ -185,7 +180,8 @@ class _State extends State<Login>  with Validation {
     );
   }
 
-  //Map_Appear   0 customer, 1 shop, 2  pharmacy, 3 restaurant , 4 atara , 9 delivery
+
+  //Map_Appear:  0 customer, 1 shop, 2  pharmacy, 3 restaurant , 4 atara , 9 delivery , 10 free delivery man
   Widget submitButton() {
     if(Global.visible_progress){
       return CircularProgressIndicator();
@@ -236,26 +232,38 @@ class _State extends State<Login>  with Validation {
                   Global.prefs.setDouble('longitude', data["longitude"]);
                   Global.prefs.setInt('merchant_id', data['merchant_id']);
 
-                  if(value["map_Appear"]== 1 || value["map_Appear"]== 2 || value["map_Appear"]== 3 ){
+
+                  // 1 supermarket, 2  pharmacy, 3 restaurant, 4 atara
+                  if(value["map_Appear"]== 1 || value["map_Appear"]== 2 || value["map_Appear"]== 3 || value["map_Appear"] == 4){
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>ShopHomePage()
                     ));
                   }
-                  else if (value["map_Appear"]== 0 ){
+                  //Customer
+                  else if (value["map_Appear"] == 0 ){
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>CustomerHomePage()
                     ));
                   }
-                  else if(value["map_Appear"]== 9 ) {
+                  // Delivery works in shop
+                  else if(value["map_Appear"] == 9 ) {
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>DeliveryHomePage()
                     ));
+                  }
+                  // Free Delivery works alone by taking order from nearest shop to his current location and then order it
+                  else if(value["map_Appear"] == 10){
 
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>FreeDeliveryHomePage()
+                    ));
                   }
                 }
+
                 catch (Excepetion) {
                   print(Excepetion);
                 }

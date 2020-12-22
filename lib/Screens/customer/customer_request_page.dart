@@ -35,180 +35,186 @@ class _State extends State<UserRequest>{
           return Scaffold(
             resizeToAvoidBottomPadding: false,
             appBar:Utils.appBarusers(context,AppLocalizations.of(context).translate('request') ),
-            body: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
+            body: GestureDetector(
+              onTap: (){
+                FocusScope.of(context).requestFocus(new FocusNode());
 
-                  Center(
-                    child: Text(AppLocalizations.of(context).translate('request_info') ,
-                      style: TextStyle(
-                        fontFamily: Global.fontFamily,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18),),
-                  ),
-                  SizedBox(height: 10),
-                  Expanded(
-                    child: Container(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          borderOnForeground: true,
-                          elevation: 10,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: TextField(
-                              maxLines: null,
-                              keyboardType: TextInputType.multiline,
-                              decoration: InputDecoration.collapsed(hintText: ""),
-                              controller: detailsTextController,
+              },
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+
+                    Center(
+                      child: Text(AppLocalizations.of(context).translate('request_info') ,
+                        style: TextStyle(
+                          fontFamily: Global.fontFamily,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18),),
+                    ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      child: Container(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
-                          ),
-                        )
+                            borderOnForeground: true,
+                            elevation: 10,
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                maxLines: null,
+                                keyboardType: TextInputType.multiline,
+                                decoration: InputDecoration.collapsed(hintText: ""),
+                                controller: detailsTextController,
+                              ),
+                            ),
+                          )
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  Expanded(
-                    child: buildGridView(),
-                   ),
-                  Expanded(
-                    child: Row(
-                       mainAxisAlignment: MainAxisAlignment.center,//Center Row contents horizontally,
-                      children: [
-                        Container(
-                            child: Center(
-                              child: SizedBox.fromSize(
-                                size: Size(70, 70), // button width and height
-                                child: ClipOval(
-                                  child: Material(
-                                    color:  Color(int.parse(Global.primaryColor)), // button color
-                                    child: InkWell(
-                                      splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                      onTap: () {
-                                        launch('tel://${shop.mobileNumber}');
-                                      }, // button pressed
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(Icons.call,color: Colors.white,), // icon
-                                          Text(AppLocalizations.of(context).translate('call')  , style: TextStyle(
-                                          color: Colors.white,
-                                     ),), // text
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            )),
-                        SizedBox(width: 20),
-                        Container(
-                            child: Center(
-                              child: SizedBox.fromSize(
-                                size: Size(70, 70), // button width and height
-                                child: ClipOval(
-                                  child: Material(
-                                    color:  Color(int.parse(Global.primaryColor)), // button color
-                                    child: InkWell(
-                                      splashColor: Color(int.parse(Global.secondaryColor)), // splash color
-                                      onTap: () {
-                                        _showPicker(context);
-                                      }, // button pressed
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(Icons.add_a_photo,color: Colors.white,), // icon
-                                          Text(AppLocalizations.of(context).translate('upload_photo') , style: TextStyle(
+                    SizedBox(height: 20),
+                    Expanded(
+                      child: buildGridView(),
+                     ),
+                    Expanded(
+                      child: Row(
+                         mainAxisAlignment: MainAxisAlignment.center,//Center Row contents horizontally,
+                        children: [
+                          Container(
+                              child: Center(
+                                child: SizedBox.fromSize(
+                                  size: Size(70, 70), // button width and height
+                                  child: ClipOval(
+                                    child: Material(
+                                      color:  Color(int.parse(Global.primaryColor)), // button color
+                                      child: InkWell(
+                                        splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                                        onTap: () {
+                                          launch('tel://${shop.mobileNumber}');
+                                        }, // button pressed
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Icon(Icons.call,color: Colors.white,), // icon
+                                            Text(AppLocalizations.of(context).translate('call')  , style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 10
-                                          )), // text
-                                        ],
+                                       ),), // text
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              )
-                            )),
-                      ],
-                    ),
-                  ),
-                  Container(
-                      child: Center(
-                        child:  Global.visible_progress ?
-                                   CircularProgressIndicator() :
-                                   RaisedButton(
-                                          onPressed: () async {
-                                            setState(() {
-                                              Global.visible_progress=true;
-                                            });
-                                      if(images.length>0) {
-                                            image1=images[0].name.toString();
-                                            image1 = image1.replaceAll(".","-");
-                                            image1+=".png";
-                                          if(images.length>1) {
-                                              image2=images[1].name.toString();
-                                              image2 = image2.replaceAll(".","-");
-                                              image2+=".png";
-                                            }
-                                          for(int i=0;i<images.length;i++)
-                                            {
-                                              File file = File ( await FlutterAbsolutePath.getAbsolutePath(images[i].identifier));
-                                              Uint8List tempbyte = file.readAsBytesSync();
-                                              String temp= tempbyte.toString();
-                                              print(temp);
-                                              arrbytes.add(tempbyte);
-                                            }
-                                        }
-                                      if(detailsTextController.text.toString().length!=0 || images.length != 0 ){
-                                        try{
-                                          if(arrbytes.length == 2 ){
-                                            Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
-                                              setState(() {
-                                                Global.visible_progress=false;
-                                              });
-                                              Utils.toastMessage(AppLocalizations.of(context).translate('request_have_been_sent') );
-                                            });
-                                          }// 1 image doesn't work
-                                          else
-                                          {
-                                            Request.addRequest1("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),"","",null,null).then((value) {
-                                              setState(() {
-                                                Global.visible_progress=false;
-                                              });
-                                              Utils.toastMessage(AppLocalizations.of(context).translate('request_have_been_sent') );
-                                            });
-                                          }
-                                        }catch(Exception)
-                                            {
-                                              setState(() {
-                                                Global.visible_progress=false;
-                                              });
-                                            }
-                                      }else{
-                                        Utils.toastMessage(AppLocalizations.of(context).translate('fill_the_request') );
-                                        setState(() {
-                                          Global.visible_progress=false;
-                                        });
-                                      }
-                                    },
-                                    elevation: 2.0,
-                                    color: Color(int.parse(Global.primaryColor)),
-                                    textColor: Colors.white,
-                                    padding: const EdgeInsets.all(0.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                    ),
-                                    child: Container(
-                                      padding:  EdgeInsets.all(10.0),
-                                      child: Text(AppLocalizations.of(context).translate('request_order') ,
-                                          style: TextStyle(fontSize: 15)
-                                      ),
-                                    )
-                                ),
+                                )
                               )),
+                          SizedBox(width: 20),
+                          Container(
+                              child: Center(
+                                child: SizedBox.fromSize(
+                                  size: Size(70, 70), // button width and height
+                                  child: ClipOval(
+                                    child: Material(
+                                      color:  Color(int.parse(Global.primaryColor)), // button color
+                                      child: InkWell(
+                                        splashColor: Color(int.parse(Global.secondaryColor)), // splash color
+                                        onTap: () {
+                                          _showPicker(context);
+                                        }, // button pressed
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Icon(Icons.add_a_photo,color: Colors.white,), // icon
+                                            Text(AppLocalizations.of(context).translate('upload_photo') , style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10
+                                            )), // text
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              )),
+                        ],
+                      ),
+                    ),
+                    Container(
+                        child: Center(
+                          child:  Global.visible_progress ?
+                                     CircularProgressIndicator() :
+                                     RaisedButton(
+                                            onPressed: () async {
+                                              setState(() {
+                                                Global.visible_progress=true;
+                                              });
+                                        if(images.length>0) {
+                                              image1=images[0].name.toString();
+                                              image1 = image1.replaceAll(".","-");
+                                              image1+=".png";
+                                            if(images.length>1) {
+                                                image2=images[1].name.toString();
+                                                image2 = image2.replaceAll(".","-");
+                                                image2+=".png";
+                                              }
+                                            for(int i=0;i<images.length;i++)
+                                              {
+                                                File file = File ( await FlutterAbsolutePath.getAbsolutePath(images[i].identifier));
+                                                Uint8List tempbyte = file.readAsBytesSync();
+                                                String temp= tempbyte.toString();
+                                                print(temp);
+                                                arrbytes.add(tempbyte);
+                                              }
+                                          }
+                                        if(detailsTextController.text.toString().length!=0 || images.length != 0 ){
+                                          try{
+                                            if(arrbytes.length == 2 ){
+                                              Request.addRequest("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),image1,image2,arrbytes[0],arrbytes[1]).then((value) {
+                                                setState(() {
+                                                  Global.visible_progress=false;
+                                                });
+                                                Utils.toastMessage(AppLocalizations.of(context).translate('request_have_been_sent') );
+                                              });
+                                            }// 1 image doesn't work
+                                            else
+                                            {
+                                              Request.addRequest1("Request/AddRequest",Global.loginUser.id,shop.id,Global.userLocationIdDeliever,"","",detailsTextController.text.toString(),"","",null,null).then((value) {
+                                                setState(() {
+                                                  Global.visible_progress=false;
+                                                });
+                                                Utils.toastMessage(AppLocalizations.of(context).translate('request_have_been_sent') );
+                                              });
+                                            }
+                                          }catch(Exception)
+                                              {
+                                                setState(() {
+                                                  Global.visible_progress=false;
+                                                });
+                                              }
+                                        }else{
+                                          Utils.toastMessage(AppLocalizations.of(context).translate('fill_the_request') );
+                                          setState(() {
+                                            Global.visible_progress=false;
+                                          });
+                                        }
+                                      },
+                                      elevation: 2.0,
+                                      color: Color(int.parse(Global.primaryColor)),
+                                      textColor: Colors.white,
+                                      padding: const EdgeInsets.all(0.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(18.0),
+                                      ),
+                                      child: Container(
+                                        padding:  EdgeInsets.all(10.0),
+                                        child: Text(AppLocalizations.of(context).translate('request_order') ,
+                                            style: TextStyle(fontSize: 15)
+                                        ),
+                                      )
+                                  ),
+                                )),
 
-                ],
+                  ],
+                ),
               ),
             ),
           );
