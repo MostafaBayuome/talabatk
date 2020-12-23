@@ -55,7 +55,6 @@
   "request_order": "طلب اوردر",
   "request_have_been_sent": "لقد تم ارسال طلبك",
   "fill_the_request": "برجاء ادخال الطلب",
-  "my_orders": "طلباتي",
   "add_new_delivery": "اضافه طيار",
   "add": "اضافه",
   "show_all_delivery": "عرض تفاصيل الطيارين",
@@ -82,5 +81,11 @@
   "shop": "محل تجاري",
   "next":"التالي",
   "address": "العنوان",
-  "free_delivery_man":"طيار حر"
+  "free_delivery_man":"طيار حر",
+  "add_new_offer": "اضافه عرض جديد",
+  "offer_description": "وصف العرض",
+  "choose_date": "اختار الوقت",
+  "to": "الي",
+  "add_offer": "اضافه عرض"
+
 }

@@ -25,7 +25,7 @@ class _State extends State<UserRequest>{
   final picker = ImagePicker();
   List<Asset> images = List<Asset>();
   List <File> fileImageArray = [];
-  List  <Uint8List> arrbytes =[];
+  List  <Uint8List> arrbytes = [];
   User shop;
   final detailsTextController = TextEditingController();
   String image1="",image2="";

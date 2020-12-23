@@ -55,7 +55,7 @@
   "request_order": "Request Order",
   "request_have_been_sent": "Request have been sent",
   "fill_the_request": "Please fill the request",
-  "my_orders": "My orders",
+
   "add_new_delivery": "Add new Deliveryman",
   "add": "Add",
   "show_all_delivery": "Show all delivery men",
@@ -82,7 +82,12 @@
   "shop": "Shop",
   "next": "Next",
   "address": "Address",
-  "free_delivery_man": "Free delivery man"
+  "free_delivery_man": "Free delivery man",
+  "add_new_offer": "Add new offer",
+  "offer_description": "Offer description",
+  "choose_date": "Choose date",
+  "to": "to",
+  "add_offer":"Add offer"
 
 
 }
