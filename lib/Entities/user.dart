@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'global.dart';
 
-//MapAppear 0 Customer, 1 Shop, 2 Pharmacy, 9 DeliveryMan
+//MapAppear 0 Customer, 1 Shop, 2 Pharmacy, 9 DeliveryMan,10 Free DeliveryMan
 class User {
 
   int id;

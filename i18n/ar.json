@@ -86,6 +86,9 @@
   "offer_description": "وصف العرض",
   "choose_date": "اختار الوقت",
   "to": "الي",
-  "add_offer": "اضافه عرض"
+  "add_offer": "اضافه عرض",
+  "all_my_offers": "كل العروض",
+  "profile": "الملف الشخصي",
+  "all_offers": "جميع العروض"
 
 }

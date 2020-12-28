@@ -31,8 +31,8 @@ Future<void> main()  async {
    var merchant_id=Global.prefs.getInt('merchant_id');
 
    if(phone!=null) {
-       User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear,merchant_id);
-       Global.loginUser=user;
+         User user =new User(user_id,phone,latitude,longitude,user_name,password,map_Appear,merchant_id);
+         Global.loginUser=user;
      }
 
     await Global.appLanguage.fetchLocale();

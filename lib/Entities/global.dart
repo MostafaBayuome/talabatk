@@ -4,11 +4,12 @@ import 'package:Talabatk/Entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_localizations.dart';
 import 'rate.dart';
+
 class  Global {
 
   static SharedPreferences prefs;
   static User loginUser = new User.empty();
-  static String appName='Talabatk' ;
+  static String appName='Talabatk';
   static String fontFamily='NotoSansJP';
   static String primaryColor='0xff27bdef';   //Cloudy
   static String secondaryColor='0xffe85c9b';   //pink
@@ -25,7 +26,6 @@ class  Global {
   static int selectedRateID=0;
   static int selectedRequestID=0;
   static List<Rate> rateList=[];
-
 
   // appLanguage for changing application language
   static AppLanguage appLanguage = AppLanguage();

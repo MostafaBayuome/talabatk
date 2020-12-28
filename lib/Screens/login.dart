@@ -205,7 +205,7 @@ class _State extends State<Login>  with Validation {
         onPressed: () {
           if(formKey.currentState.validate())
           {
-            setState(() {
+            setState((){
               Global.visible_progress=true;
             });
 
@@ -278,9 +278,5 @@ class _State extends State<Login>  with Validation {
     );
 
   }
-
-
-
-
 
 }

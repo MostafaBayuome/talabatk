@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Talabatk/Entities/global.dart';
-
+import 'package:Talabatk/Screens/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,25 +39,7 @@ class Utils {
             )
         ),
       ),);
-      //old title
-      /*Container(
-          decoration: BoxDecoration(
-              border: Border.all(color:Color(int.parse(Global.primaryColor)) , width: 4.0),
-              borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
-              color:Color(int.parse(Global.secondaryColor))
-          ),
-          width: 140.0,
-          height: 70.0,
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(10),
-          child: Text(
-            'سجل حسابك',
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: Global.fontFamily,
-                fontWeight: FontWeight.w900,
-                fontSize: 18),
-          )) */
+    
   }
 
   // for sign out deleting all prefrences for user
@@ -85,17 +67,26 @@ class Utils {
           builder: (context) =>Settings()
       ));
     }
+    else if(choices.contains("الملف الشخصي") || choices.contains("Profile")){
+
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>Profile()
+      ));
+    }
 
   }
 
   // appbar for all users shop, customer, delivery
   static Widget  appBarusers(BuildContext context,String title ){
-    String SignOut=AppLocalizations.of(context).translate('sign_out');
+
+    String signOut=AppLocalizations.of(context).translate('sign_out');
     String settings=AppLocalizations.of(context).translate('settings');
+    String profile=AppLocalizations.of(context).translate('profile');
 
     List<String> singleChoice = <String> [
       settings,
-      SignOut
+      profile,
+      signOut
     ];
     String _title=title;
     return PreferredSize(
