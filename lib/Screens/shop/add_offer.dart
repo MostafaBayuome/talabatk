@@ -136,6 +136,7 @@ class _AddOfferState extends State<AddOffer> {
                               setState(() {
                                 Global.visible_progress=false;
                               });
+
                             });
                           }
                           else if(myController.text.length != null)
@@ -146,6 +147,8 @@ class _AddOfferState extends State<AddOffer> {
                                 setState(() {
                                   Global.visible_progress=false;
                                 });
+                                Utils.toastMessage("Offer Added");
+                                Navigator.of(context).pop();
                               });
                             }
 

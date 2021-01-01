@@ -41,8 +41,7 @@ class Location {
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);
     List<Location> locations = [];
-    for(var i in jsonData)
-    {
+    for(var i in jsonData) {
       Location location = Location(i['id'],i['user_id'],i['latitude'],i['longitude'],i['title'],i['note']);
       locations.add(location);
     }
@@ -56,8 +55,7 @@ class Location {
     final response = await http.get(url,headers:{"Content-Type": "application/json"});
     var jsonData = json.decode(response.body);
 
-    for(var i in jsonData)
-    {
+    for(var i in jsonData) {
       Location location = Location(i['id'],i['user_id'],i['latitude'],i['longitude'],i['title'],i['note']);
       return location;
     }

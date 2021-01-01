@@ -50,8 +50,7 @@ class _State  extends State<LocationEditor>{
         child: FutureBuilder(
           future: Location.getByIdLocation("Location/GetByIdLocation"),
           builder:(BuildContext context,AsyncSnapshot snapshot){
-            if(snapshot.data == null)
-              {
+            if(snapshot.data == null)  {
                 return Container(
                   child: Center(
                     child: CircularProgressIndicator()

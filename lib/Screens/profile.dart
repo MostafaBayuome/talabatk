@@ -78,6 +78,7 @@ class _State extends State<Profile>
                    Text( AppLocalizations.of(context).translate('mobile_field')+" :",style: TextStyle(
                        color: Colors.black,
                        fontFamily: Global.fontFamily,
+                       fontWeight: FontWeight.bold,
                        fontSize: 18
                    ),),
                    SizedBox(width: 10,),
@@ -97,7 +98,7 @@ class _State extends State<Profile>
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
                Text("User ID :",style: TextStyle(
-
+                  fontWeight: FontWeight.bold,
                    fontFamily: Global.fontFamily,
                    fontSize: 18
                ),),
@@ -118,7 +119,7 @@ class _State extends State<Profile>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Account Type: ",style: TextStyle(
-
+                    fontWeight: FontWeight.bold,
                     fontFamily: Global.fontFamily,
                     fontSize: 18
                 ),),

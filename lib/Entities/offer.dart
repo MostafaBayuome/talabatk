@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:Talabatk/Entities/global.dart';
 import 'dart:typed_data';
+
 class Offer {
 
   int shopid;
@@ -28,9 +28,39 @@ class Offer {
           "image_byte":base64.encode(offer.image_byte)
 
         } ) );
-
     response.toString();
     //future work return int to work on requests
   }
+
+
+  static  Future<List<Offer>> getOfferByShopId(int id) async {
+
+    try{
+      //http://talabatk.maxsystem-eg.com/api/Offer/GetByShopId?Id=11
+      String url =Global.url+"Offer/GetByShopId?Id="+id.toString();
+      final response = await http.get(url,headers:{"Content-Type": "application/json"});
+      if(response.statusCode==200){
+        var jsonData = json.decode(response.body);
+        List<Offer> offers = [];
+        for(var i in jsonData)
+        {
+          Offer offer = Offer(i['id'],i['date'],i['dateExpired'],i['image_Url'],i['description'],i['image_byte']);
+          offers.add(offer);
+        }
+        return offers;
+    }
+      else{
+        return null;
+      }
+    }
+    catch(exception){
+      throw exception;
+    }
+
+
+
+
+
+   }
 
 }
