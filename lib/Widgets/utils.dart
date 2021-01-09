@@ -12,6 +12,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
 
+
+  static  var fontBold = TextStyle(
+      fontWeight: FontWeight.bold
+  );
   // global toast_message send message in an argument
   static void toastMessage(String message){
     Fluttertoast.showToast(

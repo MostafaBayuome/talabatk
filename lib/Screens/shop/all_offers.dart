@@ -1,6 +1,7 @@
 import 'package:Talabatk/Entities/global.dart';
 import 'package:Talabatk/Entities/location.dart';
 import 'package:Talabatk/Entities/offer.dart';
+import 'package:Talabatk/Screens/shop/update_offer.dart';
 import 'package:flutter/material.dart';
 import 'package:Talabatk/Widgets/utils.dart';
 import 'package:Talabatk/Entities/app_localizations.dart';
@@ -15,7 +16,7 @@ class _State extends State<AllOffers> {
 
   @override
   Widget build(BuildContext context) {
-    String _title= AppLocalizations.of(context).translate('all_offers');
+    final String _title= AppLocalizations.of(context).translate('all_offers');
     return Scaffold(
       appBar: Utils.appBarusers(context,_title),
       body: Container(
@@ -43,7 +44,10 @@ class _State extends State<AllOffers> {
                             Expanded(
                               child: RaisedButton(
                                 onPressed: () {
-
+                                  // send shop to offer details to update
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => UpdateOffer(offer:snapshot.data[index])
+                                  ));
                                 },
                                 color: Color(int.parse(Global.primaryColor)),
                                 elevation: 10.0,
@@ -89,7 +93,6 @@ class _State extends State<AllOffers> {
                         ),
                       ),
                   );
-
                 },
               );
             }
