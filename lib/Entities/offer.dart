@@ -32,6 +32,33 @@ class Offer {
     //future work return int to work on requests
   }
 
+  static Future<String> updateOffer(Offer offer) async {
+
+    try{
+      String url = Global.url+"Offer/EditOffer";
+      final response= await  http.put(url,
+          headers: {"Content-Type": "application/json"},
+          body:json.encode({
+            "shopId": offer.shopid,
+            "date": offer.date,
+            "dateExpired": offer.dateExpired,
+            "image_Url":offer.imageUrl,
+            "description": offer.description
+          }));
+      if(response.statusCode==200)
+      {
+        return response.body.toString();
+      }
+      else{
+        return "error occurred" ;
+      }
+    }
+    catch(Exception)
+    {
+      return null;
+    }
+
+  }
 
   static  Future<List<Offer>> getOfferByShopId(int id) async {
 

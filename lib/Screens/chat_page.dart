@@ -16,6 +16,8 @@ class ChatPage extends StatefulWidget{
 
 }
 class _ChatPage extends State<ChatPage> {
+
+
   // check for displaying time
   bool check=false;
   List<Reply> replyDetails=[];

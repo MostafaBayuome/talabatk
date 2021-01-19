@@ -19,6 +19,7 @@ class Gmap extends StatefulWidget {
 }
 
 class _GMapState extends State<Gmap> {
+
   List<User> nearestShops=[];
   List<Marker> allMarkers =[];
   BitmapDescriptor pinLocationIcon;
@@ -27,6 +28,8 @@ class _GMapState extends State<Gmap> {
   List<User> shops=[];
   List<User> restaurants=[];
   List<User> atar=[];
+
+
 
   //0 all SHOP 1 All pharmacy 2 All supermarket 3 All Restaurants 4 All Atara
   int numberOfList=0;

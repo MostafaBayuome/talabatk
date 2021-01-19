@@ -26,11 +26,11 @@ class _UpdateOfferState extends State<UpdateOffer> {
   String arrbytes;
   Uint8List arrBytes;
 
-  DateTime _startDate=DateTime.now();
-  DateTime _endDate=DateTime.now().add(Duration(days: 7));
+  DateTime _startDate= DateTime.now();
+  DateTime _endDate  =  DateTime.now().add(Duration(days: 7));
   List<Asset> images = List<Asset>();
-  String image1="";
   Uint8List bytes;
+
   final myController = TextEditingController();
   Offer offer;
   _UpdateOfferState(this.offer);
@@ -54,18 +54,17 @@ class _UpdateOfferState extends State<UpdateOffer> {
       appBar:  Utils.appBarusers(context,_title),
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: Column(
+        child: ListView(
             children: [
 
               Expanded(
                 child: ListView(
                   children: <Widget> [
-
                     Row(
                       children: [
                         Text('Old offer: ',style: Utils.fontBold,),
                         SizedBox(width: 10,),
-                        Expanded(child: Text(offer.description)),
+                        Text(offer.description),
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -102,7 +101,7 @@ class _UpdateOfferState extends State<UpdateOffer> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('Old time:',style: Utils.fontBold,),
+                        Text('Old time  ',style: Utils.fontBold,),
                         SizedBox(width: 10,),
                         Text(offer.date.substring(0,10),style:TextStyle(
                             fontFamily: Global.fontFamily,
@@ -123,7 +122,7 @@ class _UpdateOfferState extends State<UpdateOffer> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('New time:',style: Utils.fontBold,),
+                        Text('New time',style: Utils.fontBold,),
                         SizedBox(width: 10,),
                         Text(_startDate.toString().substring(0,10),style:TextStyle(
                             fontFamily: Global.fontFamily,
@@ -175,20 +174,24 @@ class _UpdateOfferState extends State<UpdateOffer> {
                     ),
                     SizedBox(height: 10,),
                     images.length == 0 ? Container() :
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text("New Image:",style: TextStyle(fontWeight: FontWeight.bold),),
-                        FittedBox(
-                          fit:BoxFit.cover,
-                          child: AssetThumb(
-                            asset: images[0],
-                            width: 250,
-                            height: 250,
-                            quality: 100,
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: Column(
+
+                        children: [
+                          Text("New Image",style: TextStyle(fontWeight: FontWeight.bold),),
+                          SizedBox(height: 10,),
+                          FittedBox(
+                            fit:BoxFit.cover,
+                            child: AssetThumb(
+                              asset: images[0],
+                              width: 250,
+                              height: 250,
+                              quality: 100,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -209,8 +212,28 @@ class _UpdateOfferState extends State<UpdateOffer> {
 
               SizedBox(
                 width: double.infinity,
-                child: RaisedButton(onPressed: (){
+                child: RaisedButton(onPressed: () async {
+                  String image1="";
+                  String newDate=_startDate.toString().substring(0,10)+"T00:00";
+                  String newEndDate=_endDate.toString().substring(0,10)+"T00:00";
+                  if(images.length>0) {
+                      image1=images[0].name.toString();
+                      image1 = image1.replaceAll(".","-");
+                      image1+=".png";
+                      String uri =  await FlutterAbsolutePath.getAbsolutePath(images[0].identifier);
+                      File file = File (uri);
+                      Uint8List tempbyte = file.readAsBytesSync();
+                      bytes=tempbyte;
+                  }
 
+                    Offer offer=new Offer(Global.loginUser.id,newDate,newEndDate,image1,myController.text,bytes );
+                    Offer.updateOffer(offer).then((value) {
+                      Utils.toastMessage("Offer Updated Successfully");
+                         setState(() {
+                      Global.visible_progress=false;
+                       });
+
+                  });
                   },
                   color:Color(int.parse(Global.primaryColor)),
                   child: Text("Update Offer",style: TextStyle(color: Colors.white),),
